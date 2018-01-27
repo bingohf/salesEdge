@@ -29,5 +29,15 @@ class SampleController: ButtonBarPagerTabStripViewController {
         return [controller, controller2]
     }
 
+    @IBAction func onMoreMenuTap(_ sender: Any) {
+        let alertController = UIAlertController(title:"alert", message:"Select action",preferredStyle:UIAlertControllerStyle.actionSheet)
+        let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
+            (action: UIAlertAction!) -> Void in
+            //print("按下確認後，閉包裡的動作")
+        }
+        alertController.addAction(groupQRCodeAction)
+        alertController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        self.present(alertController, animated:true,completion:nil)
+    }
 }
 

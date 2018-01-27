@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class PAViewController: UIViewController {
+class PAViewController: UIViewController,UIWebViewDelegate {
 
     @IBOutlet weak var mWebView: UIWebView!
     
@@ -18,6 +18,7 @@ class PAViewController: UIViewController {
         let myURL = URL(string: "https://www.apple.com")
         let myRequest = URLRequest(url: myURL!)
         mWebView.loadRequest(myRequest)
+        mWebView.delegate = self;
     }
 
     override func didReceiveMemoryWarning() {
