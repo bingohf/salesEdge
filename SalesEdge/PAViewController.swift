@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
-class SecondViewController: UIViewController {
+class PAViewController: UIViewController {
 
+    @IBOutlet weak var mWebView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let myURL = URL(string: "https://www.apple.com")
+        let myRequest = URLRequest(url: myURL!)
+        mWebView.loadRequest(myRequest)
     }
 
     override func didReceiveMemoryWarning() {
