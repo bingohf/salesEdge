@@ -8,14 +8,22 @@
 
 import UIKit
 import XLPagerTabStrip
+import QRCodeReader
+import AVFoundation
 
-class SampleController: ButtonBarPagerTabStripViewController {
+class SampleController: UIViewController,QRCodeReaderViewControllerDelegate {
 
+    
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr,.code39,.code128, .upce,.aztec,.code93,.dataMatrix,.ean13,.pdf417], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        buttonBarView.selectedBar.backgroundColor = .orange
-        buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,21 +31,43 @@ class SampleController: ButtonBarPagerTabStripViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let controller = TabBaseViewController();
-        let controller2 = TabBaseViewController();
-        return [controller, controller2]
-    }
 
     @IBAction func onMoreMenuTap(_ sender: Any) {
         let alertController = UIAlertController(title:"alert", message:"Select action",preferredStyle:UIAlertControllerStyle.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
             (action: UIAlertAction!) -> Void in
-            //print("按下確認後，閉包裡的動作")
+            self.scanARcode()
         }
         alertController.addAction(groupQRCodeAction)
         alertController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         self.present(alertController, animated:true,completion:nil)
+    }
+    
+    func scanARcode() {
+        readerVC.delegate = self
+        
+        // Or by using the closure pattern
+        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+            print(result)
+        }
+        
+        // Presents the readerVC as modal form sheet
+        readerVC.modalPresentationStyle = .formSheet
+        present(readerVC, animated: true, completion: nil)
+    }
+    func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        reader.stopScanning()
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
+ 
+    }
+    func readerDidCancel(_ reader: QRCodeReaderViewController) {
+        reader.stopScanning()
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
