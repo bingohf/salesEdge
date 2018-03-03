@@ -89,8 +89,11 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="U6P-FF-NHo"/>
                                 </connections>
                             </textField>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncr-PL-WL2">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncr-PL-WL2" userLabel="MWebView">
                                 <rect key="frame" x="0.0" y="185" width="375" height="433"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="9zh-dA-A5N"/>
+                                </connections>
                             </webView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LRD-mx-ttT">
                                 <rect key="frame" x="177" y="391" width="20" height="20"/>
@@ -149,6 +152,7 @@
                         <outlet property="mFieldPANO" destination="bdv-iI-ctg" id="6cT-53-eLS"/>
                         <outlet property="mImageView" destination="Qn4-1r-bml" id="wFf-E0-Sv0"/>
                         <outlet property="mIndicator" destination="LRD-mx-ttT" id="LJH-y4-cMl"/>
+                        <outlet property="mStateBarItem" destination="3ot-vf-P7b" id="3w7-BI-gUm"/>
                         <outlet property="mWebView" destination="Ncr-PL-WL2" id="87c-aL-Ee9"/>
                     </connections>
                 </viewController>
