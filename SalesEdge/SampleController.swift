@@ -35,11 +35,16 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func pdaGuid() -> String {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
-        let deviceName = "iPhone"
+        let deviceName = UIDevice.current.modelName
         let dformatter = DateFormatter()
         dformatter.dateFormat = "yyyyMMdd'T'HHmmss.S"
         let timeStamp = dformatter.string(from: Date.init())
-        let language = Locale.preferredLanguages.first!
+        var language = Locale.preferredLanguages.first!
+        var languageArr = language.components(separatedBy: "-")
+        while languageArr.count > 2 {
+            languageArr.remove(at: 1)
+        }
+        language = languageArr.joined(separator: "_")
         return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
     }
     
@@ -49,6 +54,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mIndicator.startAnimating()
         loadMenus()
         queryBill(mode:"Hello")
+        mStateBarItem.title = ""
         showState()
     }
     
@@ -115,7 +121,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             "billNo": "",
             "MyTaxNo" : "",
             "pdaGuid": pdaGuid(),
-            "type" : mMode
+            "type" : mode
         ]
         Alamofire.request(baseUrl + "Sp/sp_getBill", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
@@ -179,8 +185,19 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             }
             alertController.addAction(modeAction)
         }
+        alertController.addAction(UIAlertAction(title:"Cancel", style:.cancel){
+            (action: UIAlertAction!) -> Void in
+            alertController.dismiss(animated: true, completion: nil)
+        })
         alertController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
-        self.present(alertController, animated:true,completion:nil)
+        self.present(alertController, animated:true){
+            alertController.view.superview?.isUserInteractionEnabled = true
+            alertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        }
+    }
+    
+    @objc func alertControllerBackgroundTapped(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     func changeMode(mode:String)  {
