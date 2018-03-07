@@ -75,6 +75,12 @@ class Helper{
     open static func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
+    
+    open static func encodeBase64(image:UIImage) -> String{
+        let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
+        let strBase64:String = imageData.base64EncodedString(options: .lineLength64Characters)
+        return strBase64
+    }
 }
 
 
@@ -128,5 +134,4 @@ public extension UIDevice {
         default:                                        return identifier
         }
     }
-    
 }
