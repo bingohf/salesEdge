@@ -19,6 +19,7 @@ class PAViewController: UIViewController,UIWebViewDelegate {
         let myRequest = URLRequest(url: myURL!)
         mWebView.loadRequest(myRequest)
         mWebView.delegate = self;
+        self.view.makeToast("This is a piece of toast")
     }
 
     override func didReceiveMemoryWarning() {

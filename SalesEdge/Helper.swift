@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Alamofire
+
 
 class Helper{
    
@@ -80,6 +82,46 @@ class Helper{
         let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
         let strBase64:String = imageData.base64EncodedString(options: .lineLength64Characters)
         return strBase64
+    }
+    
+    open static func getErrorMessage<Value>(_ result: Result<Value>) -> String {
+        if case let .failure(error) = result {
+            if let error = error as? AFError {
+                switch error {
+                case .invalidURL(let url):
+                    return ("Invalid URL: \(url) - \(error.localizedDescription)")
+                case .parameterEncodingFailed(let reason):
+                    return("Parameter encoding failed: \(error.localizedDescription)")
+                    return("Failure Reason: \(reason)")
+                case .multipartEncodingFailed(let reason):
+                    return("Multipart encoding failed: \(error.localizedDescription)")
+                    return("Failure Reason: \(reason)")
+                case .responseValidationFailed(let reason):
+                    return("Response validation failed: \(error.localizedDescription)")
+                    return("Failure Reason: \(reason)")
+                    
+                    switch reason {
+                    case .dataFileNil, .dataFileReadFailed:
+                        return("Downloaded file could not be read")
+                    case .missingContentType(let acceptableContentTypes):
+                        return("Content Type Missing: \(acceptableContentTypes)")
+                    case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                        return("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                    case .unacceptableStatusCode(let code):
+                        return("Response status code was unacceptable: \(code)")
+                    }
+                case .responseSerializationFailed(let reason):
+                    return("Response serialization failed: \(error.localizedDescription)")
+                }
+                
+
+            } else if let error = error as? URLError {
+                return("URLError occurred: \(error.localizedDescription)")
+            } else {
+                return("Unknown error: \(error.localizedDescription)")
+            }
+        }
+        return ""
     }
 }
 

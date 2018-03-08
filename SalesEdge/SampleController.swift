@@ -11,6 +11,7 @@ import XLPagerTabStrip
 import QRCodeReader
 import AVFoundation
 import Alamofire
+import Toast_Swift
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
 
@@ -29,7 +30,6 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr,.code39,.code128, .upce,.aztec,.code93,.dataMatrix,.ean13,.pdf417], captureDevicePosition: .back)
         }
-        
         return QRCodeReaderViewController(builder: builder)
     }()
     
@@ -56,6 +56,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         queryBill(mode:"Hello")
         mStateBarItem.title = ""
         showState()
+
+        //self.view.makeToastActivity(.center)
     }
     
     func loadMenus() {
@@ -69,14 +71,16 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             .debugLog()
             .responseJSON{
                 response in
-                if let result = response.result.value {
-                    let JSON = result as! NSDictionary
-                    let array = JSON.value(forKey: "result") as! NSArray
-                    let jsonString = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
-                    let menus = self.convertToArray(text: jsonString);
-                    self.menus = menus as! [NSDictionary]
-                    self.showState()
+                guard case let .success(value) = response.result else{
+                    self.navigationController?.view.makeToast(Helper.getErrorMessage(response.result), duration: 3.0, position: .center)
+                    return
                 }
+                let JSON = value as! NSDictionary
+                let array = JSON.value(forKey: "result") as! NSArray
+                let jsonString = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
+                let menus = self.convertToArray(text: jsonString);
+                self.menus = menus as! [NSDictionary]
+                self.showState()
                 
         }
     }
@@ -127,6 +131,49 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             .debugLog()
             .responseJSON{
                 response in
+                let x: Result<String>
+                guard case let  .success(value) = response.result else{
+                    if case let .failure(error) = response.result {
+                        if let error = error as? AFError {
+                            switch error {
+                            case .invalidURL(let url):
+                                print("Invalid URL: \(url) - \(error.localizedDescription)")
+                            case .parameterEncodingFailed(let reason):
+                                print("Parameter encoding failed: \(error.localizedDescription)")
+                                print("Failure Reason: \(reason)")
+                            case .multipartEncodingFailed(let reason):
+                                print("Multipart encoding failed: \(error.localizedDescription)")
+                                print("Failure Reason: \(reason)")
+                            case .responseValidationFailed(let reason):
+                                print("Response validation failed: \(error.localizedDescription)")
+                                print("Failure Reason: \(reason)")
+                                
+                                switch reason {
+                                case .dataFileNil, .dataFileReadFailed:
+                                    print("Downloaded file could not be read")
+                                case .missingContentType(let acceptableContentTypes):
+                                    print("Content Type Missing: \(acceptableContentTypes)")
+                                case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                                    print("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                                case .unacceptableStatusCode(let code):
+                                    print("Response status code was unacceptable: \(code)")
+                                }
+                            case .responseSerializationFailed(let reason):
+                                print("Response serialization failed: \(error.localizedDescription)")
+                                print("Failure Reason: \(reason)")
+                            }
+                            
+                            print("Underlying error: \(String(describing: error.underlyingError))")
+                        } else if let error = error as? URLError {
+                            print("URLError occurred: \(error.localizedDescription)")
+                        } else {
+                            print("Unknown error: \(error)")
+                        }
+                    }
+                    return
+                }
+                
+
                 if let result = response.result.value {
                     let JSON = result as! NSDictionary
                     let array = JSON.value(forKey: "result") as! NSArray
@@ -247,12 +294,33 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         
         dismiss(animated: true, completion: nil)
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == mFieldPANO || textField == mFieldBillNo{
+        if !(textField.text == "") && ( textField == mFieldPANO || textField == mFieldBillNo){
             textField.resignFirstResponder()
             return true
         }
         return false
+    }
+    
+    func receiveGroup(group:String) {
+        let parameters = [
+            "macNo" : UIDevice.current.identifierForVendor!.uuidString
+        ]
+        
+        Alamofire.request(baseUrl + "group/\(group)", method: .put, parameters: parameters, encoding: JSONEncoding.default)
+            .debugLog()
+            .responseJSON{
+                response in
+                if let result = response.result.value {
+                    let JSON = result as! NSDictionary
+                    let array = JSON.value(forKey: "result") as! NSArray
+                    let html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
+                    print(html)
+                    self.mWebView.loadHTMLString(html, baseURL: nil)
+                }
+                
+        }
     }
 }
 
