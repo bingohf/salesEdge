@@ -95,9 +95,6 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="9zh-dA-A5N"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LRD-mx-ttT">
-                                <rect key="frame" x="177" y="391" width="20" height="20"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mns-42-JeD">
                                 <rect key="frame" x="272" y="80" width="40" height="40"/>
                                 <constraints>
@@ -120,7 +117,6 @@
                             <constraint firstItem="Ncr-PL-WL2" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="1DO-Gm-U1X"/>
                             <constraint firstItem="Yot-00-lWu" firstAttribute="centerY" secondItem="ZYp-uF-XX6" secondAttribute="centerY" id="4cq-uF-hFi"/>
                             <constraint firstItem="Dho-LC-KoT" firstAttribute="leading" secondItem="bdv-iI-ctg" secondAttribute="trailing" constant="7" id="5Ti-XP-rba"/>
-                            <constraint firstItem="LRD-mx-ttT" firstAttribute="centerY" secondItem="Ncr-PL-WL2" secondAttribute="centerY" id="5k0-Wk-YQ3"/>
                             <constraint firstItem="ZYp-uF-XX6" firstAttribute="leading" secondItem="mns-42-JeD" secondAttribute="trailing" constant="7" id="BcD-vA-AuW"/>
                             <constraint firstItem="Dho-LC-KoT" firstAttribute="top" secondItem="ZYp-uF-XX6" secondAttribute="bottom" constant="17" id="I9W-It-iOx"/>
                             <constraint firstItem="mns-42-JeD" firstAttribute="leading" secondItem="Yot-00-lWu" secondAttribute="trailing" constant="7" id="K7Y-6r-qao"/>
@@ -130,7 +126,6 @@
                             <constraint firstItem="ZYp-uF-XX6" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="16" id="Zy1-Pe-TRJ"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="Dho-LC-KoT" secondAttribute="trailing" constant="16" id="iVY-hw-G1I"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="Ncr-PL-WL2" secondAttribute="bottom" id="krs-J4-5os"/>
-                            <constraint firstItem="LRD-mx-ttT" firstAttribute="centerX" secondItem="Ncr-PL-WL2" secondAttribute="centerX" id="l1N-f1-dA2"/>
                             <constraint firstItem="bdv-iI-ctg" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="16" id="nzg-DS-daV"/>
                             <constraint firstItem="mns-42-JeD" firstAttribute="centerY" secondItem="ZYp-uF-XX6" secondAttribute="centerY" id="qDa-PO-4TE"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="ZYp-uF-XX6" secondAttribute="trailing" constant="16" id="yQz-fb-0Bn"/>
@@ -151,7 +146,6 @@
                         <outlet property="mFieldBillNo" destination="Yot-00-lWu" id="bHC-ry-swy"/>
                         <outlet property="mFieldPANO" destination="bdv-iI-ctg" id="6cT-53-eLS"/>
                         <outlet property="mImageView" destination="Qn4-1r-bml" id="wFf-E0-Sv0"/>
-                        <outlet property="mIndicator" destination="LRD-mx-ttT" id="LJH-y4-cMl"/>
                         <outlet property="mStateBarItem" destination="3ot-vf-P7b" id="3w7-BI-gUm"/>
                         <outlet property="mWebView" destination="Ncr-PL-WL2" id="87c-aL-Ee9"/>
                     </connections>

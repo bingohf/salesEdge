@@ -21,7 +21,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     @IBOutlet weak var mWebView: UIWebView!
     @IBOutlet weak var mFieldPANO: UITextField!
-    @IBOutlet weak var mIndicator: UIActivityIndicatorView!
+
     let baseUrl = "http://ledwayvip.cloudapp.net:8080/datasnap/rest/TLwDataModule/"
     var menus = [NSDictionary]()
     var mMode = "Check"
@@ -51,7 +51,6 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     override func viewDidLoad() {
         super.viewDidLoad()
         mWebView.loadHTMLString(pdaGuid(), baseURL: nil)
-        mIndicator.startAnimating()
         loadMenus()
         queryBill(mode:"Hello")
         mStateBarItem.title = ""
@@ -223,12 +222,14 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     @IBAction func onPAQRCodeClick(_ sender: Any) {
         scanQRCode(){qrcodeResult in
             self.mFieldPANO.text = qrcodeResult?.value
+            self.queryDetail()
         }
     }
     
     @IBAction func onBillQrCodeClick(_ sender: Any) {
         scanQRCode(){qrcodeResult in
             self.mFieldBillNo.text = qrcodeResult?.value
+            self.queryBill(billNo: self.mFieldBillNo.text ?? "")
         }
     }
     
@@ -349,7 +350,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func settingChange(line:String?, myTaxNo:String?) {
         let preferences = UserDefaults.standard
-        self.title = "Sales Edge (\(myTaxNo ?? ""))"
+        self.title = "Scan Master (\(myTaxNo ?? ""))"
         preferences.set(myTaxNo, forKey: "myTaxNo")
         preferences.set(line, forKey: "line")
         preferences.synchronize()
