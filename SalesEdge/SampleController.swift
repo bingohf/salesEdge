@@ -14,11 +14,11 @@ import Alamofire
 import Toast_Swift
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
-
+    
     @IBOutlet weak var mStateBarItem: UIBarButtonItem!
     @IBOutlet weak var mImageView: UIImageView!
     @IBOutlet weak var mFieldBillNo: UITextField!
-
+    
     @IBOutlet weak var mWebView: UIWebView!
     @IBOutlet weak var mFieldPANO: UITextField!
     @IBOutlet weak var mIndicator: UIActivityIndicatorView!
@@ -92,7 +92,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                 
         }
     }
-
+    
     func toast(message:String) {
         var vc:UIViewController? = self
         while ((vc?.parent) != nil)  {
@@ -130,79 +130,93 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         // Dispose of any resources that can be recreated.
     }
     
-    func queryBill()  {
-        queryBill(mode:mMode)
+    func queryBill( billNo :String = "")  {
+        queryBill(mode:mMode, billNo: billNo)
     }
     
-
     
-    func queryBill(mode:String) {
-        let parameters: [String: Any] = makeRequest().merging(["type" : mode]) { (current, _) in current }
-        
-        Alamofire.request(baseUrl + "Sp/sp_getBill", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+    
+    func queryBill(mode:String, billNo :String = "") {
+        webViewRequest(apiPath: "Sp/sp_getBill", params: ["type" : mode, "billNo" :billNo])
+    }
+    
+    func queryDetail() {
+        let billNo = mFieldBillNo.text ?? ""
+        let detailNo = mFieldPANO.text ?? ""
+        webViewRequest(apiPath: "Sp/sp_getDetail", params: ["type" : mMode, "billNo" :billNo, "detailNo" : detailNo])
+    }
+    
+    func webViewRequest(apiPath:String, params:[String : Any])  {
+        let view = self.view
+        view?.makeToastActivity(.center)
+        let parameters: [String: Any] = makeRequest().merging(params) { (current, _) in current }
+        Alamofire.request(baseUrl + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{
                 response in
-                let x: Result<String>
-                guard case let  .success(value) = response.result else{
-                    if case let .failure(error) = response.result {
-                        if let error = error as? AFError {
-                            switch error {
-                            case .invalidURL(let url):
-                                print("Invalid URL: \(url) - \(error.localizedDescription)")
-                            case .parameterEncodingFailed(let reason):
-                                print("Parameter encoding failed: \(error.localizedDescription)")
-                                print("Failure Reason: \(reason)")
-                            case .multipartEncodingFailed(let reason):
-                                print("Multipart encoding failed: \(error.localizedDescription)")
-                                print("Failure Reason: \(reason)")
-                            case .responseValidationFailed(let reason):
-                                print("Response validation failed: \(error.localizedDescription)")
-                                print("Failure Reason: \(reason)")
-                                
-                                switch reason {
-                                case .dataFileNil, .dataFileReadFailed:
-                                    print("Downloaded file could not be read")
-                                case .missingContentType(let acceptableContentTypes):
-                                    print("Content Type Missing: \(acceptableContentTypes)")
-                                case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
-                                    print("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
-                                case .unacceptableStatusCode(let code):
-                                    print("Response status code was unacceptable: \(code)")
-                                }
-                            case .responseSerializationFailed(let reason):
-                                print("Response serialization failed: \(error.localizedDescription)")
-                                print("Failure Reason: \(reason)")
-                            }
-                            
-                            print("Underlying error: \(String(describing: error.underlyingError))")
-                        } else if let error = error as? URLError {
-                            print("URLError occurred: \(error.localizedDescription)")
-                        } else {
-                            print("Unknown error: \(error)")
-                        }
-                    }
-                    return
-                }
-                
-
-                if let result = response.result.value {
-                    let JSON = result as! NSDictionary
-                    let array = JSON.value(forKey: "result") as! NSArray
-                    let html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
-                    print(html)
-                    self.mWebView.loadHTMLString(html, baseURL: nil)
-                }
+                self.showResponse(response: response)
                 
         }
     }
-   
+    
+    func showResponse(response : DataResponse<Any>)  {
+        view?.hideToastActivity()
+        guard case let  .success(value) = response.result else{
+            if case let .failure(error) = response.result {
+                if let error = error as? AFError {
+                    switch error {
+                    case .invalidURL(let url):
+                        print("Invalid URL: \(url) - \(error.localizedDescription)")
+                    case .parameterEncodingFailed(let reason):
+                        print("Parameter encoding failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                    case .multipartEncodingFailed(let reason):
+                        print("Multipart encoding failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                    case .responseValidationFailed(let reason):
+                        print("Response validation failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                        
+                        switch reason {
+                        case .dataFileNil, .dataFileReadFailed:
+                            print("Downloaded file could not be read")
+                        case .missingContentType(let acceptableContentTypes):
+                            print("Content Type Missing: \(acceptableContentTypes)")
+                        case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                            print("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                        case .unacceptableStatusCode(let code):
+                            print("Response status code was unacceptable: \(code)")
+                        }
+                    case .responseSerializationFailed(let reason):
+                        print("Response serialization failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                    }
+                    
+                    print("Underlying error: \(String(describing: error.underlyingError))")
+                } else if let error = error as? URLError {
+                    print("URLError occurred: \(error.localizedDescription)")
+                } else {
+                    print("Unknown error: \(error)")
+                }
+            }
+            return
+        }
+        
+        
+        if let result = response.result.value {
+            let JSON = result as! NSDictionary
+            let array = JSON.value(forKey: "result") as! NSArray
+            let html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
+            print(html)
+            self.mWebView.loadHTMLString(html, baseURL: nil)
+        }
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         var image = info[UIImagePickerControllerOriginalImage] as! UIImage
-     //   image = Helper.cropToBounds(image:image, width:512, height:512)
-      //  image = Helper.resizeImage(image:image, targetSize: CGSize(width: 512, height: 512))
+        //   image = Helper.cropToBounds(image:image, width:512, height:512)
+        //  image = Helper.resizeImage(image:image, targetSize: CGSize(width: 512, height: 512))
         mImageView.image = image
     }
     
@@ -232,11 +246,11 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
             (action: UIAlertAction!) -> Void in
             self.receiveGroup(group: "24BD65CF-1EE0-41FE-94B6-F56116DD54A3")
-//            self.scanQRCode(){qrcodeResult in
-//                if let qrcode = qrcodeResult?.value {
-//                    self.receiveGroup(group: qrcode)
-//                }
-//            }
+            //            self.scanQRCode(){qrcodeResult in
+            //                if let qrcode = qrcodeResult?.value {
+            //                    self.receiveGroup(group: qrcode)
+            //                }
+            //            }
         }
         alertController.addAction(groupQRCodeAction)
         
@@ -244,7 +258,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             let text = item.value(forKey: "menu_name") as! String
             let mode = item.value(forKey: "menu_Label_Eng") as! String
             let modeAction = UIAlertAction(title:text, style:.default){
-                  (action: UIAlertAction!) -> Void in
+                (action: UIAlertAction!) -> Void in
                 self.changeMode(mode: mode)
             }
             alertController.addAction(modeAction)
@@ -304,7 +318,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
- 
+        
     }
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
@@ -313,23 +327,28 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if !(textField.text == "") && ( textField == mFieldPANO || textField == mFieldBillNo){
+        if let text = textField.text {
             textField.resignFirstResponder()
+            if textField == mFieldBillNo {
+                self.queryBill(billNo: text)
+            } else if textField == mFieldPANO {
+                self.queryDetail()
+            }
             return true
         }
         return false
     }
- 
+    
     func settingChange() {
         let preferences = UserDefaults.standard
         if let line = preferences.object(forKey: "line") as! String?, let myTaxNo = preferences.object(forKey: "myTaxNo") as! String? {
             settingChange(line: line, myTaxNo: myTaxNo)
         }
-       
+        
     }
     
     func settingChange(line:String?, myTaxNo:String?) {
-         let preferences = UserDefaults.standard
+        let preferences = UserDefaults.standard
         self.title = "Sales Edge (\(myTaxNo ?? ""))"
         preferences.set(myTaxNo, forKey: "myTaxNo")
         preferences.set(line, forKey: "line")
