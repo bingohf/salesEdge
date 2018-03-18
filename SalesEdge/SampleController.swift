@@ -135,10 +135,22 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     
     
-    func queryBill(mode:String, billNo :String = "") {
-        webViewRequest(apiPath: "Sp/sp_getBill", params: ["type" : mode, "billNo" :billNo])
+    func queryBill(mode:String, billNo :String = "", image : UIImage? = nil) {
+        var param = ["type" : mode, "billNo" :billNo]
+        if let image = image {
+            let image1 = Helper.cropToBounds(image:image, width:512, height:512)
+            let image2 = Helper.cropToBounds(image:image1, width:128, height:128)
+            let imageData1:NSData = UIImagePNGRepresentation(image1)! as NSData
+            let imageData2:NSData = UIImagePNGRepresentation(image2)! as NSData
+            
+            let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
+            let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
+            param.merge(["graphic":strBase641, "graphic2": strBase642]){ (current, _) in current }
+        }
+        webViewRequest(apiPath: "Sp/sp_getBill", params: param)
     }
     
+   
     func queryDetail() {
         let billNo = mFieldBillNo.text ?? ""
         let detailNo = mFieldPANO.text ?? ""
@@ -213,10 +225,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        var image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //   image = Helper.cropToBounds(image:image, width:512, height:512)
-        //  image = Helper.resizeImage(image:image, targetSize: CGSize(width: 512, height: 512))
-        mImageView.image = image
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        queryBill(mode:mMode, billNo: mFieldBillNo.text ?? "", image:image)
     }
     
     @IBAction func onPAQRCodeClick(_ sender: Any) {
