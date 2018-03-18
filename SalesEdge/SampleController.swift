@@ -56,25 +56,33 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         queryBill(mode:"Hello")
         mStateBarItem.title = ""
         showState()
-
+        settingChange()
         //self.view.makeToastActivity(.center)
     }
     
-    func loadMenus() {
-        let parameters: [String: Any] = [
-            "line" : "01",
+    func makeRequest() -> [String : Any] {
+        let line = UserDefaults.standard.object(forKey: "line") as! String?
+        let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
+        return [
+            "line" : "\(line ?? "01")",
             "reader" : "01",
-            "MyTaxNo" : "",
+            "MyTaxNo" : "\(myTaxNo ?? "")",
             "pdaGuid": pdaGuid()
         ]
+    }
+    
+    func loadMenus() {
+        let parameters = makeRequest()
         Alamofire.request(baseUrl + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
+            .validate(statusCode: 200..<300)
             .responseJSON{
                 response in
-                guard case let .success(value) = response.result else{
-                    self.navigationController?.view.makeToast(Helper.getErrorMessage(response.result), duration: 3.0, position: .center)
+                if let error = response.result.error as? AFError {
+                    self.toast(message: Helper.getErrorMessage(response.result))
                     return
                 }
+                let value = response.result.value
                 let JSON = value as! NSDictionary
                 let array = JSON.value(forKey: "result") as! NSArray
                 let jsonString = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
@@ -85,6 +93,16 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         }
     }
 
+    func toast(message:String) {
+        var vc:UIViewController? = self
+        while ((vc?.parent) != nil)  {
+            vc = vc?.parent
+        }
+        if let vc = vc {
+            vc.view.makeToast(message)
+        }
+    }
+    
     func convertToArray(text: String) -> [Any]? {
         if let data = text.data(using: String.Encoding.utf8) {
             do {
@@ -119,14 +137,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
 
     
     func queryBill(mode:String) {
-        let parameters: [String: Any] = [
-            "line" : "01",
-            "reader" : "01",
-            "billNo": "",
-            "MyTaxNo" : "",
-            "pdaGuid": pdaGuid(),
-            "type" : mode
-        ]
+        let parameters: [String: Any] = makeRequest().merging(["type" : mode]) { (current, _) in current }
+        
         Alamofire.request(baseUrl + "Sp/sp_getBill", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{
@@ -219,7 +231,12 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertControllerStyle.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
             (action: UIAlertAction!) -> Void in
-           // self.scanARcode()
+            self.receiveGroup(group: "24BD65CF-1EE0-41FE-94B6-F56116DD54A3")
+//            self.scanQRCode(){qrcodeResult in
+//                if let qrcode = qrcodeResult?.value {
+//                    self.receiveGroup(group: qrcode)
+//                }
+//            }
         }
         alertController.addAction(groupQRCodeAction)
         
@@ -302,6 +319,22 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         }
         return false
     }
+ 
+    func settingChange() {
+        let preferences = UserDefaults.standard
+        if let line = preferences.object(forKey: "line") as! String?, let myTaxNo = preferences.object(forKey: "myTaxNo") as! String? {
+            settingChange(line: line, myTaxNo: myTaxNo)
+        }
+       
+    }
+    
+    func settingChange(line:String?, myTaxNo:String?) {
+         let preferences = UserDefaults.standard
+        self.title = "Sales Edge (\(myTaxNo ?? ""))"
+        preferences.set(myTaxNo, forKey: "myTaxNo")
+        preferences.set(line, forKey: "line")
+        preferences.synchronize()
+    }
     
     func receiveGroup(group:String) {
         let parameters = [
@@ -314,10 +347,18 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                 response in
                 if let result = response.result.value {
                     let JSON = result as! NSDictionary
-                    let array = JSON.value(forKey: "result") as! NSArray
-                    let html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
-                    print(html)
-                    self.mWebView.loadHTMLString(html, baseURL: nil)
+                    if let array = JSON.value(forKey: "result") as! NSArray?{
+                        if let result = array.firstObject as! NSDictionary? {
+                            if let error = result["error"] as! String? {
+                                self.toast(message: error)
+                                return
+                            }
+                            if let line = result["line"] as! String?, let myTaxNo = result["myTaxNo"] as! String? {
+                                self.settingChange(line:line, myTaxNo: myTaxNo)
+                            }
+                        }
+                    }
+                    
                 }
                 
         }

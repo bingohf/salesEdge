@@ -15,7 +15,7 @@ class PAViewController: UIViewController,UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myURL = URL(string: "https://www.apple.com")
+        let myURL = URL(string: "http://ledwayazure.cloudapp.net/mobile")
         let myRequest = URLRequest(url: myURL!)
         mWebView.loadRequest(myRequest)
         mWebView.delegate = self;
