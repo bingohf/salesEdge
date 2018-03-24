@@ -50,13 +50,14 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mWebView.loadHTMLString(pdaGuid(), baseURL: nil)
+        //mWebView.loadHTMLString(pdaGuid(), baseURL: nil)
         loadMenus()
         queryBill(mode:"Hello")
         mStateBarItem.title = ""
         showState()
         settingChange()
         //self.view.makeToastActivity(.center)
+
     }
     
     func makeRequest() -> [String : Any] {
@@ -136,8 +137,10 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     
     func queryBill(mode:String, billNo :String = "", image : UIImage? = nil) {
+        var apiPath = "Sp/sp_getBill"
         var param = ["type" : mode, "billNo" :billNo]
         if let image = image {
+            apiPath = "Sp/sp_getBill_Photo"
             let image1 = Helper.cropToBounds(image:image, width:512, height:512)
             let image2 = Helper.cropToBounds(image:image1, width:128, height:128)
             let imageData1:NSData = UIImagePNGRepresentation(image1)! as NSData
@@ -145,9 +148,10 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             
             let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
             let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
+            
             param.merge(["graphic":strBase641, "graphic2": strBase642]){ (current, _) in current }
         }
-        webViewRequest(apiPath: "Sp/sp_getBill", params: param)
+        webViewRequest(apiPath: apiPath, params: param)
     }
     
    
@@ -217,9 +221,40 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         if let result = response.result.value {
             let JSON = result as! NSDictionary
             let array = JSON.value(forKey: "result") as! NSArray
-            let html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
-            print(html)
+            var html = (array.firstObject as! NSDictionary).value(forKey: "memotext") as! String
+            do {
+                let regex = try NSRegularExpression(pattern: "^!+")
+                if let result = regex.firstMatch(in: html, options: [],
+                                                 range: NSRange(html.startIndex..., in: html)){
+                    let str = html
+                    let index = str.index(str.startIndex, offsetBy: result.range.length + 1)
+                    let mySubstring = str[index...]
+                    html = String(mySubstring)
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))  
+                    
+                }
+            }
+            catch let error{
+                
+            }
+            
             self.mWebView.loadHTMLString(html, baseURL: nil)
+            
+        }
+    }
+    
+    func matches(for regex: String, in text: String) -> [String] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
         }
     }
     
@@ -231,15 +266,20 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     @IBAction func onPAQRCodeClick(_ sender: Any) {
         scanQRCode(){qrcodeResult in
-            self.mFieldPANO.text = qrcodeResult?.value
-            self.queryDetail()
+            if let text = qrcodeResult?.value {
+                self.mFieldPANO.text = qrcodeResult?.value
+                self.queryDetail()
+            }
         }
     }
     
     @IBAction func onBillQrCodeClick(_ sender: Any) {
         scanQRCode(){qrcodeResult in
-            self.mFieldBillNo.text = qrcodeResult?.value
-            self.queryBill(billNo: self.mFieldBillNo.text ?? "")
+            if let text = qrcodeResult?.value {
+                self.mFieldBillNo.text = qrcodeResult?.value
+                self.queryBill(billNo: self.mFieldBillNo.text ?? "")
+            }
+
         }
     }
     
@@ -256,12 +296,11 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertControllerStyle.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
             (action: UIAlertAction!) -> Void in
-            self.receiveGroup(group: "24BD65CF-1EE0-41FE-94B6-F56116DD54A3")
-            //            self.scanQRCode(){qrcodeResult in
-            //                if let qrcode = qrcodeResult?.value {
-            //                    self.receiveGroup(group: qrcode)
-            //                }
-            //            }
+                        self.scanQRCode(){qrcodeResult in
+                            if let qrcode = qrcodeResult?.value {
+                                self.receiveGroup(group: qrcode)
+                            }
+                        }
         }
         alertController.addAction(groupQRCodeAction)
         
