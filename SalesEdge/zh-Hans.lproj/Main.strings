@@ -1,0 +1,42 @@
+
+/* Class = "UIBarButtonItem"; title = "Status"; ObjectID = "3ot-vf-P7b"; */
+"3ot-vf-P7b.title" = "Status";
+
+/* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "4EN-8d-jzv"; */
+"4EN-8d-jzv.title" = "Sales Edge";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Dho-LC-KoT"; */
+"Dho-LC-KoT.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "Wcv-nf-yGZ"; */
+"Wcv-nf-yGZ.title" = "Sales Edge";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Ycf-mx-AD3"; */
+"Ycf-mx-AD3.title" = "Title";
+
+/* Class = "UITextField"; placeholder = "Bill No"; ObjectID = "Yot-00-lWu"; */
+"Yot-00-lWu.placeholder" = "Bill No";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZYp-uF-XX6"; */
+"ZYp-uF-XX6.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "PA No"; ObjectID = "bdv-iI-ctg"; */
+"bdv-iI-ctg.placeholder" = "PA No";
+
+/* Class = "UITabBarItem"; title = "PA"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "PA";
+
+/* Class = "UITabBarItem"; title = "PA"; ObjectID = "irA-YK-sIj"; */
+"irA-YK-sIj.title" = "PA";
+
+/* Class = "UIBarButtonItem"; title = "More"; ObjectID = "j8D-k5-vXk"; */
+"j8D-k5-vXk.title" = "More";
+
+/* Class = "UITabBarItem"; title = "Scan Master"; ObjectID = "kD2-2g-BF1"; */
+"kD2-2g-BF1.title" = "Scan Master";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mns-42-JeD"; */
+"mns-42-JeD.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "say-W8-c62"; */
+"say-W8-c62.title" = "Sales Edge";

@@ -230,7 +230,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                     let index = str.index(str.startIndex, offsetBy: result.range.length + 1)
                     let mySubstring = str[index...]
                     html = String(mySubstring)
-                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))  
+                    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    self.toast(message: html)
                     
                 }
             }
@@ -294,7 +295,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     @IBAction func onMoreMenuTap(_ sender: Any) {
         loadMenus()
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertControllerStyle.actionSheet)
-        let groupQRCodeAction = UIAlertAction(title:"Change Group", style:.default){
+        let groupQRCodeAction = UIAlertAction(title:NSLocalizedString("Change Group", comment:""), style:.default){
             (action: UIAlertAction!) -> Void in
                         self.scanQRCode(){qrcodeResult in
                             if let qrcode = qrcodeResult?.value {
