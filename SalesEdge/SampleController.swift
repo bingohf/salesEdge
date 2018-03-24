@@ -77,7 +77,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             .validate(statusCode: 200..<300)
             .responseJSON{
                 response in
-                if let error = response.result.error as? AFError {
+                if let error = response.result.error {
                     self.toast(message: Helper.getErrorMessage(response.result))
                     return
                 }
