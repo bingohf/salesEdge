@@ -40,9 +40,9 @@ class Helper{
         
         // Create bitmap image from context using the rect
         let imageRef: CGImage = (contextImage.cgImage?.cropping(to: rect))!
-        
+        let image = resizeImage(image: UIImage(cgImage:imageRef), targetSize: CGSize(width:width, height:height))
         // Create a new image based on the imageRef and rotate back to the original orientation
-        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        //let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
         
         return image
     }
