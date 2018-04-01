@@ -13,9 +13,10 @@ class MyIDViewController: XLPagerItemViewController{
     
     @IBOutlet weak var mImgQRCode: UIImageView!
     
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
-        if let qrImage = Helper.generateQRCode(from:deviceId){
+        let bizcard = UserDefaults.standard.string(forKey: "bizcard") ?? ""
+        if let qrImage = Helper.generateQRCode(from:"\(deviceId)\r\n\(bizcard)"){
             mImgQRCode.image = qrImage
         }
     }

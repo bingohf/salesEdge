@@ -19,6 +19,8 @@
 		6A92F726201360CE00079C31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F725201360CE00079C31 /* Assets.xcassets */; };
 		6A92F729201360CE00079C31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F727201360CE00079C31 /* LaunchScreen.storyboard */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
+		6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */; };
+		6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8AD32070D4DB00919B1A /* MainViewController.swift */; };
 		6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC53F1D2014D683003F7815 /* TabBaseViewController.swift */; };
 		DF44E99DFD68EDD8EC3810C2 /* Pods_SalesEdge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,8 @@
 		6A92F728201360CE00079C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A92F72A201360CE00079C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
+		6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBizCardViewController.swift; sourceTree = "<group>"; };
+		6ABE8AD32070D4DB00919B1A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6AC53F1D2014D683003F7815 /* TabBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBaseViewController.swift; sourceTree = "<group>"; };
 		D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.release.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +106,8 @@
 				6A38896B206F2F380036FBA1 /* MyPageViewController.swift */,
 				6A38896F206F3CB90036FBA1 /* XLPagerItemViewController.swift */,
 				6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */,
+				6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */,
+				6ABE8AD32070D4DB00919B1A /* MainViewController.swift */,
 			);
 			path = SalesEdge;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A190B19204A8C3900534483 /* Helper.swift in Sources */,
+				6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */,
 				6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */,
 				6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */,
 				6A92F721201360CE00079C31 /* PAViewController.swift in Sources */,
@@ -265,6 +272,7 @@
 				6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */,
 				6A92F71F201360CE00079C31 /* SampleController.swift in Sources */,
 				6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */,
+				6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
