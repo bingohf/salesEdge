@@ -16,7 +16,8 @@ class MyPageViewController :ButtonBarPagerTabStripViewController{
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "MyShareAppViewController")
-        let controller2 = storyboard.instantiateViewController(withIdentifier: "MyShareAppViewController")
+        let controller2 = storyboard.instantiateViewController(withIdentifier: "MyIDViewController") as! MyIDViewController
+        controller2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("MyID", comment: "")))
         return [controller,controller2]
     }
     

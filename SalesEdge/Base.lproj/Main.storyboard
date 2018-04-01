@@ -323,6 +323,79 @@
             </objects>
             <point key="canvasLocation" x="1484" y="-1077"/>
         </scene>
+        <!--MyID View Controller-->
+        <scene sceneID="MIg-vc-L5u">
+            <objects>
+                <viewController storyboardIdentifier="MyIDViewController" id="F9C-15-duD" customClass="MyIDViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zWa-rD-SrC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Samples will be sent to this phone by scanning QRCODE below." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceH-wJ-00J">
+                                <rect key="frame" x="16" y="40" width="343" height="51"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="R5O-s3-JsS">
+                                <rect key="frame" x="16" y="40" width="343" height="611"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ceH-wJ-00J" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="7LP-YV-c9w"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="bottom" secondItem="R5O-s3-JsS" secondAttribute="bottom" constant="16" id="H0E-Vv-jZV"/>
+                            <constraint firstItem="ceH-wJ-00J" firstAttribute="top" secondItem="J0I-eo-qnQ" secondAttribute="top" constant="20" id="cAV-Lo-2Wb"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="R5O-s3-JsS" secondAttribute="trailing" constant="16" id="deK-Il-5GC"/>
+                            <constraint firstItem="R5O-s3-JsS" firstAttribute="top" secondItem="ceH-wJ-00J" secondAttribute="top" id="e9g-SB-4z4"/>
+                            <constraint firstItem="R5O-s3-JsS" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="hp4-aM-kcC"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="ceH-wJ-00J" secondAttribute="trailing" constant="16" id="uF7-y9-HXU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="J0I-eo-qnQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="mImgQRCode" destination="R5O-s3-JsS" id="hdz-3V-vxu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDW-8p-sYp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3621.5999999999999" y="-1077.2113943028487"/>
+        </scene>
+        <!--Pager Item View Controller-->
+        <scene sceneID="4Kz-cV-mkf">
+            <objects>
+                <viewController storyboardIdentifier="MyBizCardViewController" id="m14-H8-NlX" customClass="XLPagerItemViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IsB-l8-6fJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Install  app before sharing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-WM-VDe">
+                                <rect key="frame" x="16" y="40" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="T1A-fa-IUZ">
+                                <rect key="frame" x="16" y="40" width="343" height="611"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mQ2-WM-VDe" firstAttribute="top" secondItem="I1n-tE-Mbw" secondAttribute="top" constant="20" id="6LN-CN-bLF"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="mQ2-WM-VDe" secondAttribute="trailing" constant="16" id="DoP-jN-wM6"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="T1A-fa-IUZ" secondAttribute="trailing" constant="16" id="Zmp-zx-Uls"/>
+                            <constraint firstItem="mQ2-WM-VDe" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="fXO-uE-Ufr"/>
+                            <constraint firstItem="T1A-fa-IUZ" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="k13-dD-6oF"/>
+                            <constraint firstItem="T1A-fa-IUZ" firstAttribute="top" secondItem="mQ2-WM-VDe" secondAttribute="top" id="paS-eq-Yxh"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="bottom" secondItem="T1A-fa-IUZ" secondAttribute="bottom" constant="16" id="qHb-vj-QhK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="I1n-tE-Mbw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IgP-oh-1Yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4785" y="-1078"/>
+        </scene>
     </scenes>
     <resources>
         <image name="app_share_qrcode" width="400" height="400"/>
