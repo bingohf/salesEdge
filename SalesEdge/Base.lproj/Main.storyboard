@@ -32,29 +32,40 @@
             </objects>
             <point key="canvasLocation" x="532" y="-1077"/>
         </scene>
-        <!--Pager View Controller-->
+        <!--Pager Item View Controller-->
         <scene sceneID="nqJ-4Z-pkF">
             <objects>
-                <viewController storyboardIdentifier="MyShareAppViewController" id="wEn-Vp-2Zi" customClass="XLPagerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyShareAppViewController" id="wEn-Vp-2Zi" customClass="XLPagerItemViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XIn-AI-QVg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Je1-Gl-Q6z">
-                                <rect key="frame" x="147" y="230" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Install  app before sharing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPA-Yh-qFk">
+                                <rect key="frame" x="16" y="40" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="feN-Op-Llv">
+                                <rect key="frame" x="16" y="40" width="343" height="611"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="feN-Op-Llv" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="6Ch-Ni-mZm"/>
+                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="top" secondItem="JYK-Zc-UyC" secondAttribute="top" constant="20" id="9dX-Wb-5g0"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="feN-Op-Llv" secondAttribute="trailing" constant="16" id="QGL-vH-lTm"/>
+                            <constraint firstItem="feN-Op-Llv" firstAttribute="top" secondItem="rPA-Yh-qFk" secondAttribute="top" id="clT-kz-vx5"/>
+                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="hxD-v3-DBi"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="rPA-Yh-qFk" secondAttribute="trailing" constant="16" id="rFD-iy-RIg"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="bottom" secondItem="feN-Op-Llv" secondAttribute="bottom" constant="16" id="u7P-Td-8jc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JYK-Zc-UyC"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Uf-4O-Qoi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3081" y="-1047"/>
+            <point key="canvasLocation" x="2661.3193403298351" y="-1077.5999999999999"/>
         </scene>
         <!--Scan Master-->
         <scene sceneID="fc1-Al-LDm">
@@ -216,7 +227,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PA" image="ic_language" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="PA" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Sales Edge" id="Wcv-nf-yGZ"/>
                     <connections>
                         <outlet property="mWebView" destination="Wds-k7-9JY" id="Cjh-bT-Jd5"/>
@@ -230,7 +241,7 @@
         <scene sceneID="ywH-Pw-2ho">
             <objects>
                 <navigationController id="MPa-G9-f43" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="PA" id="irA-YK-sIj"/>
+                    <tabBarItem key="tabBarItem" title="PA" image="ic_language" id="irA-YK-sIj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R4i-Id-MlL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -310,10 +321,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GYz-Zi-7Ox" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2308" y="-1096"/>
+            <point key="canvasLocation" x="1484" y="-1077"/>
         </scene>
     </scenes>
     <resources>
+        <image name="app_share_qrcode" width="400" height="400"/>
         <image name="ic_account_box" width="24" height="24"/>
         <image name="ic_language" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>

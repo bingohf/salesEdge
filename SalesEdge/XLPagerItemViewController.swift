@@ -9,10 +9,17 @@
 import Foundation
 import XLPagerTabStrip
 
-class XLPagerViewController: UIViewController,IndicatorInfoProvider {
+class XLPagerItemViewController: UIViewController,IndicatorInfoProvider {
+    
+    var itemInfo = IndicatorInfo(title: "View")
+    
+    public func setInfo(itemInfo: IndicatorInfo) {
+        self.itemInfo = itemInfo
+    }
+
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: NSLocalizedString("APP", comment: ""))
+        return itemInfo
     }
     
     
