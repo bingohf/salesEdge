@@ -12,4 +12,5 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'Alamofire', '~> 4.5'
     pod 'QRCodeReader.swift', '~> 8.0.3'
     pod 'Toast-Swift', '~> 3.0.1'
+    pod 'SQLite.swift', '~> 0.11.4'
 end

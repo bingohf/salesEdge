@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,23 +42,26 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Install  app before sharing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPA-Yh-qFk">
                                 <rect key="frame" x="16" y="40" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="HeU-KS-UcF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="feN-Op-Llv">
-                                <rect key="frame" x="16" y="40" width="343" height="611"/>
+                                <rect key="frame" x="16" y="81" width="343" height="566"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="feN-Op-Llv" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="6Ch-Ni-mZm"/>
-                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="top" secondItem="JYK-Zc-UyC" secondAttribute="top" constant="20" id="9dX-Wb-5g0"/>
-                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="feN-Op-Llv" secondAttribute="trailing" constant="16" id="QGL-vH-lTm"/>
-                            <constraint firstItem="feN-Op-Llv" firstAttribute="top" secondItem="rPA-Yh-qFk" secondAttribute="top" id="clT-kz-vx5"/>
-                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="hxD-v3-DBi"/>
-                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="rPA-Yh-qFk" secondAttribute="trailing" constant="16" id="rFD-iy-RIg"/>
-                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="bottom" secondItem="feN-Op-Llv" secondAttribute="bottom" constant="16" id="u7P-Td-8jc"/>
+                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="7GC-7Q-5QX"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="bottom" secondItem="feN-Op-Llv" secondAttribute="bottom" constant="20" id="JSr-rn-Whm"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="rPA-Yh-qFk" secondAttribute="trailing" constant="16" id="SRC-03-0oY"/>
+                            <constraint firstItem="JYK-Zc-UyC" firstAttribute="trailing" secondItem="feN-Op-Llv" secondAttribute="trailing" constant="16" id="VML-nC-UQx"/>
+                            <constraint firstItem="rPA-Yh-qFk" firstAttribute="top" secondItem="JYK-Zc-UyC" secondAttribute="top" constant="20" id="elS-Da-h0h"/>
+                            <constraint firstItem="feN-Op-Llv" firstAttribute="top" secondItem="rPA-Yh-qFk" secondAttribute="bottom" constant="20" id="fz0-Da-sTg"/>
+                            <constraint firstItem="feN-Op-Llv" firstAttribute="leading" secondItem="JYK-Zc-UyC" secondAttribute="leading" constant="16" id="r6E-ZR-joP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JYK-Zc-UyC"/>
                     </view>
@@ -331,25 +334,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Samples will be sent to this phone by scanning QRCODE below." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceH-wJ-00J">
-                                <rect key="frame" x="16" y="40" width="343" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Samples will be sent to this phone by scanning QRCODE below." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceH-wJ-00J">
+                                <rect key="frame" x="16" y="40" width="343" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dNx-79-oww"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="R5O-s3-JsS">
-                                <rect key="frame" x="16" y="40" width="343" height="611"/>
+                                <rect key="frame" x="16" y="110" width="343" height="537"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ceH-wJ-00J" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="7LP-YV-c9w"/>
-                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="bottom" secondItem="R5O-s3-JsS" secondAttribute="bottom" constant="16" id="H0E-Vv-jZV"/>
-                            <constraint firstItem="ceH-wJ-00J" firstAttribute="top" secondItem="J0I-eo-qnQ" secondAttribute="top" constant="20" id="cAV-Lo-2Wb"/>
-                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="R5O-s3-JsS" secondAttribute="trailing" constant="16" id="deK-Il-5GC"/>
-                            <constraint firstItem="R5O-s3-JsS" firstAttribute="top" secondItem="ceH-wJ-00J" secondAttribute="top" id="e9g-SB-4z4"/>
-                            <constraint firstItem="R5O-s3-JsS" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="hp4-aM-kcC"/>
-                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="ceH-wJ-00J" secondAttribute="trailing" constant="16" id="uF7-y9-HXU"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="bottom" secondItem="R5O-s3-JsS" secondAttribute="bottom" constant="20" id="Dgc-p0-1SN"/>
+                            <constraint firstItem="ceH-wJ-00J" firstAttribute="top" secondItem="J0I-eo-qnQ" secondAttribute="top" constant="20" id="QVy-u7-5DV"/>
+                            <constraint firstItem="ceH-wJ-00J" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="SaQ-V1-iHX"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="ceH-wJ-00J" secondAttribute="trailing" constant="16" id="UvB-Ks-FoK"/>
+                            <constraint firstItem="J0I-eo-qnQ" firstAttribute="trailing" secondItem="R5O-s3-JsS" secondAttribute="trailing" constant="16" id="ec3-bS-qsY"/>
+                            <constraint firstItem="R5O-s3-JsS" firstAttribute="leading" secondItem="J0I-eo-qnQ" secondAttribute="leading" constant="16" id="o8D-Mb-Jma"/>
+                            <constraint firstItem="R5O-s3-JsS" firstAttribute="top" secondItem="ceH-wJ-00J" secondAttribute="bottom" constant="20" id="tE2-Pt-wF9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J0I-eo-qnQ"/>
                     </view>
@@ -370,7 +376,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="The data entry here will be converted to QRCODE" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DfU-ea-QaF">
-                                <rect key="frame" x="16" y="36" width="298" height="87"/>
+                                <rect key="frame" x="16" y="40" width="298" height="87"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="87" id="c7r-rw-GQa"/>
                                 </constraints>
@@ -381,10 +387,10 @@
                                 </connections>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_share_qrcode" translatesAutoresizingMaskIntoConstraints="NO" id="pHU-RG-azA">
-                                <rect key="frame" x="16" y="145" width="343" height="502"/>
+                                <rect key="frame" x="16" y="147" width="343" height="500"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teX-9b-XuL">
-                                <rect key="frame" x="322" y="64" width="37" height="30"/>
+                                <rect key="frame" x="322" y="68.5" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="onBtnDoneTouch:" destination="m14-H8-NlX" eventType="touchDown" id="Dwu-Hx-8OI"/>
@@ -393,15 +399,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="teX-9b-XuL" firstAttribute="leading" secondItem="DfU-ea-QaF" secondAttribute="trailing" constant="8" id="C2M-Fa-D2S"/>
-                            <constraint firstItem="pHU-RG-azA" firstAttribute="top" secondItem="DfU-ea-QaF" secondAttribute="bottom" constant="22" id="Jif-Lc-2t6"/>
-                            <constraint firstItem="teX-9b-XuL" firstAttribute="centerY" secondItem="DfU-ea-QaF" secondAttribute="centerY" id="N0t-2G-O80"/>
-                            <constraint firstItem="DfU-ea-QaF" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="SkC-Ab-4JU"/>
-                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="teX-9b-XuL" secondAttribute="trailing" constant="16" id="h2o-VW-5NS"/>
-                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="pHU-RG-azA" secondAttribute="trailing" constant="16" id="mli-cB-Vde"/>
-                            <constraint firstItem="DfU-ea-QaF" firstAttribute="top" secondItem="I1n-tE-Mbw" secondAttribute="top" constant="16" id="rKe-4w-9Y0"/>
-                            <constraint firstItem="pHU-RG-azA" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="sy0-wl-rNy"/>
-                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="bottom" secondItem="pHU-RG-azA" secondAttribute="bottom" constant="20" id="wTr-Ys-Qfd"/>
+                            <constraint firstItem="teX-9b-XuL" firstAttribute="centerY" secondItem="DfU-ea-QaF" secondAttribute="centerY" id="6Sj-hf-9f0"/>
+                            <constraint firstItem="DfU-ea-QaF" firstAttribute="top" secondItem="I1n-tE-Mbw" secondAttribute="top" constant="20" id="At9-R5-Tee"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="bottom" secondItem="pHU-RG-azA" secondAttribute="bottom" constant="20" id="LX0-Kv-fel"/>
+                            <constraint firstItem="pHU-RG-azA" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="PuP-gR-KS4"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="pHU-RG-azA" secondAttribute="trailing" constant="16" id="Sv6-Ao-tVq"/>
+                            <constraint firstItem="I1n-tE-Mbw" firstAttribute="trailing" secondItem="teX-9b-XuL" secondAttribute="trailing" constant="16" id="Tma-Qg-EYd"/>
+                            <constraint firstItem="pHU-RG-azA" firstAttribute="top" secondItem="DfU-ea-QaF" secondAttribute="bottom" constant="20" id="XSI-ha-9tA"/>
+                            <constraint firstItem="teX-9b-XuL" firstAttribute="leading" secondItem="DfU-ea-QaF" secondAttribute="trailing" constant="8" id="eGV-pD-Pgc"/>
+                            <constraint firstItem="DfU-ea-QaF" firstAttribute="leading" secondItem="I1n-tE-Mbw" secondAttribute="leading" constant="16" id="xGe-bQ-cVK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I1n-tE-Mbw"/>
                     </view>
