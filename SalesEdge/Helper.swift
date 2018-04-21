@@ -12,7 +12,16 @@ import Alamofire
 
 
 class Helper{
-   
+    
+    private static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return formatter
+    }()
+    
+    open static func format(date: Date) -> String{
+        return formatter.string(from:date)
+    }
     open static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
         
