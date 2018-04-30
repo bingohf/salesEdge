@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import RxSwift
+import SQLite
 
 struct ViewDataItem {
     let label:String
     let subTitle:String
     let timeStamp:String
+    let key:String
 }
 
 class ProductListController : UITableViewController{
@@ -76,7 +78,7 @@ class ProductListController : UITableViewController{
                         let prodno =  row[product.prodno]
                         let desc = row[product.desc]
                         let timestamp = Helper.format(date: row[product.create_date])
-                        dataList.append(ViewDataItem(label: prodno, subTitle: desc, timeStamp: timestamp))
+                        dataList.append(ViewDataItem(label: prodno, subTitle: desc, timeStamp: timestamp, key:prodno))
                         
                         // id: 1, email: alice@mac.com, name: Optional("Alice")
                     }
@@ -105,4 +107,70 @@ class ProductListController : UITableViewController{
             }).disposed(by: disposeBag)
     }
     
+
+
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            let rowData = self.data[index.row]
+            let product = LDataBase.shared.product
+           let thisRow = product.table.filter(product.prodno == rowData.key)
+            do {
+                if let db = LDataBase.shared.db {
+                    if try db.run(thisRow.delete()) > 0 {
+                        print("deleted alice")
+                        self.data.remove(at: index.row)
+                        tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+                    } else {
+                        print("alice not found")
+                    }
+                }
+            } catch {
+                print("delete failed: \(error)")
+            }
+            
+        }
+        share.backgroundColor = .orange
+        
+        return [share]
+    }
+
+    @IBAction func onMoreClick(_ sender: Any) {
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+        // 2
+        let deleteAction = UIAlertAction(title: "Download sample group", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.downloadGroupShow()
+        })
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("File Saved")
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        // 4
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(saveAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
+    func downloadGroupShow() {
+        view?.makeToastActivity(.center)
+        
+    }
 }

@@ -22,7 +22,6 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     @IBOutlet weak var mWebView: UIWebView!
     @IBOutlet weak var mFieldPANO: UITextField!
 
-    let baseUrl = "http://ledwayvip.cloudapp.net:8080/datasnap/rest/TLwDataModule/"
     var menus = [NSDictionary]()
     var mMode = "Check"
     
@@ -73,7 +72,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func loadMenus() {
         let parameters = makeRequest()
-        Alamofire.request(baseUrl + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.BASE_URL + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -165,7 +164,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let view = self.view
         view?.makeToastActivity(.center)
         let parameters: [String: Any] = makeRequest().merging(params) { (current, _) in current }
-        Alamofire.request(baseUrl + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.BASE_URL + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{
                 response in
@@ -411,7 +410,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             "macNo" : UIDevice.current.identifierForVendor!.uuidString
         ]
         
-        Alamofire.request(baseUrl + "group/\(group)", method: .put, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.BASE_URL + "group/\(group)", method: .put, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{
                 response in
