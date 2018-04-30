@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import SQLite
+import Alamofire
 
 struct ViewDataItem {
     let label:String
@@ -171,6 +172,95 @@ class ProductListController : UITableViewController{
     
     func downloadGroupShow() {
         view?.makeToastActivity(.center)
-        
+        let sql = "select * from view_GroupShowName "
+        let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
+            .debugLog()
+            .validate(statusCode: 200..<300)
+            .responseJSON{
+                response in
+                self.view?.hideToastActivity()
+                if let error = response.result.error {
+                    self.toast(message: Helper.getErrorMessage(response.result))
+                    return
+                }
+                let value = response.result.value
+                let JSON = value as! NSDictionary
+                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                let optionMenu = UIAlertController(title: nil, message: "Choose exhibition", preferredStyle: .actionSheet)
+                for object in array{
+                    if let item = object as? NSDictionary{
+                        if let name = item.value(forKey: "showname"){
+                            let action = UIAlertAction(title: name as! String, style: .default, handler: {
+                                (alert: UIAlertAction!) -> Void in
+                                self.download(showName:name as! String)
+                            })
+                            optionMenu.addAction(action)
+                        }
+
+                    }
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    print("Cancelled")
+                })
+                optionMenu.addAction(cancelAction)
+                self.present(optionMenu, animated: true, completion: nil)
+                
+        }
+    }
+    
+    func download(showName:String)  {
+        let preferences = UserDefaults.standard
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let sql = "select * from view_GroupShowList where showname ='\(showName)'"
+        let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
+            .debugLog()
+            .validate(statusCode: 200..<300)
+            .responseJSON{
+                response in
+                self.view?.hideToastActivity()
+                
+                if let error = response.result.error {
+                    self.toast(message: Helper.getErrorMessage(response.result))
+                    return
+                }
+                let value = response.result.value
+                let JSON = value as! NSDictionary
+                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                for object in array{
+                    if let item = object as? NSDictionary{
+                        if let prodno = item.value(forKey: "prodno") as? String   {
+
+                            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                            let dataPath = documentsDirectory.appendingPathComponent("Show")
+                            
+                            do {
+                                try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
+                            } catch let error as NSError {
+                                print("Error creating directory: \(error.localizedDescription)")
+                            }
+                           
+                            do {
+                                if let graphic = item.value(forKey: "graphic") as? String {
+                                    let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+                                    try data?.write(to: dataPath.appendingPathComponent("\(prodno)_type1.png", isDirectory: false))
+                                }
+                                if let graphic = item.value(forKey: "graphic2") as? String {
+                                    let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+                                    try data?.write(to: dataPath.appendingPathComponent("\(prodno)_type2.png", isDirectory: false))
+                                }
+                            } catch let error as NSError {
+                                print("Error creating directory: \(error.localizedDescription)")
+                            }
+                           
+                        }
+                        
+                    }
+                }
+
+                
+        }
     }
 }
