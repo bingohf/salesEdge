@@ -12,6 +12,7 @@ import QRCodeReader
 import AVFoundation
 import Alamofire
 import Toast_Swift
+import RxSwift
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
     
@@ -24,6 +25,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
 
     var menus = [NSDictionary]()
     var mMode = "Check"
+    var mContinueScan = false
     
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -32,6 +34,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         return QRCodeReaderViewController(builder: builder)
     }()
     
+
     func pdaGuid() -> String {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
         let deviceName = UIDevice.current.modelName
@@ -231,7 +234,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                     html = String(mySubstring)
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                     self.toast(message: html)
-                    
+                } else {
+                    self.onWebViewRequestCallback()
                 }
             }
             catch let error{
@@ -265,6 +269,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onPAQRCodeClick(_ sender: Any) {
+        mContinueScan = false
         scanQRCode(){qrcodeResult in
             if let text = qrcodeResult?.value {
                 self.mFieldPANO.text = qrcodeResult?.value
@@ -274,6 +279,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onBillQrCodeClick(_ sender: Any) {
+        mContinueScan = false
         scanQRCode(){qrcodeResult in
             if let text = qrcodeResult?.value {
                 self.mFieldBillNo.text = qrcodeResult?.value
@@ -284,6 +290,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onBtnTakePhotoClick(_ sender: Any) {
+        mContinueScan = false
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
@@ -430,6 +437,25 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                     
                 }
                 
+        }
+    }
+    
+    
+    @IBAction func onMulitScanTouch(_ sender: Any) {
+        mContinueScan = true
+        scanQRCode(){qrcodeResult in
+            if let text = qrcodeResult?.value {
+                self.mFieldPANO.text = qrcodeResult?.value
+                self.queryDetail()
+            }
+        }
+    }
+    
+    func onWebViewRequestCallback() {
+        if mContinueScan {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
+                self.onMulitScanTouch("")
+            })
         }
     }
 }

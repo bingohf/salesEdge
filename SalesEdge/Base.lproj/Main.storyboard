@@ -138,7 +138,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PA No" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bdv-iI-ctg">
-                                <rect key="frame" x="16" y="137" width="296" height="40"/>
+                                <rect key="frame" x="16" y="137" width="249" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="4Am-b0-0PX"/>
                                 </constraints>
@@ -166,17 +166,29 @@
                                     <action selector="onBtnTakePhotoClick:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Hmr-at-soD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWH-J0-Xau">
+                                <rect key="frame" x="272" y="137" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="M5e-tX-ewp"/>
+                                    <constraint firstAttribute="height" constant="40" id="qvB-V3-pti"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="qrcode-scan-multi"/>
+                                <connections>
+                                    <action selector="onMulitScanTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="rdn-NN-F6y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="Ncr-PL-WL2" secondAttribute="trailing" id="11Y-1f-vAC"/>
                             <constraint firstItem="Ncr-PL-WL2" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="1DO-Gm-U1X"/>
+                            <constraint firstItem="IWH-J0-Xau" firstAttribute="centerY" secondItem="Dho-LC-KoT" secondAttribute="centerY" id="33L-nO-Nl6"/>
                             <constraint firstItem="Yot-00-lWu" firstAttribute="centerY" secondItem="ZYp-uF-XX6" secondAttribute="centerY" id="4cq-uF-hFi"/>
-                            <constraint firstItem="Dho-LC-KoT" firstAttribute="leading" secondItem="bdv-iI-ctg" secondAttribute="trailing" constant="7" id="5Ti-XP-rba"/>
                             <constraint firstItem="ZYp-uF-XX6" firstAttribute="leading" secondItem="mns-42-JeD" secondAttribute="trailing" constant="7" id="BcD-vA-AuW"/>
                             <constraint firstItem="Dho-LC-KoT" firstAttribute="top" secondItem="ZYp-uF-XX6" secondAttribute="bottom" constant="17" id="I9W-It-iOx"/>
                             <constraint firstItem="mns-42-JeD" firstAttribute="leading" secondItem="Yot-00-lWu" secondAttribute="trailing" constant="7" id="K7Y-6r-qao"/>
                             <constraint firstItem="Ncr-PL-WL2" firstAttribute="top" secondItem="Dho-LC-KoT" secondAttribute="bottom" constant="8" id="Mft-f7-LRw"/>
+                            <constraint firstItem="Dho-LC-KoT" firstAttribute="leading" secondItem="IWH-J0-Xau" secondAttribute="trailing" constant="7" id="UFQ-Gj-onT"/>
                             <constraint firstItem="bdv-iI-ctg" firstAttribute="centerY" secondItem="Dho-LC-KoT" secondAttribute="centerY" id="UVp-2J-1bx"/>
                             <constraint firstItem="Yot-00-lWu" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="16" id="UgH-Xa-0MG"/>
                             <constraint firstItem="ZYp-uF-XX6" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="16" id="Zy1-Pe-TRJ"/>
@@ -184,6 +196,7 @@
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="Ncr-PL-WL2" secondAttribute="bottom" id="krs-J4-5os"/>
                             <constraint firstItem="bdv-iI-ctg" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="16" id="nzg-DS-daV"/>
                             <constraint firstItem="mns-42-JeD" firstAttribute="centerY" secondItem="ZYp-uF-XX6" secondAttribute="centerY" id="qDa-PO-4TE"/>
+                            <constraint firstItem="IWH-J0-Xau" firstAttribute="leading" secondItem="bdv-iI-ctg" secondAttribute="trailing" constant="7" id="xjX-aU-oM3"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="ZYp-uF-XX6" secondAttribute="trailing" constant="16" id="yQz-fb-0Bn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -514,5 +527,6 @@
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
         <image name="qrcode-scan" width="24" height="24"/>
+        <image name="qrcode-scan-multi" width="40" height="40"/>
     </resources>
 </document>
