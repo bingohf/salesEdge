@@ -48,6 +48,20 @@ class ProductListController : UITableViewController{
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
         cell.mTxtTimestamp.text = item.timeStamp
+        cell.mTxtLabel.text = item.label
+        cell.mTxtSubTitle.text = item.subTitle
+        cell.mImage.image = nil
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(item.label)_type1.png")
+        do{
+             let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath.path){
+                cell.mImage.image = UIImage(contentsOfFile: filePath.path)
+            }
+          
+        }catch{
+            print(error)
+        }
         return cell
         
     }
@@ -149,11 +163,7 @@ class ProductListController : UITableViewController{
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow()
         })
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("File Saved")
-        })
-        
+    
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -163,7 +173,6 @@ class ProductListController : UITableViewController{
         
         // 4
         optionMenu.addAction(deleteAction)
-        optionMenu.addAction(saveAction)
         optionMenu.addAction(cancelAction)
         
         // 5
@@ -172,7 +181,9 @@ class ProductListController : UITableViewController{
     
     func downloadGroupShow() {
         view?.makeToastActivity(.center)
-        let sql = "select * from view_GroupShowName "
+        let preferences = UserDefaults.standard
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let sql = "select * from view_GroupShowName where mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
@@ -213,7 +224,7 @@ class ProductListController : UITableViewController{
     func download(showName:String)  {
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
-        let sql = "select * from view_GroupShowList where showname ='\(showName)'"
+        let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
@@ -229,6 +240,9 @@ class ProductListController : UITableViewController{
                 let value = response.result.value
                 let JSON = value as! NSDictionary
                 let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                if array.count < 1{
+                    self.toast(message: "No data")
+                }
                 for object in array{
                     if let item = object as? NSDictionary{
                         if let prodno = item.value(forKey: "prodno") as? String   {
@@ -255,10 +269,26 @@ class ProductListController : UITableViewController{
                                 print("Error creating directory: \(error.localizedDescription)")
                             }
                            
+                            if let db = LDataBase.shared.db {
+                                let product = LDataBase.shared.product
+                                do{
+                                    var date = Date()
+                                    if let dateStr = item.value(forKey: "updatedate") as? String{
+                                        date = dateStr.dateFromISO8601 ?? Date()
+                                    }
+                                    let spec:String? = item.value(forKey: "specdesc") as? String
+                                    try db.run(product.table.insert(product.desc <- spec ?? "",  product.prodno <- prodno, product.create_date <- date))
+                                }catch {
+                                    print(error)
+                                }
+                            }
+                            
+                            
                         }
                         
                     }
                 }
+                self.reloadData()
 
                 
         }
