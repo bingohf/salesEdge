@@ -275,6 +275,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         scanQRCode(){qrcodeResult in
             if let text = qrcodeResult?.value {
                 self.mFieldPANO.text = qrcodeResult?.value
+                self.mFieldPANO.endEditing(true)
                 self.queryDetail()
             }
         }
@@ -284,8 +285,10 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mContinueScan = false
         mDisposables.dispose()
         scanQRCode(){qrcodeResult in
+             self.view.endEditing(true)
             if let text = qrcodeResult?.value {
                 self.mFieldBillNo.text = qrcodeResult?.value
+                self.mFieldBillNo.endEditing(true)
                 self.queryBill(billNo: self.mFieldBillNo.text ?? "")
             }
 
@@ -365,6 +368,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         guard inScanning == false else{
             return
         }
+        self.view.endEditing(true)
         inScanning = true
         readerVC.delegate = self
         
