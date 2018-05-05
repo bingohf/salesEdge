@@ -12,6 +12,7 @@ import QRCodeReader
 import AVFoundation
 import Alamofire
 import Toast_Swift
+import RxSwift
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
     
@@ -24,7 +25,9 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
 
     var menus = [NSDictionary]()
     var mMode = "Check"
-    
+    var mContinueScan = false
+    var inScanning = false
+    let mDisposables = CompositeDisposable()
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
             $0.reader = QRCodeReader(metadataObjectTypes: [.qr,.code39,.code128, .upce,.aztec,.code93,.dataMatrix,.ean13,.pdf417], captureDevicePosition: .back)
@@ -32,6 +35,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         return QRCodeReaderViewController(builder: builder)
     }()
     
+
     func pdaGuid() -> String {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
         let deviceName = UIDevice.current.modelName
@@ -231,7 +235,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                     html = String(mySubstring)
                     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                     self.toast(message: html)
-                    
+                } else {
+                    self.onWebViewRequestCallback()
                 }
             }
             catch let error{
@@ -265,6 +270,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onPAQRCodeClick(_ sender: Any) {
+        mContinueScan = false
+        mDisposables.dispose()
         scanQRCode(){qrcodeResult in
             if let text = qrcodeResult?.value {
                 self.mFieldPANO.text = qrcodeResult?.value
@@ -274,6 +281,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onBillQrCodeClick(_ sender: Any) {
+        mContinueScan = false
+        mDisposables.dispose()
         scanQRCode(){qrcodeResult in
             if let text = qrcodeResult?.value {
                 self.mFieldBillNo.text = qrcodeResult?.value
@@ -284,6 +293,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     @IBAction func onBtnTakePhotoClick(_ sender: Any) {
+        mContinueScan = false
+        mDisposables.dispose()
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
@@ -351,6 +362,10 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         }
     }
     func scanQRCode(callback: @escaping (QRCodeReaderResult?) -> Void){
+        guard inScanning == false else{
+            return
+        }
+        inScanning = true
         readerVC.delegate = self
         
         // Or by using the closure pattern
@@ -358,13 +373,13 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         
         // Presents the readerVC as modal form sheet
         readerVC.modalPresentationStyle = .formSheet
-        present(readerVC, animated: true, completion: nil)
+        present(readerVC, animated: false, completion: nil)
     }
     
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         reader.stopScanning()
-        
-        dismiss(animated: true, completion: nil)
+        self.inScanning = false
+        dismiss(animated: false, completion: nil)
     }
     
     func reader(_ reader: QRCodeReaderViewController, didSwitchCamera newCaptureDevice: AVCaptureDeviceInput) {
@@ -372,7 +387,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         reader.stopScanning()
-        
+        self.inScanning = false
         dismiss(animated: true, completion: nil)
     }
     
@@ -430,6 +445,29 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
                     
                 }
                 
+        }
+    }
+    
+    
+    @IBAction func onMulitScanTouch(_ sender: Any) {
+        mContinueScan = true
+        scanQRCode(){qrcodeResult in
+            if let text = qrcodeResult?.value {
+                if(qrcodeResult?.value != self.mFieldPANO.text){
+                    self.mFieldPANO.text = qrcodeResult?.value
+                    self.queryDetail()
+                }
+            }
+        }
+    }
+    
+    func onWebViewRequestCallback() {
+        if mContinueScan {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2, execute: {
+                if self.mContinueScan {
+                    self.onMulitScanTouch("")
+                }
+            })
         }
     }
 }

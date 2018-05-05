@@ -29,13 +29,15 @@ class LDataBase {
         let desc = Expression<String>("desc")
         let create_date = Expression<Date>("create_date")
         init(db:Connection?) {
-        
-                do {
-                    let rowid = try db?.run(table.insert(prodno <- "alice@mac.com", desc <- "", create_date <- Date()))
-                    print("inserted id: \(String(describing: rowid))")
-                } catch {
-                    print("insertion failed: \(error)")
-                }
+            do {
+                try db?.run(table.create(ifNotExists: true) { t in
+                    t.column(prodno, primaryKey: true)
+                    t.column(desc)
+                    t.column(create_date)
+                })
+            }catch{
+                
+            }
         }
     }
 }
