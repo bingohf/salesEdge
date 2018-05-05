@@ -31,7 +31,22 @@ class MyBizCardViewController:XLPagerItemViewController,UITextViewDelegate{
     
     func textViewDidChange(_ textView: UITextView){
         if let text = textView.text {
-            mImgQRCode.image = Helper.generateQRCode(from: text)
+            
+            if let qrcodeImage = Helper.generateQRCode(from:text){
+                let scaleX = mImgQRCode.frame.size.width / qrcodeImage.extent.size.width
+                let scaleY = mImgQRCode.frame.size.height / qrcodeImage.extent.size.height
+                let scale = min(scaleX, scaleY)
+                let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+                
+                let image = UIImage(ciImage: transformedImage)
+                mImgQRCode.image = image
+                
+                UIGraphicsBeginImageContext(CGSize(width:mImgQRCode.frame.size.width, height:mImgQRCode.frame.size.width))
+                image.draw(in: CGRect(x:0, y:0, width:mImgQRCode.frame.size.width, height:mImgQRCode.frame.size.width))
+                let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                mImgQRCode.image = newImage
+            }
              let preferences = UserDefaults.standard
             preferences.set(text, forKey: "bizcard")
             preferences.synchronize()
