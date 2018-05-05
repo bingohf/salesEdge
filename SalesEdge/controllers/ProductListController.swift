@@ -161,7 +161,7 @@ class ProductListController : UITableViewController{
         // 2
         let deleteAction = UIAlertAction(title: "Download sample group", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
-            self.downloadGroupShow()
+            self.downloadGroupShow(sender)
         })
     
         //
@@ -174,12 +174,17 @@ class ProductListController : UITableViewController{
         // 4
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
-        
+        optionMenu.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         // 5
-        self.present(optionMenu, animated: true, completion: nil)
+        self.present(optionMenu, animated: true){
+            optionMenu.view.superview?.isUserInteractionEnabled = true
+            optionMenu.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+        }
     }
-    
-    func downloadGroupShow() {
+    @objc func alertControllerBackgroundTapped(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    func downloadGroupShow(_ sender: Any) {
         view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
@@ -216,7 +221,14 @@ class ProductListController : UITableViewController{
                     print("Cancelled")
                 })
                 optionMenu.addAction(cancelAction)
-                self.present(optionMenu, animated: true, completion: nil)
+                optionMenu.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+                // 5
+                self.present(optionMenu, animated: true){
+                    optionMenu.view.superview?.isUserInteractionEnabled = true
+                    optionMenu.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.alertControllerBackgroundTapped)))
+                }
+                
+                
                 
         }
     }
