@@ -312,6 +312,7 @@
                                     <outlet property="mTxtLabel" destination="4pj-r6-dP0" id="wj1-hz-Wnt"/>
                                     <outlet property="mTxtSubTitle" destination="ckV-Qb-vlB" id="dfv-mD-gaQ"/>
                                     <outlet property="mTxtTimestamp" destination="FDT-dz-560" id="f72-zp-AzI"/>
+                                    <segue destination="hN5-yd-lV3" kind="show" identifier="show_product_detail" id="cnv-vr-ecB"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -331,6 +332,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fh5-gR-hdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1449" y="-276"/>
+        </scene>
+        <!--Product-->
+        <scene sceneID="dL8-RX-bkH">
+            <objects>
+                <viewController title="Product" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TMw-7K-1mr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="S0k-gC-Knm"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BxL-9a-chx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2442" y="-277"/>
         </scene>
         <!--Sales Edge-->
         <scene sceneID="yl2-sM-qoP">

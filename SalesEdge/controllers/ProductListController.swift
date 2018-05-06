@@ -12,12 +12,7 @@ import RxSwift
 import SQLite
 import Alamofire
 
-struct ViewDataItem {
-    let label:String
-    let subTitle:String
-    let timeStamp:String
-    let key:String
-}
+
 
 class ProductListController : UITableViewController{
     
@@ -303,6 +298,18 @@ class ProductListController : UITableViewController{
                 self.reloadData()
 
                 
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_product_detail" {
+            let destinationVC = segue.destination as? ProductViewController
+               // destinationVC.programVar = newProgramVar
+            if let row = self.tableView.indexPathForSelectedRow?.row{
+                let item = data[row]
+                destinationVC?.title = item.label
+            
+            }
         }
     }
 }

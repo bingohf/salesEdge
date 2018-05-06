@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A085306209E93DA0094C5B7 /* ProductViewController.swift */; };
+		6A08530A209EA7440094C5B7 /* ViewDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A085309209EA7440094C5B7 /* ViewDataItem.swift */; };
 		6A0C3DCC20662E7F0050386D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C3DCE20662E7F0050386D /* InfoPlist.strings */; };
 		6A0C3DD32066397F0050386D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C3DD52066397F0050386D /* Localizable.strings */; };
 		6A190B19204A8C3900534483 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A190B18204A8C3900534483 /* Helper.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.debug.xcconfig"; sourceTree = "<group>"; };
 		3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesEdge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A085306209E93DA0094C5B7 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		6A085309209EA7440094C5B7 /* ViewDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataItem.swift; sourceTree = "<group>"; };
 		6A0C3DC620662D9E0050386D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		6A0C3DC720662D9E0050386D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		6A0C3DCF20662E810050386D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6A085308209EA7340094C5B7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6A085309209EA7440094C5B7 /* ViewDataItem.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		6A57D5AC208328390074C0C6 /* db */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +104,7 @@
 			children = (
 				6A57D5B0208347DA0074C0C6 /* ProductListController.swift */,
 				6A57D5B2208376090074C0C6 /* CustomTableCell.swift */,
+				6A085306209E93DA0094C5B7 /* ProductViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -125,6 +138,7 @@
 		6A92F71B201360CE00079C31 /* SalesEdge */ = {
 			isa = PBXGroup;
 			children = (
+				6A085308209EA7340094C5B7 /* model */,
 				6A74ACCB2096C6C300555396 /* network */,
 				6A57D5AF208347BA0074C0C6 /* controllers */,
 				6A57D5AC208328390074C0C6 /* db */,
@@ -310,8 +324,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A190B19204A8C3900534483 /* Helper.swift in Sources */,
+				6A08530A209EA7440094C5B7 /* ViewDataItem.swift in Sources */,
 				6A57D5AE208328610074C0C6 /* Database.swift in Sources */,
 				6A57D5B3208376090074C0C6 /* CustomTableCell.swift in Sources */,
+				6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */,
 				6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */,
 				6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */,
 				6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */,
