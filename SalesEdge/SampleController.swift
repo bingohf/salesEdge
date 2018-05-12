@@ -22,7 +22,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     @IBOutlet weak var mWebView: UIWebView!
     @IBOutlet weak var mFieldPANO: UITextField!
-
+    
     var menus = [NSDictionary]()
     var mMode = "Check"
     var mContinueScan = false
@@ -35,7 +35,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         return QRCodeReaderViewController(builder: builder)
     }()
     
-
+    
     func pdaGuid() -> String {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
         let deviceName = UIDevice.current.modelName
@@ -60,7 +60,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         showState()
         settingChange()
         //self.view.makeToastActivity(.center)
-
+        
     }
     
     func makeRequest() -> [String : Any] {
@@ -157,7 +157,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         webViewRequest(apiPath: apiPath, params: param)
     }
     
-   
+    
     func queryDetail() {
         let billNo = mFieldBillNo.text ?? ""
         let detailNo = mFieldPANO.text ?? ""
@@ -285,13 +285,13 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mContinueScan = false
         mDisposables.dispose()
         scanQRCode(){qrcodeResult in
-             self.view.endEditing(true)
+            self.view.endEditing(true)
             if let text = qrcodeResult?.value {
                 self.mFieldBillNo.text = qrcodeResult?.value
                 self.mFieldBillNo.endEditing(true)
                 self.queryBill(billNo: self.mFieldBillNo.text ?? "")
             }
-
+            
         }
     }
     
@@ -310,11 +310,11 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertControllerStyle.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:NSLocalizedString("Change Group", comment:""), style:.default){
             (action: UIAlertAction!) -> Void in
-                        self.scanQRCode(){qrcodeResult in
-                            if let qrcode = qrcodeResult?.value {
-                                self.receiveGroup(group: qrcode)
-                            }
-                        }
+            self.scanQRCode(){qrcodeResult in
+                if let qrcode = qrcodeResult?.value {
+                    self.receiveGroup(group: qrcode)
+                }
+            }
         }
         alertController.addAction(groupQRCodeAction)
         
@@ -482,7 +482,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
 extension Request {
     public func debugLog() -> Self {
         #if DEBUG
-            debugPrint(self)
+        debugPrint(self)
         #endif
         return self
     }

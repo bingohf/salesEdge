@@ -333,20 +333,81 @@
             </objects>
             <point key="canvasLocation" x="1449" y="-276"/>
         </scene>
-        <!--Product-->
+        <!--ProductVC-->
         <scene sceneID="dL8-RX-bkH">
             <objects>
-                <viewController title="Product" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ProductVC" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMw-7K-1mr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1111111111111" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shd-AM-Cua">
+                                <rect key="frame" x="16" y="80" width="303" height="63"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
+                                <rect key="frame" x="329" y="80" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aaQ-0W-z2B"/>
+                                    <constraint firstAttribute="width" constant="30" id="abC-zY-Bpr"/>
+                                </constraints>
+                                <state key="normal" title="QR"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
+                                <rect key="frame" x="327" y="113" width="32" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="1Qv-EM-iIR"/>
+                                    <constraint firstAttribute="height" constant="30" id="Y2E-Wf-79I"/>
+                                </constraints>
+                                <state key="normal" title="OCR"/>
+                            </button>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-yL-mNj">
+                                <rect key="frame" x="16" y="151" width="343" height="451"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oRe-oJ-znS" appends="YES" id="LCA-Wq-Ncj"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="YbP-zU-mCh" secondAttribute="trailing" constant="16" id="0Fc-mY-OtA"/>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="bottom" secondItem="KIP-yL-mNj" secondAttribute="bottom" constant="16" id="14p-zr-ax8"/>
+                            <constraint firstItem="KIP-yL-mNj" firstAttribute="leading" secondItem="S0k-gC-Knm" secondAttribute="leading" constant="16" id="2Iq-Ez-dNc"/>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="KIP-yL-mNj" secondAttribute="trailing" constant="16" id="TZK-zk-f3z"/>
+                            <constraint firstItem="KIP-yL-mNj" firstAttribute="top" secondItem="shd-AM-Cua" secondAttribute="bottom" constant="8" id="TgP-lL-otP"/>
+                            <constraint firstItem="CZz-Sw-Fmc" firstAttribute="top" secondItem="S0k-gC-Knm" secondAttribute="top" constant="16" id="Uo5-54-UFw"/>
+                            <constraint firstItem="shd-AM-Cua" firstAttribute="leading" secondItem="S0k-gC-Knm" secondAttribute="leading" constant="16" id="YWZ-ip-eMi"/>
+                            <constraint firstItem="YbP-zU-mCh" firstAttribute="top" secondItem="CZz-Sw-Fmc" secondAttribute="bottom" constant="3" id="Yie-08-jLJ"/>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="CZz-Sw-Fmc" secondAttribute="trailing" constant="16" id="bvY-SP-lKc"/>
+                            <constraint firstItem="shd-AM-Cua" firstAttribute="top" secondItem="S0k-gC-Knm" secondAttribute="top" constant="16" id="c4i-yJ-4or"/>
+                            <constraint firstItem="YbP-zU-mCh" firstAttribute="leading" secondItem="shd-AM-Cua" secondAttribute="trailing" constant="8" id="q8v-Ve-ttB"/>
+                            <constraint firstItem="shd-AM-Cua" firstAttribute="bottom" secondItem="YbP-zU-mCh" secondAttribute="bottom" id="sIb-8P-Kph"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="S0k-gC-Knm"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="sXX-Iz-3PJ">
+                        <barButtonItem key="rightBarButtonItem" title="upload" image="ic_cloud_upload" id="Jps-Xs-KU2">
+                            <connections>
+                                <action selector="onUploadTouch:" destination="hN5-yd-lV3" id="gYe-b7-Fdh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mImage" destination="KIP-yL-mNj" id="GpV-rK-QmH"/>
+                        <outlet property="mTxtDesc" destination="shd-AM-Cua" id="v1K-lm-MUl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BxL-9a-chx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="oRe-oJ-znS">
+                    <connections>
+                        <action selector="onTapGestureSelector:" destination="hN5-yd-lV3" id="dUM-0A-faj"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2442" y="-277"/>
+            <point key="canvasLocation" x="2440.8000000000002" y="-277.51124437781112"/>
         </scene>
         <!--Sales Edge-->
         <scene sceneID="yl2-sM-qoP">
@@ -518,6 +579,7 @@
         <image name="app_share_qrcode" width="400" height="400"/>
         <image name="ic_account_box" width="24" height="24"/>
         <image name="ic_border_all" width="24" height="24"/>
+        <image name="ic_cloud_upload" width="24" height="24"/>
         <image name="ic_language" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>

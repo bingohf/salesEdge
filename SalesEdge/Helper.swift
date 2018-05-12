@@ -19,8 +19,11 @@ class Helper{
         return formatter
     }()
     
-    open static func format(date: Date) -> String{
-        return formatter.string(from:date)
+    open static func format(date: Date?) -> String{
+        if date == nil {
+            return ""
+        }
+        return formatter.string(from:date!)
     }
     open static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)

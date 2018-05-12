@@ -14,11 +14,12 @@ import Alamofire
 
 
 
-class ProductListController : UITableViewController{
+class ProductListController : UITableViewController, ProductDelegate{
+    let DEFAULT_GROUP = "3036A"
     
     var disposeBag = DisposeBag()
-    var data = [ViewDataItem]()
-    
+    var data = [ProductData]()
+    let productDAO = ProductDAO()
     
     override func viewDidLoad() {
         refreshControl = UIRefreshControl()
@@ -42,12 +43,12 @@ class ProductListController : UITableViewController{
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = item.timeStamp
-        cell.mTxtLabel.text = item.label
-        cell.mTxtSubTitle.text = item.subTitle
+        cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
+        cell.mTxtLabel.text = item.prodno
+        cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = nil
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(item.label)_type1.png")
+        let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(item.prodno)_type1.png")
         do{
              let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath.path){
@@ -78,22 +79,12 @@ class ProductListController : UITableViewController{
     
     
     func reloadData()  {
-        Observable<[ViewDataItem]>.create { (observer ) -> Disposable in
+        Observable<[ProductData]>.create { (observer ) -> Disposable in
             
             do{
-                var dataList = [ViewDataItem]()
-                let product = LDataBase.shared.product
-                if let db = LDataBase.shared.db {
-                    for row in try db.prepare(product.table) {
-                        let prodno =  row[product.prodno]
-                        let desc = row[product.desc]
-                        let timestamp = Helper.format(date: row[product.create_date])
-                        dataList.append(ViewDataItem(label: prodno, subTitle: desc, timeStamp: timestamp, key:prodno))
-                        
-                        // id: 1, email: alice@mac.com, name: Optional("Alice")
-                    }
-                }
-                observer.onNext(dataList)
+                
+                let products = try self.productDAO.findAll()
+                observer.onNext(products)
                 observer.onCompleted()
             }catch {
                 observer.onError(error)
@@ -127,18 +118,10 @@ class ProductListController : UITableViewController{
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             let rowData = self.data[index.row]
-            let product = LDataBase.shared.product
-           let thisRow = product.table.filter(product.prodno == rowData.key)
             do {
-                if let db = LDataBase.shared.db {
-                    if try db.run(thisRow.delete()) > 0 {
-                        print("deleted alice")
-                        self.data.remove(at: index.row)
-                        tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
-                    } else {
-                        print("alice not found")
-                    }
-                }
+                try self.productDAO.remove(productData: rowData)
+                self.data.remove(at: index.row)
+                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }
@@ -182,7 +165,7 @@ class ProductListController : UITableViewController{
     func downloadGroupShow(_ sender: Any) {
         view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
-        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowName where mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
@@ -230,7 +213,7 @@ class ProductListController : UITableViewController{
     
     func download(showName:String)  {
         let preferences = UserDefaults.standard
-        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
@@ -251,6 +234,7 @@ class ProductListController : UITableViewController{
                     self.toast(message: "No data")
                 }
                 for object in array{
+                    var productsData = [ProductData]()
                     if let item = object as? NSDictionary{
                         if let prodno = item.value(forKey: "prodno") as? String   {
 
@@ -276,24 +260,18 @@ class ProductListController : UITableViewController{
                                 print("Error creating directory: \(error.localizedDescription)")
                             }
                            
-                            if let db = LDataBase.shared.db {
-                                let product = LDataBase.shared.product
-                                do{
-                                    var date = Date()
-                                    if let dateStr = item.value(forKey: "updatedate") as? String{
-                                        date = dateStr.dateFromISO8601 ?? Date()
-                                    }
-                                    let spec:String? = item.value(forKey: "specdesc") as? String
-                                    try db.run(product.table.insert(product.desc <- spec ?? "",  product.prodno <- prodno, product.create_date <- date))
-                                }catch {
-                                    print(error)
-                                }
+                            var date = Date()
+                            if let dateStr = item.value(forKey: "updatedate") as? String{
+                                date = dateStr.dateFromISO8601 ?? Date()
                             }
-                            
+                            let spec:String? = item.value(forKey: "specdesc") as? String
+                            let product = ProductData(prodno: prodno, desc: spec, updatedate: date)
+                            productsData.append(product)
                             
                         }
                         
                     }
+                    self.productDAO.create(productsData: productsData)
                 }
                 self.reloadData()
 
@@ -304,12 +282,27 @@ class ProductListController : UITableViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_product_detail" {
             let destinationVC = segue.destination as? ProductViewController
-               // destinationVC.programVar = newProgramVar
             if let row = self.tableView.indexPathForSelectedRow?.row{
-                let item = data[row]
-                destinationVC?.title = item.label
+                var item = data[row]
+                destinationVC?.title = item.prodno
+                destinationVC?.productData = item
+                destinationVC?.delegate = self
             
             }
         }
     }
+
+    
+    func onDataChange(productData: ProductData) {
+        if let index = data.index(where: {$0.prodno == productData.prodno}) {
+            if index > -1 {
+                data[index] = productData
+            }
+        } else{
+             data.append(productData)
+        }
+       
+        tableView.reloadData()
+    }
+    
 }
