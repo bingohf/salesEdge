@@ -322,11 +322,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Show Room" id="sUh-Qu-1T7">
-                        <barButtonItem key="rightBarButtonItem" title="Download" image="ic_more_horiz" id="l5J-fB-EuO">
-                            <connections>
-                                <action selector="onMoreClick:" destination="I37-iq-pXz" id="XIh-vT-Z5h"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Download" image="ic_more_horiz" id="l5J-fB-EuO">
+                                <connections>
+                                    <action selector="onMoreClick:" destination="I37-iq-pXz" id="XIh-vT-Z5h"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="add" id="c2D-l1-dGZ">
+                                <connections>
+                                    <action selector="onAddTouch:" destination="I37-iq-pXz" id="n3y-UP-TeR"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fh5-gR-hdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,7 +343,7 @@
         <!--ProductVC-->
         <scene sceneID="dL8-RX-bkH">
             <objects>
-                <viewController title="ProductVC" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetail" title="ProductVC" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMw-7K-1mr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -363,7 +370,7 @@
                                 </constraints>
                                 <state key="normal" title="OCR"/>
                             </button>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-yL-mNj">
+                            <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo_camera" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-yL-mNj">
                                 <rect key="frame" x="16" y="151" width="343" height="451"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -576,12 +583,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add" width="24" height="24"/>
         <image name="app_share_qrcode" width="400" height="400"/>
         <image name="ic_account_box" width="24" height="24"/>
         <image name="ic_border_all" width="24" height="24"/>
         <image name="ic_cloud_upload" width="24" height="24"/>
         <image name="ic_language" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>
+        <image name="ic_photo_camera" width="24" height="24"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
         <image name="qrcode-scan" width="24" height="24"/>

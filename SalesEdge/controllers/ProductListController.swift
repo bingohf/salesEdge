@@ -279,9 +279,9 @@ class ProductListController : UITableViewController, ProductDelegate{
                 destinationVC?.title = item.prodno
                 destinationVC?.productData = item
                 destinationVC?.delegate = self
-            
             }
         }
+        
     }
 
     
@@ -295,6 +295,38 @@ class ProductListController : UITableViewController, ProductDelegate{
         }
        
         tableView.reloadData()
+    }
+    
+    @IBAction func onAddTouch(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Input", message: nil, preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.placeholder = "Product No."
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(textField?.text)")
+            if let prodno = textField?.text {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
+                destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
+                destinationVC.title = prodno
+                destinationVC.delegate = self
+                self.show(destinationVC, sender: sender)
+            }
+          
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

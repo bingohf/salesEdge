@@ -28,6 +28,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                 let fileManager = FileManager.default
                 if fileManager.fileExists(atPath: filePath.path){
                     mImage.image = UIImage(contentsOfFile: filePath.path)
+                    mImage.contentMode = .scaleToFill
                 }
                 
             }catch{
@@ -62,6 +63,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
         let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
         mImage.image = image
+        mImage.contentMode = .scaleToFill
         let dataPath = Helper.getImagePath(folder: "Show")
         if let data512 = UIImagePNGRepresentation(image512) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
