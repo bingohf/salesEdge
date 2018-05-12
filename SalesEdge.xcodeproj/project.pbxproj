@@ -15,7 +15,6 @@
 		6A190B19204A8C3900534483 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A190B18204A8C3900534483 /* Helper.swift */; };
 		6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A38896B206F2F380036FBA1 /* MyPageViewController.swift */; };
 		6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A38896F206F3CB90036FBA1 /* XLPagerItemViewController.swift */; };
-		6A57D5AE208328610074C0C6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57D5AD208328610074C0C6 /* Database.swift */; };
 		6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57D5B0208347DA0074C0C6 /* ProductListController.swift */; };
 		6A57D5B3208376090074C0C6 /* CustomTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57D5B2208376090074C0C6 /* CustomTableCell.swift */; };
 		6A74ACCD2096C70C00555396 /* AppCons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74ACCC2096C70C00555396 /* AppCons.swift */; };
@@ -51,7 +50,6 @@
 		6A190B18204A8C3900534483 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		6A38896B206F2F380036FBA1 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6A38896F206F3CB90036FBA1 /* XLPagerItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLPagerItemViewController.swift; sourceTree = "<group>"; };
-		6A57D5AD208328610074C0C6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		6A57D5B0208347DA0074C0C6 /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
 		6A57D5B2208376090074C0C6 /* CustomTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableCell.swift; sourceTree = "<group>"; };
 		6A74ACCC2096C70C00555396 /* AppCons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCons.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 		6A57D5AC208328390074C0C6 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				6A57D5AD208328610074C0C6 /* Database.swift */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 				6A8F5E3520A67A2C0040EFA6 /* ProductManagedObject+CoreDataProperties.swift in Sources */,
 				6A190B19204A8C3900534483 /* Helper.swift in Sources */,
 				6A08530A209EA7440094C5B7 /* ViewDataItem.swift in Sources */,
-				6A57D5AE208328610074C0C6 /* Database.swift in Sources */,
 				6A57D5B3208376090074C0C6 /* CustomTableCell.swift in Sources */,
 				6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */,
 				6A8F5E3120A679370040EFA6 /* LedwayCoreData.xcdatamodeld in Sources */,
