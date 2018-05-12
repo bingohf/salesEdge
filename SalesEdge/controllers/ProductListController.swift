@@ -48,7 +48,8 @@ class ProductListController : UITableViewController, ProductDelegate{
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = nil
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(item.prodno)_type1.png")
+        let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
+        print(filePath)
         do{
              let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath.path){
@@ -237,16 +238,7 @@ class ProductListController : UITableViewController, ProductDelegate{
                     var productsData = [ProductData]()
                     if let item = object as? NSDictionary{
                         if let prodno = item.value(forKey: "prodno") as? String   {
-
-                            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                            let dataPath = documentsDirectory.appendingPathComponent("Show")
-                            
-                            do {
-                                try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
-                            } catch let error as NSError {
-                                print("Error creating directory: \(error.localizedDescription)")
-                            }
-                           
+                            let dataPath = Helper.getImagePath(folder: "Show")
                             do {
                                 if let graphic = item.value(forKey: "graphic") as? String {
                                     let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)

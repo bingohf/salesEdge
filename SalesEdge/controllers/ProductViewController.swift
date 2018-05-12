@@ -35,7 +35,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             }
         }
         
-
+        
     }
     @IBAction func onTapGestureSelector(_ sender: Any) {
         if let guesture = sender as? UITapGestureRecognizer {
@@ -48,7 +48,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         }
     }
     
-
+    
     
     @IBAction func onUploadTouch(_ sender: Any) {
         productData?.desc = mTxtDesc.text
@@ -59,7 +59,19 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-
+        let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+        let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
+        mImage.image = image
+        let dataPath = Helper.getImagePath(folder: "Show")
+        if let data512 = UIImagePNGRepresentation(image512) {
+            let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+            try? data512.write(to: filename)
+        }
+        if let data110 = UIImagePNGRepresentation(image110) {
+            let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
+            try? data110.write(to: filename)
+        }
+        
     }
     
 }

@@ -150,6 +150,17 @@ class Helper{
         return nil
     }
 
+    open static func getImagePath(folder:String) -> URL{
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dataPath = documentsDirectory.appendingPathComponent(folder)
+        
+        do {
+            try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print("Error creating directory: \(error.localizedDescription)")
+        }
+        return dataPath
+    }
 }
 
 
