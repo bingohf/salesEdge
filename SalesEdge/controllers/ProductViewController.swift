@@ -18,8 +18,9 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     
-    @IBOutlet weak var mTxtDesc: UITextField!
+    @IBOutlet weak var mTxtDesc: UITextView!
     @IBOutlet weak var mImage: UIImageView!
+    
     override public func viewDidLoad() {
         mTxtDesc.text = productData?.desc
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
