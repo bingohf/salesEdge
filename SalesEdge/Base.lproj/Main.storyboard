@@ -323,12 +323,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Show Room" id="sUh-Qu-1T7">
                         <rightBarButtonItems>
-                            <barButtonItem title="Download" image="ic_more_horiz" id="l5J-fB-EuO">
+                            <barButtonItem title="Item" image="ic_more_horiz" style="plain" id="l5J-fB-EuO">
                                 <connections>
                                     <action selector="onMoreClick:" destination="I37-iq-pXz" id="XIh-vT-Z5h"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="add" id="c2D-l1-dGZ">
+                            <barButtonItem style="plain" systemItem="add" id="c2D-l1-dGZ">
                                 <connections>
                                     <action selector="onAddTouch:" destination="I37-iq-pXz" id="n3y-UP-TeR"/>
                                 </connections>
@@ -348,7 +348,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1111111111111" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shd-AM-Cua">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shd-AM-Cua">
                                 <rect key="frame" x="16" y="80" width="303" height="63"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -583,7 +583,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="24" height="24"/>
         <image name="app_share_qrcode" width="400" height="400"/>
         <image name="ic_account_box" width="24" height="24"/>
         <image name="ic_border_all" width="24" height="24"/>

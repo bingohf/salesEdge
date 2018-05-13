@@ -36,20 +36,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }()
     
     
-    func pdaGuid() -> String {
-        let deviceId = UIDevice.current.identifierForVendor!.uuidString;
-        let deviceName = UIDevice.current.modelName
-        let dformatter = DateFormatter()
-        dformatter.dateFormat = "yyyyMMdd'T'HHmmss.S"
-        let timeStamp = dformatter.string(from: Date.init())
-        var language = Locale.preferredLanguages.first!
-        var languageArr = language.components(separatedBy: "-")
-        while languageArr.count > 2 {
-            languageArr.remove(at: 1)
-        }
-        language = languageArr.joined(separator: "_")
-        return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,19 +50,9 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         
     }
     
-    func makeRequest() -> [String : Any] {
-        let line = UserDefaults.standard.object(forKey: "line") as! String?
-        let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
-        return [
-            "line" : "\(line ?? "01")",
-            "reader" : "01",
-            "MyTaxNo" : "\(myTaxNo ?? "")",
-            "pdaGuid": pdaGuid()
-        ]
-    }
     
     func loadMenus() {
-        let parameters = makeRequest()
+        let parameters = Helper.makeRequest()
         Alamofire.request(AppCons.BASE_URL + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
@@ -167,7 +144,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     func webViewRequest(apiPath:String, params:[String : Any])  {
         let view = self.view
         view?.makeToastActivity(.center)
-        let parameters: [String: Any] = makeRequest().merging(params) { (current, _) in current }
+        let parameters: [String: Any] = Helper.makeRequest().merging(params) { (current, _) in current }
         Alamofire.request(AppCons.BASE_URL + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{

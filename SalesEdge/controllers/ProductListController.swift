@@ -311,12 +311,15 @@ class ProductListController : UITableViewController, ProductDelegate{
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             print("Text field: \(textField?.text)")
             if let prodno = textField?.text {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
-                destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
-                destinationVC.title = prodno
-                destinationVC.delegate = self
-                self.show(destinationVC, sender: sender)
+                if !prodno.isEmpty {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
+                    destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
+                    destinationVC.title = prodno
+                    destinationVC.delegate = self
+                    self.show(destinationVC, sender: sender)
+                }
+                
             }
           
             

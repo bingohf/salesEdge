@@ -161,6 +161,43 @@ class Helper{
         }
         return dataPath
     }
+    
+    
+    open static func makeRequest() -> [String : Any] {
+        let line = UserDefaults.standard.object(forKey: "line") as! String?
+        let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
+        return [
+            "line" : "\(line ?? "01")",
+            "reader" : "01",
+            "MyTaxNo" : "\(myTaxNo ?? "")",
+            "pdaGuid": pdaGuid()
+        ]
+    }
+    
+    open static func pdaGuid() -> String {
+        let deviceId = UIDevice.current.identifierForVendor!.uuidString;
+        let deviceName = UIDevice.current.modelName
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyyMMdd'T'HHmmss.S"
+        let timeStamp = dformatter.string(from: Date.init())
+        var language = Locale.preferredLanguages.first!
+        var languageArr = language.components(separatedBy: "-")
+        while languageArr.count > 2 {
+            languageArr.remove(at: 1)
+        }
+        language = languageArr.joined(separator: "_")
+        return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
+    }
+    
+    open static func toast(message:String, thisVC:UIViewController) {
+        var vc:UIViewController? = thisVC
+        while ((vc?.parent) != nil)  {
+            vc = vc?.parent
+        }
+        if let vc = vc {
+            vc.view.makeToast(message)
+        }
+    }
 }
 
 

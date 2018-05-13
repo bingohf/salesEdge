@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 protocol ProductDelegate {
     func onDataChange(productData: ProductData)
@@ -52,9 +53,62 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
     
     @IBAction func onUploadTouch(_ sender: Any) {
-        productData?.desc = mTxtDesc.text
-        delegate?.onDataChange(productData: productData!)
-        self.navigationController?.popViewController(animated: true)
+        mTxtDesc.endEditing(true)
+        let desc = mTxtDesc.text ?? ""
+        guard !desc.isEmpty else {
+            Helper.toast(message:"Please input Product description", thisVC:self)
+            return
+        }
+        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+        let image2Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
+        guard FileManager.default.fileExists(atPath: image1Path.path) else {
+            Helper.toast(message:"Please take a image for this product", thisVC:self)
+            return
+        }
+        productData?.desc = desc
+        productData?.updatedate = Date()
+        
+        if let imageData1:NSData = NSData(contentsOf: image1Path),
+            let imageData2 = NSData(contentsOf: image2Path){
+            let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
+            let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
+            var params = Helper.makeRequest()
+            params.merge(["prodno": productData?.prodno ?? "",
+                          "specdesc" : desc,
+                          "empno": UIDevice.current.identifierForVendor!.uuidString,
+                          "graphic" : strBase641,
+                          "graphic2" : strBase642
+            ]) { (any1, any2) -> Any in
+                any2
+            }
+            self.view.makeToastActivity(.center)
+            Alamofire.request(AppCons.BASE_URL + "Sp/sp_UpProduct", method: .post, parameters: params, encoding: JSONEncoding.default)
+                .debugLog()
+                .validate(statusCode: 200..<300)
+                .responseJSON{
+                    response in
+                    self.view?.hideToastActivity()
+                    if let error = response.result.error {
+                        Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
+                        return
+                    }
+                    let value = response.result.value
+                    let JSON = value as! NSDictionary
+                    let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
+                    let errCode = result.value(forKey: "errCode") as? Int
+                    let errMessage = result.value(forKey: "errData") as? String
+                    guard errCode == 1 else{
+                        Helper.toast(message: errMessage ?? "error", thisVC: self)
+                        return
+                    }
+                    let productDAO = ProductDAO()
+                    productDAO.create(data: self.productData!)
+                    self.delegate?.onDataChange(productData: self.productData!)
+                    self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+        
     }
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
