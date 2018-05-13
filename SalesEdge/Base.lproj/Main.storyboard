@@ -348,34 +348,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
-                                <rect key="frame" x="329" y="80" width="30" height="30"/>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
+                                <rect key="frame" x="319" y="80" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="aaQ-0W-z2B"/>
-                                    <constraint firstAttribute="width" constant="30" id="abC-zY-Bpr"/>
+                                    <constraint firstAttribute="height" constant="40" id="aaQ-0W-z2B"/>
+                                    <constraint firstAttribute="width" constant="40" id="abC-zY-Bpr"/>
                                 </constraints>
-                                <state key="normal" title="QR"/>
+                                <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="QR" image="qrcode"/>
                                 <connections>
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="scan_qrcode" id="grb-dQ-jcv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
-                                <rect key="frame" x="327" y="113" width="32" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
+                                <rect key="frame" x="319" y="123" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="1Qv-EM-iIR"/>
-                                    <constraint firstAttribute="height" constant="30" id="Y2E-Wf-79I"/>
+                                    <constraint firstAttribute="width" constant="40" id="1Qv-EM-iIR"/>
+                                    <constraint firstAttribute="height" constant="40" id="Y2E-Wf-79I"/>
                                 </constraints>
-                                <state key="normal" title="OCR"/>
+                                <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="OCR" image="ocr"/>
                             </button>
                             <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo_camera" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-yL-mNj">
-                                <rect key="frame" x="16" y="151" width="343" height="451"/>
+                                <rect key="frame" x="16" y="171" width="343" height="431"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="oRe-oJ-znS" appends="YES" id="LCA-Wq-Ncj"/>
                                 </connections>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="SXv-sA-g9V">
-                                <rect key="frame" x="16" y="80" width="303" height="63"/>
+                                <rect key="frame" x="16" y="80" width="295" height="83"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -429,6 +431,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mBtnQRCode" destination="CZz-Sw-Fmc" id="sUl-cr-SJt"/>
                         <outlet property="mImage" destination="KIP-yL-mNj" id="GpV-rK-QmH"/>
                         <outlet property="mTxtDesc" destination="SXv-sA-g9V" id="999-UG-wyu"/>
                     </connections>
@@ -654,6 +657,8 @@
         <image name="ic_photo_camera" width="24" height="24"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
+        <image name="ocr" width="24" height="24"/>
+        <image name="qrcode" width="24" height="24"/>
         <image name="qrcode-scan" width="24" height="24"/>
         <image name="qrcode-scan-multi" width="40" height="40"/>
     </resources>

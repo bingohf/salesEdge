@@ -289,12 +289,17 @@ class ProductListController : UITableViewController, ProductDelegate{
         if let index = data.index(where: {$0.prodno == productData.prodno}) {
             if index > -1 {
                 data[index] = productData
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             }
         } else{
-             data.append(productData)
+            data.append(productData)
+            let indexPath = IndexPath.init(row: data.count - 1, section: 0)
+            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            
         }
        
-        tableView.reloadData()
+      //  tableView.reloadData()
     }
     
     @IBAction func onAddTouch(_ sender: Any) {

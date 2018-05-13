@@ -21,7 +21,10 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     @IBOutlet weak var mTxtDesc: UITextView!
     @IBOutlet weak var mImage: UIImageView!
     
+    @IBOutlet weak var mBtnQRCode: UIButton!
     override public func viewDidLoad() {
+        mBtnQRCode.contentMode = .center
+        mBtnQRCode.imageView?.contentMode = .scaleAspectFit
         mTxtDesc.text = productData?.desc
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         if let prodno = productData?.prodno{
