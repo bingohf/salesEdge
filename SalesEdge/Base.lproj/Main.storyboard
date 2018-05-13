@@ -352,7 +352,10 @@
                                 <rect key="frame" x="16" y="80" width="303" height="63"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="hN5-yd-lV3" id="v9m-ZW-zhm"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
                                 <rect key="frame" x="329" y="80" width="30" height="30"/>
@@ -361,6 +364,9 @@
                                     <constraint firstAttribute="width" constant="30" id="abC-zY-Bpr"/>
                                 </constraints>
                                 <state key="normal" title="QR"/>
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="scan_qrcode" id="grb-dQ-jcv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
                                 <rect key="frame" x="327" y="113" width="32" height="30"/>
@@ -415,6 +421,42 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2440.8000000000002" y="-277.51124437781112"/>
+        </scene>
+        <!--Code Scanner View Controller-->
+        <scene sceneID="qEo-mL-saQ">
+            <objects>
+                <viewController id="X1Y-H0-HV2" customClass="QRCodeScannerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zb6-L0-XqZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCQ-iB-3qP">
+                                <rect key="frame" x="0.0" y="628" width="375" height="39"/>
+                                <color key="backgroundColor" red="0.59082231662094886" green="0.59082231662094886" blue="0.59082231662094886" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelTouch:" destination="X1Y-H0-HV2" eventType="touchUpInside" id="LkF-6s-r7k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JCQ-iB-3qP" firstAttribute="leading" secondItem="n9d-FA-Fyk" secondAttribute="leading" id="RFf-dp-iVG"/>
+                            <constraint firstItem="n9d-FA-Fyk" firstAttribute="trailing" secondItem="JCQ-iB-3qP" secondAttribute="trailing" id="bLD-u2-hFa"/>
+                            <constraint firstItem="JCQ-iB-3qP" firstAttribute="bottom" secondItem="n9d-FA-Fyk" secondAttribute="bottom" id="xsM-eu-ExS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n9d-FA-Fyk"/>
+                    </view>
+                    <connections>
+                        <outlet property="mBtnCancel" destination="JCQ-iB-3qP" id="Aha-fs-g1b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPd-pH-qZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3489" y="-278"/>
         </scene>
         <!--Sales Edge-->
         <scene sceneID="yl2-sM-qoP">

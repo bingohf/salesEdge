@@ -14,7 +14,7 @@ protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, QRCodeScannerDelegate{
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     
@@ -130,4 +130,19 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         
     }
     
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "scan_qrcode" {
+            let destinationVC = segue.destination as? QRCodeScannerViewController
+            destinationVC?.delegate = self
+        }
+    }
+    
+    func onReceive(qrcode: String) {
+        mTxtDesc.text = qrcode
+    }
 }
