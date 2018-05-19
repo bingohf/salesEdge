@@ -51,11 +51,11 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         print(filePath)
         do{
-             let fileManager = FileManager.default
+            let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath.path){
                 cell.mImage.image = UIImage(contentsOfFile: filePath.path)
             }
-          
+            
         }catch{
             print(error)
         }
@@ -109,8 +109,8 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
             }).disposed(by: disposeBag)
     }
     
-
-
+    
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -132,7 +132,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         
         return [share]
     }
-
+    
     @IBAction func onMoreClick(_ sender: Any) {
         // 1
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
@@ -142,7 +142,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow(sender)
         })
-    
+        
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -192,7 +192,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
                             })
                             optionMenu.addAction(action)
                         }
-
+                        
                     }
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -251,7 +251,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
                             } catch let error as NSError {
                                 print("Error creating directory: \(error.localizedDescription)")
                             }
-                           
+                            
                             var date = Date()
                             if let dateStr = item.value(forKey: "updatedate") as? String{
                                 date = dateStr.dateFromISO8601 ?? Date()
@@ -266,7 +266,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
                     self.productDAO.create(productsData: productsData)
                 }
                 self.reloadData()
-
+                
                 
         }
     }
@@ -283,7 +283,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         }
         
     }
-
+    
     
     func onDataChange(productData: ProductData) {
         if let index = data.index(where: {$0.prodno == productData.prodno}) {
@@ -298,8 +298,8 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
             tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             
         }
-       
-      //  tableView.reloadData()
+        
+        //  tableView.reloadData()
     }
     
     @IBAction func onAddTouch(_ sender: Any) {
@@ -321,7 +321,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
                 }
                 
             }
-          
+            
             
         }))
         alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
@@ -345,13 +345,33 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
     }
     
     func showProduct(prodno:String)  {
-        if !prodno.isEmpty {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
-            destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
-            destinationVC.title = prodno
-            destinationVC.delegate = self
-            self.show(destinationVC, sender: nil)
-        }
+        Observable<ProductData?>.create { (observer) -> Disposable in
+            do {
+                let productData = try self.productDAO.findBy(prodno: prodno)
+                observer.onNext(productData)
+                observer.onCompleted()
+            }catch{
+                observer.onError(error)
+            }
+            return Disposables.create()
+            }
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .do(onSubscribe: {
+                 self.view.makeToastActivity(.center)
+            }, onDispose: {
+                self.view.hideToastActivity()
+            })
+            .subscribe(onNext: { [weak self] data in
+                let productData = data ?? ProductData(prodno: prodno, desc: "", updatedate: Date())
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
+                destinationVC.productData = productData
+                destinationVC.title = prodno
+                destinationVC.delegate = self
+                self?.show(destinationVC, sender: nil)
+                }, onError: { (error) in
+                    self.toast(message:"error: \(error)")
+            }).disposed(by: disposeBag)
     }
 }

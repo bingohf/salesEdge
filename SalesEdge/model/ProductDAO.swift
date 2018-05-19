@@ -31,6 +31,19 @@ class ProductDAO:CoreDataDAO{
         return resListData
     }
     
+    public func findBy(prodno:String) throws -> ProductData?{
+        let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)
+        let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
+        fetchRequest.entity = entity
+        fetchRequest.predicate = NSPredicate(format: "prodno =%s", prodno)
+        let listData = try context.fetch(fetchRequest)
+        if let data = listData.first as? ProductManagedObject {
+            return ProductData(prodno: prodno, desc: data.desc, updatedate: data.updatedate as! Date)
+        }
+        return nil
+    }
     
     public func create(data:ProductData){
         let context = persistentContainer.viewContext
