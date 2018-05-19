@@ -83,6 +83,7 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
                 //  messageLabel.text = metadataObj.stringValue
                 print(metadataObj.stringValue)
                 delegate?.onReceive(qrcode: metadataObj.stringValue!)
+                delegate = nil
                 self.dismiss(animated: true, completion: nil)
             }
         }

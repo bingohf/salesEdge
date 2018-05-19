@@ -14,7 +14,7 @@ protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, QRCodeScannerDelegate{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, QRCodeScannerDelegate, URLConvertible{
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     
@@ -149,5 +149,47 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
     func onReceive(qrcode: String) {
         mTxtDesc.text = qrcode
+    }
+    
+    public func asURL() throws -> URL {
+        return URL(string: "http://ledwayazure.cloudapp.net/ma/ledwayocr.aspx")!
+    }
+      
+    @IBAction func onBtnOCRTouch(_ sender: Any) {
+        var userName = Helper.pdaGuid()
+        userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
+        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+        let inputStream = InputStream(url:image1Path)
+        let headers = ["content-type":"application/octet-stream", "UserName" : userName, "PASSWORD":"8887#@Ledway"]
+        Alamofire.upload(image1Path, to: self, method: .post, headers: headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON{
+                response in
+                self.view?.hideToastActivity()
+                if let error = response.result.error {
+                    Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
+                    return
+                }
+                let value = response.result.value
+                let JSON = value as! NSDictionary
+                let errCode = JSON.value(forKey: "returnCode") as? Int
+                let errMessage = JSON.value(forKey: "returnInfo") as? String
+                guard errCode == 1 else{
+                    Helper.toast(message: errMessage ?? "error", thisVC: self)
+                    return
+                }
+                let jsonStr = JSON.value(forKey: "data") as? String
+                if let data = Helper.convertToDictionary(text: jsonStr ?? ""){
+                    let limit = data["OCRLimit"] as! Int
+                    let count = data["OCRCount"] as! Int
+                    let text = data["OCRInfo"] as! String
+                    if limit - count <= 100{
+                        Helper.toast(message: "OCR has been used \(limit) time(s) (Limit:\(count)", thisVC: self)
+                    }
+                    self.mTxtDesc.text = text
+                }
+                
+                
+        }
     }
 }

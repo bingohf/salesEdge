@@ -368,6 +368,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="OCR" image="ocr"/>
+                                <connections>
+                                    <action selector="onBtnOCRTouch:" destination="hN5-yd-lV3" eventType="touchUpInside" id="6mv-Rc-xkH"/>
+                                </connections>
                             </button>
                             <imageView multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo_camera" translatesAutoresizingMaskIntoConstraints="NO" id="KIP-yL-mNj">
                                 <rect key="frame" x="16" y="171" width="343" height="431"/>
