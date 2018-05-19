@@ -34,6 +34,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                 if fileManager.fileExists(atPath: filePath.path){
                     mImage.image = UIImage(contentsOfFile: filePath.path)
                     mImage.contentMode = .scaleToFill
+                    mImage.contentMode = .scaleAspectFit
                 }
                 
             }catch{

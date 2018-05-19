@@ -266,7 +266,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="75.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="img" translatesAutoresizingMaskIntoConstraints="NO" id="bbr-MQ-yMd">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="img" translatesAutoresizingMaskIntoConstraints="NO" id="bbr-MQ-yMd">
                                             <rect key="frame" x="16" y="8" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="j57-Ae-F9a"/>
