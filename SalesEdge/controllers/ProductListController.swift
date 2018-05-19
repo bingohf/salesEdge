@@ -14,8 +14,8 @@ import Alamofire
 
 
 
-class ProductListController : UITableViewController, ProductDelegate{
-    let DEFAULT_GROUP = "3036A"
+class ProductListController : UITableViewController, ProductDelegate, QRCodeScannerDelegate{
+    let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
     
     var disposeBag = DisposeBag()
     var data = [ProductData]()
@@ -317,16 +317,19 @@ class ProductListController : UITableViewController, ProductDelegate{
             print("Text field: \(textField?.text)")
             if let prodno = textField?.text {
                 if !prodno.isEmpty {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
-                    destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
-                    destinationVC.title = prodno
-                    destinationVC.delegate = self
-                    self.show(destinationVC, sender: sender)
+                    self.showProduct(prodno: prodno)
                 }
                 
             }
           
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
+            destinationVC.delegate = self
+            self.present(destinationVC, animated: true, completion: nil)
+            
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
@@ -337,4 +340,18 @@ class ProductListController : UITableViewController, ProductDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
+    func onReceive(qrcode: String) {
+        showProduct(prodno: qrcode)
+    }
+    
+    func showProduct(prodno:String)  {
+        if !prodno.isEmpty {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
+            destinationVC.productData = ProductData(prodno: prodno, desc: "", updatedate: Date())
+            destinationVC.title = prodno
+            destinationVC.delegate = self
+            self.show(destinationVC, sender: nil)
+        }
+    }
 }

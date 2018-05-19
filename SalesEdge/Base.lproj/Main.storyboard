@@ -348,11 +348,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
-                                <rect key="frame" x="319" y="80" width="40" height="40"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
+                                <rect key="frame" x="317" y="80" width="50" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aaQ-0W-z2B"/>
-                                    <constraint firstAttribute="width" constant="40" id="abC-zY-Bpr"/>
+                                    <constraint firstAttribute="width" constant="50" id="abC-zY-Bpr"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="QR" image="qrcode"/>
@@ -361,9 +361,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
-                                <rect key="frame" x="319" y="123" width="40" height="40"/>
+                                <rect key="frame" x="317" y="123" width="50" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="1Qv-EM-iIR"/>
+                                    <constraint firstAttribute="width" constant="50" id="1Qv-EM-iIR"/>
                                     <constraint firstAttribute="height" constant="40" id="Y2E-Wf-79I"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -377,7 +377,7 @@
                                 </connections>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="SXv-sA-g9V">
-                                <rect key="frame" x="16" y="80" width="295" height="83"/>
+                                <rect key="frame" x="16" y="80" width="293" height="83"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -408,14 +408,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="YbP-zU-mCh" secondAttribute="trailing" constant="16" id="0Fc-mY-OtA"/>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="YbP-zU-mCh" secondAttribute="trailing" constant="8" id="0Fc-mY-OtA"/>
                             <constraint firstItem="SXv-sA-g9V" firstAttribute="leading" secondItem="S0k-gC-Knm" secondAttribute="leading" constant="16" id="0sr-HF-xXO"/>
                             <constraint firstItem="S0k-gC-Knm" firstAttribute="bottom" secondItem="KIP-yL-mNj" secondAttribute="bottom" constant="16" id="14p-zr-ax8"/>
                             <constraint firstItem="KIP-yL-mNj" firstAttribute="leading" secondItem="S0k-gC-Knm" secondAttribute="leading" constant="16" id="2Iq-Ez-dNc"/>
                             <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="KIP-yL-mNj" secondAttribute="trailing" constant="16" id="TZK-zk-f3z"/>
                             <constraint firstItem="CZz-Sw-Fmc" firstAttribute="top" secondItem="S0k-gC-Knm" secondAttribute="top" constant="16" id="Uo5-54-UFw"/>
                             <constraint firstItem="YbP-zU-mCh" firstAttribute="top" secondItem="CZz-Sw-Fmc" secondAttribute="bottom" constant="3" id="Yie-08-jLJ"/>
-                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="CZz-Sw-Fmc" secondAttribute="trailing" constant="16" id="bvY-SP-lKc"/>
+                            <constraint firstItem="S0k-gC-Knm" firstAttribute="trailing" secondItem="CZz-Sw-Fmc" secondAttribute="trailing" constant="8" id="bvY-SP-lKc"/>
                             <constraint firstItem="YbP-zU-mCh" firstAttribute="leading" secondItem="SXv-sA-g9V" secondAttribute="trailing" constant="8" id="fHc-Kn-VE5"/>
                             <constraint firstItem="KIP-yL-mNj" firstAttribute="top" secondItem="YbP-zU-mCh" secondAttribute="bottom" constant="8" id="jZT-D4-E9a"/>
                             <constraint firstItem="SXv-sA-g9V" firstAttribute="bottom" secondItem="YbP-zU-mCh" secondAttribute="bottom" id="lS8-RW-aL8"/>
@@ -448,7 +448,7 @@
         <!--Code Scanner View Controller-->
         <scene sceneID="qEo-mL-saQ">
             <objects>
-                <viewController id="X1Y-H0-HV2" customClass="QRCodeScannerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QRCodeScannerViewController" id="X1Y-H0-HV2" customClass="QRCodeScannerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zb6-L0-XqZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
