@@ -169,7 +169,9 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             return
         }
         var userName = Helper.pdaGuid()
-        userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
+        if !Env.isProduction(){
+            userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
+        }
     
         let inputStream = InputStream(url:image1Path)
         let headers = ["content-type":"application/octet-stream", "UserName" : userName, "PASSWORD":"8887#@Ledway"]
