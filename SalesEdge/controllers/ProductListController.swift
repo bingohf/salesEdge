@@ -12,18 +12,14 @@ import RxSwift
 import SQLite
 import Alamofire
 
-struct ViewDataItem {
-    let label:String
-    let subTitle:String
-    let timeStamp:String
-    let key:String
-}
 
-class ProductListController : UITableViewController{
+
+class ProductListController : UITableViewController, ProductDelegate, QRCodeScannerDelegate{
+    let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
     
     var disposeBag = DisposeBag()
-    var data = [ViewDataItem]()
-    
+    var data = [ProductData]()
+    let productDAO = ProductDAO()
     
     override func viewDidLoad() {
         refreshControl = UIRefreshControl()
@@ -47,18 +43,19 @@ class ProductListController : UITableViewController{
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = item.timeStamp
-        cell.mTxtLabel.text = item.label
-        cell.mTxtSubTitle.text = item.subTitle
+        cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
+        cell.mTxtLabel.text = item.prodno
+        cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = nil
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(item.label)_type1.png")
+        let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
+        print(filePath)
         do{
-             let fileManager = FileManager.default
+            let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath.path){
                 cell.mImage.image = UIImage(contentsOfFile: filePath.path)
             }
-          
+            
         }catch{
             print(error)
         }
@@ -83,22 +80,12 @@ class ProductListController : UITableViewController{
     
     
     func reloadData()  {
-        Observable<[ViewDataItem]>.create { (observer ) -> Disposable in
+        Observable<[ProductData]>.create { (observer ) -> Disposable in
             
             do{
-                var dataList = [ViewDataItem]()
-                let product = LDataBase.shared.product
-                if let db = LDataBase.shared.db {
-                    for row in try db.prepare(product.table) {
-                        let prodno =  row[product.prodno]
-                        let desc = row[product.desc]
-                        let timestamp = Helper.format(date: row[product.create_date])
-                        dataList.append(ViewDataItem(label: prodno, subTitle: desc, timeStamp: timestamp, key:prodno))
-                        
-                        // id: 1, email: alice@mac.com, name: Optional("Alice")
-                    }
-                }
-                observer.onNext(dataList)
+                
+                let products = try self.productDAO.findAll()
+                observer.onNext(products)
                 observer.onCompleted()
             }catch {
                 observer.onError(error)
@@ -122,8 +109,8 @@ class ProductListController : UITableViewController{
             }).disposed(by: disposeBag)
     }
     
-
-
+    
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -132,18 +119,10 @@ class ProductListController : UITableViewController{
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             let rowData = self.data[index.row]
-            let product = LDataBase.shared.product
-           let thisRow = product.table.filter(product.prodno == rowData.key)
             do {
-                if let db = LDataBase.shared.db {
-                    if try db.run(thisRow.delete()) > 0 {
-                        print("deleted alice")
-                        self.data.remove(at: index.row)
-                        tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
-                    } else {
-                        print("alice not found")
-                    }
-                }
+                try self.productDAO.remove(productData: rowData)
+                self.data.remove(at: index.row)
+                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }
@@ -153,7 +132,7 @@ class ProductListController : UITableViewController{
         
         return [share]
     }
-
+    
     @IBAction func onMoreClick(_ sender: Any) {
         // 1
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
@@ -163,7 +142,7 @@ class ProductListController : UITableViewController{
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow(sender)
         })
-    
+        
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -187,7 +166,7 @@ class ProductListController : UITableViewController{
     func downloadGroupShow(_ sender: Any) {
         view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
-        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowName where mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
@@ -213,7 +192,7 @@ class ProductListController : UITableViewController{
                             })
                             optionMenu.addAction(action)
                         }
-
+                        
                     }
                 }
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
@@ -235,7 +214,7 @@ class ProductListController : UITableViewController{
     
     func download(showName:String)  {
         let preferences = UserDefaults.standard
-        let mytaxno = preferences.object(forKey: "myTaxNo") ?? ""
+        let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
@@ -256,18 +235,10 @@ class ProductListController : UITableViewController{
                     self.toast(message: "No data")
                 }
                 for object in array{
+                    var productsData = [ProductData]()
                     if let item = object as? NSDictionary{
                         if let prodno = item.value(forKey: "prodno") as? String   {
-
-                            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                            let dataPath = documentsDirectory.appendingPathComponent("Show")
-                            
-                            do {
-                                try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
-                            } catch let error as NSError {
-                                print("Error creating directory: \(error.localizedDescription)")
-                            }
-                           
+                            let dataPath = Helper.getImagePath(folder: "Show")
                             do {
                                 if let graphic = item.value(forKey: "graphic") as? String {
                                     let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)
@@ -280,29 +251,127 @@ class ProductListController : UITableViewController{
                             } catch let error as NSError {
                                 print("Error creating directory: \(error.localizedDescription)")
                             }
-                           
-                            if let db = LDataBase.shared.db {
-                                let product = LDataBase.shared.product
-                                do{
-                                    var date = Date()
-                                    if let dateStr = item.value(forKey: "updatedate") as? String{
-                                        date = dateStr.dateFromISO8601 ?? Date()
-                                    }
-                                    let spec:String? = item.value(forKey: "specdesc") as? String
-                                    try db.run(product.table.insert(product.desc <- spec ?? "",  product.prodno <- prodno, product.create_date <- date))
-                                }catch {
-                                    print(error)
-                                }
-                            }
                             
+                            var date = Date()
+                            if let dateStr = item.value(forKey: "updatedate") as? String{
+                                date = dateStr.dateFromISO8601 ?? Date()
+                            }
+                            let spec:String? = item.value(forKey: "specdesc") as? String
+                            let product = ProductData(prodno: prodno, desc: spec, updatedate: date)
+                            productsData.append(product)
                             
                         }
                         
                     }
+                    self.productDAO.create(productsData: productsData)
                 }
                 self.reloadData()
-
+                
                 
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_product_detail" {
+            let destinationVC = segue.destination as? ProductViewController
+            if let row = self.tableView.indexPathForSelectedRow?.row{
+                var item = data[row]
+                destinationVC?.title = item.prodno
+                destinationVC?.productData = item
+                destinationVC?.delegate = self
+            }
+        }
+        
+    }
+    
+    
+    func onDataChange(productData: ProductData) {
+        if let index = data.index(where: {$0.prodno == productData.prodno}) {
+            if index > -1 {
+                data[index] = productData
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            }
+        } else{
+            data.append(productData)
+            let indexPath = IndexPath.init(row: data.count - 1, section: 0)
+            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            
+        }
+        
+        //  tableView.reloadData()
+    }
+    
+    @IBAction func onAddTouch(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Input", message: nil, preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.placeholder = "Product No."
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(textField?.text)")
+            if let prodno = textField?.text {
+                if !prodno.isEmpty {
+                    self.showProduct(prodno: prodno)
+                }
+                
+            }
+            
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
+            destinationVC.delegate = self
+            self.present(destinationVC, animated: true, completion: nil)
+            
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func onReceive(qrcode: String) {
+        showProduct(prodno: qrcode)
+    }
+    
+    func showProduct(prodno:String)  {
+        Observable<ProductData?>.create { (observer) -> Disposable in
+            do {
+                let productData = try self.productDAO.findBy(prodno: prodno)
+                observer.onNext(productData)
+                observer.onCompleted()
+            }catch{
+                observer.onError(error)
+            }
+            return Disposables.create()
+            }
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .observeOn(MainScheduler.instance)
+            .do(onSubscribe: {
+                 self.view.makeToastActivity(.center)
+            }, onDispose: {
+                self.view.hideToastActivity()
+            })
+            .subscribe(onNext: { [weak self] data in
+                let productData = data ?? ProductData(prodno: prodno, desc: "", updatedate: Date())
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let destinationVC = storyboard.instantiateViewController(withIdentifier: "ProductDetail") as! ProductViewController
+                destinationVC.productData = productData
+                destinationVC.title = prodno
+                destinationVC.delegate = self
+                self?.show(destinationVC, sender: nil)
+                }, onError: { (error) in
+                    self.toast(message:"error: \(error)")
+            }).disposed(by: disposeBag)
     }
 }

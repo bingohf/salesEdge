@@ -19,8 +19,11 @@ class Helper{
         return formatter
     }()
     
-    open static func format(date: Date) -> String{
-        return formatter.string(from:date)
+    open static func format(date: Date?) -> String{
+        if date == nil {
+            return ""
+        }
+        return formatter.string(from:date!)
     }
     open static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
@@ -147,6 +150,65 @@ class Helper{
         return nil
     }
 
+    open static func getImagePath(folder:String) -> URL{
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let dataPath = documentsDirectory.appendingPathComponent(folder)
+        
+        do {
+            try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print("Error creating directory: \(error.localizedDescription)")
+        }
+        return dataPath
+    }
+    
+    
+    open static func makeRequest() -> [String : Any] {
+        let line = UserDefaults.standard.object(forKey: "line") as! String?
+        let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
+        return [
+            "line" : "\(line ?? "01")",
+            "reader" : "01",
+            "MyTaxNo" : "\(myTaxNo ?? "")",
+            "pdaGuid": pdaGuid()
+        ]
+    }
+    
+    open static func pdaGuid() -> String {
+        let deviceId = UIDevice.current.identifierForVendor!.uuidString;
+        let deviceName = UIDevice.current.modelName
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyyMMdd'T'HHmmss.S"
+        let timeStamp = dformatter.string(from: Date.init())
+        var language = Locale.preferredLanguages.first!
+        var languageArr = language.components(separatedBy: "-")
+        while languageArr.count > 2 {
+            languageArr.remove(at: 1)
+        }
+        language = languageArr.joined(separator: "_")
+        return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
+    }
+    
+    open static func toast(message:String, thisVC:UIViewController) {
+        var vc:UIViewController? = thisVC
+        while ((vc?.parent) != nil)  {
+            vc = vc?.parent
+        }
+        if let vc = vc {
+            vc.view.makeToast(message)
+        }
+    }
+    
+    open static func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
 }
 
 
