@@ -14,18 +14,20 @@ protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, QRCodeScannerDelegate, URLConvertible{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, QRCodeScannerDelegate, URLConvertible{
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     
     @IBOutlet weak var mTxtDesc: UITextView!
     @IBOutlet weak var mImage: UIImageView!
     
+    @IBOutlet weak var mLabelPlaceHold: UILabel!
     @IBOutlet weak var mBtnQRCode: UIButton!
     override public func viewDidLoad() {
         mBtnQRCode.contentMode = .center
         mBtnQRCode.imageView?.contentMode = .scaleAspectFit
         mTxtDesc.text = productData?.desc
+        mLabelPlaceHold.isHidden = !mTxtDesc.text.isEmpty
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         if let prodno = productData?.prodno{
             let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(prodno)_type1.png")
@@ -156,11 +158,22 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     }
       
     @IBAction func onBtnOCRTouch(_ sender: Any) {
+        let oldText = mTxtDesc.text ?? ""
+        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+        guard oldText.isEmpty else {
+             Helper.toast(message: NSLocalizedString("Please clear description", comment:""), thisVC: self)
+            return
+        }
+        guard FileManager.default.fileExists(atPath: image1Path.absoluteString) else {
+            Helper.toast(message: NSLocalizedString("Please take a photo", comment:""), thisVC: self)
+            return
+        }
         var userName = Helper.pdaGuid()
         userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
-        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+    
         let inputStream = InputStream(url:image1Path)
         let headers = ["content-type":"application/octet-stream", "UserName" : userName, "PASSWORD":"8887#@Ledway"]
+        self.view.makeToastActivity(.center)
         Alamofire.upload(image1Path, to: self, method: .post, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -191,5 +204,15 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                 
                 
         }
+    }
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n"{
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    public func textViewDidChange(_ textView: UITextView) {
+        self.mLabelPlaceHold.isHidden = !textView.text.isEmpty
     }
 }
