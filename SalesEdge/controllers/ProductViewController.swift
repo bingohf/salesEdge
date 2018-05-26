@@ -17,6 +17,7 @@ protocol ProductDelegate {
 public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, QRCodeScannerDelegate, URLConvertible{
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
+    var afterPickImage :(() -> Void)?
     
     @IBOutlet weak var mTxtDesc: UITextView!
     @IBOutlet weak var mImage: UIImageView!
@@ -134,7 +135,8 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
             try? data110.write(to: filename)
         }
-        
+        afterPickImage?()
+        afterPickImage = nil
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -167,6 +169,14 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         }
         guard FileManager.default.fileExists(atPath: image1Path.path) else {
             Helper.toast(message: NSLocalizedString("Please take a photo", comment:""), thisVC: self)
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            present(imagePicker, animated: true, completion: nil)
+            func doOCR() -> Void {
+               self.onBtnOCRTouch(mBtnQRCode)
+            }
+            self.afterPickImage = doOCR
             return
         }
         var userName = Helper.pdaGuid()
