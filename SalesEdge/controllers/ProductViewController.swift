@@ -158,13 +158,14 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     }
       
     @IBAction func onBtnOCRTouch(_ sender: Any) {
+        mTxtDesc.endEditing(true)
         let oldText = mTxtDesc.text ?? ""
         let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
         guard oldText.isEmpty else {
              Helper.toast(message: NSLocalizedString("Please clear description", comment:""), thisVC: self)
             return
         }
-        guard FileManager.default.fileExists(atPath: image1Path.absoluteString) else {
+        guard FileManager.default.fileExists(atPath: image1Path.path) else {
             Helper.toast(message: NSLocalizedString("Please take a photo", comment:""), thisVC: self)
             return
         }
@@ -202,6 +203,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         Helper.toast(message: "OCR has been used \(limit) time(s) (Limit:\(count)", thisVC: self)
                     }
                     self.mTxtDesc.text = text
+                    self.mLabelPlaceHold.isHidden = !text.isEmpty
                 }
                 
                 
