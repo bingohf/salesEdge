@@ -205,7 +205,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                     return
                 }
                 let jsonStr = JSON.value(forKey: "data") as? String
-                if let data = Helper.convertToDictionary(text: jsonStr ?? ""){
+                if let data = Helper.convertToDictionary(text: jsonStr ?? "") as? NSDictionary{
                     let limit = data["OCRLimit"] as! Int
                     let count = data["OCRCount"] as! Int
                     let text = data["OCRInfo"] as! String

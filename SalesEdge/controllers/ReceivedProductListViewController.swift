@@ -73,8 +73,26 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
-        cell.mTxtLabel.text = data[indexPath.row].title
-        cell.mTxtTimestamp.text = Helper.format(date: data[indexPath.row].datetime)
+        let item = data[indexPath.row]
+        cell.mTxtLabel.text = item.title
+        cell.mTxtTimestamp.text = Helper.format(date: item.datetime)
+        cell.mImage.image = #imageLiteral(resourceName: "default_image")
+        cell.mTxtSubTitle.text = ""
+        if let prodno = item.firstProdNo {
+            let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(prodno)_type1.png")
+            do{
+                let fileManager = FileManager.default
+                if fileManager.fileExists(atPath: filePath.path){
+                    cell.mImage.image = UIImage(contentsOfFile: filePath.path)
+                }
+            }catch{
+                print(error)
+            }
+        }
+        
+       
+
+        
         return cell
     }
     
@@ -85,7 +103,10 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
     }
     
     func loadRemote(){
-        let deviceId = "42f7acf889d0db9"
+        var deviceId = UIDevice.current.identifierForVendor!.uuidString
+        if !Env.isProduction(){
+            deviceId = "42f7acf889d0db9"
+        }
         let query = "isnull(json,'') <>'' and shareToDeviceId like  '%\(deviceId)%'"
         let orderBy = " order by UPDATEDATE desc"
         let params = [
@@ -109,13 +130,14 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                     Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
                     return
                 }
+                self.data.removeAll()
                 let value = response.result.value
                 let JSON = value as! NSDictionary
                 let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
                 for object in array{
                     if let item = object as? NSDictionary{
                         if let json = item.value(forKey: "json") as? String{
-                            if let dict = Helper.convertToDictionary(text: json){
+                            if let dict = Helper.convertToDictionary(text: json) as? NSDictionary {
                                 let datetime = Date(timeIntervalSince1970: TimeInterval((dict["update_date"] as! UInt64) / 1000))
                                 var firstProdNo:String? = nil
                                 if let prodLinks = dict["sampleProdLinks"] as? NSArray{
@@ -134,7 +156,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                     }
                 }
                 self.data.sort(by: { (d1, d2) -> Bool in
-                    return d1.datetime < d2.datetime
+                    return d1.datetime > d2.datetime
                 })
                 self.mTableView.reloadData()
                 self.loadProductImage(data: self.data)
@@ -142,8 +164,46 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
     }
     
     func loadProductImage(data:[ReceivedSampleData])  {
+        let imagePath = Helper.getImagePath(folder: "Received")
         for dataItem in data {
-           
+            if let links = Helper.convertToDictionary(text: dataItem.detailJson) as? NSArray {
+                for arrayItem in links {
+                    if let item = arrayItem as? NSDictionary{
+                        let prodno = (item["prod_id"] as! String).replacingOccurrences(of: "'", with: "''")
+                        let params = ["query" : "prodno = '\(prodno)'"]
+                        Alamofire.request(AppCons.BASE_URL + "dataset/product", method: .get, parameters: params)
+                            .debugLog()
+                            .validate(statusCode: 200..<300)
+                            .responseJSON{
+                                response in
+                                if let error = response.result.error {
+                                    Helper.toast(message: Helper.getErrorMessage(response.result),thisVC: self)
+                                    return
+                                }
+                                let value = response.result.value
+                                let JSON = value as! NSDictionary
+                                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                                if array.count < 1{
+                                    Helper.toast(message: "No data",thisVC: self)
+                                }
+                                if let rItem = array.firstObject as? NSDictionary{
+                                    if let graphic = rItem.value(forKey: "graphic") as? String {
+                                        do{
+                                            let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)
+                                            try data?.write(to: imagePath.appendingPathComponent("\(prodno)_type1.png", isDirectory: false))
+                                            self.mTableView.reloadData()
+                                        }catch{
+                                            
+                                        }
+                                    }
+                                }
+                                
+                        }
+                        
+                        
+                    }
+                }
+            }
         }
         
     }
