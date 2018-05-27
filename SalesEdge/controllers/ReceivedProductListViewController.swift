@@ -116,9 +116,16 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                     if let item = object as? NSDictionary{
                         if let json = item.value(forKey: "json") as? String{
                             if let dict = Helper.convertToDictionary(text: json){
-                                let datetime = Date(timeIntervalSince1970: TimeInterval((dict["create_date"] as! UInt64) / 1000))
+                                let datetime = Date(timeIntervalSince1970: TimeInterval((dict["update_date"] as! UInt64) / 1000))
+                                var firstProdNo:String? = nil
+                                if let prodLinks = dict["sampleProdLinks"] as? NSArray{
+                                    if let firstItem = prodLinks.firstObject as? NSDictionary{
+                                        firstProdNo = firstItem["prod_id"] as? String
+                                    }
+                                }
                                 let json = Helper.converToJson(obj:  dict["sampleProdLinks"]! )
-                                let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String)
+                                
+                                let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String, sampleId: dict["guid"] as! String, firstProdNo:firstProdNo)
                                 self.data.append(item)
                                 self.receivedSampleDAO.create(productsData: [item])
                             }
@@ -126,8 +133,20 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                         
                     }
                 }
+                self.data.sort(by: { (d1, d2) -> Bool in
+                    return d1.datetime < d2.datetime
+                })
                 self.mTableView.reloadData()
+                self.loadProductImage(data: self.data)
         }
     }
+    
+    func loadProductImage(data:[ReceivedSampleData])  {
+        for dataItem in data {
+           
+        }
+        
+    }
+    
     
 }

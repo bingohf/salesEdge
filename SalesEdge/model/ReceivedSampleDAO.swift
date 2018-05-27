@@ -27,26 +27,13 @@ class ReceivedSampleDAO:CoreDataDAO{
         if listData.count > 0{
             for item in listData{
                 let mo = item as! ReceivedSampleMO
-                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, detailJson: mo.detailJson!, title: mo.title!))
+                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, detailJson: mo.detailJson!, title: mo.title!,sampleId: mo.sampleId!, firstProdNo: mo.firstProdNo))
             }
         }
         return resListData
     }
     
-    public func findBy(prodno:String) throws -> ProductData?{
-        let context = persistentContainer.viewContext
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)
-        let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
-        fetchRequest.entity = entity
-        fetchRequest.predicate = NSPredicate(format: "prodno =%s", prodno)
-        let listData = try context.fetch(fetchRequest)
-        if let data = listData.first as? ProductManagedObject {
-            return ProductData(prodno: prodno, desc: data.desc, updatedate: data.updatedate as! Date)
-        }
-        return nil
-    }
-    
+  
    
     public func create(productsData:[ReceivedSampleData]){
         let context = persistentContainer.viewContext
@@ -56,6 +43,8 @@ class ReceivedSampleDAO:CoreDataDAO{
             rSample.title = data.title
             rSample.datetime = data.datetime as NSDate
             rSample.detailJson = data.detailJson
+            rSample.sampleId = data.sampleId
+            rSample.firstProdNo = data.firstProdNo
         }
         self.saveContext()
     }

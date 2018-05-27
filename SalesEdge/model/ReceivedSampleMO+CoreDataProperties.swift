@@ -2,7 +2,7 @@
 //  ReceivedSampleMO+CoreDataProperties.swift
 //  SalesEdge
 //
-//  Created by Bin Guo on 2018/5/26.
+//  Created by Bin Guo on 2018/5/27.
 //  Copyright © 2018年 Bin Guo. All rights reserved.
 //
 //
@@ -20,5 +20,7 @@ extension ReceivedSampleMO {
     @NSManaged public var datetime: NSDate?
     @NSManaged public var detailJson: String?
     @NSManaged public var title: String?
+    @NSManaged public var sampleId: String?
+    @NSManaged public var firstProdNo: String?
 
 }

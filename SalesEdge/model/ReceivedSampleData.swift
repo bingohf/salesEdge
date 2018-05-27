@@ -11,4 +11,6 @@ struct ReceivedSampleData {
    var datetime: Date
    var detailJson: String
    var title: String
+    var sampleId :String
+    var firstProdNo:String?
 }
