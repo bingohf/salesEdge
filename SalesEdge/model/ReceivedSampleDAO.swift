@@ -17,7 +17,7 @@ class ReceivedSampleDAO:CoreDataDAO{
         let context = persistentContainer.viewContext
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         let entity = NSEntityDescription.entity(forEntityName: "ReceivedSample", in: context)
-        let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
+        let fetchRequest:NSFetchRequest<ReceivedSampleMO> = ReceivedSampleMO.fetchRequest()
         fetchRequest.entity = entity
         let sortDescriptor = NSSortDescriptor(key: "datetime", ascending: false)
         let sortDesciptors = [sortDescriptor]
