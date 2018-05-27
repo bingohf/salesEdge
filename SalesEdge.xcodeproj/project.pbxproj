@@ -30,6 +30,10 @@
 		6A92F724201360CE00079C31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F722201360CE00079C31 /* Main.storyboard */; };
 		6A92F726201360CE00079C31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F725201360CE00079C31 /* Assets.xcassets */; };
 		6A92F729201360CE00079C31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F727201360CE00079C31 /* LaunchScreen.storyboard */; };
+		6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */; };
+		6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */; };
+		6A9CC0FF20B9706000B1761E /* ReceivedSampleDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */; };
+		6A9CC10120B970A600B1761E /* ReceivedSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */; };
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
@@ -72,6 +76,10 @@
 		6A92F725201360CE00079C31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A92F728201360CE00079C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A92F72A201360CE00079C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceivedSampleMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceivedSampleMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSampleDAO.swift; sourceTree = "<group>"; };
+		6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSampleData.swift; sourceTree = "<group>"; };
 		6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		6AA8862E20A8192200052232 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +114,8 @@
 		6A085308209EA7340094C5B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */,
+				6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */,
 				6A8F5E3220A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift */,
 				6A8F5E3320A67A2C0040EFA6 /* ProductManagedObject+CoreDataProperties.swift */,
 				6A085309209EA7440094C5B7 /* ViewDataItem.swift */,
@@ -113,6 +123,8 @@
 				6A8F5E2F20A679370040EFA6 /* LedwayCoreData.xcdatamodeld */,
 				6A8F5E5720A67B4A0040EFA6 /* CoreDataDAO.swift */,
 				6A8F5E5920A68C310040EFA6 /* ProductDAO.swift */,
+				6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */,
+				6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -361,7 +373,9 @@
 				6A5F6B5020AFCCAB006F1F35 /* env.swift in Sources */,
 				6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */,
 				6ADC73C620B9379800151EFD /* ReceivedProductListViewController.swift in Sources */,
+				6A9CC0FF20B9706000B1761E /* ReceivedSampleDAO.swift in Sources */,
 				6A8F5E3120A679370040EFA6 /* LedwayCoreData.xcdatamodeld in Sources */,
+				6A9CC10120B970A600B1761E /* ReceivedSampleData.swift in Sources */,
 				6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */,
 				6A8F5E3420A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift in Sources */,
 				6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */,
@@ -377,8 +391,10 @@
 				6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */,
 				6A92F71F201360CE00079C31 /* SampleController.swift in Sources */,
 				6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */,
+				6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */,
 				6A74ACCD2096C70C00555396 /* AppCons.swift in Sources */,
 				6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */,
+				6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

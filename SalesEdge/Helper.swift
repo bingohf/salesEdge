@@ -209,6 +209,15 @@ class Helper{
         }
         return nil
     }
+    
+    open static func converToJson(obj:Any) -> String?{
+        do{
+            let data =  try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+            return String(data: data, encoding: .utf8)
+        }catch{
+            return ""
+        }
+    }
 }
 
 
