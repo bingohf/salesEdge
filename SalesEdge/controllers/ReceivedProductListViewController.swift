@@ -26,6 +26,14 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
             #selector(ReceivedProductViewController.handleRefresh(_:)),
                                  for: UIControlEvents.valueChanged)
         mTableView.refreshControl = refreshControl
+        
+        // Self-sizing table view cells in iOS 8 require that the rowHeight property of the table view be set to the constant UITableViewAutomaticDimension
+        mTableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Self-sizing table view cells in iOS 8 are enabled when the estimatedRowHeight property of the table view is set to a non-zero value.
+        // Setting the estimated row height prevents the table view from calling tableView:heightForRowAtIndexPath: for every row in the table on first load;
+        // it will only be called as cells are about to scroll onscreen. This is a major performance optimization.
+        mTableView.estimatedRowHeight = 44.0 // set this to whatever your "average" cell height is; it doesn't need to be very accurate
         loadFromCache()
         
     }
