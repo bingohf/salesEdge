@@ -12,6 +12,7 @@ import CoreData
 class ProductDAO:CoreDataDAO{
     
     public func findAll()throws ->[ProductData] {
+        let o :ReceivedSampleMO?
         let context = persistentContainer.viewContext
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)

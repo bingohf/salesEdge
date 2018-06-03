@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A048BB220C38E3500D88164 /* MySampleListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A048BB120C38E3500D88164 /* MySampleListController.swift */; };
+		6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8920C2AB0C0083868C /* ImageViewController.swift */; };
+		6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */; };
 		6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A085306209E93DA0094C5B7 /* ProductViewController.swift */; };
 		6A08530A209EA7440094C5B7 /* ViewDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A085309209EA7440094C5B7 /* ViewDataItem.swift */; };
 		6A08530C209EA9520094C5B7 /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A08530B209EA9520094C5B7 /* ProductData.swift */; };
@@ -30,18 +33,27 @@
 		6A92F724201360CE00079C31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F722201360CE00079C31 /* Main.storyboard */; };
 		6A92F726201360CE00079C31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F725201360CE00079C31 /* Assets.xcassets */; };
 		6A92F729201360CE00079C31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A92F727201360CE00079C31 /* LaunchScreen.storyboard */; };
+		6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */; };
+		6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */; };
+		6A9CC0FF20B9706000B1761E /* ReceivedSampleDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */; };
+		6A9CC10120B970A600B1761E /* ReceivedSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */; };
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
 		6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */; };
 		6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8AD32070D4DB00919B1A /* MainViewController.swift */; };
 		6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC53F1D2014D683003F7815 /* TabBaseViewController.swift */; };
+		6ADC73C420B931CE00151EFD /* SalesLeadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADC73C320B931CE00151EFD /* SalesLeadsViewController.swift */; };
+		6ADC73C620B9379800151EFD /* ReceivedProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADC73C520B9379800151EFD /* ReceivedProductListViewController.swift */; };
 		DF44E99DFD68EDD8EC3810C2 /* Pods_SalesEdge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.debug.xcconfig"; sourceTree = "<group>"; };
 		3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesEdge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A048BB120C38E3500D88164 /* MySampleListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySampleListController.swift; sourceTree = "<group>"; };
+		6A064B8920C2AB0C0083868C /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDetailController.swift; sourceTree = "<group>"; };
 		6A085306209E93DA0094C5B7 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		6A085309209EA7440094C5B7 /* ViewDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataItem.swift; sourceTree = "<group>"; };
 		6A08530B209EA9520094C5B7 /* ProductData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
@@ -70,12 +82,18 @@
 		6A92F725201360CE00079C31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A92F728201360CE00079C31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A92F72A201360CE00079C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceivedSampleMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceivedSampleMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSampleDAO.swift; sourceTree = "<group>"; };
+		6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSampleData.swift; sourceTree = "<group>"; };
 		6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		6AA8862E20A8192200052232 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
 		6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBizCardViewController.swift; sourceTree = "<group>"; };
 		6ABE8AD32070D4DB00919B1A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6AC53F1D2014D683003F7815 /* TabBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBaseViewController.swift; sourceTree = "<group>"; };
+		6ADC73C320B931CE00151EFD /* SalesLeadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesLeadsViewController.swift; sourceTree = "<group>"; };
+		6ADC73C520B9379800151EFD /* ReceivedProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedProductListViewController.swift; sourceTree = "<group>"; };
 		D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.release.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +120,8 @@
 		6A085308209EA7340094C5B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */,
+				6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */,
 				6A8F5E3220A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift */,
 				6A8F5E3320A67A2C0040EFA6 /* ProductManagedObject+CoreDataProperties.swift */,
 				6A085309209EA7440094C5B7 /* ViewDataItem.swift */,
@@ -109,6 +129,8 @@
 				6A8F5E2F20A679370040EFA6 /* LedwayCoreData.xcdatamodeld */,
 				6A8F5E5720A67B4A0040EFA6 /* CoreDataDAO.swift */,
 				6A8F5E5920A68C310040EFA6 /* ProductDAO.swift */,
+				6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */,
+				6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -127,6 +149,11 @@
 				6A57D5B2208376090074C0C6 /* CustomTableCell.swift */,
 				6A085306209E93DA0094C5B7 /* ProductViewController.swift */,
 				6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */,
+				6ADC73C320B931CE00151EFD /* SalesLeadsViewController.swift */,
+				6ADC73C520B9379800151EFD /* ReceivedProductListViewController.swift */,
+				6A064B8920C2AB0C0083868C /* ImageViewController.swift */,
+				6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */,
+				6A048BB120C38E3500D88164 /* MySampleListController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -230,7 +257,7 @@
 				TargetAttributes = {
 					6A92F718201360CE00079C31 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter.iOS = {
 								enabled = 0;
@@ -354,23 +381,32 @@
 				6A57D5B3208376090074C0C6 /* CustomTableCell.swift in Sources */,
 				6A5F6B5020AFCCAB006F1F35 /* env.swift in Sources */,
 				6A085307209E93DA0094C5B7 /* ProductViewController.swift in Sources */,
+				6A048BB220C38E3500D88164 /* MySampleListController.swift in Sources */,
+				6ADC73C620B9379800151EFD /* ReceivedProductListViewController.swift in Sources */,
+				6A9CC0FF20B9706000B1761E /* ReceivedSampleDAO.swift in Sources */,
 				6A8F5E3120A679370040EFA6 /* LedwayCoreData.xcdatamodeld in Sources */,
+				6A9CC10120B970A600B1761E /* ReceivedSampleData.swift in Sources */,
 				6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */,
 				6A8F5E3420A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift in Sources */,
 				6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */,
 				6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */,
 				6A8F5E5820A67B4A0040EFA6 /* CoreDataDAO.swift in Sources */,
 				6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */,
+				6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */,
 				6A92F721201360CE00079C31 /* PAViewController.swift in Sources */,
+				6ADC73C420B931CE00151EFD /* SalesLeadsViewController.swift in Sources */,
 				6A8F5E5A20A68C310040EFA6 /* ProductDAO.swift in Sources */,
 				6A92F71D201360CE00079C31 /* AppDelegate.swift in Sources */,
 				6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */,
+				6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */,
 				6A08530C209EA9520094C5B7 /* ProductData.swift in Sources */,
 				6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */,
 				6A92F71F201360CE00079C31 /* SampleController.swift in Sources */,
 				6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */,
+				6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */,
 				6A74ACCD2096C70C00555396 /* AppCons.swift in Sources */,
 				6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */,
+				6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,15 +510,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ddb56123-bae4-4a4a-bd2c-b7f4610a5285";
-				PROVISIONING_PROFILE_SPECIFIER = "For Test";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -606,15 +642,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9ed5b629-a822-461a-84c9-bd0f91121a00";
-				PROVISIONING_PROFILE_SPECIFIER = "iPhone app dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -627,15 +663,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5f4ded3-ffd4-41d8-a4c1-9cdd5ff8508e";
-				PROVISIONING_PROFILE_SPECIFIER = AppStore;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

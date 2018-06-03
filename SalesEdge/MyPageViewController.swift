@@ -10,8 +10,9 @@ import Foundation
 import XLPagerTabStrip
 
 
+
 class MyPageViewController :ButtonBarPagerTabStripViewController{
-    
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
