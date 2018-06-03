@@ -50,10 +50,31 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     @IBAction func onTapGestureSelector(_ sender: Any) {
         if let guesture = sender as? UITapGestureRecognizer {
             if guesture.view === mImage {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = .camera
-                present(imagePicker, animated: true, completion: nil)
+                let prodno = productData!.prodno
+                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(prodno)_type1.png")
+                do{
+                    let fileManager = FileManager.default
+                    if fileManager.fileExists(atPath: filePath.path){
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+                        vc.imageUrl = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+                        show(vc, sender: sender)
+                    }else{
+                        let imagePicker = UIImagePickerController()
+                        imagePicker.delegate = self
+                        imagePicker.sourceType = .camera
+                        present(imagePicker, animated: true, completion: nil)
+                    }
+                    
+                }catch{
+                    print(error)
+                }
+                
+                
+            
+                
+    
             }
         }
     }
@@ -149,6 +170,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             let destinationVC = segue.destination as? QRCodeScannerViewController
             destinationVC?.delegate = self
         }
+        if segue.identifier == "take_photo" {
+            let imagePicker = segue.destination as! UIImagePickerController
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+        }
     }
     
     func onReceive(qrcode: String) {
@@ -228,5 +254,12 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     }
     public func textViewDidChange(_ textView: UITextView) {
         self.mLabelPlaceHold.isHidden = !textView.text.isEmpty
+    }
+    
+    @IBAction func onActionPhotoTouch(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true, completion: nil)
     }
 }

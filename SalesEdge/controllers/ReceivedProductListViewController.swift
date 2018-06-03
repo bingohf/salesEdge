@@ -215,6 +215,16 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         }
         
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_detail"{
+            if let row = self.mTableView.indexPathForSelectedRow?.row{
+                var item = data[row]
+                let destinationVC = segue.destination as! ReceivedDetailController
+                destinationVC.detailJson = item.detailJson
+                destinationVC.title = item.title
+            }
+          
+        }
+    }
     
 }
