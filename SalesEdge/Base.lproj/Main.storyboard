@@ -808,6 +808,33 @@
             </objects>
             <point key="canvasLocation" x="3600.8000000000002" y="-1834.6326836581711"/>
         </scene>
+        <!--My Sample List Controller-->
+        <scene sceneID="Ysj-Ga-I92">
+            <objects>
+                <viewController storyboardIdentifier="MySampleListController" id="gcc-yL-5Bm" customClass="MySampleListController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ou3-fG-0cT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="coming soon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6r-6Q-j7Q">
+                                <rect key="frame" x="138.5" y="75" width="98.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Z6r-6Q-j7Q" firstAttribute="top" secondItem="sUI-dW-7ky" secondAttribute="top" constant="55" id="FXt-UA-cFK"/>
+                            <constraint firstItem="Z6r-6Q-j7Q" firstAttribute="centerX" secondItem="ou3-fG-0cT" secondAttribute="centerX" id="Rga-1D-1rY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sUI-dW-7ky"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AEW-3F-uQS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4686" y="-1857"/>
+        </scene>
         <!--MyID View Controller-->
         <scene sceneID="MIg-vc-L5u">
             <objects>

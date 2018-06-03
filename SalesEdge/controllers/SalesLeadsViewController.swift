@@ -17,10 +17,13 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ReceivedProductViewController") as! ReceivedProductViewController
-        vc.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Received", comment: "")))
+        let vc2 = storyboard.instantiateViewController(withIdentifier: "ReceivedProductViewController") as! ReceivedProductViewController
+        vc2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Received", comment: "")))
         
-        return [vc]
+        let vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
+        vc1.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("My List", comment: "")))
+        
+        return [vc2,vc1]
     }
     
     override func viewDidLoad() {
