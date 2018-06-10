@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MySample" representedClassName="MySample" syncable="YES" codeGenerationType="class"/>
     <entity name="Product" representedClassName="ProductManagedObject" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="prodno" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,5 +21,6 @@
     <elements>
         <element name="Product" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="ReceivedSample" positionX="-63" positionY="9" width="128" height="120"/>
+        <element name="MySample" positionX="-63" positionY="36" width="128" height="45"/>
     </elements>
 </model>
