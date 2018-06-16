@@ -6,6 +6,7 @@ target 'SalesEdge' do
   use_frameworks!
 
   # Pods for SalesEdge
+  pod 'IQKeyboardManagerSwift'
 pod 'XLPagerTabStrip', '~> 8.0'
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
