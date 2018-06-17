@@ -169,7 +169,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
     
     func setSelectedCountTitle()  {
         self.title = "\(selected.count) product\(selected.count < 2 ? "":"s") selected"
-        mTitleItem.title = self.title
+     //   mTitleItem.title = self.title
     }
     
 }

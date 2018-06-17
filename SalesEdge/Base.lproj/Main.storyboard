@@ -656,28 +656,11 @@
         <!--Product Picker View Controller-->
         <scene sceneID="QZT-9g-E6O">
             <objects>
-                <viewController id="R3V-UH-qy2" customClass="ProductPickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R3V-UH-qy2" customClass="ProductPickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NgU-32-7sf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXs-rk-A6W">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="zLY-f7-k3k">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EkS-ab-VCa">
-                                            <connections>
-                                                <action selector="onCancelTouch:" destination="R3V-UH-qy2" id="Dap-5m-hXX"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="M1e-zZ-syE">
-                                            <connections>
-                                                <action selector="onSaveTouch:" destination="R3V-UH-qy2" id="x9c-Hs-9gd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MTp-ll-BC0">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -748,25 +731,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QXs-rk-A6W" firstAttribute="leading" secondItem="MTp-ll-BC0" secondAttribute="leading" id="5Pa-rH-3XD"/>
                             <constraint firstItem="ORF-67-E3G" firstAttribute="trailing" secondItem="MTp-ll-BC0" secondAttribute="trailing" id="63g-Bd-Hda"/>
-                            <constraint firstItem="QXs-rk-A6W" firstAttribute="top" secondItem="ORF-67-E3G" secondAttribute="top" id="JS3-Fq-wkp"/>
-                            <constraint firstItem="QXs-rk-A6W" firstAttribute="trailing" secondItem="MTp-ll-BC0" secondAttribute="trailing" id="Lde-Wl-05t"/>
+                            <constraint firstItem="MTp-ll-BC0" firstAttribute="top" secondItem="ORF-67-E3G" secondAttribute="top" id="NCa-Qx-Rlr"/>
                             <constraint firstItem="MTp-ll-BC0" firstAttribute="leading" secondItem="ORF-67-E3G" secondAttribute="leading" id="cf4-O2-7lA"/>
-                            <constraint firstItem="MTp-ll-BC0" firstAttribute="top" secondItem="QXs-rk-A6W" secondAttribute="bottom" id="ckP-vz-wDd"/>
                             <constraint firstItem="ORF-67-E3G" firstAttribute="bottom" secondItem="MTp-ll-BC0" secondAttribute="bottom" id="kro-3M-Qql"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ORF-67-E3G"/>
                     </view>
                     <connections>
                         <outlet property="mTableView" destination="MTp-ll-BC0" id="UTZ-he-dzM"/>
-                        <outlet property="mTitleItem" destination="zLY-f7-k3k" id="CkH-gg-ny4"/>
-                        <outlet property="mTitlebar" destination="QXs-rk-A6W" id="aPz-tT-D31"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ny3-WS-tuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3489" y="-2633"/>
+            <point key="canvasLocation" x="3488.8000000000002" y="-2633.4332833583212"/>
         </scene>
         <!--Sample Customer View Controller-->
         <scene sceneID="c4Z-jY-kAe">
@@ -1304,7 +1282,7 @@
                             <barButtonItem systemItem="save" id="Pcd-C7-ye9"/>
                             <barButtonItem title="Pick" id="Ihj-Uo-fiI">
                                 <connections>
-                                    <segue destination="R3V-UH-qy2" kind="presentation" identifier="show_pick" id="jYD-JD-lke"/>
+                                    <segue destination="R3V-UH-qy2" kind="show" identifier="show_pick" id="jYD-JD-lke"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
