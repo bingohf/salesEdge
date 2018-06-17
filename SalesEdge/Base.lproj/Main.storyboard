@@ -756,11 +756,13 @@
                     </view>
                     <connections>
                         <outlet property="mTableView" destination="MTp-ll-BC0" id="UTZ-he-dzM"/>
+                        <outlet property="mTitleItem" destination="zLY-f7-k3k" id="CkH-gg-ny4"/>
+                        <outlet property="mTitlebar" destination="QXs-rk-A6W" id="aPz-tT-D31"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ny3-WS-tuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3480" y="-2578"/>
+            <point key="canvasLocation" x="3489" y="-2633"/>
         </scene>
         <!--Sample Customer View Controller-->
         <scene sceneID="c4Z-jY-kAe">
@@ -787,6 +789,17 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EDO-ND-eXP">
                                 <rect key="frame" x="0.0" y="20" width="375" height="495"/>
@@ -822,7 +835,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4287.1999999999998" y="-2609.1454272863571"/>
+            <point key="canvasLocation" x="4290" y="-2633"/>
         </scene>
         <!--Received Product View Controller-->
         <scene sceneID="kbD-p3-SR7">
@@ -1211,7 +1224,21 @@
                         <viewLayoutGuide key="safeArea" id="2ey-yn-lFP"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Sample" id="N0O-pX-3X2"/>
+                    <navigationItem key="navigationItem" title="Sample" id="N0O-pX-3X2">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wha-i5-R34">
+                            <connections>
+                                <action selector="onCancelTouch:" destination="emq-0B-plV" id="55u-CH-QSN"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="save" id="Pcd-C7-ye9"/>
+                            <barButtonItem title="Pick" id="Ihj-Uo-fiI">
+                                <connections>
+                                    <segue destination="R3V-UH-qy2" kind="presentation" id="jYD-JD-lke"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="YhH-lw-47q" id="7Ub-i6-P3o"/>
                         <outlet property="containerView" destination="zE1-vz-ZGX" id="WIL-9k-uBb"/>
