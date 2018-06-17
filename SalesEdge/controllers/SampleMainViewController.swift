@@ -13,18 +13,18 @@ import UIKit
 
 class SampleMainViewController :ButtonBarPagerTabStripViewController{
     var sampleData:SampleData? = SampleData(sampleId: "x")
-    
+    var vcMyList: MySampleListController? = nil
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        vcMyList = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
+      
         let vc2 = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
         vc2.sampleData = sampleData
         vc2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
-        
-        let vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
-        vc1.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
-        
-        return [vc1,vc2]
+        vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
+        return [vcMyList!,vc2]
     }
     
     override func viewDidLoad() {
@@ -36,6 +36,14 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
     
     @IBAction func onCancelTouch(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "show_pick"{
+            let vc = segue.destination as! ProductPickerViewController
+            vc.delegate = vcMyList
+            
+        }
     }
 
 }

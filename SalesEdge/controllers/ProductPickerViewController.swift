@@ -11,15 +11,23 @@ import UIKit
 import RxSwift
 import SQLite
 
+protocol ProductPickDelegate {
+    func getSelected() -> [ProductData]
+    func callback(selected : [ProductData])
+}
+
 class ProductPickerViewController:UIViewController, UITableViewDataSource, UITableViewDelegate{
-    var disposeBag = DisposeBag()
-    var data = [ProductData]()
-    var selected = [ProductData]()
-    let productDAO = ProductDAO()
+    private var disposeBag = DisposeBag()
+    private var data = [ProductData]()
+    private var selected = [ProductData]()
+    private let productDAO = ProductDAO()
+    
     @IBOutlet weak var mTableView: UITableView!
     
     @IBOutlet weak var mTitleItem: UINavigationItem!
     @IBOutlet weak var mTitlebar: UINavigationBar!
+    
+    public var delegate:ProductPickDelegate? = nil
     override func viewDidLoad() {
         mTableView.setEditing(true, animated: true)
         mTableView.refreshControl = UIRefreshControl()
@@ -27,8 +35,10 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         mTableView.refreshControl?.addTarget(self, action:
             #selector(ProductPickerViewController.handleRefresh(_:)),
                                   for: UIControlEvents.valueChanged)
-        reloadData()
+  
+        selected = delegate?.getSelected() ?? [ProductData]()
         setSelectedCountTitle()
+        reloadData()
         
     }
     
@@ -37,6 +47,10 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
     }
     
     
+    @IBAction func onSaveTouch(_ sender: Any) {
+        delegate?.callback(selected: selected)
+        self.dismiss(animated: true)
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell =
@@ -62,17 +76,38 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         return cell
         
     }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        print(indexPath)
+        return indexPath
+    }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let item = data[indexPath.row]
+        var isSelected = false
         for selectedItem in selected{
             if selectedItem.prodno == item.prodno{
-                cell.setSelected(true, animated: false)
+                isSelected = true
             }
+        }
+        if isSelected {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
         }
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let isSelected = mTableView.cellForRow(at: indexPath)?.isSelected ?? false
+//        if isSelected{
+//            mTableView.deselectRow(at: indexPath, animated: true)
+//        }
+        
         var found = false
         let item = data[indexPath.row]
         for selectedItem in selected{
@@ -84,9 +119,15 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
             selected.append(item)
         }
         setSelectedCountTitle()
-       
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.row < selected.count {
+            selected.remove(at: indexPath.row)
+        }
+        setSelectedCountTitle()
+    }
+  
     func reloadData()  {
         Observable<[ProductData]>.create { (observer ) -> Disposable in
             do{
