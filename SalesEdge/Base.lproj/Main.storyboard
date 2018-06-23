@@ -470,7 +470,7 @@
         <!--Image View Controller-->
         <scene sceneID="9ZC-zi-dqe">
             <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="W5h-Po-h7i" customClass="ImageViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" automaticallyAdjustsScrollViewInsets="NO" id="W5h-Po-h7i" customClass="ImageViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LdH-fh-8DA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -653,16 +653,16 @@
             </objects>
             <point key="canvasLocation" x="1334" y="-2632"/>
         </scene>
-        <!--Product Picker View Controller-->
+        <!--Picker-->
         <scene sceneID="QZT-9g-E6O">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R3V-UH-qy2" customClass="ProductPickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Picker" automaticallyAdjustsScrollViewInsets="NO" id="R3V-UH-qy2" customClass="ProductPickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NgU-32-7sf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MTp-ll-BC0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="oXB-QT-kFz" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
@@ -738,6 +738,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ORF-67-E3G"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="sGN-87-vt0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="KPg-b6-bLV">
+                            <connections>
+                                <action selector="onSaveTouch:" destination="R3V-UH-qy2" id="WzG-Ua-VLN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mTableView" destination="MTp-ll-BC0" id="UTZ-he-dzM"/>
                     </connections>

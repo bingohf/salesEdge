@@ -49,7 +49,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
     
     @IBAction func onSaveTouch(_ sender: Any) {
         delegate?.callback(selected: selected)
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -122,9 +122,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.row < selected.count {
-            selected.remove(at: indexPath.row)
-        }
+        selected = selected.filter{ $0.prodno != data[indexPath.row].prodno}
         setSelectedCountTitle()
     }
   

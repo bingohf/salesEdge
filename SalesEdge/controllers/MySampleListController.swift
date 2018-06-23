@@ -25,7 +25,6 @@ class MySampleListController:XLPagerItemViewController,UITableViewDelegate, UITa
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = nil
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         print(filePath)
         do{
@@ -50,5 +49,44 @@ class MySampleListController:XLPagerItemViewController,UITableViewDelegate, UITa
     }
     func getSelected() -> [ProductData] {
         return data
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        do{
+            let  item = data[indexPath.row]
+            let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath.path){
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+                vc.imageUrl = filePath
+                show(vc, sender: nil)
+            }else{
+                Helper.toast(message: "No Image", thisVC: self)
+            }
+            
+        }catch{
+            print(error)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            let rowData = self.data[index.row]
+            do {
+                self.data.remove(at: index.row)
+                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+            } catch {
+                print("delete failed: \(error)")
+            }
+            
+        }
+        share.backgroundColor = .orange
+        
+        return [share]
     }
 }
