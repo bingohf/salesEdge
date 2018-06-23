@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import  XLPagerTabStrip
+import ALCameraViewController
 
 class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var sampleData:SampleData? = nil
@@ -35,26 +36,34 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     @IBAction func onTapGestureTouch(_ sender: Any) {
         if let guesture = sender as? UITapGestureRecognizer, let sampleId = sampleData?.sampleId {
             if guesture.view === mImage {
-        
-                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleId)_type1.png")
-                do{
-                    let fileManager = FileManager.default
-                    if fileManager.fileExists(atPath: filePath.path){
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-                        vc.imageUrl = Helper.getImagePath(folder: "Sample").appendingPathComponent("\(sampleId)_type1.png")
-                        show(vc, sender: sender)
-                    }else{
-                        let imagePicker = UIImagePickerController()
-                        imagePicker.delegate = self
-                        imagePicker.sourceType = .camera
-                        present(imagePicker, animated: true, completion: nil)
-                    }
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "CombinImagePickerViewController") as! CombinImagePickerViewController
+                present(vc, animated: true, completion: nil)
+                vc.onCompleted = {[weak self]image in
+                    self?.mImage.image = image
                     
-                }catch{
-                    print(error)
                 }
+                //                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                //                let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleId)_type1.png")
+                //                do{
+                //                    let fileManager = FileManager.default
+                //                    if fileManager.fileExists(atPath: filePath.path){
+                //                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                //                        let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+                //                        vc.imageUrl = Helper.getImagePath(folder: "Sample").appendingPathComponent("\(sampleId)_type1.png")
+                //                        show(vc, sender: sender)
+                //                    }else{
+                //                        let imagePicker = UIImagePickerController()
+                //                        imagePicker.delegate = self
+                //                        imagePicker.sourceType = .camera
+                //                        present(imagePicker, animated: true, completion: nil)
+                //
+                //
+                //                    }
+                //
+                //                }catch{
+                //                    print(error)
+                //                }
                 
             }
         }

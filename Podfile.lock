@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
+  - ALCameraViewController (3.0.2)
   - IQKeyboardManagerSwift (5.0.7)
   - QRCodeReader.swift (8.0.4)
   - RxCocoa (4.1.1):
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
+  - ALCameraViewController
   - IQKeyboardManagerSwift
   - QRCodeReader.swift (~> 8.0.3)
   - RxCocoa (~> 4.0)
@@ -23,6 +25,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  ALCameraViewController: 1edce3497633f0df138523645ed1228961ee2eab
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   QRCodeReader.swift: 9730cfa7ed5f0dd839765df8cf18d41db20e4081
   RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
@@ -31,6 +34,6 @@ SPEC CHECKSUMS:
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: cd370bf5583ec9fac4267e57494e09b7cf1a677a
+PODFILE CHECKSUM: f3e91785574dc0fb99918eef01806d7a897b154c
 
 COCOAPODS: 1.3.1
