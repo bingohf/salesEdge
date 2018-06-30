@@ -46,21 +46,21 @@ class CombinImagePickerViewController:UIViewController{
     
     @IBAction func onTouchSave(_ sender: Any) {
     
-        var topImage = mImage1.image(for: .normal)
-         var bottomImage = mImage1.image(for: .normal)
-        var size = CGSize(width: 512, height: 512)
-        UIGraphicsBeginImageContext(size)
-        
-        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        bottomImage!.drawInRect(areaSize)
-        
-        topImage!.drawInRect(areaSize, blendMode: kCGBlendModeNormal, alpha: 0.8)
-        
-        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        onCompleted?(mImage1.image(for: .normal))
-        self.dismiss(animated: true, completion: nil)
+//        var topImage = mImage1.image(for: .normal)
+//         var bottomImage = mImage1.image(for: .normal)
+//        var size = CGSize(width: 512, height: 512)
+//        UIGraphicsBeginImageContext(size)
+//        
+//        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+//        bottomImage!.drawInRect(areaSize)
+//        
+//        topImage!.drawInRect(areaSize, blendMode: kCGBlendModeNormal, alpha: 0.8)
+//        
+//        var newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        onCompleted?(mImage1.image(for: .normal))
+//        self.dismiss(animated: true, completion: nil)
         
         
     }

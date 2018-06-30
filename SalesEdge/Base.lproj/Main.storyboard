@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -841,7 +840,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="NVR-fx-cEN" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="NVR-fx-cEN" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NVR-fx-cEN" id="x9G-g2-hsM">
@@ -856,13 +855,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Label111" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXT-8x-s81">
-                                                    <rect key="frame" x="83" y="21" width="259" height="98"/>
+                                                    <rect key="frame" x="83" y="21" width="551" height="98"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5v-jA-hAA">
-                                                    <rect key="frame" x="305.5" y="11" width="28.5" height="13.5"/>
+                                                    <rect key="frame" x="597.5" y="11" width="28.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1096,7 +1095,7 @@
         <!--Combin Image Picker View Controller-->
         <scene sceneID="A9N-aT-wlH">
             <objects>
-                <viewController storyboardIdentifier="CombinImagePickerViewController" id="zdo-0T-THt" customClass="CombinImagePickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CombinImagePickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="zdo-0T-THt" customClass="CombinImagePickerViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d9b-6e-OEC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1114,11 +1113,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-QC-g4I">
-                                <rect key="frame" x="8" y="72" width="359" height="587"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-QC-g4I">
+                                <rect key="frame" x="8" y="80" width="359" height="579"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiA-Oo-B5r">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="293.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="286.5"/>
                                         <state key="normal" title="Touch to Image 1">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1126,8 +1125,8 @@
                                             <action selector="mOnImage1Touch:" destination="zdo-0T-THt" eventType="touchUpInside" id="ge5-xD-dgu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWf-vq-VR8">
-                                        <rect key="frame" x="0.0" y="299.5" width="359" height="287.5"/>
+                                    <button opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWf-vq-VR8">
+                                        <rect key="frame" x="0.0" y="292.5" width="359" height="286.5"/>
                                         <state key="normal" title="Touch to Image 2">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -1136,38 +1135,18 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="tiA-Oo-B5r" firstAttribute="width" secondItem="kk2-QC-g4I" secondAttribute="width" multiplier="0.5" id="838-Mq-4Yn"/>
-                                    <constraint firstItem="tiA-Oo-B5r" firstAttribute="height" secondItem="kk2-QC-g4I" secondAttribute="height" multiplier="0.5" id="CLK-Lt-4NP"/>
-                                    <constraint firstItem="tiA-Oo-B5r" firstAttribute="height" secondItem="kk2-QC-g4I" secondAttribute="height" id="dh2-6i-BTF"/>
-                                    <constraint firstItem="xWf-vq-VR8" firstAttribute="height" secondItem="kk2-QC-g4I" secondAttribute="height" id="gVw-WI-dtj"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="838-Mq-4Yn"/>
-                                        <exclude reference="dh2-6i-BTF"/>
-                                        <exclude reference="gVw-WI-dtj"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=compact" axis="horizontal">
-                                    <mask key="constraints">
-                                        <include reference="838-Mq-4Yn"/>
-                                        <exclude reference="CLK-Lt-4NP"/>
-                                        <include reference="dh2-6i-BTF"/>
-                                        <include reference="gVw-WI-dtj"/>
-                                    </mask>
-                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" axis="horizontal"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="VxL-8p-4ft" firstAttribute="trailing" secondItem="kk2-QC-g4I" secondAttribute="trailing" constant="8" id="56T-Hu-QDy"/>
-                            <constraint firstItem="kk2-QC-g4I" firstAttribute="leading" secondItem="VxL-8p-4ft" secondAttribute="leading" constant="8" id="Ab7-u1-b1u"/>
-                            <constraint firstItem="VxL-8p-4ft" firstAttribute="bottom" secondItem="kk2-QC-g4I" secondAttribute="bottom" constant="8" id="G2A-Yf-sP2"/>
-                            <constraint firstItem="kk2-QC-g4I" firstAttribute="top" secondItem="u1l-3B-h9i" secondAttribute="bottom" constant="8" id="T6g-c8-aBI"/>
-                            <constraint firstItem="u1l-3B-h9i" firstAttribute="top" secondItem="VxL-8p-4ft" secondAttribute="top" id="WCB-LA-Z91"/>
-                            <constraint firstItem="u1l-3B-h9i" firstAttribute="leading" secondItem="VxL-8p-4ft" secondAttribute="leading" id="c1E-gb-1xp"/>
-                            <constraint firstItem="VxL-8p-4ft" firstAttribute="trailing" secondItem="u1l-3B-h9i" secondAttribute="trailing" id="hCF-jr-OxI"/>
+                            <constraint firstItem="VxL-8p-4ft" firstAttribute="trailing" secondItem="kk2-QC-g4I" secondAttribute="trailing" constant="8" id="35J-F2-b86"/>
+                            <constraint firstItem="kk2-QC-g4I" firstAttribute="top" secondItem="VxL-8p-4ft" secondAttribute="top" constant="60" id="HWM-rQ-j0k"/>
+                            <constraint firstItem="u1l-3B-h9i" firstAttribute="top" secondItem="VxL-8p-4ft" secondAttribute="top" id="PB5-Ua-FGW"/>
+                            <constraint firstItem="VxL-8p-4ft" firstAttribute="bottom" secondItem="kk2-QC-g4I" secondAttribute="bottom" constant="8" id="T0N-vT-IJi"/>
+                            <constraint firstItem="u1l-3B-h9i" firstAttribute="leading" secondItem="VxL-8p-4ft" secondAttribute="leading" id="bdk-VD-t2E"/>
+                            <constraint firstItem="kk2-QC-g4I" firstAttribute="leading" secondItem="VxL-8p-4ft" secondAttribute="leading" constant="8" id="dF7-OZ-DK3"/>
+                            <constraint firstItem="u1l-3B-h9i" firstAttribute="trailing" secondItem="VxL-8p-4ft" secondAttribute="trailing" id="mZ4-wS-nbg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VxL-8p-4ft"/>
                     </view>
