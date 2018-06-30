@@ -45,12 +45,49 @@ class CombinImagePickerViewController:UIViewController{
     }
     
     @IBAction func onTouchSave(_ sender: Any) {
-    
-//        var topImage = mImage1.image(for: .normal)
-//         var bottomImage = mImage1.image(for: .normal)
-//        var size = CGSize(width: 512, height: 512)
-//        UIGraphicsBeginImageContext(size)
-//        
+        let width:CGFloat = 512
+        let height:CGFloat = 512
+        var imageSize = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 1.0)
+        var image1 = mImage1.image(for: .normal)
+        var image2 = mImage2.image(for: .normal)
+        if image1 != nil && image2 != nil{
+            if let  image = image1{
+                let size = image.size
+                let rate = min(width / size.width, height / size.height / 2)
+                let newSize = CGSize(width: rate * size.width, height: rate * size.height)
+                let x = (width - newSize.width) / 2
+                let y = (height / 2 - newSize.height) / 2
+                image.draw(in: CGRect(x: x, y: y, width: newSize.width, height: newSize.height))
+                
+            }
+            if let  image = image2{
+                let size = image.size
+                let rate = min(width / size.width, height / size.height / 2)
+                let newSize = CGSize(width: rate * size.width, height: rate * size.height)
+                let x = (width - newSize.width) / 2
+                let y = (height / 2 - newSize.height) / 2 + height / 2
+                image.draw(in: CGRect(x: x, y: y, width: newSize.width, height: newSize.height))
+            }
+        }else{
+            if let image = image1 ?? image2 {
+                let size = image.size
+                let rate = max(width / size.width, height / size.height)
+                let newSize = CGSize(width: rate * size.width, height: rate * size.height)
+                let x = (width - newSize.width) / 2
+                let y = (height - newSize.height) / 2
+                image.draw(in: CGRect(x: x, y: y, width: newSize.width, height: newSize.height))
+                
+            }
+        }
+
+ 
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+        self.dismiss(animated: true, completion: nil)
+        onCompleted?(newImage)
+//
 //        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
 //        bottomImage!.drawInRect(areaSize)
 //        
