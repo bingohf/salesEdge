@@ -1104,7 +1104,11 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Take Photo" id="Ha3-vv-nIT">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8yS-zW-Eph"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8yS-zW-Eph">
+                                            <connections>
+                                                <action selector="mOnCancelTouch:" destination="zdo-0T-THt" id="GeD-Bi-TMa"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="tSO-VV-Ol5">
                                             <connections>
                                                 <action selector="onTouchSave:" destination="zdo-0T-THt" id="a2Q-dm-dBk"/>
@@ -1151,6 +1155,7 @@
                         <viewLayoutGuide key="safeArea" id="VxL-8p-4ft"/>
                     </view>
                     <connections>
+                        <outlet property="mActionSave" destination="tSO-VV-Ol5" id="Av7-1p-bXX"/>
                         <outlet property="mImage1" destination="tiA-Oo-B5r" id="f5y-rc-huk"/>
                         <outlet property="mImage2" destination="xWf-vq-VR8" id="Y8K-nt-Joz"/>
                     </connections>
