@@ -21,7 +21,7 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
         let vc2 = storyboard.instantiateViewController(withIdentifier: "ReceivedProductViewController") as! ReceivedProductViewController
         vc2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Received", comment: "")))
         
-        let vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
+        let vc1 = storyboard.instantiateViewController(withIdentifier: "MyShowRoomListController") as! MyShowRoomListController
         vc1.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("My List", comment: "")))
         
         return [vc2,vc1]

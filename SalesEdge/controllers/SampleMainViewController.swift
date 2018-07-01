@@ -18,12 +18,12 @@ public protocol Form{
 class SampleMainViewController :ButtonBarPagerTabStripViewController{
     let mySampleDAO = MySampleDAO()
     var sampleData = MySampleData(sampleId : "x")
-    var vcMyList: MySampleListController? = nil
+    var vcMyList: MyShowRoomListController? = nil
     var vcCustomer : SampleCustomerViewController? = nil
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        vcMyList = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
+        vcMyList = storyboard.instantiateViewController(withIdentifier: "MyShowRoomListController") as! MyShowRoomListController
       
         vcCustomer = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
         vcCustomer?.sampleData = sampleData

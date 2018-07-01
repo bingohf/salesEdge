@@ -1,5 +1,5 @@
 //
-//  MySampleListController.swift
+//  MyShowRoomListController
 //  SalesEdge
 //
 //  Created by Bin Guo on 2018/6/3.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 
-class MySampleListController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource, ProductPickDelegate {
+class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource, ProductPickDelegate {
     @IBOutlet weak var mTableView: UITableView!
     var disposeBag = DisposeBag()
     var data = [ProductData]()
