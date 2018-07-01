@@ -16,6 +16,10 @@
 		6A0C3DCC20662E7F0050386D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C3DCE20662E7F0050386D /* InfoPlist.strings */; };
 		6A0C3DD32066397F0050386D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A0C3DD52066397F0050386D /* Localizable.strings */; };
 		6A190B19204A8C3900534483 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A190B18204A8C3900534483 /* Helper.swift */; };
+		6A1F749220E78F3E001CFE65 /* MySample+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F749020E78F3E001CFE65 /* MySample+CoreDataClass.swift */; };
+		6A1F749320E78F3E001CFE65 /* MySample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F749120E78F3E001CFE65 /* MySample+CoreDataProperties.swift */; };
+		6A1F749520E78F6A001CFE65 /* MySampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F749420E78F6A001CFE65 /* MySampleData.swift */; };
+		6A1F749720E78FBB001CFE65 /* MySampleDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F749620E78FBB001CFE65 /* MySampleDAO.swift */; };
 		6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A38896B206F2F380036FBA1 /* MyPageViewController.swift */; };
 		6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A38896F206F3CB90036FBA1 /* XLPagerItemViewController.swift */; };
 		6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A57D5B0208347DA0074C0C6 /* ProductListController.swift */; };
@@ -39,7 +43,6 @@
 		6A9CC10120B970A600B1761E /* ReceivedSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */; };
 		6A9D27BF20CCBA32006020EB /* ProductPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D27BE20CCBA32006020EB /* ProductPickerViewController.swift */; };
 		6A9D27C120CCFFBC006020EB /* SampleCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D27C020CCFFBC006020EB /* SampleCustomerViewController.swift */; };
-		6A9D27C320CD63AF006020EB /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D27C220CD63AF006020EB /* SampleData.swift */; };
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
@@ -68,6 +71,10 @@
 		6A0C3DD020662EAE0050386D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A0C3DD42066397F0050386D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6A190B18204A8C3900534483 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		6A1F749020E78F3E001CFE65 /* MySample+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySample+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6A1F749120E78F3E001CFE65 /* MySample+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MySample+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6A1F749420E78F6A001CFE65 /* MySampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySampleData.swift; sourceTree = "<group>"; };
+		6A1F749620E78FBB001CFE65 /* MySampleDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySampleDAO.swift; sourceTree = "<group>"; };
 		6A38896B206F2F380036FBA1 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		6A38896F206F3CB90036FBA1 /* XLPagerItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XLPagerItemViewController.swift; sourceTree = "<group>"; };
 		6A57D5B0208347DA0074C0C6 /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
@@ -93,7 +100,6 @@
 		6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSampleData.swift; sourceTree = "<group>"; };
 		6A9D27BE20CCBA32006020EB /* ProductPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPickerViewController.swift; sourceTree = "<group>"; };
 		6A9D27C020CCFFBC006020EB /* SampleCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCustomerViewController.swift; sourceTree = "<group>"; };
-		6A9D27C220CD63AF006020EB /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		6AA8862E20A8192200052232 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +137,8 @@
 		6A085308209EA7340094C5B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6A1F749020E78F3E001CFE65 /* MySample+CoreDataClass.swift */,
+				6A1F749120E78F3E001CFE65 /* MySample+CoreDataProperties.swift */,
 				6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */,
 				6A9CC0FB20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift */,
 				6A8F5E3220A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift */,
@@ -142,7 +150,8 @@
 				6A8F5E5920A68C310040EFA6 /* ProductDAO.swift */,
 				6A9CC0FE20B9706000B1761E /* ReceivedSampleDAO.swift */,
 				6A9CC10020B970A600B1761E /* ReceivedSampleData.swift */,
-				6A9D27C220CD63AF006020EB /* SampleData.swift */,
+				6A1F749420E78F6A001CFE65 /* MySampleData.swift */,
+				6A1F749620E78FBB001CFE65 /* MySampleDAO.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 				6A8F5E3420A67A2C0040EFA6 /* ProductManagedObject+CoreDataClass.swift in Sources */,
 				6A57D5B1208347DA0074C0C6 /* ProductListController.swift in Sources */,
 				6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */,
+				6A1F749520E78F6A001CFE65 /* MySampleData.swift in Sources */,
 				6A8F5E5820A67B4A0040EFA6 /* CoreDataDAO.swift in Sources */,
 				6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */,
 				6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */,
@@ -421,16 +431,18 @@
 				6A8F5E5A20A68C310040EFA6 /* ProductDAO.swift in Sources */,
 				6A92F71D201360CE00079C31 /* AppDelegate.swift in Sources */,
 				6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */,
+				6A1F749220E78F3E001CFE65 /* MySample+CoreDataClass.swift in Sources */,
 				6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */,
 				6A08530C209EA9520094C5B7 /* ProductData.swift in Sources */,
 				6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */,
-				6A9D27C320CD63AF006020EB /* SampleData.swift in Sources */,
 				6A92F71F201360CE00079C31 /* SampleController.swift in Sources */,
 				6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */,
+				6A1F749720E78FBB001CFE65 /* MySampleDAO.swift in Sources */,
 				6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */,
 				6A74ACCD2096C70C00555396 /* AppCons.swift in Sources */,
 				6A9D27BF20CCBA32006020EB /* ProductPickerViewController.swift in Sources */,
 				6AE90FFA20CBB0A9006F35C7 /* SampleMainViewController.swift in Sources */,
+				6A1F749320E78F3E001CFE65 /* MySample+CoreDataProperties.swift in Sources */,
 				6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */,
 				6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */,
 			);

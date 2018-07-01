@@ -10,21 +10,26 @@ import Foundation
 import XLPagerTabStrip
 import UIKit
 
+public protocol Form{
+    func save()-> Bool
+}
+
 
 class SampleMainViewController :ButtonBarPagerTabStripViewController{
-    var sampleData:SampleData? = SampleData(sampleId: "x")
+    let mySampleDAO = MySampleDAO()
+    var sampleData = MySampleData(sampleId : "x")
     var vcMyList: MySampleListController? = nil
-
+    var vcCustomer : SampleCustomerViewController? = nil
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         vcMyList = storyboard.instantiateViewController(withIdentifier: "MySampleListController") as! MySampleListController
       
-        let vc2 = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
-        vc2.sampleData = sampleData
-        vc2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
+        vcCustomer = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
+        vcCustomer?.sampleData = sampleData
+        vcCustomer?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
         vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
-        return [vcMyList!,vc2]
+        return [vcCustomer!,vcMyList!]
     }
     
     override func viewDidLoad() {
@@ -46,4 +51,10 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         }
     }
 
+    @IBAction func onSaveTouch(_ sender: Any) {
+        if vcCustomer?.save() ?? false{
+            mySampleDAO.create(data: sampleData)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
 }

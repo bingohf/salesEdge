@@ -11,10 +11,11 @@ import UIKit
 import  XLPagerTabStrip
 import ALCameraViewController
 
-class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    var sampleData:SampleData? = nil
+class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form {
+    var sampleData:MySampleData? = nil
     @IBOutlet weak var mImage: UIImageView!
     
+    @IBOutlet weak var mTxtCustomer: UITextView!
     override func viewDidLoad() {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
@@ -85,5 +86,10 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
             let filename = dataPath.appendingPathComponent("\(sampleData?.sampleId ?? "")_type2.png")
             try? data110.write(to: filename)
         }
+    }
+    
+    func save() -> Bool {
+        sampleData?.customer = mTxtCustomer.text
+        return true
     }
 }

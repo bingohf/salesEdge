@@ -665,7 +665,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="oXB-QT-kFz" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="oXB-QT-kFz" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oXB-QT-kFz" id="CPV-1I-5DN">
@@ -817,6 +817,7 @@
                     </view>
                     <connections>
                         <outlet property="mImage" destination="EDO-ND-eXP" id="YyZ-5d-jd7"/>
+                        <outlet property="mTxtCustomer" destination="gMk-lc-AGr" id="CIV-2S-MvH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HD7-Cg-7fc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -855,13 +856,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Label111" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXT-8x-s81">
-                                                    <rect key="frame" x="83" y="21" width="551" height="98"/>
+                                                    <rect key="frame" x="83" y="21" width="259" height="98"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5v-jA-hAA">
-                                                    <rect key="frame" x="597.5" y="11" width="28.5" height="13.5"/>
+                                                    <rect key="frame" x="305.5" y="11" width="28.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1011,7 +1012,7 @@
                                 <rect key="frame" x="81" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="RAV-9f-Ynm" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="RAV-9f-Ynm" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RAV-9f-Ynm" id="Oat-IL-OeB">
@@ -1026,19 +1027,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Label111" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYe-vB-9s0">
-                                                    <rect key="frame" x="83.5" y="21" width="57.5" height="100"/>
+                                                    <rect key="frame" x="83.5" y="21" width="258.5" height="100"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EyE-AD-mis">
-                                                    <rect key="frame" x="104.5" y="11" width="28.5" height="13.5"/>
+                                                    <rect key="frame" x="305.5" y="11" width="28.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBZ-rb-q1i">
-                                                    <rect key="frame" x="83.5" y="121" width="33" height="16"/>
+                                                    <rect key="frame" x="83.5" y="121" width="250.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1360,7 +1361,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="save" id="Pcd-C7-ye9"/>
+                            <barButtonItem systemItem="save" id="Pcd-C7-ye9">
+                                <connections>
+                                    <action selector="onSaveTouch:" destination="emq-0B-plV" id="kEd-c1-tVp"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Pick" id="Ihj-Uo-fiI">
                                 <connections>
                                     <segue destination="R3V-UH-qy2" kind="show" identifier="show_pick" id="jYD-JD-lke"/>
