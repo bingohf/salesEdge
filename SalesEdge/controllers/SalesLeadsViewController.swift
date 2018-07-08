@@ -15,16 +15,17 @@ import XLPagerTabStrip
 class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
     
     @IBOutlet weak var mAddBarItem: UIBarButtonItem!
+    var vc1 :MySampleListViewController? = nil
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc2 = storyboard.instantiateViewController(withIdentifier: "ReceivedProductViewController") as! ReceivedProductViewController
         vc2.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Received", comment: "")))
         
-        let vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListViewController") as! MySampleListViewController
-        vc1.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("My List", comment: "")))
+        vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListViewController") as! MySampleListViewController
+        vc1?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("My List", comment: "")))
         
-        return [vc2,vc1]
+        return [vc2,vc1!]
     }
     
     override func viewDidLoad() {
@@ -35,7 +36,14 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "add_sample"{
-            self.moveToViewController(at: 0)
+            self.moveToViewController(at: 1)
+            let vc = segue.destination as! UINavigationController
+            if let rootVC = vc.viewControllers.first as? SampleMainViewController{
+                rootVC.onCompleted = {[weak self](sample)in
+                    self?.vc1?.loadDatas()
+                }
+            }
+            
         }
     }
     

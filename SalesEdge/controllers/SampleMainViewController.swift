@@ -18,7 +18,7 @@ public protocol Form{
 class SampleMainViewController :ButtonBarPagerTabStripViewController{
     let mySampleDAO = MySampleDAO()
     var sampleData = MySampleData(sampleId : "SAMPLE_\(Date().timeIntervalSinceNow.bitPattern)")
-    var vcMyList: MyShowRoomListController? = nil
+    open var vcMyList: MyShowRoomListController? = nil
     var vcCustomer : SampleCustomerViewController? = nil
     var onCompleted :((MySampleData?) -> Void)?
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

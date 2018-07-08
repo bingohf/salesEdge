@@ -11,7 +11,7 @@ import UIKit
 import RxSwift
 
 class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var mTableView: UITableView!
+    @IBOutlet weak var mTableView: UITableView?
     var disposeBag = DisposeBag()
     var data = [MySampleData]()
     let mySampleDAO = MySampleDAO()
@@ -68,7 +68,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
     }
     
     
-    func loadDatas()  {
+    open func loadDatas()  {
         Observable<[MySampleData]>.create { (observer ) -> Disposable in
             do{
                 let samples = try self.mySampleDAO.findAll()
@@ -90,7 +90,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             })
             .subscribe(onNext: { [weak self] data in
                 self?.data = data
-                self?.mTableView.reloadData()
+                self?.mTableView?.reloadData()
                 }, onError: {
                     [weak self] error in
                     Helper.toast(message: error.localizedDescription, thisVC: self!)
@@ -102,7 +102,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
         if segue.identifier == "show_sample_detail"{
             let navigationVC = segue.destination as! UINavigationController
             let rootVC = navigationVC.viewControllers.first as! SampleMainViewController
-            if let row = self.mTableView.indexPathForSelectedRow?.row{
+            if let row = self.mTableView?.indexPathForSelectedRow?.row{
                 var item = data[row]
                 rootVC.sampleData = item
                 rootVC.onCompleted = {[weak self]sampleData in

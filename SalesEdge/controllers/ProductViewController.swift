@@ -61,10 +61,31 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         vc.imageUrl = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
                         show(vc, sender: sender)
                     }else{
-                        let imagePicker = UIImagePickerController()
-                        imagePicker.delegate = self
-                        imagePicker.sourceType = .camera
-                        present(imagePicker, animated: true, completion: nil)
+                        
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "CombinImagePickerViewController") as! CombinImagePickerViewController
+                        vc.onCompleted = {[weak self] image in
+                            if let image = image {
+                                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                                let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
+                                self?.mImage.image = image
+                                self?.mImage.contentMode = .scaleToFill
+                                let dataPath = Helper.getImagePath(folder: "Show")
+                                if let data512 = UIImagePNGRepresentation(image512) {
+                                    let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type1.png")
+                                    try? data512.write(to: filename)
+                                }
+                                if let data110 = UIImagePNGRepresentation(image110) {
+                                    let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type2.png")
+                                    try? data110.write(to: filename)
+                                }
+                                self?.afterPickImage?()
+                                self?.afterPickImage = nil
+                            }
+                
+                        
+                        }
+                        present(vc, animated: true, completion: nil)
                     }
                     
                 }catch{
@@ -257,9 +278,29 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     }
     
     @IBAction func onActionPhotoTouch(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CombinImagePickerViewController") as! CombinImagePickerViewController
+        vc.onCompleted = {[weak self] image in
+            if let image = image {
+                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
+                self?.mImage.image = image
+                self?.mImage.contentMode = .scaleToFill
+                let dataPath = Helper.getImagePath(folder: "Show")
+                if let data512 = UIImagePNGRepresentation(image512) {
+                    let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type1.png")
+                    try? data512.write(to: filename)
+                }
+                if let data110 = UIImagePNGRepresentation(image110) {
+                    let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type2.png")
+                    try? data110.write(to: filename)
+                }
+                self?.afterPickImage?()
+                self?.afterPickImage = nil
+            }
+            
+            
+        }
+        present(vc, animated: true, completion: nil)
     }
 }

@@ -1301,7 +1301,7 @@
                     <navigationItem key="navigationItem" title="Sales Leads" id="LuM-bH-ga6">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nrB-Po-WkA">
                             <connections>
-                                <segue destination="M4c-Hb-CIy" kind="presentation" id="lQL-al-B4s"/>
+                                <segue destination="M4c-Hb-CIy" kind="presentation" identifier="add_sample" id="lQL-al-B4s"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1495,6 +1495,6 @@
         <image name="qrcode-scan-multi" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lod-K2-e7i"/>
+        <segue reference="lQL-al-B4s"/>
     </inferredMetricsTieBreakers>
 </document>
