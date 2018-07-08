@@ -17,6 +17,7 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     
     @IBOutlet weak var mTxtCustomer: UITextView!
     override func viewDidLoad() {
+        mTxtCustomer.text = sampleData?.customer
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
         do{
@@ -27,6 +28,7 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 mImage.contentMode = .scaleAspectFit
             }else{
                 mImage.image = #imageLiteral(resourceName: "ic_photo_camera")
+                mImage.contentMode = .center
             }
             
         }catch{
@@ -90,6 +92,23 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     
     func save() -> Bool {
         sampleData?.customer = mTxtCustomer.text
+        if  mImage.contentMode != .center {
+            if let image = mImage.image{
+                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
+                mImage.image = image
+                mImage.contentMode = .scaleToFill
+                let dataPath = Helper.getImagePath(folder: "Sample")
+                if let data512 = UIImagePNGRepresentation(image512) {
+                    let filename = dataPath.appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
+                    try? data512.write(to: filename)
+                }
+                if let data110 = UIImagePNGRepresentation(image110) {
+                    let filename = dataPath.appendingPathComponent("\(sampleData?.sampleId ?? "")_type2.png")
+                    try? data110.write(to: filename)
+                }
+            }
+        }
         return true
     }
 }

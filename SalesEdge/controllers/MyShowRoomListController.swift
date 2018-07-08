@@ -10,11 +10,27 @@ import Foundation
 import UIKit
 import RxSwift
 
-class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource, ProductPickDelegate {
-    @IBOutlet weak var mTableView: UITableView!
+class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource, ProductPickDelegate ,Form{
     var disposeBag = DisposeBag()
     var data = [ProductData]()
+    var sampleData:MySampleData? = nil
     
+    @IBOutlet weak var mTableView: UITableView?
+    override func viewDidLoad() {
+        data.removeAll()
+        if let json = sampleData?.productJson{
+            if let temp = Helper.convertToDictionary(text: json) as? NSArray {
+                for object in temp{
+                    if let item = object as? NSDictionary{
+                        let temp = ProductData(prodno: item["prodno"] as! String, desc: item["desc"] as? String, updatedate: item["updatedate"] as? Date)
+                        data.append(temp)
+                    }
+
+                }
+            }
+        }
+
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =
@@ -45,7 +61,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     
     func callback(selected: [ProductData]) {
         data = selected
-        mTableView.reloadData()
+        mTableView?.reloadData()
     }
     func getSelected() -> [ProductData] {
         return data
@@ -88,5 +104,15 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         share.backgroundColor = .orange
         
         return [share]
+    }
+    
+    func save() -> Bool {
+        let temp =  data.map({ (product) -> NSDictionary in
+            return ["prodno": product.prodno,
+                    "desc": product.desc
+            ]
+        })
+        sampleData?.productJson = Helper.converToJson(obj:temp)
+        return true
     }
 }

@@ -17,9 +17,10 @@ public protocol Form{
 
 class SampleMainViewController :ButtonBarPagerTabStripViewController{
     let mySampleDAO = MySampleDAO()
-    var sampleData = MySampleData(sampleId : "SAMPLE_\(Date())")
+    var sampleData = MySampleData(sampleId : "SAMPLE_\(Date().timeIntervalSinceNow.bitPattern)")
     var vcMyList: MyShowRoomListController? = nil
     var vcCustomer : SampleCustomerViewController? = nil
+    var onCompleted :((MySampleData?) -> Void)?
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -29,6 +30,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         vcCustomer?.sampleData = sampleData
         vcCustomer?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
         vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
+        vcMyList?.sampleData = sampleData
         return [vcCustomer!,vcMyList!]
     }
     
@@ -52,9 +54,10 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
     }
 
     @IBAction func onSaveTouch(_ sender: Any) {
-        if vcCustomer?.save() ?? false{
+        if vcCustomer?.save() ?? false && vcMyList?.save() ?? false{
             mySampleDAO.create(data: sampleData)
         }
         self.dismiss(animated: true, completion: nil)
+        onCompleted?(sampleData)
     }
 }

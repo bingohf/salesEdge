@@ -105,7 +105,12 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             if let row = self.mTableView.indexPathForSelectedRow?.row{
                 var item = data[row]
                 rootVC.sampleData = item
+                rootVC.onCompleted = {[weak self]sampleData in
+                    self?.loadDatas()
+                    
+                }
             }
+            
         }
     }
 }

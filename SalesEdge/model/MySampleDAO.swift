@@ -38,6 +38,7 @@ class MySampleDAO:CoreDataDAO{
         mySample.created = data.created
         mySample.productJson = data.productJson
         mySample.sampleId = data.sampleId
+        mySample.created = NSDate()
         self.saveContext()
     }
 }
