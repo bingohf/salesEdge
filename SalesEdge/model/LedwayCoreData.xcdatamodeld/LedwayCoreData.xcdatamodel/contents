@@ -9,6 +9,11 @@
         <attribute name="reader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sampleId" attributeType="String" syncable="YES"/>
         <attribute name="shareToDeviceID" optional="YES" attributeType="String" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="sampleId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Product" representedClassName="ProductManagedObject" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
