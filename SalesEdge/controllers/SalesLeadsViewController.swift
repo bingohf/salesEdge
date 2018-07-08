@@ -25,7 +25,7 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
         vc1 = storyboard.instantiateViewController(withIdentifier: "MySampleListViewController") as! MySampleListViewController
         vc1?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("My List", comment: "")))
         
-        return [vc2,vc1!]
+        return [vc1!,vc2]
     }
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "add_sample"{
-            self.moveToViewController(at: 1)
+            self.moveToViewController(at: 0)
             let vc = segue.destination as! UINavigationController
             if let rootVC = vc.viewControllers.first as? SampleMainViewController{
                 rootVC.onCompleted = {[weak self](sample)in

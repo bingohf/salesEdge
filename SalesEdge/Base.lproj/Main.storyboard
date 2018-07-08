@@ -770,6 +770,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTa-fM-LYA">
                                 <rect key="frame" x="329" y="583" width="30" height="30"/>
                                 <state key="normal" title="Q R"/>
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="scan_qr_code" id="2i8-t7-Wux"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gMk-lc-AGr">
                                 <rect key="frame" x="16" y="523" width="303" height="128"/>
@@ -1496,5 +1499,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQL-al-B4s"/>
+        <segue reference="2i8-t7-Wux"/>
     </inferredMetricsTieBreakers>
 </document>
