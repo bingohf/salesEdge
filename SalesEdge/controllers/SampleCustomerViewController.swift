@@ -44,6 +44,7 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 present(vc, animated: true, completion: nil)
                 vc.onCompleted = {[weak self]image in
                     self?.mImage.image = image
+                    self?.mImage.contentMode = .scaleAspectFit
                     
                 }
                 //                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

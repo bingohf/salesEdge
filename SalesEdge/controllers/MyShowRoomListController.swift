@@ -61,6 +61,12 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     
     func callback(selected: [ProductData]) {
         data = selected
+        let temp =  data.map({ (product) -> NSDictionary in
+            return ["prodno": product.prodno,
+                    "desc": product.desc
+            ]
+        })
+        sampleData?.productJson = Helper.converToJson(obj:temp)
         mTableView?.reloadData()
     }
     func getSelected() -> [ProductData] {
