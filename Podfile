@@ -15,4 +15,5 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'Toast-Swift', '~> 3.0.1'
     pod 'SQLite.swift', '~> 0.11.4'
     pod 'ALCameraViewController'
+    pod 'RxAlamofire'
 end
