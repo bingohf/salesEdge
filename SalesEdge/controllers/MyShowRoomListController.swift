@@ -26,8 +26,10 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                         if let intDate = item["create_date"] as? UInt64{
                             updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
                         }
-                        let temp = ProductData(prodno: item["prod_id"] as! String, desc: item["spec_desc"] as? String, updatedate: updatedate)
-                        data.append(temp)
+                        if let prodno = item["prod_id"]{
+                            let temp = ProductData(prodno: prodno as! String, desc: item["spec_desc"] as? String, updatedate: updatedate)
+                            data.append(temp)
+                        }
                     }
 
                 }
