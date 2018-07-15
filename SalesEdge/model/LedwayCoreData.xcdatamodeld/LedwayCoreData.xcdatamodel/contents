@@ -3,6 +3,7 @@
     <entity name="MySample" representedClassName="MySample" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="customer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dataFrom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="line" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mac_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productJson" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +34,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MySample" positionX="-693" positionY="-0" width="128" height="165"/>
+        <element name="MySample" positionX="-693" positionY="-0" width="128" height="180"/>
         <element name="Product" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="ReceivedSample" positionX="-63" positionY="9" width="128" height="120"/>
     </elements>

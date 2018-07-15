@@ -92,6 +92,10 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     }
     
     func save() -> Bool {
+        guard mTxtCustomer.text != "" else {
+            Helper.toast(message: "Please input Customer Description", thisVC: self)
+            return false
+        }
         sampleData?.customer = mTxtCustomer.text
         if  mImage.contentMode != .center {
             if let image = mImage.image{

@@ -22,7 +22,11 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             if let temp = Helper.convertToDictionary(text: json) as? NSArray {
                 for object in temp{
                     if let item = object as? NSDictionary{
-                        let temp = ProductData(prodno: item["prodno"] as! String, desc: item["desc"] as? String, updatedate: item["updatedate"] as? Date)
+                        var updatedate:Date? = nil
+                        if let intDate = item["create_date"] as? UInt64{
+                            updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
+                        }
+                        let temp = ProductData(prodno: item["prod_id"] as! String, desc: item["spec_desc"] as? String, updatedate: updatedate)
                         data.append(temp)
                     }
 
@@ -113,9 +117,15 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     }
     
     func save() -> Bool {
+        
         let temp =  data.map({ (product) -> NSDictionary in
-            return ["prodno": product.prodno,
-                    "desc": product.desc
+            var jsonDate :Int? = nil
+            if let date = product.updatedate{
+                jsonDate = Int(((date.timeIntervalSince1970) * 1000.0).rounded())
+            }
+            return ["prod_id": product.prodno,
+                    "spec_desc": product.desc ?? nil,
+                    "create_date" : jsonDate ?? nil
             ]
         })
         sampleData?.productJson = Helper.converToJson(obj:temp)
