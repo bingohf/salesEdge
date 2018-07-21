@@ -1468,6 +1468,11 @@
                                     <segue destination="R3V-UH-qy2" kind="show" identifier="show_pick" id="jYD-JD-lke"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Item" image="ic_share" id="FcJ-Ja-Iu2">
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="share" id="7Fn-HG-vAR"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1490,6 +1495,7 @@
         <image name="ic_language" width="24" height="24"/>
         <image name="ic_more_horiz" width="24" height="24"/>
         <image name="ic_photo_camera" width="24" height="24"/>
+        <image name="ic_share" width="24" height="24"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
         <image name="ocr" width="24" height="24"/>
@@ -1499,6 +1505,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQL-al-B4s"/>
-        <segue reference="2i8-t7-Wux"/>
+        <segue reference="7Fn-HG-vAR"/>
     </inferredMetricsTieBreakers>
 </document>

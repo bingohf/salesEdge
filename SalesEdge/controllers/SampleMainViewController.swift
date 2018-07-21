@@ -18,7 +18,7 @@ public protocol Form{
 }
 
 
-class SampleMainViewController :ButtonBarPagerTabStripViewController{
+class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScannerDelegate{
     let mySampleDAO = MySampleDAO()
     var sampleData = MySampleData(sampleId : Helper.pdaGuid())
     open var vcMyList: MyShowRoomListController? = nil
@@ -52,7 +52,9 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         if segue.identifier == "show_pick"{
             let vc = segue.destination as! ProductPickerViewController
             vc.delegate = vcMyList
-            
+        } else if segue.identifier == "share"{
+            let vc = segue.destination as! QRCodeScannerViewController
+            vc.delegate = self
         }
     }
 
@@ -148,15 +150,15 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             ob.observeOn(MainScheduler.instance)
                 .subscribe(onError: {[weak self] (err) in
                     Helper.toast(message: "\(err.localizedDescription)", thisVC: self!)
-                }, onCompleted: {
-                    
+                }, onCompleted: {[weak self] in
+                    self?.mySampleDAO.create(data: (self?.sampleData)!)
+                    self?.dismiss(animated: true, completion: nil)
+                    self?.onCompleted?(self?.sampleData)
                 }, onDisposed: {
                     self.view.hideToastActivity()
                 })
 
-            mySampleDAO.create(data: sampleData)
-            self.dismiss(animated: true, completion: nil)
-            onCompleted?(sampleData)
+  
         }
 
     }
@@ -171,5 +173,12 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                     "update_date" :Int64((sampleData.created.timeIntervalSince1970 * 1000.0).rounded()),
                     "guid":sampleData.sampleId]
         return Helper.converToJson(obj: dict)
+    }
+    
+    func onReceive(qrcode: String) {
+        if !qrcode.isEmpty{
+            sampleData.shareToDeviceID = qrcode
+            onSaveTouch(self)
+        }
     }
 }
