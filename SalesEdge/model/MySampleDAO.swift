@@ -39,6 +39,10 @@ class MySampleDAO:CoreDataDAO{
         mySample.productJson = data.productJson
         mySample.sampleId = data.sampleId
         mySample.created = NSDate()
+        mySample.shareToDeviceID = data.shareToDeviceID
+        mySample.dataFrom = data.dataFrom
+        mySample.reader = data.reader
+        mySample.line = data.line
         self.saveContext()
     }
 }

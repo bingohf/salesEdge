@@ -54,7 +54,16 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
             vc.delegate = vcMyList
         } else if segue.identifier == "share"{
             let vc = segue.destination as! QRCodeScannerViewController
-            vc.delegate = self
+            vc.onCompleted = { [weak self](qrcode) in
+                if !qrcode.isEmpty{
+                    self?.sampleData.shareToDeviceID = qrcode
+                    self?.onSaveTouch(self)
+                }
+            }
+        } else if segue.identifier == "pick_product_by_qrcode" {
+            let vc = segue.destination as! QRCodeScannerViewController
+            vc.onCompleted = vcMyList?.addProduct
+            self.moveToViewController(at: 1)
         }
     }
 
@@ -168,7 +177,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
         if let settingBizCard = UserDefaults.standard.string(forKey: "bizcard"){
             defaultBizCard = settingBizCard
         }
-        let dict:[String : Any] = ["sampleProdLinks": sampleData.productJson,
+        let dict:[String : Any] = ["sampleProdLinks": Helper.convertToDictionary(text: sampleData.productJson ?? "[]"),
                     "dataFrom": defaultBizCard,
                     "update_date" :Int64((sampleData.created.timeIntervalSince1970 * 1000.0).rounded()),
                     "guid":sampleData.sampleId]

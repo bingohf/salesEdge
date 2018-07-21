@@ -22,6 +22,7 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
+    var onCompleted:((_ text:String)->Void)? = nil
     let supportedBarCodes = [AVMetadataObject.ObjectType.qr,AVMetadataObject.ObjectType.code128,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.ean13,AVMetadataObject.ObjectType.ean8,AVMetadataObject.ObjectType.aztec]
     
     override func viewDidLoad() {
@@ -84,6 +85,8 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
                 print(metadataObj.stringValue)
                 delegate?.onReceive(qrcode: metadataObj.stringValue!)
                 delegate = nil
+                onCompleted?(metadataObj.stringValue!)
+                onCompleted = nil
                 self.dismiss(animated: true, completion: nil)
             }
         }

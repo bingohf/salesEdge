@@ -1468,6 +1468,11 @@
                                     <segue destination="R3V-UH-qy2" kind="show" identifier="show_pick" id="jYD-JD-lke"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Item" image="qrcode" id="lu3-eA-w30">
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="pick_product_by_qrcode" id="Fa7-hu-ity"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Item" image="ic_share" id="FcJ-Ja-Iu2">
                                 <connections>
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="share" id="7Fn-HG-vAR"/>
@@ -1505,6 +1510,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQL-al-B4s"/>
-        <segue reference="7Fn-HG-vAR"/>
+        <segue reference="Fa7-hu-ity"/>
     </inferredMetricsTieBreakers>
 </document>

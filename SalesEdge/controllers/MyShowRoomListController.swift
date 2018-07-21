@@ -14,9 +14,14 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     var disposeBag = DisposeBag()
     var data = [ProductData]()
     var sampleData:MySampleData? = nil
-    
+     private let productDAO = ProductDAO()
     @IBOutlet weak var mTableView: UITableView?
     override func viewDidLoad() {
+        loadJsonData()
+
+    }
+    
+    func loadJsonData()   {
         data.removeAll()
         if let json = sampleData?.productJson{
             if let temp = Helper.convertToDictionary(text: json) as? NSArray {
@@ -31,11 +36,10 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                             data.append(temp)
                         }
                     }
-
+                    
                 }
             }
         }
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,14 +72,20 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     func callback(selected: [ProductData]) {
         data = selected
         let temp =  data.map({ (product) -> NSDictionary in
+            var jsonDate :Int64? = nil
+            if let date = product.updatedate{
+                jsonDate = Int64(((date.timeIntervalSince1970) * 1000.0).rounded())
+            }
             return ["prod_id": product.prodno,
-                    "spec_desc": product.desc
+                    "spec_desc": product.desc,
+                "create_date":jsonDate
             ]
         })
         sampleData?.productJson = Helper.converToJson(obj:temp)
         mTableView?.reloadData()
     }
     func getSelected() -> [ProductData] {
+        loadJsonData()
         return data
     }
     
@@ -132,5 +142,26 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         })
         sampleData?.productJson = Helper.converToJson(obj:temp)
         return true
+    }
+    
+    func addProduct(qrcode:String){
+        loadJsonData()
+        let found = data.filter { (product) -> Bool in
+            return product.prodno == qrcode
+        }
+        if found.count == 0{
+            do{
+                if let product = try productDAO.findBy(prodno: qrcode){
+                    self.data.append(product)
+                    save()
+                    mTableView?.reloadData()
+                }else{
+                    Helper.toast(message: "Can not find the product( \(qrcode))", thisVC: self)
+                }
+            }catch{
+                print(error)
+            }
+        }
+    
     }
 }
