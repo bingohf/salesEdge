@@ -109,7 +109,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                 updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
                             }
                             if let prodno = item["prod_id"]{
-                                let param = ["line":1,
+                                let params = ["line":1,
                                              "reader":1,
                                              "empno": UIDevice.current.identifierForVendor!.uuidString,
                                              "series":sampleData.sampleId,

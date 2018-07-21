@@ -121,9 +121,9 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     func save() -> Bool {
         
         let temp =  data.map({ (product) -> NSDictionary in
-            var jsonDate :Int? = nil
+            var jsonDate :Int64? = nil
             if let date = product.updatedate{
-                jsonDate = Int(((date.timeIntervalSince1970) * 1000.0).rounded())
+                jsonDate = Int64(((date.timeIntervalSince1970) * 1000.0).rounded())
             }
             return ["prod_id": product.prodno,
                     "spec_desc": product.desc ?? nil,
