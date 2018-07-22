@@ -38,12 +38,22 @@ class ProductDAO:CoreDataDAO{
         let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)
         let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
         fetchRequest.entity = entity
-        fetchRequest.predicate = NSPredicate(format: "prodno =%s", prodno)
+        fetchRequest.predicate = NSPredicate(format: "prodno = %@", prodno)
         let listData = try context.fetch(fetchRequest)
         if let data = listData.first as? ProductManagedObject {
             return ProductData(prodno: prodno, desc: data.desc, updatedate: data.updatedate as! Date)
         }
         return nil
+    }
+    
+    public func removeAll() throws {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
+        
+        // Create Batch Delete Request
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        try context.execute(batchDeleteRequest)
     }
     
     public func create(data:ProductData){

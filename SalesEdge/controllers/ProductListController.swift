@@ -142,7 +142,25 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow(sender)
         })
-        
+        let deleteAllAction = UIAlertAction(title: "Remove All", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let alert = UIAlertController(title: "Remove all", message: "Are you sure to remove all?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                do {
+                    try self.productDAO.removeAll()
+                    self.data.removeAll()
+                }catch{
+                    Helper.toast(message: error.localizedDescription, thisVC: self)
+                }
+                self.tableView.reloadData()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+        })
         //
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -153,6 +171,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         // 4
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
+        optionMenu.addAction(deleteAllAction)
         optionMenu.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         // 5
         self.present(optionMenu, animated: true){
