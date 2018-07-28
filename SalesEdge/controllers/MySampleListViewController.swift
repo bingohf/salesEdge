@@ -56,6 +56,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
         let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             let rowData = self.data[index.row]
             do {
+                self.mySampleDAO.remove(data: rowData)
                 self.data.remove(at: index.row)
                 tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
             } catch {
@@ -113,4 +114,6 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             
         }
     }
+
+    
 }

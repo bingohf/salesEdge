@@ -46,4 +46,20 @@ class MySampleDAO:CoreDataDAO{
         mySample.upload_date = data.upload_date
         self.saveContext()
     }
+    
+    public func remove(data:MySampleData) {
+        let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        let entity = NSEntityDescription.entity(forEntityName: "MySample", in: context)
+        let fetchRequest:NSFetchRequest<MySample> = MySample.fetchRequest()
+        fetchRequest.entity = entity
+        fetchRequest.predicate = NSPredicate(format: "sampleId = %@", data.sampleId ?? "")
+        if let result = try? context.fetch(fetchRequest) {
+            for object in result {
+                context.delete(object)
+            }
+        }
+        self.saveContext()
+        
+    }
 }

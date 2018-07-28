@@ -52,20 +52,12 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
     
     @IBAction func onCancelTouch(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Exit", message: "Save Record?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] (_) in
-            self?.vcCustomer?.save()
-            self?.vcMyList?.save()
-            self?.sampleData.created = NSDate()
-            self?.mySampleDAO.create(data: (self?.sampleData)!)
-            self?.dismiss(animated: true, completion: nil)
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { [weak alert] (_) in
-              self.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
+        self.vcCustomer?.save()
+        self.vcMyList?.save()
+        self.sampleData.created = NSDate()
+        self.mySampleDAO.create(data: self.sampleData)
+        self.dismiss(animated: true, completion: nil)
+        onCompleted?(sampleData)
         
       
     }
