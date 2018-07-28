@@ -20,21 +20,27 @@ public protocol Form{
 
 class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScannerDelegate{
     let mySampleDAO = MySampleDAO()
-    var sampleData = MySampleData(sampleId : Helper.pdaGuid())
+    var sampleData = MySampleData(sampleId : "\(generateSampleId())")
     open var vcMyList: MyShowRoomListController? = nil
     var vcCustomer : SampleCustomerViewController? = nil
     var onCompleted :((MySampleData?) -> Void)?
+
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         vcMyList = storyboard.instantiateViewController(withIdentifier: "MyShowRoomListController") as! MyShowRoomListController
-      
         vcCustomer = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
         vcCustomer?.sampleData = sampleData
         vcCustomer?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
         vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
         vcMyList?.sampleData = sampleData
         return [vcCustomer!,vcMyList!]
+    }
+    
+    class func generateSampleId() -> String{
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyyMMdd'T'HHmm"
+        return "\(dformatter.string(from: Date()))_\(UUID().uuidString)"
     }
     
     override func viewDidLoad() {
@@ -45,7 +51,23 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
     }
     
     @IBAction func onCancelTouch(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        
+        let alert = UIAlertController(title: "Exit", message: "Save Record?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] (_) in
+            self?.vcCustomer?.save()
+            self?.vcMyList?.save()
+            self?.sampleData.created = NSDate()
+            self?.mySampleDAO.create(data: (self?.sampleData)!)
+            self?.dismiss(animated: true, completion: nil)
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { [weak alert] (_) in
+              self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+      
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,7 +96,9 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
                           "custMemo" : sampleData.customer ?? "",
                           "shareToDeviceId": sampleData.shareToDeviceID ?? "",
                           "empno": UIDevice.current.identifierForVendor!.uuidString,
-                          "json" : toJson(sampleData: sampleData)
+                          "json" : toJson(sampleData: sampleData),
+                          "line":1,
+                          "reader":1
             ]) { (any1, any2) -> Any in
                 any2
             }
@@ -160,6 +184,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
                 .subscribe(onError: {[weak self] (err) in
                     Helper.toast(message: "\(err.localizedDescription)", thisVC: self!)
                 }, onCompleted: {[weak self] in
+                    self?.sampleData.upload_date = NSDate()
                     self?.mySampleDAO.create(data: (self?.sampleData)!)
                     self?.dismiss(animated: true, completion: nil)
                     self?.onCompleted?(self?.sampleData)

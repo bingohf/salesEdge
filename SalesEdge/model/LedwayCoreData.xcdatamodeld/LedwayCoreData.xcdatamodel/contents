@@ -10,6 +10,7 @@
         <attribute name="reader" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sampleId" attributeType="String" syncable="YES"/>
         <attribute name="shareToDeviceID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="upload_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="sampleId"/>
@@ -34,7 +35,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MySample" positionX="-693" positionY="-0" width="128" height="180"/>
+        <element name="MySample" positionX="-693" positionY="-0" width="128" height="195"/>
         <element name="Product" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="ReceivedSample" positionX="-63" positionY="9" width="128" height="120"/>
     </elements>

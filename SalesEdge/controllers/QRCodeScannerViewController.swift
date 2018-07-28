@@ -23,7 +23,9 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
     var onCompleted:((_ text:String)->Void)? = nil
-    let supportedBarCodes = [AVMetadataObject.ObjectType.qr,AVMetadataObject.ObjectType.code128,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.ean13,AVMetadataObject.ObjectType.ean8,AVMetadataObject.ObjectType.aztec]
+    let supportedBarCodes = [
+       
+        AVMetadataObject.ObjectType.qr,AVMetadataObject.ObjectType.code128,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code39,AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.ean13,AVMetadataObject.ObjectType.ean8,AVMetadataObject.ObjectType.aztec]
     
     override func viewDidLoad() {
         // 取得 AVCaptureDevice 類別的實體來初始化一個device物件，並提供video
@@ -74,7 +76,6 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
         
         // 取得元資料（metadata）物件
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        if metadataObj.type == AVMetadataObject.ObjectType.qr {
             
             //倘若發現的原資料與 QR code 原資料相同，便更新狀態標籤的文字並設定邊界
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj as
@@ -89,7 +90,7 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
                 onCompleted = nil
                 self.dismiss(animated: true, completion: nil)
             }
-        }
+    
     }
     @IBAction func onCancelTouch(_ sender: Any) {
         dismiss(animated: true, completion: nil)

@@ -18,7 +18,8 @@ class MySampleData {
     var mac_address: String?
     var shareToDeviceID: String?
     var dataFrom: String?
-    init(sampleId:String? = nil, customer:String? = nil, created:NSDate? = NSDate(), productJson:String? = nil , line:String? = nil, reader:String? = nil, mac_address:String? = nil, shareToDeviceID:String? = nil, dataFrom:String? = nil){
+    var upload_date: NSDate?
+    init(sampleId:String? = nil, customer:String? = nil, created:NSDate? = NSDate(), productJson:String? = nil , line:String? = nil, reader:String? = nil, mac_address:String? = nil, shareToDeviceID:String? = nil, dataFrom:String? = nil, update_date:NSDate? = nil){
         self.customer = customer
         self.created = created ?? NSDate()
         self.sampleId = sampleId
@@ -28,7 +29,7 @@ class MySampleData {
         self.mac_address = mac_address
         self.shareToDeviceID = shareToDeviceID
         self.dataFrom = dataFrom
-        
+        self.upload_date = update_date
     }
     
     func toDictionary() -> NSDictionary {
@@ -42,6 +43,7 @@ class MySampleData {
         ret.setValue(mac_address, forKey: "mac_address")
         ret.setValue(shareToDeviceID, forKey: "shareToDeviceID")
         ret.setValue(dataFrom, forKey: "dataFrom")
+        ret.setValue(upload_date, forKey: "update_date")
         return ret
     }
 }

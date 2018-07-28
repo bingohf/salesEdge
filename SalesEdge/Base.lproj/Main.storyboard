@@ -1452,13 +1452,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sample" id="N0O-pX-3X2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wha-i5-R34">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="wha-i5-R34">
                             <connections>
                                 <action selector="onCancelTouch:" destination="emq-0B-plV" id="55u-CH-QSN"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="save" id="Pcd-C7-ye9">
+                            <barButtonItem title="Item" image="ic_share" id="FcJ-Ja-Iu2">
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="share" id="7Fn-HG-vAR"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="ic_cloud_upload" id="Pcd-C7-ye9">
                                 <connections>
                                     <action selector="onSaveTouch:" destination="emq-0B-plV" id="kEd-c1-tVp"/>
                                 </connections>
@@ -1471,11 +1476,6 @@
                             <barButtonItem title="Item" image="qrcode" id="lu3-eA-w30">
                                 <connections>
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="pick_product_by_qrcode" id="Fa7-hu-ity"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="ic_share" id="FcJ-Ja-Iu2">
-                                <connections>
-                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="share" id="7Fn-HG-vAR"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
