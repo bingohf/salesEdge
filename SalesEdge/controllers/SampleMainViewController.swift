@@ -97,7 +97,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
             let imagePath = Helper.getImagePath(folder: "Sample").appendingPathComponent("\(sampleData.sampleId ?? "xxxxxx")_type1.png")
             if FileManager.default.fileExists(atPath: imagePath.path){
                 if let imageData1 = NSData(contentsOf: imagePath){
-                    let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
+                    let strBase641 = imageData1.base64EncodedString()
                     params.merge(["custCardPic": strBase641
                     ]) { (any1, any2) -> Any in
                         any2

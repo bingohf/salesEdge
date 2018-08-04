@@ -169,11 +169,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         mImage.image = image
         mImage.contentMode = .scaleToFill
         let dataPath = Helper.getImagePath(folder: "Show")
-        if let data512 = UIImagePNGRepresentation(image512) {
+        if let data512 = UIImageJPEGRepresentation(image512, 1) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
             try? data512.write(to: filename)
         }
-        if let data110 = UIImagePNGRepresentation(image110) {
+        if let data110 = UIImageJPEGRepresentation(image110, 1) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
             try? data110.write(to: filename)
         }

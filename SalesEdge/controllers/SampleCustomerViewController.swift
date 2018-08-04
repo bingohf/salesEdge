@@ -11,13 +11,15 @@ import UIKit
 import  XLPagerTabStrip
 import ALCameraViewController
 
-class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form,QRCodeScannerDelegate {
+class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form,QRCodeScannerDelegate,UITextFieldDelegate, UITextViewDelegate{
     var sampleData:MySampleData? = nil
+    @IBOutlet weak var mCustomerHint: UILabel!
     @IBOutlet weak var mImage: UIImageView!
     
     @IBOutlet weak var mTxtCustomer: UITextView!
     override func viewDidLoad() {
         mTxtCustomer.text = sampleData?.customer
+        mCustomerHint.isHidden = !mTxtCustomer.text.isEmpty
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
         do{
@@ -104,11 +106,11 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 mImage.image = image
                 mImage.contentMode = .scaleToFill
                 let dataPath = Helper.getImagePath(folder: "Sample")
-                if let data512 = UIImagePNGRepresentation(image512) {
+                if let data512 = UIImageJPEGRepresentation(image512, 1) {
                     let filename = dataPath.appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
                     try? data512.write(to: filename)
                 }
-                if let data110 = UIImagePNGRepresentation(image110) {
+                if let data110 = UIImageJPEGRepresentation(image110, 1) {
                     let filename = dataPath.appendingPathComponent("\(sampleData?.sampleId ?? "")_type2.png")
                     try? data110.write(to: filename)
                 }
@@ -127,5 +129,8 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 vc.delegate = self
             }
         }
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        self.mCustomerHint.isHidden = !textView.text.isEmpty
     }
 }
