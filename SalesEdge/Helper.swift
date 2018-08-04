@@ -138,7 +138,7 @@ class Helper{
     
     
     open static func generateQRCode(from string: String) -> CIImage? {
-        let data = string.data(using: String.Encoding.ascii)
+        let data = string.data(using: String.Encoding.utf8)
         
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
