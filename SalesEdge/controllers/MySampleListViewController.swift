@@ -29,6 +29,11 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
         cell.mTxtLabel.text = item.customer
         cell.mTxtSubTitle.text = ""
         cell.mImage.image = #imageLiteral(resourceName: "default_image")
+        cell.mRedFlag.layer.cornerRadius = 5
+        cell.mRedFlag.isHidden = false
+        if item.upload_date != nil {
+            cell.mRedFlag.isHidden = item.upload_date?.timeIntervalSince1970 ?? 0 > item.created.timeIntervalSince1970
+        }
         let filePath = Helper.getImagePath(folder:"Sample").appendingPathComponent("\(item.sampleId ?? "")_type1.png")
         do{
             let fileManager = FileManager.default

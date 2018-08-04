@@ -77,7 +77,7 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj as
                 AVMetadataMachineReadableCodeObject) as! AVMetadataMachineReadableCodeObject
             qrCodeFrameView?.frame = barCodeObject.bounds;
-            if metadataObj.stringValue != nil {
+            if metadataObj.stringValue != nil && onCompleted != nil {
                 //  messageLabel.text = metadataObj.stringValue
                 print(metadataObj.stringValue)
                 onCompleted?(metadataObj.stringValue!)

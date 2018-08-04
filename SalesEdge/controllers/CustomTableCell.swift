@@ -15,5 +15,5 @@ class CustomTableCellView: UITableViewCell  {
     @IBOutlet weak open var mTxtSubTitle: UILabel!
     @IBOutlet weak open var mTxtLabel: UILabel!
     @IBOutlet weak open var mTxtTimestamp: UILabel!
-
+    @IBOutlet weak var mRedFlag: UIView!
 }
