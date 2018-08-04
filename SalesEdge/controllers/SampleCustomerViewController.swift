@@ -47,6 +47,7 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 vc.onCompleted = {[weak self]image in
                     self?.mImage.image = image
                     self?.mImage.contentMode = .scaleAspectFit
+                    self?.sampleData?.isDirty = true
                     
                 }
                 //                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -132,5 +133,6 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     }
     func textViewDidChange(_ textView: UITextView) {
         self.mCustomerHint.isHidden = !textView.text.isEmpty
+        self.sampleData?.isDirty = true
     }
 }

@@ -82,6 +82,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             ]
         })
         sampleData?.productJson = Helper.converToJson(obj:temp)
+        sampleData?.isDirty = true
         mTableView?.reloadData()
     }
     func getSelected() -> [ProductData] {
@@ -162,6 +163,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                 print(error)
             }
         }
+        sampleData?.isDirty = true
     
     }
 }

@@ -51,13 +51,15 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
     }
     
     @IBAction func onCancelTouch(_ sender: Any) {
-        
-        self.vcCustomer?.save()
-        self.vcMyList?.save()
-        self.sampleData.created = NSDate()
-        self.mySampleDAO.create(data: self.sampleData)
+        if self.sampleData.isDirty{
+            sampleData.isDirty = false
+            self.vcCustomer?.save()
+            self.vcMyList?.save()
+            self.sampleData.created = NSDate()
+            self.mySampleDAO.create(data: self.sampleData)
+            onCompleted?(sampleData)
+        }
         self.dismiss(animated: true, completion: nil)
-        onCompleted?(sampleData)
         
       
     }

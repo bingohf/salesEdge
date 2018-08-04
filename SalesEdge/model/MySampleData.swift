@@ -19,6 +19,7 @@ class MySampleData {
     var shareToDeviceID: String?
     var dataFrom: String?
     var upload_date: NSDate?
+    var isDirty:Bool = false
     init(sampleId:String? = nil, customer:String? = nil, created:NSDate? = NSDate(), productJson:String? = nil , line:String? = nil, reader:String? = nil, mac_address:String? = nil, shareToDeviceID:String? = nil, dataFrom:String? = nil, update_date:NSDate? = nil){
         self.customer = customer
         self.created = created ?? NSDate()
