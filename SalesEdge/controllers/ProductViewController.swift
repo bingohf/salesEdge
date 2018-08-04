@@ -14,7 +14,7 @@ protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, QRCodeScannerDelegate, URLConvertible{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, URLConvertible{
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     var afterPickImage :(() -> Void)?
@@ -189,7 +189,9 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "scan_qrcode" {
             let destinationVC = segue.destination as? QRCodeScannerViewController
-            destinationVC?.delegate = self
+            destinationVC?.onCompleted = { [weak self](qrcode) in
+                self?.mTxtDesc.text = qrcode
+            }
         }
         if segue.identifier == "take_photo" {
             let imagePicker = segue.destination as! UIImagePickerController
@@ -197,10 +199,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             imagePicker.sourceType = .camera
         }
     }
-    
-    func onReceive(qrcode: String) {
-        mTxtDesc.text = qrcode
-    }
+
     
     public func asURL() throws -> URL {
         return URL(string: "http://ledwayazure.cloudapp.net/ma/ledwayocr.aspx")!

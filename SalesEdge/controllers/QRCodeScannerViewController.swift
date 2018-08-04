@@ -11,12 +11,8 @@ import AVFoundation
 import UIKit
 
 
-protocol QRCodeScannerDelegate {
-    func onReceive(qrcode: String)
-}
-
 class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObjectsDelegate{
-    open var delegate : QRCodeScannerDelegate?
+
     
     @IBOutlet weak var mBtnCancel: UIButton!
     var captureSession:AVCaptureSession?
@@ -84,8 +80,6 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
             if metadataObj.stringValue != nil {
                 //  messageLabel.text = metadataObj.stringValue
                 print(metadataObj.stringValue)
-                delegate?.onReceive(qrcode: metadataObj.stringValue!)
-                delegate = nil
                 onCompleted?(metadataObj.stringValue!)
                 onCompleted = nil
                 self.dismiss(animated: true, completion: nil)

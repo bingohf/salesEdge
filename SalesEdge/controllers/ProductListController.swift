@@ -14,7 +14,7 @@ import Alamofire
 
 
 
-class ProductListController : UITableViewController, ProductDelegate, QRCodeScannerDelegate{
+class ProductListController : UITableViewController, ProductDelegate{
     let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
     
     var disposeBag = DisposeBag()
@@ -346,7 +346,10 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
-            destinationVC.delegate = self
+            destinationVC.onCompleted = {[weak self](qrcode)in
+                 self?.showProduct(prodno: qrcode)
+                
+            }
             self.present(destinationVC, animated: true, completion: nil)
             
             
@@ -359,9 +362,7 @@ class ProductListController : UITableViewController, ProductDelegate, QRCodeScan
         self.present(alert, animated: true, completion: nil)
     }
     
-    func onReceive(qrcode: String) {
-        showProduct(prodno: qrcode)
-    }
+
     
     func showProduct(prodno:String)  {
         Observable<ProductData?>.create { (observer) -> Disposable in

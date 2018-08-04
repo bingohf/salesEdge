@@ -11,7 +11,7 @@ import UIKit
 import  XLPagerTabStrip
 import ALCameraViewController
 
-class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form,QRCodeScannerDelegate,UITextFieldDelegate, UITextViewDelegate{
+class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form, UITextFieldDelegate, UITextViewDelegate{
     var sampleData:MySampleData? = nil
     @IBOutlet weak var mCustomerHint: UILabel!
     @IBOutlet weak var mImage: UIImageView!
@@ -119,14 +119,14 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
         return true
     }
     
-    func onReceive(qrcode: String) {
-        mTxtCustomer.text = qrcode
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "scan_qr_code" {
             if let vc = segue.destination as? QRCodeScannerViewController{
-                vc.delegate = self
+            
+                vc.onCompleted = {[weak self] (qrcode) in
+                     self?.mTxtCustomer.text = qrcode
+                }
             }
         }
     }

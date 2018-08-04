@@ -18,7 +18,7 @@ public protocol Form{
 }
 
 
-class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScannerDelegate{
+class SampleMainViewController :ButtonBarPagerTabStripViewController{
     let mySampleDAO = MySampleDAO()
     var sampleData = MySampleData(sampleId : "\(generateSampleId())")
     open var vcMyList: MyShowRoomListController? = nil
@@ -201,10 +201,4 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController, QRCodeScan
         return Helper.converToJson(obj: dict)
     }
     
-    func onReceive(qrcode: String) {
-        if !qrcode.isEmpty{
-            sampleData.shareToDeviceID = qrcode
-            onSaveTouch(self)
-        }
-    }
 }
