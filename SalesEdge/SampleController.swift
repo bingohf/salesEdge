@@ -142,6 +142,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     }
     
     func webViewRequest(apiPath:String, params:[String : Any])  {
+        mFieldBillNo.isEnabled = false
+        mFieldPANO.isEnabled = false
         let view = self.view
         view?.makeToastActivity(.center)
         let parameters: [String: Any] = Helper.makeRequest().merging(params) { (current, _) in current }
@@ -156,6 +158,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func showResponse(response : DataResponse<Any>)  {
         view?.hideToastActivity()
+        mFieldBillNo.isEnabled = true
+        mFieldPANO.isEnabled = true
         guard case let  .success(value) = response.result else{
             if case let .failure(error) = response.result {
                 if let error = error as? AFError {
@@ -250,10 +254,13 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mContinueScan = false
         mDisposables.dispose()
         scanQRCode(){qrcodeResult in
+            print(qrcodeResult)
             if let text = qrcodeResult?.value {
-                self.mFieldPANO.text = qrcodeResult?.value
-                self.mFieldPANO.endEditing(true)
-                self.queryDetail()
+                if self.mFieldPANO.isEnabled{
+                    self.mFieldPANO.text = qrcodeResult?.value
+                    self.mFieldPANO.endEditing(true)
+                    self.queryDetail()
+                }
             }
         }
     }
@@ -262,11 +269,15 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mContinueScan = false
         mDisposables.dispose()
         scanQRCode(){qrcodeResult in
-            self.view.endEditing(true)
+
+            print(qrcodeResult)
             if let text = qrcodeResult?.value {
-                self.mFieldBillNo.text = qrcodeResult?.value
-                self.mFieldBillNo.endEditing(true)
-                self.queryBill(billNo: self.mFieldBillNo.text ?? "")
+                if  self.mFieldBillNo.isEnabled{
+                    self.mFieldBillNo.text = qrcodeResult?.value
+                    self.mFieldBillNo.endEditing(true)
+                    self.queryBill(billNo: self.mFieldBillNo.text ?? "")
+                }
+               
             }
             
         }
