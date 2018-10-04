@@ -142,6 +142,22 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
             .do(onNext: { [weak self] data in
                 self?.data = data
                 self?.mTableView.reloadData()
+                var index = 0
+                if var selected = self?.selected{
+                    outter:while index < selected.count{
+                        for item in data{
+                            if item.prodno == selected[index].prodno{
+                                index = index + 1
+                                continue outter
+                            }
+                        }
+                        selected.remove(at: index)
+                        self?.selected = selected
+                    }
+                    self?.setSelectedCountTitle()
+                }
+ 
+                
             }, onError: {  [weak self] (error) in
                 if let vc = self {
                     Helper.toast(message: error.localizedDescription, thisVC: vc)
