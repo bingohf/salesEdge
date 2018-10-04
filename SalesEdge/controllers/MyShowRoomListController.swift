@@ -21,7 +21,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
 
     }
     
-    func loadJsonData()   {
+    open func loadJsonData()   {
         data.removeAll()
         if let json = sampleData?.productJson{
             if let temp = Helper.convertToDictionary(text: json) as? NSArray {
@@ -40,6 +40,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                 }
             }
         }
+        mTableView?.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

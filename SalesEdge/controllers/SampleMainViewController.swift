@@ -34,6 +34,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         vcCustomer?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
         vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
         vcMyList?.sampleData = sampleData
+        vcMyList?.loadJsonData()
         return [vcCustomer!,vcMyList!]
     }
     
