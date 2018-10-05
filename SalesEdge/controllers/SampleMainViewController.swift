@@ -148,13 +148,16 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                 updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
                             }
                             if let prodno = item["prod_id"]{
-                                let params = ["line":1,
-                                             "reader":1,
-                                             "empno": UIDevice.current.identifierForVendor!.uuidString,
-                                             "series":sampleData.sampleId,
-                                             "prodno": prodno,
-                                             "itemExt": "\(index)",
-                                            "pcsnum":1]
+                                
+                                var params = Helper.makeRequest()
+                                params.merge([
+                                    "empno": UIDevice.current.identifierForVendor!.uuidString,
+                                    "series":sampleData.sampleId,
+                                    "prodno": prodno,
+                                    "itemExt": "\(index)",
+                                    "pcsnum":1]) { (any1, any2) -> Any in
+                                    any2
+                                }
                                 let obItem = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSampleDetailLine", parameters: params, encoding: JSONEncoding.default)
                                     .validate(statusCode: 200 ..< 300)
                                     .validate({ (request, response, data) -> Request.ValidationResult in
