@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import  XLPagerTabStrip
 import ALCameraViewController
+import Alamofire
+import RxSwift
+import RxAlamofire
+
 
 class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,Form, UITextFieldDelegate, UITextViewDelegate{
     var sampleData:MySampleData? = nil
@@ -17,6 +21,7 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     @IBOutlet weak var mImage: UIImageView!
     
     @IBOutlet weak var mTxtCustomer: UITextView!
+    let emptyImage = #imageLiteral(resourceName: "ic_photo_camera")
     override func viewDidLoad() {
         mTxtCustomer.text = sampleData?.customer
         mCustomerHint.isHidden = !mTxtCustomer.text.isEmpty
@@ -29,7 +34,8 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
                 mImage.contentMode = .scaleToFill
                 mImage.contentMode = .scaleAspectFit
             }else{
-                mImage.image = #imageLiteral(resourceName: "ic_photo_camera")
+                mImage.image = emptyImage
+                
                 mImage.contentMode = .center
             }
             
@@ -134,5 +140,52 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     func textViewDidChange(_ textView: UITextView) {
         self.mCustomerHint.isHidden = !textView.text.isEmpty
         self.sampleData?.isDirty = true
+    }
+    @IBAction func onOcrTouch(_ sender: Any) {
+        guard mTxtCustomer.text.isEmpty else{
+            Helper.toast(message: "Please clear business card memo", thisVC: self)
+            return
+        }
+        guard mImage.image != emptyImage else {
+            Helper.toast(message: "No Photo", thisVC: self)
+            return
+        }
+        let data = UIImagePNGRepresentation(mImage.image!)
+        do{
+                self.view.makeToastActivity(.center)
+               
+            Alamofire.upload(data!, to: try Router.baseURLString.asURL().appendingPathComponent("ma/ledwayocr.aspx"), method: HTTPMethod.post, headers: ["Content-Type":"application/octet-stream","UserName":Helper.getMyTaxNO(),"Password":"8887#@Ledway"])
+                    .validate(statusCode: 200..<300)
+                    .responseJSON { [weak self](response) in
+                        if let error = response.result.error {
+                            Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self!)
+                            self?.view.hideToastActivity()
+                            return
+                        }
+                        self?.view.hideToastActivity()
+                        let value = response.result.value
+                        let JSON = value as! NSDictionary
+                        if let returnCode = JSON["returnCode"] as? Int{
+                            if returnCode != 1{
+                                Helper.toast(message: JSON["returnInfo"] as! String, thisVC: self!)
+                                return
+                            }
+                            let data = JSON["data"] as! String
+                            let dataJson = Helper.convertToDictionary(text: data) as! NSDictionary
+                            let OCRCount = dataJson["OCRCount"] as! Int
+                            let OCRLimit = dataJson["OCRLimit"] as! Int
+                            let OCRInfo = dataJson["OCRInfo"] as! String
+                            if (OCRLimit - OCRCount <= 100) {
+                                Helper.toast(message: "OCR has been used \(OCRCount) time(s) (Limit:\(OCRLimit)", thisVC: self!)
+                            }
+                            self?.mTxtCustomer.text = OCRInfo
+                            
+                        }
+                }
+            
+        }catch{
+            print(error)
+        }
+ 
     }
 }

@@ -225,7 +225,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             self.afterPickImage = doOCR
             return
         }
-        var userName = Helper.pdaGuid()
+        var userName = Helper.getMyTaxNO()
         if !Env.isProduction(){
             userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
         }

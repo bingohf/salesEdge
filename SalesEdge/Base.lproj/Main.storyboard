@@ -764,18 +764,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOR-uG-067">
-                                <rect key="frame" x="335" y="627" width="24" height="24"/>
+                                <rect key="frame" x="325" y="615" width="50" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="IXY-ax-qRH"/>
+                                    <constraint firstAttribute="width" constant="50" id="Mra-9c-iOX"/>
+                                    <constraint firstAttribute="height" constant="36" id="NTd-6a-ASE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="RpU-60-Z84"/>
+                                </constraints>
                                 <state key="normal" image="ocr"/>
+                                <connections>
+                                    <action selector="onOcrTouch:" destination="bTO-wv-w4X" eventType="touchDown" id="F82-PG-wed"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTa-fM-LYA">
-                                <rect key="frame" x="335" y="595" width="24" height="24"/>
+                                <rect key="frame" x="325" y="571" width="50" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6Jl-zi-5RH"/>
+                                    <constraint firstAttribute="height" constant="36" id="oII-yA-2vT"/>
+                                </constraints>
                                 <state key="normal" image="qrcode-scan"/>
                                 <connections>
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="scan_qr_code" id="2i8-t7-Wux"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gMk-lc-AGr">
-                                <rect key="frame" x="16" y="523" width="311" height="128"/>
+                                <rect key="frame" x="16" y="523" width="309" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="8cq-B9-9Tg"/>
@@ -820,9 +833,9 @@
                             <constraint firstItem="EDO-ND-eXP" firstAttribute="top" secondItem="hEM-nR-aWg" secondAttribute="top" id="GgR-dL-5H7"/>
                             <constraint firstItem="YOR-uG-067" firstAttribute="top" secondItem="LTa-fM-LYA" secondAttribute="bottom" constant="8" id="U4p-vz-ZoS"/>
                             <constraint firstItem="EDO-ND-eXP" firstAttribute="leading" secondItem="hEM-nR-aWg" secondAttribute="leading" id="hJi-li-qwk"/>
-                            <constraint firstItem="hEM-nR-aWg" firstAttribute="trailing" secondItem="YOR-uG-067" secondAttribute="trailing" constant="16" id="hh9-sC-EQ6"/>
-                            <constraint firstItem="hEM-nR-aWg" firstAttribute="trailing" secondItem="LTa-fM-LYA" secondAttribute="trailing" constant="16" id="o3D-Kw-YH0"/>
-                            <constraint firstItem="YOR-uG-067" firstAttribute="leading" secondItem="gMk-lc-AGr" secondAttribute="trailing" constant="8" id="s0r-P6-hX0"/>
+                            <constraint firstItem="hEM-nR-aWg" firstAttribute="trailing" secondItem="YOR-uG-067" secondAttribute="trailing" id="hh9-sC-EQ6"/>
+                            <constraint firstItem="hEM-nR-aWg" firstAttribute="trailing" secondItem="LTa-fM-LYA" secondAttribute="trailing" id="o3D-Kw-YH0"/>
+                            <constraint firstItem="YOR-uG-067" firstAttribute="leading" secondItem="gMk-lc-AGr" secondAttribute="trailing" id="s0r-P6-hX0"/>
                             <constraint firstItem="hEM-nR-aWg" firstAttribute="bottom" secondItem="gMk-lc-AGr" secondAttribute="bottom" constant="16" id="tFc-V5-Jin"/>
                             <constraint firstItem="xvi-6C-Vld" firstAttribute="top" secondItem="gMk-lc-AGr" secondAttribute="top" constant="8" id="tkw-in-jXE"/>
                         </constraints>
@@ -1532,6 +1545,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Lod-K2-e7i"/>
-        <segue reference="2i8-t7-Wux"/>
+        <segue reference="grb-dQ-jcv"/>
     </inferredMetricsTieBreakers>
 </document>

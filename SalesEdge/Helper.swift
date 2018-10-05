@@ -189,6 +189,17 @@ class Helper{
         return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
     }
     
+    open static func getMyTaxNO()->String{
+        let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
+        if let myTaxno = myTaxNo {
+            if !myTaxno.isEmpty{
+                return myTaxno
+            }
+        }
+        return pdaGuid()
+    }
+    
+    
     open static func toast(message:String, thisVC:UIViewController) {
         var vc:UIViewController? = thisVC
         while ((vc?.parent) != nil)  {
