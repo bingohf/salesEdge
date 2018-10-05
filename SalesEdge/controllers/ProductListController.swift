@@ -232,6 +232,7 @@ class ProductListController : UITableViewController, ProductDelegate{
     }
     
     func download(showName:String)  {
+        self.view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)'"
@@ -242,7 +243,6 @@ class ProductListController : UITableViewController, ProductDelegate{
             .responseJSON{
                 response in
                 self.view?.hideToastActivity()
-                
                 if let error = response.result.error {
                     self.toast(message: Helper.getErrorMessage(response.result))
                     return
