@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import SQLite
+import Toast_Swift
 
 protocol ProductPickDelegate {
     func getSelected() -> [ProductData]
@@ -17,6 +18,7 @@ protocol ProductPickDelegate {
 }
 
 class ProductPickerViewController:UIViewController, UITableViewDataSource, UITableViewDelegate{
+    open var message:String?
     private var disposeBag = DisposeBag()
     private var data = [ProductData]()
     private var selected = [ProductData]()
@@ -39,6 +41,14 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         selected = delegate?.getSelected() ?? [ProductData]()
         setSelectedCountTitle()
         reloadData()
+        
+        
+        if let message = message {
+            var style = ToastStyle()
+            style.messageColor = UIColor.green
+            self.view.makeToast(message,style:style)
+            self.title = message
+        }
         
     }
     

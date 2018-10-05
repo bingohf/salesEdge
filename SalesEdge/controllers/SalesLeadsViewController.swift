@@ -39,6 +39,7 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
             self.moveToViewController(at: 0)
             let vc = segue.destination as! UINavigationController
             if let rootVC = vc.viewControllers.first as? SampleMainViewController{
+                rootVC.message = "Add Sample"
                 rootVC.onCompleted = {[weak self](sample)in
                     self?.vc1?.loadDatas()
                 }

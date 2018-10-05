@@ -1368,14 +1368,13 @@
                                                         <constraint firstAttribute="width" constant="60" id="f7b-ri-CYT"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbe-dh-AIY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcycle" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-ub-dpN">
                                                     <rect key="frame" x="69" y="7" width="10" height="10"/>
-                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.056107677719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="10" id="4dQ-yX-ebp"/>
-                                                        <constraint firstAttribute="width" constant="10" id="Wgb-OZ-Zli"/>
+                                                        <constraint firstAttribute="height" constant="10" id="3Y3-Ai-wde"/>
+                                                        <constraint firstAttribute="width" constant="10" id="9t3-cG-8fU"/>
                                                     </constraints>
-                                                </view>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Label111" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vz-XP-07T">
                                                     <rect key="frame" x="83" y="21" width="292" height="100"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1399,24 +1398,24 @@
                                                 <constraint firstItem="4Vz-XP-07T" firstAttribute="top" secondItem="8KO-ta-nae" secondAttribute="topMargin" constant="10" id="0Kh-ZV-sR8"/>
                                                 <constraint firstItem="Upt-nP-7cl" firstAttribute="leading" secondItem="4Vz-XP-07T" secondAttribute="leading" id="0SA-Aj-TSV"/>
                                                 <constraint firstItem="Upt-nP-7cl" firstAttribute="top" secondItem="4Vz-XP-07T" secondAttribute="bottom" id="3rh-ye-00B"/>
-                                                <constraint firstItem="Jbe-dh-AIY" firstAttribute="trailing" secondItem="8Zi-k6-dag" secondAttribute="trailing" constant="4" id="AfE-j0-RH6"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Vz-XP-07T" secondAttribute="trailing" id="GZ5-6u-heq"/>
                                                 <constraint firstItem="8Zi-k6-dag" firstAttribute="top" secondItem="8KO-ta-nae" secondAttribute="topMargin" id="JGv-xs-phY"/>
                                                 <constraint firstItem="Ul4-Hz-mtE" firstAttribute="trailing" secondItem="8KO-ta-nae" secondAttribute="trailingMargin" id="JT5-xh-cPh"/>
                                                 <constraint firstItem="4Vz-XP-07T" firstAttribute="leading" secondItem="8Zi-k6-dag" secondAttribute="trailing" constant="8" id="KF5-oi-zmy"/>
-                                                <constraint firstItem="Jbe-dh-AIY" firstAttribute="top" secondItem="8Zi-k6-dag" secondAttribute="top" constant="-4" id="VZj-yT-Uft"/>
+                                                <constraint firstItem="v8K-ub-dpN" firstAttribute="trailing" secondItem="8Zi-k6-dag" secondAttribute="trailing" constant="4" id="RLF-jk-Gcq"/>
                                                 <constraint firstItem="8Zi-k6-dag" firstAttribute="leading" secondItem="8KO-ta-nae" secondAttribute="leadingMargin" id="eK8-Vu-fJN"/>
                                                 <constraint firstItem="Upt-nP-7cl" firstAttribute="top" secondItem="4Vz-XP-07T" secondAttribute="bottom" id="lTA-ko-DPD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Upt-nP-7cl" secondAttribute="trailing" id="lxH-1M-0Vw"/>
                                                 <constraint firstItem="Upt-nP-7cl" firstAttribute="leading" secondItem="8KO-ta-nae" secondAttribute="leadingMargin" constant="68" id="ouE-O0-lxv"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Upt-nP-7cl" secondAttribute="bottom" id="pBc-Eb-0Vz"/>
+                                                <constraint firstItem="v8K-ub-dpN" firstAttribute="top" secondItem="8Zi-k6-dag" secondAttribute="top" constant="-4" id="q3f-Uw-OXm"/>
                                                 <constraint firstItem="Ul4-Hz-mtE" firstAttribute="top" secondItem="8KO-ta-nae" secondAttribute="topMargin" id="s1R-We-FTf"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="8Zi-k6-dag" secondAttribute="bottom" constant="8" id="vVl-Of-oh8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="mImage" destination="8Zi-k6-dag" id="JEC-PV-0WW"/>
-                                            <outlet property="mRedFlag" destination="Jbe-dh-AIY" id="FA2-H0-iwS"/>
+                                            <outlet property="mRedFlag" destination="v8K-ub-dpN" id="L5H-sx-fLz"/>
                                             <outlet property="mTxtLabel" destination="4Vz-XP-07T" id="cVL-Wp-qYW"/>
                                             <outlet property="mTxtSubTitle" destination="Upt-nP-7cl" id="byR-ik-SQD"/>
                                             <outlet property="mTxtTimestamp" destination="Ul4-Hz-mtE" id="Hhr-ft-WLi"/>
@@ -1542,9 +1541,10 @@
         <image name="qrcode" width="24" height="24"/>
         <image name="qrcode-scan" width="24" height="24"/>
         <image name="qrcode-scan-multi" width="40" height="40"/>
+        <image name="redcycle" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lod-K2-e7i"/>
-        <segue reference="grb-dQ-jcv"/>
+        <segue reference="lQL-al-B4s"/>
+        <segue reference="7Fn-HG-vAR"/>
     </inferredMetricsTieBreakers>
 </document>

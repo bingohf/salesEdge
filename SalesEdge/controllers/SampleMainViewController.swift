@@ -12,6 +12,7 @@ import UIKit
 import Alamofire
 import RxSwift
 import RxAlamofire
+import Toast_Swift
 
 public protocol Form{
     func save()-> Bool
@@ -24,7 +25,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
     open var vcMyList: MyShowRoomListController? = nil
     var vcCustomer : SampleCustomerViewController? = nil
     var onCompleted :((MySampleData?) -> Void)?
-
+    open var message :String?
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         //let child_1 = TableChildExampleViewController(style: .plain, itemInfo: "Table View")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -49,6 +50,13 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         buttonBarView.selectedBar.backgroundColor = .orange
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
         containerView.contentSize = containerView.frame.size
+        
+        if let message = message {
+            var style = ToastStyle()
+            style.messageColor = UIColor.green
+            self.view.makeToast(message,style:style)
+            self.title = message
+        }
     }
     
     @IBAction func onCancelTouch(_ sender: Any) {
@@ -69,8 +77,10 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         if segue.identifier == "show_pick"{
             let vc = segue.destination as! ProductPickerViewController
             vc.delegate = vcMyList
+            vc.message = "Pick Show Room"
         } else if segue.identifier == "share"{
             let vc = segue.destination as! QRCodeScannerViewController
+            vc.message = "Scan Other's \"MyID\""
             vc.onCompleted = { [weak self](qrcode) in
                 if !qrcode.isEmpty{
                     self?.sampleData.shareToDeviceID = qrcode
@@ -79,6 +89,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             }
         } else if segue.identifier == "pick_product_by_qrcode" {
             let vc = segue.destination as! QRCodeScannerViewController
+            vc.message = "Pick Show Room by QRCode"
             vc.onCompleted = vcMyList?.addProduct
             self.moveToViewController(at: 1)
         }
@@ -108,7 +119,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 }
             }
             let manager = SessionManager.default
-            var ob = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSample_v3", parameters: params, encoding: JSONEncoding.default)
+            var ob = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSample_v3Line", parameters: params, encoding: JSONEncoding.default)
                 .validate(statusCode: 200 ..< 300)
                 .validate({ (request, response, data) -> Request.ValidationResult in
                     if let str = String(data: data!, encoding: .utf8){
@@ -146,7 +157,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                              "prodno": prodno,
                                              "itemExt": "\(index)",
                                             "pcsnum":1]
-                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSampleDetail", parameters: params, encoding: JSONEncoding.default)
+                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSampleDetailLine", parameters: params, encoding: JSONEncoding.default)
                                     .validate(statusCode: 200 ..< 300)
                                     .validate({ (request, response, data) -> Request.ValidationResult in
                                         if let str = String(data: data!, encoding: .utf8){

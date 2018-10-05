@@ -9,11 +9,11 @@
 import Foundation
 import AVFoundation
 import UIKit
-
+import Toast_Swift
 
 class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObjectsDelegate{
 
-    
+    open var message:String?
     @IBOutlet weak var mBtnCancel: UIButton!
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -60,7 +60,12 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
             print(error)
             return
         }
-        
+        if let message = message {
+            var style = ToastStyle()
+            style.messageColor = UIColor.green
+            self.view.makeToast(message,style:style)
+            self.title = message
+        }
         
     }
     public func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){

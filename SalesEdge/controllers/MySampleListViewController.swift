@@ -27,6 +27,9 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
         let  item = data[indexPath.row]
         cell.mTxtTimestamp.text = Helper.format(date: item.created as Date?)
         cell.mTxtLabel.text = item.customer
+        if (cell.mTxtLabel.text ?? "") .isEmpty{
+            cell.mTxtLabel.text = "NA"
+        }
         cell.mTxtSubTitle.text = ""
         cell.mImage.image = #imageLiteral(resourceName: "default_image")
         cell.mRedFlag.layer.cornerRadius = 5
@@ -46,6 +49,8 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
         }
         return cell
     }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
@@ -109,6 +114,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             let navigationVC = segue.destination as! UINavigationController
             let rootVC = navigationVC.viewControllers.first as! SampleMainViewController
             if let row = self.mTableView?.indexPathForSelectedRow?.row{
+                rootVC.message = "Edit Sample"
                 var item = data[row]
                 rootVC.sampleData = item
                 rootVC.onCompleted = {[weak self]sampleData in
