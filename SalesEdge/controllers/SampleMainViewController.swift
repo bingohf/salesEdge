@@ -102,9 +102,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                           "custMemo" : sampleData.customer ?? "",
                           "shareToDeviceId": sampleData.shareToDeviceID ?? "",
                           "empno": UIDevice.current.identifierForVendor!.uuidString,
-                          "json" : toJson(sampleData: sampleData),
-                          "line":1,
-                          "reader":1
+                          "json" : toJson(sampleData: sampleData)
             ]) { (any1, any2) -> Any in
                 any2
             }
