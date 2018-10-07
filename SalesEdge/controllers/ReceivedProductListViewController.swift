@@ -113,7 +113,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
     func loadRemote(){
         var deviceId = UIDevice.current.identifierForVendor!.uuidString
         if !Env.isProduction(){
-            deviceId = "42f7acf889d0db9"
+            //deviceId = "42f7acf889d0db9"
         }
         let query = "isnull(json,'') <>'' and shareToDeviceId like  '%\(deviceId)%'"
         let orderBy = " order by UPDATEDATE desc"
@@ -153,7 +153,18 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                                         firstProdNo = firstItem["prod_id"] as? String
                                     }
                                 }
-                                let json = Helper.converToJson(obj:  dict["sampleProdLinks"]! )
+                                
+                                let links = dict["sampleProdLinks"] as! NSArray
+                                var myTaxNoLinks = [Any]()
+                                for linkItem in links{
+                                    let tempDict = NSMutableDictionary ()
+                                    tempDict.addEntries(from: linkItem as! [AnyHashable : Any])
+                                    let mytaxNo:String? = item["mytaxno"] as? String
+                                    tempDict.addEntries(from: ["myTaxNo": mytaxNo])
+                                    myTaxNoLinks.append(tempDict)
+                                }
+                                
+                                let json = Helper.converToJson(obj:  myTaxNoLinks)
                                 
                                 let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String, sampleId: dict["guid"] as! String, firstProdNo:firstProdNo)
                                 self.data.append(item)
@@ -178,7 +189,12 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 for arrayItem in links {
                     if let item = arrayItem as? NSDictionary{
                         let prodno = (item["prod_id"] as! String).replacingOccurrences(of: "'", with: "''")
-                        let params = ["query" : "prodno = '\(prodno)'"]
+                        var query = "prodno = '\(prodno)' "
+                        if let mytaxno = item["myTaxNo"] as? String{
+                            query = query + "and mytaxno='\(mytaxno)'"
+                        }
+                        
+                        let params = ["query" : query]
                         Alamofire.request(AppCons.BASE_URL + "dataset/product", method: .get, parameters: params)
                             .debugLog()
                             .validate(statusCode: 200..<300)
