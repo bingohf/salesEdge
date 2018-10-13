@@ -227,7 +227,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         }
         var userName = Helper.getMyTaxNO()
         if !Env.isProduction(){
-            userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
+           // userName = "b46fe30b737a24ef-MI 5-LEDWAY-20180519T163532.7~zh_CN"
         }
     
         let inputStream = InputStream(url:image1Path)

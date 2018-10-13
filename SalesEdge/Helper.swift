@@ -169,7 +169,7 @@ class Helper{
         return [
             "line" : "\(line ?? "01")",
             "reader" : "01",
-            "MyTaxNo" : "\(myTaxNo ?? "")",
+            "MyTaxNo" : getMyTaxNO(),
             "pdaGuid": pdaGuid()
         ]
     }
@@ -196,7 +196,7 @@ class Helper{
                 return myTaxno
             }
         }
-        return pdaGuid()
+        return UIDevice.current.identifierForVendor!.uuidString
     }
     
     
