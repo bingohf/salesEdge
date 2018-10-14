@@ -20,7 +20,7 @@ class ProductListController : UITableViewController, ProductDelegate{
     var disposeBag = DisposeBag()
     var data = [ProductData]()
     let productDAO = ProductDAO()
-    
+    let default_Image = #imageLiteral(resourceName: "default_image")
     override func viewDidLoad() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action:
@@ -46,7 +46,7 @@ class ProductListController : UITableViewController, ProductDelegate{
         cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
-        cell.mImage.image = nil
+        cell.mImage.image = default_Image
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         print(filePath)
@@ -235,7 +235,7 @@ class ProductListController : UITableViewController, ProductDelegate{
         self.view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
-        let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)'"
+        let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)' order by prodno"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()

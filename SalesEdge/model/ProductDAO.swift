@@ -18,7 +18,7 @@ class ProductDAO:CoreDataDAO{
         let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)
         let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
         fetchRequest.entity = entity
-        let sortDescriptor = NSSortDescriptor(key: "updatedate", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "prodno", ascending: true)
         let sortDesciptors = [sortDescriptor]
         fetchRequest.sortDescriptors = sortDesciptors
         var resListData = [ProductData]()
