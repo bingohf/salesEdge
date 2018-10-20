@@ -46,6 +46,27 @@ class ProductDAO:CoreDataDAO{
         return nil
     }
     
+    public func filter(filter:String) throws -> [ProductData] {
+        let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        let entity = NSEntityDescription.entity(forEntityName: "Product", in: context)
+        let fetchRequest:NSFetchRequest<ProductManagedObject> = ProductManagedObject.fetchRequest()
+        fetchRequest.entity = entity
+        let sortDescriptor = NSSortDescriptor(key: "prodno", ascending: true)
+        let sortDesciptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDesciptors
+        fetchRequest.predicate = NSPredicate(format: "prodno CONTAINS[cd] %@ or desc CONTAINS[cd] %@", filter, filter)
+        let listData = try context.fetch(fetchRequest)
+        var resListData = [ProductData]()
+        if listData.count > 0{
+            for item in listData{
+                let mo = item as! ProductManagedObject
+                resListData.append(ProductData(prodno: mo.prodno ?? "", desc: mo.desc, updatedate: mo.updatedate as! Date))
+            }
+        }
+        return resListData
+    }
+    
     public func removeAll() throws {
         let context = persistentContainer.viewContext
         

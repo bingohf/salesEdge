@@ -628,9 +628,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="udF-Oq-jK6">
+                            <searchBar contentMode="redraw" placeholder="Product No." translatesAutoresizingMaskIntoConstraints="NO" id="udF-Oq-jK6">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="x2X-TB-A9V" id="e6r-7D-hXl"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QHo-4v-yAd">
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
@@ -728,6 +731,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="udF-Oq-jK6" id="SbD-Gp-6lj"/>
                         <outlet property="searchDisplayController" destination="WhN-1f-bbC" id="fpI-Af-nEa"/>
                         <outlet property="tableView" destination="QHo-4v-yAd" id="SiW-Xc-ATF"/>
                     </connections>

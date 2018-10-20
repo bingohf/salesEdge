@@ -12,7 +12,7 @@ import RxSwift
 import SQLite
 import Alamofire
 
-class ProductListWithSearchController:UIViewController, UITableViewDelegate, UITableViewDataSource,ProductDelegate{
+class ProductListWithSearchController:UIViewController, UITableViewDelegate, UITableViewDataSource,ProductDelegate, UISearchBarDelegate{
     let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
     @IBOutlet weak var tableView: UITableView!
     var disposeBag = DisposeBag()
@@ -20,16 +20,19 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
     let productDAO = ProductDAO()
     let default_Image = #imageLiteral(resourceName: "default_image")
  
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action:
             #selector(ProductListWithSearchController.handleRefresh(_:)),
                                            for: UIControlEvents.valueChanged)
         reloadData()
+        
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-       
+       reloadData()
+        searchBar.text = ""
         
     }
     
@@ -61,13 +64,18 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         return cell
     }
     
-    func reloadData()  {
+    func reloadData(filter:String?=nil)  {
         Observable<[ProductData]>.create { (observer ) -> Disposable in
             
             do{
+                if let filter = filter{
+                    try observer.onNext(self.productDAO.filter(filter: filter))
+                }else{
+                    try observer.onNext(self.productDAO.findAll())
+                }
                 
-                let products = try self.productDAO.findAll()
-                observer.onNext(products)
+                
+                
                 observer.onCompleted()
             }catch {
                 observer.onError(error)
@@ -378,5 +386,19 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                 }, onError: { (error) in
                     self.toast(message:"error: \(error)")
             }).disposed(by: disposeBag)
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        reloadData(filter: searchText.isEmpty ? nil : searchText)
+    }
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.resignFirstResponder()
+        return true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
