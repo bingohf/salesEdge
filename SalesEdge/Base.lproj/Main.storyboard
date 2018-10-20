@@ -789,8 +789,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Product No." translatesAutoresizingMaskIntoConstraints="NO" id="KFr-64-7In">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="R3V-UH-qy2" id="2K6-xo-5Oi"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MTp-ll-BC0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="148" id="oXB-QT-kFz" customClass="CustomTableCellView" customModule="SalesEdge" customModuleProvider="target">
@@ -859,10 +866,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ORF-67-E3G" firstAttribute="trailing" secondItem="MTp-ll-BC0" secondAttribute="trailing" id="63g-Bd-Hda"/>
-                            <constraint firstItem="MTp-ll-BC0" firstAttribute="top" secondItem="ORF-67-E3G" secondAttribute="top" id="NCa-Qx-Rlr"/>
-                            <constraint firstItem="MTp-ll-BC0" firstAttribute="leading" secondItem="ORF-67-E3G" secondAttribute="leading" id="cf4-O2-7lA"/>
-                            <constraint firstItem="ORF-67-E3G" firstAttribute="bottom" secondItem="MTp-ll-BC0" secondAttribute="bottom" id="kro-3M-Qql"/>
+                            <constraint firstItem="KFr-64-7In" firstAttribute="trailing" secondItem="ORF-67-E3G" secondAttribute="trailing" id="7W6-U8-m5z"/>
+                            <constraint firstItem="KFr-64-7In" firstAttribute="leading" secondItem="ORF-67-E3G" secondAttribute="leading" id="CM1-rJ-mAI"/>
+                            <constraint firstItem="KFr-64-7In" firstAttribute="top" secondItem="ORF-67-E3G" secondAttribute="top" id="JUN-Fr-Iqy"/>
+                            <constraint firstItem="MTp-ll-BC0" firstAttribute="leading" secondItem="ORF-67-E3G" secondAttribute="leading" id="MPB-0V-qfk"/>
+                            <constraint firstAttribute="trailing" secondItem="MTp-ll-BC0" secondAttribute="trailing" id="cgn-W3-eOM"/>
+                            <constraint firstItem="MTp-ll-BC0" firstAttribute="top" secondItem="KFr-64-7In" secondAttribute="bottom" id="onh-vT-fV4"/>
+                            <constraint firstAttribute="bottom" secondItem="MTp-ll-BC0" secondAttribute="bottom" id="ypt-W4-sSX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ORF-67-E3G"/>
                     </view>
@@ -877,6 +887,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mTableView" destination="MTp-ll-BC0" id="UTZ-he-dzM"/>
+                        <outlet property="searchBar" destination="KFr-64-7In" id="1kF-Ib-EpN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ny3-WS-tuF" userLabel="First Responder" sceneMemberID="firstResponder"/>

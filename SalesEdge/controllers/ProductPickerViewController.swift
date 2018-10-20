@@ -17,15 +17,16 @@ protocol ProductPickDelegate {
     func callback(selected : [ProductData])
 }
 
-class ProductPickerViewController:UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ProductPickerViewController:UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
     open var message:String?
     private var disposeBag = DisposeBag()
     private var data = [ProductData]()
     private var selected = [ProductData]()
     private let productDAO = ProductDAO()
-    
+    let defaultImage = #imageLiteral(resourceName: "default_image")
     @IBOutlet weak var mTableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mTitleItem: UINavigationItem!
     @IBOutlet weak var mTitlebar: UINavigationBar!
     
@@ -41,13 +42,11 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         selected = delegate?.getSelected() ?? [ProductData]()
         setSelectedCountTitle()
         reloadData()
-        
-        
         if let message = message {
             var style = ToastStyle()
             style.messageColor = UIColor.green
             self.view.makeToast(message,style:style)
-            self.title = message
+           // self.title = message
         }
         
     }
@@ -70,7 +69,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
-        cell.mImage.image = nil
+        cell.mImage.image = defaultImage
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         print(filePath)
@@ -136,11 +135,16 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         setSelectedCountTitle()
     }
   
-    func reloadData()  {
+    func reloadData(filter:String?=nil)  {
         Observable<[ProductData]>.create { (observer ) -> Disposable in
+            
             do{
-                let products = try self.productDAO.findAll()
-                observer.onNext(products)
+                if let filter = filter{
+                    try observer.onNext(self.productDAO.filter(filter: filter))
+                }else{
+                    try observer.onNext(self.productDAO.findAll())
+                }
+                
                 observer.onCompleted()
             }catch {
                 observer.onError(error)
@@ -152,20 +156,6 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
             .do(onNext: { [weak self] data in
                 self?.data = data
                 self?.mTableView.reloadData()
-                var index = 0
-                if var selected = self?.selected{
-                    outter:while index < selected.count{
-                        for item in data{
-                            if item.prodno == selected[index].prodno{
-                                index = index + 1
-                                continue outter
-                            }
-                        }
-                        selected.remove(at: index)
-                        self?.selected = selected
-                    }
-                    self?.setSelectedCountTitle()
-                }
  
                 
             }, onError: {  [weak self] (error) in
@@ -188,6 +178,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
     
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        searchBar.text = ""
         reloadData()
     }
     
@@ -196,4 +187,19 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
      //   mTitleItem.title = self.title
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        reloadData(filter: searchText.isEmpty ? nil : searchText)
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.resignFirstResponder()
+        return true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }

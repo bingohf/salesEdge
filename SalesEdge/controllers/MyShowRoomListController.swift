@@ -14,6 +14,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     var disposeBag = DisposeBag()
     var data = [ProductData]()
     var sampleData:MySampleData? = nil
+    let defaultImage = #imageLiteral(resourceName: "default_image")
      private let productDAO = ProductDAO()
     @IBOutlet weak var mTableView: UITableView?
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
-        cell.mImage.image = nil
+        cell.mImage.image = defaultImage
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         print(filePath)
         do{
