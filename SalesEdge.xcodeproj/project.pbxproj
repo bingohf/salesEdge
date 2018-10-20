@@ -46,6 +46,7 @@
 		6A9D27C120CCFFBC006020EB /* SampleCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D27C020CCFFBC006020EB /* SampleCustomerViewController.swift */; };
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
+		6AA999A6217A9F3B0008E298 /* ProductListWithSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
 		6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */; };
 		6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8AD32070D4DB00919B1A /* MainViewController.swift */; };
@@ -105,6 +106,7 @@
 		6A9D27C020CCFFBC006020EB /* SampleCustomerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCustomerViewController.swift; sourceTree = "<group>"; };
 		6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		6AA8862E20A8192200052232 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListWithSearchController.swift; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
 		6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBizCardViewController.swift; sourceTree = "<group>"; };
 		6ABE8AD32070D4DB00919B1A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				6A57D5B0208347DA0074C0C6 /* ProductListController.swift */,
+				6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */,
 				6A57D5B2208376090074C0C6 /* CustomTableCell.swift */,
 				6A085306209E93DA0094C5B7 /* ProductViewController.swift */,
 				6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */,
@@ -289,7 +292,7 @@
 				TargetAttributes = {
 					6A92F718201360CE00079C31 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter.iOS = {
 								enabled = 0;
@@ -431,6 +434,7 @@
 				6A388970206F3CB90036FBA1 /* XLPagerItemViewController.swift in Sources */,
 				6A1F749520E78F6A001CFE65 /* MySampleData.swift in Sources */,
 				6A8F5E5820A67B4A0040EFA6 /* CoreDataDAO.swift in Sources */,
+				6AA999A6217A9F3B0008E298 /* ProductListWithSearchController.swift in Sources */,
 				6A38896C206F2F380036FBA1 /* MyPageViewController.swift in Sources */,
 				6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */,
 				6A92F721201360CE00079C31 /* PAViewController.swift in Sources */,
@@ -558,15 +562,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1e99b092-7299-4e3b-9aca-829957af0f6b";
-				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc 2";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -690,15 +694,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9ed5b629-a822-461a-84c9-bd0f91121a00";
-				PROVISIONING_PROFILE_SPECIFIER = "iPhone app dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -711,15 +715,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f5f4ded3-ffd4-41d8-a4c1-9cdd5ff8508e";
-				PROVISIONING_PROFILE_SPECIFIER = AppStore;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
