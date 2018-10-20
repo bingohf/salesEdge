@@ -179,7 +179,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
-        let sql = "select * from view_GroupShowName where mytaxno ='\(mytaxno)'"
+        let sql = "select * from view_GroupShowName2 where mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
@@ -197,8 +197,8 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                 let optionMenu = UIAlertController(title: nil, message: "Choose exhibition", preferredStyle: .actionSheet)
                 for object in array{
                     if let item = object as? NSDictionary{
-                        if let name = item.value(forKey: "showname"){
-                            let action = UIAlertAction(title: name as! String, style: .default, handler: {
+                        if let name = item.value(forKey: "showname"), let ttl = item.value(forKey: "ttl"), let rec = item.value(forKey: "showname2"){
+                            let action = UIAlertAction(title:"\(name as! String) \(ttl as! Int) \(rec as! String)", style: .default, handler: {
                                 (alert: UIAlertAction!) -> Void in
                                 self.download(showName:name as! String)
                             })
