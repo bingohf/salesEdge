@@ -16,5 +16,5 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'SQLite.swift', '~> 0.11.4'
     pod 'ALCameraViewController'
     pod 'RxAlamofire', '~> 4.2.0'
-    pod 'AlamofireNetworkActivityLogger', '~> 2.3'
+    pod 'JGProgressHUD'
 end

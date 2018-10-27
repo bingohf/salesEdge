@@ -24,7 +24,7 @@ class ReceivedDetailController:UITableViewController{
         if let array = Helper.convertToDictionary(text: detailJson!) as? NSArray {
             for case let item as NSDictionary in array{
                 let prodno = item.value(forKey: "prod_id") as! String
-                let spec = item.value(forKey: "spec_desc") as! String
+                let spec = item.value(forKey: "spec_desc") as? String ?? ""
                 let date = Date(timeIntervalSince1970: TimeInterval((item["create_date"] as! UInt64) / 1000))
                 data.append(ProdInfo(prodno: prodno, create_date: date, spec: spec))
             }
