@@ -11,6 +11,8 @@ import UIKit
 import RxSwift
 import SQLite
 import Alamofire
+import JGProgressHUD
+
 
 class ProductListWithSearchController:UIViewController, UITableViewDelegate, UITableViewDataSource,ProductDelegate, UISearchBarDelegate{
     let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
@@ -197,10 +199,16 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                 let optionMenu = UIAlertController(title: nil, message: "Choose exhibition", preferredStyle: .actionSheet)
                 for object in array{
                     if let item = object as? NSDictionary{
-                        if let name = item.value(forKey: "showname"), let ttl = item.value(forKey: "ttl"), let rec = item.value(forKey: "showname2"){
-                            let action = UIAlertAction(title:"\(name as! String) \(ttl as! Int) \(rec as! String)", style: .default, handler: {
+                        if let name = item.value(forKey: "showname"), let ttl = item.value(forKey: "ttl") as? Int, let rec = item.value(forKey: "showname2"){
+                            let action = UIAlertAction(title:"\(name as! String) \(ttl) \(rec as! String)", style: .default, handler: {
                                 (alert: UIAlertAction!) -> Void in
-                                self.download(showName:name as! String)
+                                
+                                let hud = JGProgressHUD(style: .dark)
+                                hud.indicatorView = JGProgressHUDPieIndicatorView()
+                                hud.progress = 0.025
+                                hud.textLabel.text = "Loading"
+                                hud.show(in: self.view)
+                                self.download(showName:name as! String,hud:hud, total:ttl, offset:0, size:1)
                             })
                             optionMenu.addAction(action)
                         }
@@ -224,11 +232,12 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         }
     }
     
-    func download(showName:String)  {
-        self.view?.makeToastActivity(.center)
+    func download(showName:String, hud:JGProgressHUD,total:Int,offset:Int,size:Int)  {
+        hud.progress = Float(offset + size) / Float(total)
+        //self.view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
-        let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)' order by prodno"
+        let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)' order by prodno OFFSET \(offset)  ROWS FETCH NEXT \(size) ROWS ONLY"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
@@ -237,14 +246,20 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                 response in
                 self.view?.hideToastActivity()
                 if let error = response.result.error {
-                    self.toast(message: Helper.getErrorMessage(response.result))
+                    //self.toast(message: Helper.getErrorMessage(response.result))
+                    hud.indicatorView = JGProgressHUDErrorIndicatorView ()
+                    hud.textLabel.text = Helper.getErrorMessage(response.result)
+                    hud.dismiss(afterDelay: 3)
                     return
                 }
                 let value = response.result.value
                 let JSON = value as! NSDictionary
                 let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
                 if array.count < 1{
-                    self.toast(message: "No data")
+                    //self.toast(message: "No data")
+                    hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud.textLabel.text = "Done"
+                    hud.dismiss(afterDelay: 1)
                 }
                 for object in array{
                     var productsData = [ProductData]()
@@ -276,9 +291,29 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                         
                     }
                     self.productDAO.create(productsData: productsData)
+                    l1:for item in productsData{
+                        let index = self.data.index(where: {$0.prodno == item.prodno})
+                        if let index = index{
+                            self.data[index].desc = item.desc
+                            self.data[index].updatedate = item.updatedate
+                            let indexPath = IndexPath(row: index, section: 0)
+                            self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                        }else{
+                            self.data.append(item)
+                             let indexPath = IndexPath(row: self.data.count - 1 , section: 0)
+                            self.tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                        }
+                    }
                 }
-                self.reloadData()
-                
+                if total > offset + size{
+                    self.download(showName: showName, hud: hud, total: total, offset: offset+size, size: size)
+                }else{
+                    hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                    hud.textLabel.text = "Success"
+                    hud.dismiss(afterDelay: 1)
+                }
                 
         }
     }

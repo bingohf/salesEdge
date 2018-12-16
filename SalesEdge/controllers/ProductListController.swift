@@ -11,7 +11,7 @@ import UIKit
 import RxSwift
 import SQLite
 import Alamofire
-
+import JGProgressHUD
 
 
 class ProductListController : UITableViewController, ProductDelegate{
@@ -183,6 +183,8 @@ class ProductListController : UITableViewController, ProductDelegate{
         self.dismiss(animated: true, completion: nil)
     }
     func downloadGroupShow(_ sender: Any) {
+        
+
         view?.makeToastActivity(.center)
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP

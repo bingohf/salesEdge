@@ -116,6 +116,7 @@
 		6ADC73C520B9379800151EFD /* ReceivedProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedProductListViewController.swift; sourceTree = "<group>"; };
 		6ADFF14720E8FEE400051E52 /* MySampleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySampleListViewController.swift; sourceTree = "<group>"; };
 		6AE90FF920CBB0A9006F35C7 /* SampleMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMainViewController.swift; sourceTree = "<group>"; };
+		6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesEdge.entitlements; sourceTree = "<group>"; };
 		91BC84EBD2A22330F4A87F3C /* Pods-SalesEdge.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.adhoc.xcconfig"; sourceTree = "<group>"; };
 		D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.release.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +222,7 @@
 		6A92F71B201360CE00079C31 /* SalesEdge */ = {
 			isa = PBXGroup;
 			children = (
+				6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */,
 				6A085308209EA7340094C5B7 /* model */,
 				6A74ACCB2096C6C300555396 /* network */,
 				6A57D5AF208347BA0074C0C6 /* controllers */,
@@ -291,13 +293,16 @@
 				TargetAttributes = {
 					6A92F718201360CE00079C31 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter.iOS = {
 								enabled = 0;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -546,17 +551,18 @@
 			baseConfigurationReference = 91BC84EBD2A22330F4A87F3C /* Pods-SalesEdge.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1e99b092-7299-4e3b-9aca-829957af0f6b";
-				PROVISIONING_PROFILE_SPECIFIER = "Ad Hoc 2";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -678,17 +684,18 @@
 			baseConfigurationReference = 3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9ed5b629-a822-461a-84c9-bd0f91121a00";
-				PROVISIONING_PROFILE_SPECIFIER = "iPhone app dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -699,17 +706,18 @@
 			baseConfigurationReference = D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5MLJD884CA;
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d1810ac0-5479-49a7-a9b3-b843c15807ce";
-				PROVISIONING_PROFILE_SPECIFIER = "For AppStore";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
