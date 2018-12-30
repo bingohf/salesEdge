@@ -9,7 +9,7 @@
 
 import Foundation
 import XLPagerTabStrip
-
+import SwiftEventBus
 
 
 class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
@@ -32,8 +32,23 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
         super.viewDidLoad()
         buttonBarView.selectedBar.backgroundColor = .orange
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
+        
+        self.parent?.tabBarItem.badgeValue = UIApplication.shared.applicationIconBadgeNumber < 1 ? "" : String(UIApplication.shared.applicationIconBadgeNumber)
+        SwiftEventBus.onMainThread(self, name: "BadgeValue") { result in
+            if let count = result?.object as? Int{
+                self.parent?.tabBarItem.badgeValue = ""
+                if count > 0 {
+                    self.parent?.tabBarItem.badgeValue = String(count)
+                }
+            }
+        }
     
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SwiftEventBus.unregister(self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "add_sample"{
             self.moveToViewController(at: 0)

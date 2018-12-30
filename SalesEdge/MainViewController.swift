@@ -11,12 +11,12 @@ import UIKit
 
 class MainViewController: UITabBarController,UITabBarControllerDelegate {
     
+    @IBOutlet weak var mTabBar: UITabBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         let index = UserDefaults.standard.integer(forKey: "selectedIndex")
         selectedIndex = index
         self.delegate = self
-        
     }
     
     

@@ -115,7 +115,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
     
     func loadRemote(){
         Helper.loadUnReadCount(){
-            
+
         }
         
         

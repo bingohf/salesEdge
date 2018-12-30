@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
-
+import SwiftEventBus
 
 class Helper{
     
@@ -136,6 +136,10 @@ class Helper{
         return ""
     }
     
+    open static func setBadge(count:Int){
+        SwiftEventBus.post("BadgeValue", sender: count)
+        UIApplication.shared.applicationIconBadgeNumber = count
+    }
     
     open static func loadUnReadCount(callback:@escaping ()->Void){
         var params = Helper.makeRequest()
@@ -158,7 +162,7 @@ class Helper{
                 for object in array{
                     if let item = object as? NSDictionary{
                         if let count = item.value(forKey: "count") as? Int{
-                            UIApplication.shared.applicationIconBadgeNumber = count
+                            setBadge(count: count)
                         }
                     }
                 }

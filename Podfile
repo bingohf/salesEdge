@@ -17,4 +17,5 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'ALCameraViewController'
     pod 'RxAlamofire', '~> 4.2.0'
     pod 'JGProgressHUD'
+    pod 'SwiftEventBus', :tag => '3.0.1', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
 end

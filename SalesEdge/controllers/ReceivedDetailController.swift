@@ -41,7 +41,7 @@ class ReceivedDetailController:UITableViewController{
                 for object in array{
                     if let item = object as? NSDictionary{
                         if let count = item.value(forKey: "count") as? Int{
-                            UIApplication.shared.applicationIconBadgeNumber = count
+                            Helper.setBadge(count: count)
                         }
                     }
                 }
