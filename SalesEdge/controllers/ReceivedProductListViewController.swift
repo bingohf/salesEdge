@@ -34,7 +34,8 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         // Setting the estimated row height prevents the table view from calling tableView:heightForRowAtIndexPath: for every row in the table on first load;
         // it will only be called as cells are about to scroll onscreen. This is a major performance optimization.
         mTableView.estimatedRowHeight = 44.0 // set this to whatever your "average" cell height is; it doesn't need to be very accurate
-        loadFromCache()
+       // loadFromCache()
+        loadRemote()
         
     }
     
@@ -115,19 +116,16 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         if !Env.isProduction(){
             //deviceId = "42f7acf889d0db9"
         }
-        let query = "isnull(json,'') <>'' and shareToDeviceId like  '%\(deviceId)%'"
-        let orderBy = " order by UPDATEDATE desc"
-        let params = [
-            "query": query,
-            "orderBy": orderBy
-        ];
         do{
             try receivedSampleDAO.remove()
         }catch{
             print(error)
         }
+        let params = [
+            "device_id":deviceId
+        ]
         self.mTableView.refreshControl?.beginRefreshing()
-        Alamofire.request(AppCons.BASE_URL + "dataset/PRODUCTAPPGET", method: .get, parameters: params)
+        Alamofire.request(AppCons.BASE_URL + "SPDataSet/SP_GET_RECEIVEDLIST", method: .post, parameters: params,encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{

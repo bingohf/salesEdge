@@ -19,13 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let bag = DisposeBag()
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UITabBar.appearance().tintColor = UIColor.init(red: 0.027, green: 0.725, blue: 0.608, alpha: 1)
         UIApplication.shared.statusBarStyle = .lightContent
          IQKeyboardManager.sharedManager().enable = true
-  
+      // UIApplication.shared.applicationIconBadgeNumber = num
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { granted, error in
@@ -35,8 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else {
                 print("使用者不同意，不喜歡米花兒，哭哭!")
             }
-            
         })
+        
+
         return true
     }
     
@@ -49,16 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]) { (any1, any2) -> Any in
             any2
         }
-        
         Alamofire.request(AppCons.BASE_URL + "SpDataSet/SP_GET_MESSAGECOUNT", method: .post, parameters: params,encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
                 response in
                 if let error = response.result.error {
-                    completionHandler(.failed)
+                    completionHandler(.newData)
                     return
                 }
+                completionHandler(.newData)
                 let value = response.result.value
                 let JSON = value as! NSDictionary
                 let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
@@ -66,12 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if let item = object as? NSDictionary{
                         if let count = item.value(forKey: "count") as? Int{
                            UIApplication.shared.applicationIconBadgeNumber = count
-                            completionHandler(count > 0 ? .newData : .noData)
-                            return
                         }
                     }
                 }
-                completionHandler(.noData)
+                completionHandler(.newData)
         }
         
     }
