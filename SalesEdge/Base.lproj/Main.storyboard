@@ -1021,6 +1021,13 @@
                                                         <constraint firstAttribute="height" constant="60" id="KCV-Sy-abr"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcycle" translatesAutoresizingMaskIntoConstraints="NO" id="JS3-V3-qiy">
+                                                    <rect key="frame" x="65" y="11" width="10" height="10"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="10" id="PJp-zt-hav"/>
+                                                        <constraint firstAttribute="width" constant="10" id="Zu1-lH-Vxk"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" text="Label111" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXT-8x-s81">
                                                     <rect key="frame" x="83" y="21" width="259" height="98"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1051,13 +1058,16 @@
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Rds-JK-xFF" secondAttribute="bottom" constant="8" id="QrX-x1-xga"/>
                                                 <constraint firstItem="Rds-JK-xFF" firstAttribute="leading" secondItem="x9G-g2-hsM" secondAttribute="leadingMargin" id="Vid-kI-R2c"/>
                                                 <constraint firstItem="sCI-30-mKr" firstAttribute="leading" secondItem="QXT-8x-s81" secondAttribute="leading" id="fme-de-2K3"/>
+                                                <constraint firstItem="JS3-V3-qiy" firstAttribute="top" secondItem="Rds-JK-xFF" secondAttribute="top" id="kzY-Ix-bZq"/>
                                                 <constraint firstItem="sCI-30-mKr" firstAttribute="top" secondItem="QXT-8x-s81" secondAttribute="bottom" id="nYK-Po-8E9"/>
                                                 <constraint firstItem="sCI-30-mKr" firstAttribute="top" secondItem="QXT-8x-s81" secondAttribute="bottom" id="noM-Nd-q0A"/>
+                                                <constraint firstItem="JS3-V3-qiy" firstAttribute="trailing" secondItem="Rds-JK-xFF" secondAttribute="trailing" id="sSN-V6-7aP"/>
                                                 <constraint firstItem="b5v-jA-hAA" firstAttribute="trailing" secondItem="x9G-g2-hsM" secondAttribute="trailingMargin" id="yLU-cu-sIw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="mImage" destination="Rds-JK-xFF" id="B8u-Bj-7W8"/>
+                                            <outlet property="mRedFlag" destination="JS3-V3-qiy" id="g1W-Js-hyU"/>
                                             <outlet property="mTxtLabel" destination="QXT-8x-s81" id="rl5-BJ-rSU"/>
                                             <outlet property="mTxtSubTitle" destination="sCI-30-mKr" id="pDi-9k-7Gb"/>
                                             <outlet property="mTxtTimestamp" destination="b5v-jA-hAA" id="i07-Gh-a5P"/>
@@ -1683,7 +1693,7 @@
         <image name="redcycle" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lQL-al-B4s"/>
+        <segue reference="Lod-K2-e7i"/>
         <segue reference="7Fn-HG-vAR"/>
         <segue reference="32D-md-z5T"/>
     </inferredMetricsTieBreakers>

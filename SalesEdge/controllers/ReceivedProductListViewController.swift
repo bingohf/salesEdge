@@ -87,6 +87,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         cell.mTxtTimestamp.text = Helper.format(date: item.datetime)
         cell.mImage.image = #imageLiteral(resourceName: "default_image")
         cell.mTxtSubTitle.text = ""
+        cell.mRedFlag.isHidden = (item.unread_count ?? 0) < 1
         if let prodno = item.firstProdNo {
             let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(prodno)_type1.png")
             do{
@@ -142,7 +143,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
                 for object in array{
                     if let item = object as? NSDictionary{
-                        if let json = item.value(forKey: "json") as? String{
+                        if let json = item.value(forKey: "json") as? String, let unread_count = item.value(forKey: "unread_count") as? Int{
                             if let dict = Helper.convertToDictionary(text: json) as? NSDictionary {
                                 let datetime = Date(timeIntervalSince1970: TimeInterval((dict["update_date"] as! UInt64) / 1000))
                                 var firstProdNo:String? = nil
@@ -164,7 +165,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                                 
                                 let json = Helper.converToJson(obj:  myTaxNoLinks)
                                 
-                                let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String, sampleId: dict["guid"] as! String, firstProdNo:firstProdNo)
+                                let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String, sampleId: dict["guid"] as! String, firstProdNo:firstProdNo, unread_count: unread_count)
                                 self.data.append(item)
                                 self.receivedSampleDAO.create(productsData: [item])
                             }

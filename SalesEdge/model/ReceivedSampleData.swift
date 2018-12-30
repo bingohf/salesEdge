@@ -13,4 +13,5 @@ struct ReceivedSampleData {
    var title: String
     var sampleId :String
     var firstProdNo:String?
+    var unread_count:Int?
 }

@@ -27,7 +27,7 @@ class ReceivedSampleDAO:CoreDataDAO{
         if listData.count > 0{
             for item in listData{
                 let mo = item as! ReceivedSampleMO
-                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, detailJson: mo.detailJson!, title: mo.title!,sampleId: mo.sampleId!, firstProdNo: mo.firstProdNo))
+                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, detailJson: mo.detailJson!, title: mo.title!,sampleId: mo.sampleId!, firstProdNo: mo.firstProdNo, unread_count: 0))
             }
         }
         return resListData
