@@ -117,7 +117,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 }
             }
             let manager = SessionManager.default
-            var ob = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSample_v3Line", parameters: params, encoding: JSONEncoding.default)
+            var ob = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSample_v4Line", parameters: params, encoding: JSONEncoding.default)
                 .validate(statusCode: 200 ..< 300)
                 .validate({ (request, response, data) -> Request.ValidationResult in
                     if let str = String(data: data!, encoding: .utf8){

@@ -27,7 +27,7 @@ class ReceivedDetailController:UITableViewController{
                       "key2": sampleId!,
                       "type":"SAMPLE"]
         
-        Alamofire.request(AppCons.BASE_URL + "SPDataSet/SP_READ_MESSAGE", method: .post, parameters: params,encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.BASE_URL + "SpDataSet/SP_READ_MESSAGE", method: .post, parameters: params,encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{

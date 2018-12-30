@@ -43,35 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
       
         print("performFetchWithCompletionHandler")
-        
-        var params = Helper.makeRequest()
-        params.merge(["device_id": "B"
-        ]) { (any1, any2) -> Any in
-            any2
+        Helper.loadUnReadCount(){
+             completionHandler(.newData)
         }
-        Alamofire.request(AppCons.BASE_URL + "SpDataSet/SP_GET_MESSAGECOUNT", method: .post, parameters: params,encoding: JSONEncoding.default)
-            .debugLog()
-            .validate(statusCode: 200..<300)
-            .responseJSON{
-                response in
-                if let error = response.result.error {
-                    completionHandler(.newData)
-                    return
-                }
-                completionHandler(.newData)
-                let value = response.result.value
-                let JSON = value as! NSDictionary
-                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
-                for object in array{
-                    if let item = object as? NSDictionary{
-                        if let count = item.value(forKey: "count") as? Int{
-                           UIApplication.shared.applicationIconBadgeNumber = count
-                        }
-                    }
-                }
-                completionHandler(.newData)
-        }
-        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
