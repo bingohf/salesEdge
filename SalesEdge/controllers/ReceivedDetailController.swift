@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 struct ProdInfo {
    var prodno:String
@@ -18,9 +19,34 @@ struct ProdInfo {
 
 class ReceivedDetailController:UITableViewController{
     var detailJson:String? = nil
+    var sampleId:String? = nil
     var data = [ProdInfo]()
     
     override func viewDidLoad() {
+        let params = ["device_id":UIDevice.current.identifierForVendor!.uuidString,
+                      "key2": sampleId!,
+                      "type":"SAMPLE"]
+        
+        Alamofire.request(AppCons.BASE_URL + "SPDataSet/SP_READ_MESSAGE", method: .post, parameters: params,encoding: JSONEncoding.default)
+            .debugLog()
+            .validate(statusCode: 200..<300)
+            .responseJSON{
+                response in
+                if let error = response.result.error {
+                    return
+                }
+                let value = response.result.value
+                let JSON = value as! NSDictionary
+                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                for object in array{
+                    if let item = object as? NSDictionary{
+                        if let count = item.value(forKey: "count") as? Int{
+                            UIApplication.shared.applicationIconBadgeNumber = count
+                        }
+                    }
+                }
+        }
+        
         if let array = Helper.convertToDictionary(text: detailJson!) as? NSArray {
             for case let item as NSDictionary in array{
                 let prodno = item.value(forKey: "prod_id") as! String

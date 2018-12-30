@@ -237,6 +237,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 let destinationVC = segue.destination as! ReceivedDetailController
                 destinationVC.detailJson = item.detailJson
                 destinationVC.title = item.title
+                destinationVC.sampleId = item.sampleId
             }
           
         }
