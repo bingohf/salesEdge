@@ -88,7 +88,13 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         cell.mTxtTimestamp.text = Helper.format(date: item.datetime)
         cell.mImage.image = #imageLiteral(resourceName: "default_image")
         cell.mTxtSubTitle.text = ""
-        cell.mRedFlag.isHidden = (item.unread_count ?? 0) < 1
+        cell.mRedFlag.isHidden = true
+        cell.badgeString = ""
+        if let count = item.unread_count {
+            if count > 0 {
+                cell.badgeString = String(count)
+            }
+        }
         if let prodno = item.firstProdNo {
             let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(prodno)_type1.png")
             do{
@@ -240,6 +246,9 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         if segue.identifier == "show_detail"{
             if let row = self.mTableView.indexPathForSelectedRow?.row{
                 var item = data[row]
+                item.unread_count = 0
+                data[row] = item
+                self.mTableView.reloadRows(at: [self.mTableView.indexPathForSelectedRow!], with: .automatic)
                 let destinationVC = segue.destination as! ReceivedDetailController
                 destinationVC.detailJson = item.detailJson
                 destinationVC.title = item.title

@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
+import TDBadgedCell
 
-
-class CustomTableCellView: UITableViewCell  {
+class CustomTableCellView: TDBadgedCell  {
     @IBOutlet weak open var mImage: UIImageView!
     @IBOutlet weak open var mTxtSubTitle: UILabel!
     @IBOutlet weak open var mTxtLabel: UILabel!
