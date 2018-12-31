@@ -37,7 +37,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         loadFromCache()
         loadRemote()
 
-        
+    
     }
     
     

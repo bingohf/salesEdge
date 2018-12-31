@@ -750,8 +750,8 @@
         <!--Sales Leads-->
         <scene sceneID="9sV-Av-9h6">
             <objects>
-                <navigationController id="riG-Id-5RL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sales Leads" image="business" badgeValue="111" id="Hwa-Mu-Rzs"/>
+                <navigationController id="riG-Id-5RL" customClass="UISalesLeadsNavigationController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sales Leads" image="business" id="Hwa-Mu-Rzs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eYu-zY-2da">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1692,7 +1692,7 @@
         <image name="redcycle" width="9.6000003814697266" height="9.6000003814697266"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lQL-al-B4s"/>
+        <segue reference="Lod-K2-e7i"/>
         <segue reference="7Fn-HG-vAR"/>
         <segue reference="32D-md-z5T"/>
     </inferredMetricsTieBreakers>
