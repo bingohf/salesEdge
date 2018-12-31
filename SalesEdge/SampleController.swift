@@ -123,8 +123,8 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             apiPath = "Sp/sp_getBill_Photo"
             let image1 = Helper.cropToBounds(image:image, width:512, height:512)
             let image2 = Helper.cropToBounds(image:image1, width:128, height:128)
-            let imageData1:NSData = UIImagePNGRepresentation(image1)! as NSData
-            let imageData2:NSData = UIImagePNGRepresentation(image2)! as NSData
+            let imageData1:NSData = image1.pngData()! as NSData
+            let imageData2:NSData = image2.pngData()! as NSData
             
             let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
             let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
@@ -244,9 +244,12 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         picker.dismiss(animated: true, completion: nil)
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
         queryBill(mode:mMode, billNo: mFieldBillNo.text ?? "", image:image)
     }
     
@@ -295,7 +298,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     @IBAction func onMoreMenuTap(_ sender: Any) {
         loadMenus()
-        let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertController.Style.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:NSLocalizedString("Change Group", comment:""), style:.default){
             (action: UIAlertAction!) -> Void in
             self.scanQRCode(){qrcodeResult in
@@ -334,14 +337,14 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         self.mMode = mode
         showState()
     }
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         switch navigationType {
         case .linkClicked:
             // Open links in Safari
             guard let url = request.url else { return true }
             
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 // openURL(_:) is deprecated in iOS 10+.
                 UIApplication.shared.openURL(url)
@@ -474,4 +477,19 @@ extension Request {
         #endif
         return self
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

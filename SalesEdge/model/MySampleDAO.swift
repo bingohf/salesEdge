@@ -23,7 +23,7 @@ class MySampleDAO:CoreDataDAO{
         let listData = try context.fetch(fetchRequest)
         if listData.count > 0{
             for item in listData{
-                let mo = item as! MySample
+                let mo = item 
                 resListData.append(MySampleData(sampleId: mo.sampleId, customer: mo.customer, created: mo.created, productJson: mo.productJson, line:mo.line, reader:mo.reader, mac_address:mo.mac_address, shareToDeviceID:mo.shareToDeviceID, update_date:mo.upload_date))
             }
         }

@@ -47,13 +47,13 @@ class QRCodeScannerViewController :UIViewController, AVCaptureMetadataOutputObje
             view.layer.addSublayer(videoPreviewLayer!)
             captureSession?.startRunning()
             // 將訊息標籤移到最上層視圖
-            view.bringSubview(toFront: mBtnCancel)
+            view.bringSubviewToFront(mBtnCancel)
             qrCodeFrameView = UIView()
             if let qrCodeFrameView = qrCodeFrameView {
                 qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
                 qrCodeFrameView.layer.borderWidth = 2
                 view.addSubview(qrCodeFrameView)
-                view.bringSubview(toFront: qrCodeFrameView)
+                view.bringSubviewToFront(qrCodeFrameView)
             }
             
         }  catch{

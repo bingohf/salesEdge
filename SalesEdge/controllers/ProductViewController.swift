@@ -71,11 +71,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                                 self?.mImage.image = image
                                 self?.mImage.contentMode = .scaleToFill
                                 let dataPath = Helper.getImagePath(folder: "Show")
-                                if let data512 = UIImagePNGRepresentation(image512) {
+                                if let data512 = image512.pngData() {
                                     let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type1.png")
                                     try? data512.write(to: filename)
                                 }
-                                if let data110 = UIImagePNGRepresentation(image110) {
+                                if let data110 = image110.pngData() {
                                     let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type2.png")
                                     try? data110.write(to: filename)
                                 }
@@ -161,19 +161,22 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         
     }
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         picker.dismiss(animated: true, completion: nil)
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
         let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
         let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
         mImage.image = image
         mImage.contentMode = .scaleToFill
         let dataPath = Helper.getImagePath(folder: "Show")
-        if let data512 = UIImageJPEGRepresentation(image512, 1) {
+        if let data512 = image512.jpegData(compressionQuality: 1) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
             try? data512.write(to: filename)
         }
-        if let data110 = UIImageJPEGRepresentation(image110, 1) {
+        if let data110 = image110.jpegData(compressionQuality: 1) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
             try? data110.write(to: filename)
         }
@@ -286,11 +289,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                 self?.mImage.image = image
                 self?.mImage.contentMode = .scaleToFill
                 let dataPath = Helper.getImagePath(folder: "Show")
-                if let data512 = UIImagePNGRepresentation(image512) {
+                if let data512 = image512.pngData() {
                     let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type1.png")
                     try? data512.write(to: filename)
                 }
-                if let data110 = UIImagePNGRepresentation(image110) {
+                if let data110 = image110.pngData() {
                     let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type2.png")
                     try? data110.write(to: filename)
                 }
@@ -302,4 +305,14 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         }
         present(vc, animated: true, completion: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

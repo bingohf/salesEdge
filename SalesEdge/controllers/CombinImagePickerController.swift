@@ -37,7 +37,7 @@ class CombinImagePickerViewController:UIViewController{
         { [weak self] image, asset in
             if let image = image {
                 self?.mActionSave.isEnabled = true
-                button.setImage(image, for: UIControlState.normal)
+                button.setImage(image, for: UIControl.State.normal)
                 button.imageView?.contentMode = .scaleAspectFit
                 
             }

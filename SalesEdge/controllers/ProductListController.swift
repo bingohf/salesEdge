@@ -25,7 +25,7 @@ class ProductListController : UITableViewController, ProductDelegate{
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action:
             #selector(ProductListController.handleRefresh(_:)),
-                                  for: UIControlEvents.valueChanged)
+                                  for: UIControl.Event.valueChanged)
         
         self.tableView.addSubview(self.refreshControl!)
         reloadData()
@@ -122,7 +122,7 @@ class ProductListController : UITableViewController, ProductDelegate{
             do {
                 try self.productDAO.remove(productData: rowData)
                 self.data.remove(at: index.row)
-                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+                tableView.deleteRows(at: [index], with: UITableView.RowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }
@@ -311,12 +311,12 @@ class ProductListController : UITableViewController, ProductDelegate{
             if index > -1 {
                 data[index] = productData
                 let indexPath = IndexPath(row: index, section: 0)
-                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }
         } else{
             data.append(productData)
             let indexPath = IndexPath.init(row: data.count - 1, section: 0)
-            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             
         }
         

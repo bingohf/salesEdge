@@ -27,7 +27,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action:
             #selector(ProductListWithSearchController.handleRefresh(_:)),
-                                           for: UIControlEvents.valueChanged)
+                                           for: UIControl.Event.valueChanged)
         reloadData()
         
     }
@@ -117,7 +117,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             do {
                 try self.productDAO.remove(productData: rowData)
                 self.data.remove(at: index.row)
-                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+                tableView.deleteRows(at: [index], with: UITableView.RowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }
@@ -297,13 +297,13 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                             self.data[index].desc = item.desc
                             self.data[index].updatedate = item.updatedate
                             let indexPath = IndexPath(row: index, section: 0)
-                            self.tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            self.tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
                         }else{
                             self.data.append(item)
                              let indexPath = IndexPath(row: self.data.count - 1 , section: 0)
-                            self.tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            self.tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
                         }
                     }
                 }
@@ -337,12 +337,12 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             if index > -1 {
                 data[index] = productData
                 let indexPath = IndexPath(row: index, section: 0)
-                tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             }
         } else{
             data.append(productData)
             let indexPath = IndexPath.init(row: data.count - 1, section: 0)
-            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             
         }
         

@@ -16,6 +16,7 @@ PODS:
     - SQLite.swift/standard (= 0.11.4)
   - SQLite.swift/standard (0.11.4)
   - SwiftEventBus (3.0.1)
+  - TDBadgedCell (5.5.1)
   - Toast-Swift (3.0.1)
   - XLPagerTabStrip (8.0.0)
 
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SQLite.swift (~> 0.11.4)
   - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag `3.0.1`)
+  - TDBadgedCell (~> 5.5)
   - Toast-Swift (~> 3.0.1)
   - XLPagerTabStrip (~> 8.0)
 
@@ -44,6 +46,7 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - SQLite.swift
+    - TDBadgedCell
     - Toast-Swift
     - XLPagerTabStrip
 
@@ -68,9 +71,10 @@ SPEC CHECKSUMS:
   RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftEventBus: 87ccaeceff91b748775e37751ae3a81ec815b3d5
+  TDBadgedCell: 9c651089021510d197f4d2b4892e7ad1f84ff378
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 6962520f8c45fc5c5d24fc1dc73e24348630bb37
+PODFILE CHECKSUM: ecec5332e2dec0c6a9eb78e0b3b88bebb2047929
 
 COCOAPODS: 1.5.3

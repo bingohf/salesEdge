@@ -68,7 +68,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             do {
                 self.mySampleDAO.remove(data: rowData)
                 self.data.remove(at: index.row)
-                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+                tableView.deleteRows(at: [index], with: UITableView.RowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }

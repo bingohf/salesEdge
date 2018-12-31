@@ -25,7 +25,7 @@ class ProductDAO:CoreDataDAO{
         let listData = try context.fetch(fetchRequest)
         if listData.count > 0{
             for item in listData{
-                let mo = item as! ProductManagedObject
+                let mo = item 
                 resListData.append(ProductData(prodno: mo.prodno ?? "", desc: mo.desc, updatedate: mo.updatedate as! Date))
             }
         }
@@ -60,7 +60,7 @@ class ProductDAO:CoreDataDAO{
         var resListData = [ProductData]()
         if listData.count > 0{
             for item in listData{
-                let mo = item as! ProductManagedObject
+                let mo = item 
                 resListData.append(ProductData(prodno: mo.prodno ?? "", desc: mo.desc, updatedate: mo.updatedate as! Date))
             }
         }

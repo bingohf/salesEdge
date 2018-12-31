@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '8.0'
+ platform :ios, '9.0'
 
 target 'SalesEdge' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -18,4 +18,5 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'RxAlamofire', '~> 4.2.0'
     pod 'JGProgressHUD'
     pod 'SwiftEventBus', :tag => '3.0.1', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
+    pod 'TDBadgedCell', '~> 5.5'
 end

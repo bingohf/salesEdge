@@ -91,7 +91,7 @@ class Helper{
     }
     
     open static func encodeBase64(image:UIImage) -> String{
-        let imageData:NSData = UIImagePNGRepresentation(image)! as NSData
+        let imageData:NSData = image.pngData()! as NSData
         let strBase64:String = imageData.base64EncodedString(options: .lineLength64Characters)
         return strBase64
     }

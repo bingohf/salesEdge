@@ -37,7 +37,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
         
         mTableView.refreshControl?.addTarget(self, action:
             #selector(ProductPickerViewController.handleRefresh(_:)),
-                                  for: UIControlEvents.valueChanged)
+                                  for: UIControl.Event.valueChanged)
   
         selected = delegate?.getSelected() ?? [ProductData]()
         setSelectedCountTitle()
@@ -106,7 +106,7 @@ class ProductPickerViewController:UIViewController, UITableViewDataSource, UITab
             }
         }
         if isSelected {
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
         }
     }
     

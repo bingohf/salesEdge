@@ -120,7 +120,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             let rowData = self.data[index.row]
             do {
                 self.data.remove(at: index.row)
-                tableView.deleteRows(at: [index], with: UITableViewRowAnimation.fade)
+                tableView.deleteRows(at: [index], with: UITableView.RowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
             }
