@@ -100,6 +100,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             var params = Helper.makeRequest()
             params.merge(["series": sampleData.sampleId ?? "",
                           "custMemo" : sampleData.customer ?? "",
+                          "dataFrom": sampleData.dataFrom ?? "",
                           "shareToDeviceId": sampleData.shareToDeviceID ?? "",
                           "empno": UIDevice.current.identifierForVendor!.uuidString,
                           "json" : toJson(sampleData: sampleData)
@@ -152,6 +153,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                 var params = Helper.makeRequest()
                                 params.merge([
                                     "empno": UIDevice.current.identifierForVendor!.uuidString,
+                                    "dataFrom": sampleData.dataFrom!,
                                     "series":sampleData.sampleId,
                                     "prodno": prodno,
                                     "itemExt": "\(index)",
