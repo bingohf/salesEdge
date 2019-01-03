@@ -153,7 +153,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                 var params = Helper.makeRequest()
                                 params.merge([
                                     "empno": UIDevice.current.identifierForVendor!.uuidString,
-                                    "dataFrom": sampleData.dataFrom!,
+                                    "dataFrom": sampleData.dataFrom ?? "",
                                     "series":sampleData.sampleId,
                                     "prodno": prodno,
                                     "itemExt": "\(index)",
