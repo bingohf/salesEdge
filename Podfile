@@ -6,11 +6,11 @@ target 'SalesEdge' do
   use_frameworks!
 
   # Pods for SalesEdge
-  pod 'IQKeyboardManagerSwift'
-pod 'XLPagerTabStrip', '~> 8.0'
+    pod 'IQKeyboardManagerSwift'
+    pod 'XLPagerTabStrip', '~> 8.0'
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
-    pod 'Alamofire', '~> 4.5'
+    pod 'Alamofire', '~> 4.8'
     pod 'QRCodeReader.swift', '~> 8.0.3'
     pod 'Toast-Swift', '~> 3.0.1'
     pod 'SQLite.swift', '~> 0.11.4'
@@ -19,4 +19,6 @@ pod 'XLPagerTabStrip', '~> 8.0'
     pod 'JGProgressHUD'
     pod 'SwiftEventBus', :tag => '3.0.1', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
     pod 'TDBadgedCell', '~> 5.5'
+    pod 'AlamofireImage', '~> 3.5'
+    pod 'Disk', '~> 0.4.0'
 end

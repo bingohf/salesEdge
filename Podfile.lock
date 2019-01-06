@@ -1,6 +1,9 @@
 PODS:
-  - Alamofire (4.7.3)
+  - Alamofire (4.8.0)
+  - AlamofireImage (3.5.0):
+    - Alamofire (~> 4.8)
   - ALCameraViewController (3.0.2)
+  - Disk (0.4.0)
   - IQKeyboardManagerSwift (5.0.7)
   - JGProgressHUD (2.0.3)
   - QRCodeReader.swift (8.0.4)
@@ -21,8 +24,10 @@ PODS:
   - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
+  - Alamofire (~> 4.8)
+  - AlamofireImage (~> 3.5)
   - ALCameraViewController
+  - Disk (~> 0.4.0)
   - IQKeyboardManagerSwift
   - JGProgressHUD
   - QRCodeReader.swift (~> 8.0.3)
@@ -38,7 +43,9 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireImage
     - ALCameraViewController
+    - Disk
     - IQKeyboardManagerSwift
     - JGProgressHUD
     - QRCodeReader.swift
@@ -61,8 +68,10 @@ CHECKOUT OPTIONS:
     :tag: 3.0.1
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
   ALCameraViewController: 1edce3497633f0df138523645ed1228961ee2eab
+  Disk: ef2956657d5bb56034b38b29b352170165226440
   IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   QRCodeReader.swift: 9730cfa7ed5f0dd839765df8cf18d41db20e4081
@@ -75,6 +84,6 @@ SPEC CHECKSUMS:
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: ecec5332e2dec0c6a9eb78e0b3b88bebb2047929
+PODFILE CHECKSUM: 9da8deb423f0b8238b964d65efb79124a2a9bf96
 
 COCOAPODS: 1.5.3

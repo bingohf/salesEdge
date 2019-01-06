@@ -1671,6 +1671,51 @@
             </objects>
             <point key="canvasLocation" x="2441" y="-2633"/>
         </scene>
+        <!--Image View Controller2-->
+        <scene sceneID="SSH-Od-Xio">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewController2" automaticallyAdjustsScrollViewInsets="NO" id="DP1-DQ-6cX" customClass="ImageViewController2" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aHK-ih-0Fa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="6" translatesAutoresizingMaskIntoConstraints="NO" id="ytO-xw-MBY">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KbF-ZX-qsn">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="KbF-ZX-qsn" firstAttribute="leading" secondItem="ytO-xw-MBY" secondAttribute="leading" id="AWc-e3-ehh"/>
+                                    <constraint firstItem="KbF-ZX-qsn" firstAttribute="centerY" secondItem="ytO-xw-MBY" secondAttribute="centerY" id="f7O-uo-jnU"/>
+                                    <constraint firstItem="KbF-ZX-qsn" firstAttribute="top" secondItem="ytO-xw-MBY" secondAttribute="top" id="hge-Qu-Z0m"/>
+                                    <constraint firstAttribute="bottom" secondItem="KbF-ZX-qsn" secondAttribute="bottom" id="of4-ZE-mTk"/>
+                                    <constraint firstItem="KbF-ZX-qsn" firstAttribute="centerX" secondItem="ytO-xw-MBY" secondAttribute="centerX" id="vKp-jN-jon"/>
+                                    <constraint firstAttribute="trailing" secondItem="KbF-ZX-qsn" secondAttribute="trailing" id="wvR-gi-cug"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="DP1-DQ-6cX" id="kQx-Kb-UN5"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ytO-xw-MBY" firstAttribute="bottom" secondItem="2zC-yr-xaN" secondAttribute="bottom" id="GdY-gO-J59"/>
+                            <constraint firstItem="ytO-xw-MBY" firstAttribute="leading" secondItem="2zC-yr-xaN" secondAttribute="leading" id="Ji7-nl-1GV"/>
+                            <constraint firstItem="ytO-xw-MBY" firstAttribute="top" secondItem="2zC-yr-xaN" secondAttribute="top" id="PML-mh-mBc"/>
+                            <constraint firstItem="ytO-xw-MBY" firstAttribute="trailing" secondItem="2zC-yr-xaN" secondAttribute="trailing" id="dJa-XT-5nH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2zC-yr-xaN"/>
+                    </view>
+                    <connections>
+                        <outlet property="mImageView" destination="KbF-ZX-qsn" id="YZF-iy-UU6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CD6-4V-PSJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3346" y="525"/>
+        </scene>
     </scenes>
     <resources>
         <image name="app_share_qrcode" width="400" height="400"/>

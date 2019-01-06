@@ -11,12 +11,15 @@ import UIKit
 import XLPagerTabStrip
 import Alamofire
 import RxSwift
+import AlamofireImage
+
 
 class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource {
     let refreshControl = UIRefreshControl()
     let receivedSampleDAO = ReceivedSampleDAO()
     var data = [ReceivedSampleData]()
     var disposeBag = DisposeBag()
+    
     
     @IBOutlet weak var mTableView: UITableView!
     
@@ -95,17 +98,33 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 cell.badgeString = String(count)
             }
         }
-        if let prodno = item.firstProdNo {
-            let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(prodno)_type1.png")
-            do{
-                let fileManager = FileManager.default
-                if fileManager.fileExists(atPath: filePath.path){
-                    cell.mImage.image = UIImage(contentsOfFile: filePath.path)
-                }
-            }catch{
-                print(error)
-            }
-        }
+        cell.mImage.af_setImage(
+            withURL: URL(string: "\(AppCons.BASE_URL)\(item.graphicUrl ?? "")")!,
+            placeholderImage: #imageLiteral(resourceName: "default_image"),
+            imageTransition: .crossDissolve(0.2)
+        )
+//        let urlRequest = URLRequest(url: URL(string: "https://httpbin.org/image/jpeg")!)
+//
+//        imageDownloader.download(urlRequest) { response in
+//            print(response.request)
+//            print(response.response)
+//            debugPrint(response.result)
+//
+//            if let image = response.result.value {
+//                print(image)
+//            }
+//        }
+//        if let prodno = item.firstProdNo {
+//            let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(prodno)_type1.png")
+//            do{
+//                let fileManager = FileManager.default
+//                if fileManager.fileExists(atPath: filePath.path){
+//                    cell.mImage.image = UIImage(contentsOfFile: filePath.path)
+//                }
+//            }catch{
+//                print(error)
+//            }
+//        }
         
        
 
@@ -129,16 +148,12 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         if !Env.isProduction(){
             //deviceId = "42f7acf889d0db9"
         }
-        do{
-            try receivedSampleDAO.remove()
-        }catch{
-            print(error)
-        }
+
         let params = [
             "device_id":deviceId
         ]
         self.mTableView.refreshControl?.beginRefreshing()
-        Alamofire.request(AppCons.BASE_URL + "SPDataSet/SP_GET_RECEIVEDLIST", method: .post, parameters: params,encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.BASE_URL + "spJson/SP_GET_RECEIVEDLIST2", method: .get, parameters: params,encoding: URLEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -146,41 +161,49 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 self.mTableView.refreshControl?.endRefreshing()
                 self.view?.hideToastActivity()
                 if let error = response.result.error {
-                    Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
+                    var toastMessage = Helper.getErrorMessage(response.result)
+                    if let message = String(data: response.data!, encoding: String.Encoding.utf8){
+                        toastMessage = message
+                    }
+                    Helper.toast(message: toastMessage, thisVC: self)
                     return
+                }
+                do{
+                    try self.receivedSampleDAO.remove()
+                }catch{
+                    print(error)
                 }
                 self.data.removeAll()
                 let value = response.result.value
-                let JSON = value as! NSDictionary
-                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
+                let array = value as! NSArray
+                let json = ""
                 for object in array{
                     if let item = object as? NSDictionary{
-                        if let json = item.value(forKey: "json") as? String, let unread_count = item.value(forKey: "unread_count") as? Int{
-                            if let dict = Helper.convertToDictionary(text: json) as? NSDictionary {
-                                let datetime = Date(timeIntervalSince1970: TimeInterval((dict["update_date"] as! UInt64) / 1000))
-                                var firstProdNo:String? = nil
-                                if let prodLinks = dict["sampleProdLinks"] as? NSArray{
-                                    if let firstItem = prodLinks.firstObject as? NSDictionary{
-                                        firstProdNo = firstItem["prod_id"] as? String
+                        if let unread_count = item.value(forKey: "unread_count") as? Int,
+                            let dateStr = item.value(forKey: "updatedate") as? String{
+                            let date = Helper.date(from:dateStr)
+                            let dataFrom = item.value(forKey: "datafrom") as? String
+                            let series = item.value(forKey: "series") as? String
+                            let myTaxno = item.value(forKey: "myTaxNO") as? String
+                            var url:String? = nil
+                            let products = item.value(forKey: "products") as? NSArray
+                            if let products = products{
+                                for temp in products{
+                                    if let productItem = temp as? NSDictionary{
+                                        let prodNO = productItem.value(forKey: "ProdNO") as? String
+                                        let graphicUrl = productItem.value(forKey: "graphicUrl") as? String
+                                        let specdesc = productItem.value(forKey: "specdesc") as? String
+                                        let updateDate = Helper.date(from:productItem.value(forKey: "updatedate") as? String)
+                                        if url == nil {
+                                            url = graphicUrl
+                                        }
                                     }
                                 }
-                                
-                                let links = dict["sampleProdLinks"] as! NSArray
-                                var myTaxNoLinks = [Any]()
-                                for linkItem in links{
-                                    let tempDict = NSMutableDictionary ()
-                                    tempDict.addEntries(from: linkItem as! [AnyHashable : Any])
-                                    let mytaxNo:String? = item["mytaxno"] as? String
-                                    tempDict.addEntries(from: ["myTaxNo": mytaxNo])
-                                    myTaxNoLinks.append(tempDict)
-                                }
-                                
-                                let json = Helper.converToJson(obj:  myTaxNoLinks)
-                                
-                                let item = ReceivedSampleData(datetime: datetime, detailJson: json!, title: dict["dataFrom"] as! String, sampleId: dict["guid"] as! String, firstProdNo:firstProdNo, unread_count: unread_count)
-                                self.data.append(item)
-                                self.receivedSampleDAO.create(productsData: [item])
                             }
+                            let item = ReceivedSampleData(datetime: date!, products: Helper.converToJson(obj: products), title: dataFrom!,  sampleId: series!,  unread_count: unread_count, graphicUrl: url)
+                            self.data.append(item)
+                            self.receivedSampleDAO.create(productsData: [item])
+                           
                         }
                         
                     }
@@ -189,59 +212,11 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                     return d1.datetime > d2.datetime
                 })
                 self.mTableView.reloadData()
-                self.loadProductImage(data: self.data)
+                //self.loadProductImage(data: self.data)
         }
     }
     
-    func loadProductImage(data:[ReceivedSampleData])  {
-        let imagePath = Helper.getImagePath(folder: "Received")
-        for dataItem in data {
-            if let links = Helper.convertToDictionary(text: dataItem.detailJson) as? NSArray {
-                for arrayItem in links {
-                    if let item = arrayItem as? NSDictionary{
-                        let prodno = (item["prod_id"] as! String).replacingOccurrences(of: "'", with: "''")
-                        var query = "prodno = '\(prodno)' "
-                        if let mytaxno = item["myTaxNo"] as? String{
-                            query = query + "and mytaxno='\(mytaxno)'"
-                        }
-                        
-                        let params = ["query" : query]
-                        Alamofire.request(AppCons.BASE_URL + "dataset/product", method: .get, parameters: params)
-                            .debugLog()
-                            .validate(statusCode: 200..<300)
-                            .responseJSON{
-                                response in
-                                if let error = response.result.error {
-                                    Helper.toast(message: Helper.getErrorMessage(response.result),thisVC: self)
-                                    return
-                                }
-                                let value = response.result.value
-                                let JSON = value as! NSDictionary
-                                let array = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSArray
-                                if array.count < 1{
-                                    Helper.toast(message: "No data",thisVC: self)
-                                }
-                                if let rItem = array.firstObject as? NSDictionary{
-                                    if let graphic = rItem.value(forKey: "graphic") as? String {
-                                        do{
-                                            let data = Data(base64Encoded: graphic,options:NSData.Base64DecodingOptions.ignoreUnknownCharacters)
-                                            try data?.write(to: imagePath.appendingPathComponent("\(prodno)_type1.png", isDirectory: false))
-                                            self.mTableView.reloadData()
-                                        }catch{
-                                            
-                                        }
-                                    }
-                                }
-                                
-                        }
-                        
-                        
-                    }
-                }
-            }
-        }
-        
-    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show_detail"{
             if let row = self.mTableView.indexPathForSelectedRow?.row{
@@ -250,7 +225,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 data[row] = item
                 self.mTableView.reloadRows(at: [self.mTableView.indexPathForSelectedRow!], with: .automatic)
                 let destinationVC = segue.destination as! ReceivedDetailController
-                destinationVC.detailJson = item.detailJson
+                destinationVC.detailJson = item.products
                 destinationVC.title = item.title
                 destinationVC.sampleId = item.sampleId
             }

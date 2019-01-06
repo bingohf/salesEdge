@@ -12,8 +12,9 @@ import Alamofire
 
 struct ProdInfo {
    var prodno:String
-    var create_date:Date
+    var create_date:Date?
    var spec:String
+    var graphicUrl:String?
     
 }
 
@@ -48,11 +49,14 @@ class ReceivedDetailController:UITableViewController{
         }
         
         if let array = Helper.convertToDictionary(text: detailJson!) as? NSArray {
-            for case let item as NSDictionary in array{
-                let prodno = item.value(forKey: "prod_id") as! String
-                let spec = item.value(forKey: "spec_desc") as? String ?? ""
-                let date = Date(timeIntervalSince1970: TimeInterval((item["create_date"] as! UInt64) / 1000))
-                data.append(ProdInfo(prodno: prodno, create_date: date, spec: spec))
+            for temp in array{
+                if let item = temp as? NSDictionary{
+                    let prodno = item.value(forKey: "ProdNO") as! String
+                    let spec = item.value(forKey: "specdesc") as? String ?? ""
+                    let date = Helper.date(from:item.value(forKey: "updatedate") as? String)
+                    
+                    data.append(ProdInfo(prodno: prodno, create_date: date, spec: spec,graphicUrl:item.value(forKey: "graphicUrl") as? String))
+                }
             }
         }
     }
@@ -69,39 +73,21 @@ class ReceivedDetailController:UITableViewController{
         cell.mTxtSubTitle.text = item.spec
         cell.mTxtTimestamp.text = Helper.format(date: item.create_date)
         
-
-            let filePath = Helper.getImagePath(folder:"Received").appendingPathComponent("\(item.prodno)_type1.png")
-            do{
-                let fileManager = FileManager.default
-                if fileManager.fileExists(atPath: filePath.path){
-                    cell.mImage.image = UIImage(contentsOfFile: filePath.path)
-                }else{
-                    cell.mImage.image = #imageLiteral(resourceName: "default_image")
-                }
-            }catch{
-                print(error)
-            }
-    
+        cell.mImage.af_setImage(
+            withURL: URL(string: "\(AppCons.BASE_URL)\(item.graphicUrl ?? "")")!,
+            placeholderImage: #imageLiteral(resourceName: "default_image"),
+            imageTransition: .crossDissolve(0.2)
+        )
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let prodno = data[indexPath.row].prodno
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let filePath = documentsDirectory.appendingPathComponent("Received").appendingPathComponent("\(prodno)_type1.png")
-        do{
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: filePath.path){
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
-                vc.imageUrl = filePath
-                show(vc, sender: nil)
-            }else{
-                Helper.toast(message: "No Image", thisVC: self)
-            }
-            
-        }catch{
-            print(error)
-        }
+        let url = data[indexPath.row].graphicUrl
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController2") as! ImageViewController2
+        vc.imageUrl = url
+        vc.title = data[indexPath.row].prodno
+        show(vc, sender: nil)
+        
     }
 }

@@ -13,11 +13,21 @@ import SwiftEventBus
 
 class Helper{
     
+    
+    
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         return formatter
     }()
+    
+    private static let jsonFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        return formatter
+    }()
+    
     
     open static func format(date: Date?) -> String{
         if date == nil {
@@ -25,6 +35,15 @@ class Helper{
         }
         return formatter.string(from:date!)
     }
+    
+    open static func date(from:String?) -> Date?{
+        if let str = from {
+            return jsonFormatter.date(from: str)
+        }
+        return nil
+        
+    }
+    
     open static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
         
@@ -222,7 +241,7 @@ class Helper{
         return "\(deviceId)-\(deviceName)-LEDWAY-\(timeStamp)~\(language)"
     }
     
-    open static func getMyTaxNO()->String{
+    public static func getMyTaxNO()->String{
         let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
         if let myTaxno = myTaxNo {
             if !myTaxno.isEmpty{

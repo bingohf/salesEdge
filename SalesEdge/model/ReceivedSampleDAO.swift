@@ -27,7 +27,7 @@ class ReceivedSampleDAO:CoreDataDAO{
         if listData.count > 0{
             for item in listData{
                 let mo = item 
-                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, detailJson: mo.detailJson!, title: mo.title!,sampleId: mo.sampleId!, firstProdNo: mo.firstProdNo, unread_count: 0))
+                resListData.append(ReceivedSampleData(datetime: mo.datetime! as Date, products: mo.products, title: mo.title!,sampleId: mo.sampleId!, unread_count: 0, graphicUrl:mo.graphicUrl))
             }
         }
         return resListData
@@ -42,9 +42,9 @@ class ReceivedSampleDAO:CoreDataDAO{
             let rSample = NSEntityDescription.insertNewObject(forEntityName: "ReceivedSample", into:context) as! ReceivedSampleMO
             rSample.title = data.title
             rSample.datetime = data.datetime as NSDate
-            rSample.detailJson = data.detailJson
+            rSample.products = data.products
             rSample.sampleId = data.sampleId
-            rSample.firstProdNo = data.firstProdNo
+            rSample.graphicUrl = data.graphicUrl
         }
         self.saveContext()
     }

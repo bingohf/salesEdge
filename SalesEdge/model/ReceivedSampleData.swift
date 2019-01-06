@@ -9,9 +9,9 @@
 import Foundation
 struct ReceivedSampleData {
    var datetime: Date
-   var detailJson: String
+   var products: String?
    var title: String
-    var sampleId :String
-    var firstProdNo:String?
-    var unread_count:Int?
+   var sampleId :String
+   var unread_count:Int?
+   var graphicUrl :String?
 }

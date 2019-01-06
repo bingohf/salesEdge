@@ -12,7 +12,7 @@ import IQKeyboardManagerSwift
 import RxSwift
 import UserNotifications
 import Alamofire
-
+import AlamofireImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
 
+        
+        UIImageView.af_sharedImageDownloader = ImageDownloader(
+            configuration: ImageDownloader.defaultURLSessionConfiguration(),
+            downloadPrioritization: .fifo,
+            maximumActiveDownloads: 4,
+            imageCache: MemoryDiskCache()
+        )
         return true
     }
     

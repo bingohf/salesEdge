@@ -29,8 +29,8 @@
     </entity>
     <entity name="ReceivedSample" representedClassName="ReceivedSampleMO" syncable="YES">
         <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detailJson" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="firstProdNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="graphicUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="products" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sampleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
