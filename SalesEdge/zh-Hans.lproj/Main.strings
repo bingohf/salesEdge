@@ -15,13 +15,13 @@
 "Ycf-mx-AD3.title" = "Title";
 
 /* Class = "UITextField"; placeholder = "Bill No"; ObjectID = "Yot-00-lWu"; */
-"Yot-00-lWu.placeholder" = "Bill No";
+"Yot-00-lWu.placeholder" = "1. Bill No";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZYp-uF-XX6"; */
 "ZYp-uF-XX6.normalTitle" = "Button";
 
 /* Class = "UITextField"; placeholder = "PA No"; ObjectID = "bdv-iI-ctg"; */
-"bdv-iI-ctg.placeholder" = "PA No";
+"bdv-iI-ctg.placeholder" = "2. PA or Item No";
 
 /* Class = "UITabBarItem"; title = "PA"; ObjectID = "cPa-gy-q4n"; */
 "cPa-gy-q4n.title" = "PA";

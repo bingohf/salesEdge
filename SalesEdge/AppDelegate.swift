@@ -13,6 +13,8 @@ import RxSwift
 import UserNotifications
 import Alamofire
 import AlamofireImage
+import CoreStore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,6 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             maximumActiveDownloads: 4,
             imageCache: MemoryDiskCache()
         )
+        
+        CoreStore.defaultStack = DataStack(
+            xcodeModelName: "CoreStore",
+            migrationChain: ["CoreStore"]
+        )
+        do {
+          try CoreStore.addStorageAndWait(SQLiteStore(fileName: "MyStore2.sqlite"))
+        }catch{
+            print(error)
+        }
+        
         return true
     }
     

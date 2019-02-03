@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ReceivedProduct" representedClassName=".ReceivedProduct" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prod_no" attributeType="String" syncable="YES"/>
+        <attribute name="spec" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="sample" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ReceivedSample" inverseName="products" inverseEntity="ReceivedSample" syncable="YES"/>
+    </entity>
+    <entity name="ReceivedSample" representedClassName=".ReceivedSample" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sample_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unread_count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReceivedProduct" inverseName="sample" inverseEntity="ReceivedProduct" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ReceivedProduct" positionX="-164.67578125" positionY="-82.8515625" width="128" height="120"/>
+        <element name="ReceivedSample" positionX="-435.5390625" positionY="-114.2421875" width="128" height="120"/>
+    </elements>
+</model>

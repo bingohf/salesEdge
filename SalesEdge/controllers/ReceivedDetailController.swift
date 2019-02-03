@@ -19,9 +19,8 @@ struct ProdInfo {
 }
 
 class ReceivedDetailController:UITableViewController{
-    var detailJson:String? = nil
+    var products:[ReceivedProduct]? = nil
     var sampleId:String? = nil
-    var data = [ProdInfo]()
     
     override func viewDidLoad() {
         let params = ["device_id":UIDevice.current.identifierForVendor!.uuidString,
@@ -48,46 +47,40 @@ class ReceivedDetailController:UITableViewController{
                 }
         }
         
-        if let array = Helper.convertToDictionary(text: detailJson!) as? NSArray {
-            for temp in array{
-                if let item = temp as? NSDictionary{
-                    let prodno = item.value(forKey: "ProdNO") as! String
-                    let spec = item.value(forKey: "specdesc") as? String ?? ""
-                    let date = Helper.date(from:item.value(forKey: "updatedate") as? String)
-                    
-                    data.append(ProdInfo(prodno: prodno, create_date: date, spec: spec,graphicUrl:item.value(forKey: "graphicUrl") as? String))
-                }
-            }
-        }
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return products?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
-        let item = data[indexPath.row]
-        cell.mTxtLabel.text = item.prodno
-        cell.mTxtSubTitle.text = item.spec
-        cell.mTxtTimestamp.text = Helper.format(date: item.create_date)
-        
-        cell.mImage.af_setImage(
-            withURL: URL(string: "\(AppCons.BASE_URL)\(item.graphicUrl ?? "")")!,
-            placeholderImage: #imageLiteral(resourceName: "default_image"),
-            imageTransition: .crossDissolve(0.2)
-        )
+        if let item = self.products?[indexPath.row]{
+            cell.mTxtLabel.text = item.prod_no
+            cell.mTxtSubTitle.text = item.spec
+            cell.mTxtTimestamp.text = Helper.format(date: item.date)
+            cell.mImage.image = #imageLiteral(resourceName: "default_image")
+            if let image_url = item.image_url{
+                cell.mImage.af_setImage(
+                    withURL: URL(string: "\(AppCons.BASE_URL)\(image_url)")!,
+                    placeholderImage: #imageLiteral(resourceName: "default_image"),
+                    imageTransition: .crossDissolve(0.2)
+                )
+            }
+
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = data[indexPath.row].graphicUrl
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController2") as! ImageViewController2
-        vc.imageUrl = url
-        vc.title = data[indexPath.row].prodno
-        show(vc, sender: nil)
+        if let url = self.products?[indexPath.row].image_url{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController2") as! ImageViewController2
+            vc.imageUrl = url
+            vc.title = self.products?[indexPath.row].prod_no ?? ""
+            show(vc, sender: nil)
+        }
         
     }
 }

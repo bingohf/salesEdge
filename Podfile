@@ -21,4 +21,5 @@ target 'SalesEdge' do
     pod 'TDBadgedCell', '~> 5.5'
     pod 'AlamofireImage', '~> 3.5'
     pod 'Disk', '~> 0.4.0'
+    pod 'CoreStore', '~> 5.0'
 end

@@ -100,6 +100,13 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
             let mode = item.value(forKey: "menu_Label_Eng") as! String
             if(mode == mMode){
                 mStateBarItem.title = text
+                if mode.uppercased() == mode{
+                    mFieldBillNo.placeholder = "1. Bill No"
+                    mFieldPANO.placeholder = "2. PA or Item No"
+                }else{
+                    mFieldBillNo.placeholder = "2. Bill No"
+                    mFieldPANO.placeholder = "1. PA or Item No"
+                }
                 break;
             }
         }

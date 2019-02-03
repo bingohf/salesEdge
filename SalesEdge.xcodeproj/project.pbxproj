@@ -48,6 +48,10 @@
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
 		6AA999A6217A9F3B0008E298 /* ProductListWithSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */; };
+		6AB1989321F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989221F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift */; };
+		6AB1989621F2F26E00ED3E50 /* CoreStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989421F2F26D00ED3E50 /* CoreStore.xcdatamodeld */; };
+		6AB1989921F2F87300ED3E50 /* ReceivedSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989821F2F87300ED3E50 /* ReceivedSample.swift */; };
+		6AB1989B21F2F8E200ED3E50 /* ReceivedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989A21F2F8E200ED3E50 /* ReceivedProduct.swift */; };
 		6AB71F0D21D8FB1800CF633C /* UISalesLeadsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB71F0C21D8FB1800CF633C /* UISalesLeadsNavigationController.swift */; };
 		6ABE8ACD2070B05000919B1A /* MyIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */; };
 		6ABE8AD02070B98E00919B1A /* MyBizCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */; };
@@ -112,6 +116,10 @@
 		6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
 		6AA8862E20A8192200052232 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListWithSearchController.swift; sourceTree = "<group>"; };
+		6AB1989221F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ReceivedSampleMO+CoreDataProperties.swift"; path = "/Users/binguo/workdir/SalesEdge/SalesEdge/model/ReceivedSampleMO+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		6AB1989521F2F26D00ED3E50 /* CoreStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreStore.xcdatamodel; sourceTree = "<group>"; };
+		6AB1989821F2F87300ED3E50 /* ReceivedSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSample.swift; sourceTree = "<group>"; };
+		6AB1989A21F2F8E200ED3E50 /* ReceivedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedProduct.swift; sourceTree = "<group>"; };
 		6AB71F0C21D8FB1800CF633C /* UISalesLeadsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISalesLeadsNavigationController.swift; sourceTree = "<group>"; };
 		6ABE8ACC2070B05000919B1A /* MyIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIDViewController.swift; sourceTree = "<group>"; };
 		6ABE8ACF2070B98E00919B1A /* MyBizCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBizCardViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 		6A085308209EA7340094C5B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6AB1989221F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift */,
 				6A1F749020E78F3E001CFE65 /* MySample+CoreDataClass.swift */,
 				6A1F749120E78F3E001CFE65 /* MySample+CoreDataProperties.swift */,
 				6A9CC0FA20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift */,
@@ -234,6 +243,7 @@
 		6A92F71B201360CE00079C31 /* SalesEdge */ = {
 			isa = PBXGroup;
 			children = (
+				6AB1989721F2F85400ED3E50 /* coreStore */,
 				6AEF421F21D9AEB6000F531E /* view */,
 				6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */,
 				6A085308209EA7340094C5B7 /* model */,
@@ -258,8 +268,18 @@
 				6ABE8AD32070D4DB00919B1A /* MainViewController.swift */,
 				6AA8862E20A8192200052232 /* Extensions.swift */,
 				6A5F6B4F20AFCCAB006F1F35 /* env.swift */,
+				6AB1989421F2F26D00ED3E50 /* CoreStore.xcdatamodeld */,
 			);
 			path = SalesEdge;
+			sourceTree = "<group>";
+		};
+		6AB1989721F2F85400ED3E50 /* coreStore */ = {
+			isa = PBXGroup;
+			children = (
+				6AB1989821F2F87300ED3E50 /* ReceivedSample.swift */,
+				6AB1989A21F2F8E200ED3E50 /* ReceivedProduct.swift */,
+			);
+			path = coreStore;
 			sourceTree = "<group>";
 		};
 		6AEF421F21D9AEB6000F531E /* view */ = {
@@ -375,6 +395,7 @@
 				"${BUILT_PRODUCTS_DIR}/ALCameraViewController/ALCameraViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
@@ -393,6 +414,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALCameraViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
@@ -439,6 +461,8 @@
 				6AA8862F20A8192200052232 /* Extensions.swift in Sources */,
 				6A8F5E3520A67A2C0040EFA6 /* ProductManagedObject+CoreDataProperties.swift in Sources */,
 				6A190B19204A8C3900534483 /* Helper.swift in Sources */,
+				6AB1989321F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift in Sources */,
+				6AB1989B21F2F8E200ED3E50 /* ReceivedProduct.swift in Sources */,
 				6A08530A209EA7440094C5B7 /* ViewDataItem.swift in Sources */,
 				6A57D5B3208376090074C0C6 /* CustomTableCell.swift in Sources */,
 				6A5F6B5020AFCCAB006F1F35 /* env.swift in Sources */,
@@ -475,6 +499,7 @@
 				6A92F71F201360CE00079C31 /* SampleController.swift in Sources */,
 				6AC53F1E2014D683003F7815 /* TabBaseViewController.swift in Sources */,
 				6A1F749720E78FBB001CFE65 /* MySampleDAO.swift in Sources */,
+				6AB1989621F2F26E00ED3E50 /* CoreStore.xcdatamodeld in Sources */,
 				6A9CC0FD20B96FE300B1761E /* ReceivedSampleMO+CoreDataProperties.swift in Sources */,
 				6AB71F0D21D8FB1800CF633C /* UISalesLeadsNavigationController.swift in Sources */,
 				6A24768921E1E45000A3539E /* ImageViewController2.swift in Sources */,
@@ -484,6 +509,7 @@
 				6A1F749320E78F3E001CFE65 /* MySample+CoreDataProperties.swift in Sources */,
 				6ABE8AD42070D4DB00919B1A /* MainViewController.swift in Sources */,
 				6A9CC0FC20B96FE300B1761E /* ReceivedSampleMO+CoreDataClass.swift in Sources */,
+				6AB1989921F2F87300ED3E50 /* ReceivedSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,6 +817,16 @@
 			);
 			currentVersion = 6ACB64AB21E0D70000D4FB2C /* LedwayCoreData 2.xcdatamodel */;
 			path = LedwayCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		6AB1989421F2F26D00ED3E50 /* CoreStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6AB1989521F2F26D00ED3E50 /* CoreStore.xcdatamodel */,
+			);
+			currentVersion = 6AB1989521F2F26D00ED3E50 /* CoreStore.xcdatamodel */;
+			path = CoreStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
