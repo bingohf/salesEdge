@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1660,6 +1660,11 @@
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="pick_product_by_qrcode" id="Fa7-hu-ity"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="MS" image="icon_qr_code_mulit" id="znL-es-UJ7">
+                                <connections>
+                                    <segue destination="X1Y-H0-HV2" kind="presentation" identifier="pick_mulit_product" id="i5L-r6-N6y"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1719,26 +1724,27 @@
     </scenes>
     <resources>
         <image name="app_share_qrcode" width="400" height="400"/>
-        <image name="business" width="48" height="48"/>
-        <image name="default_image" width="96" height="96"/>
-        <image name="ic_account_box" width="48" height="48"/>
-        <image name="ic_border_all" width="48" height="48"/>
-        <image name="ic_cloud_upload" width="48" height="48"/>
-        <image name="ic_language" width="48" height="48"/>
-        <image name="ic_more_horiz" width="48" height="48"/>
-        <image name="ic_photo_camera" width="48" height="48"/>
-        <image name="ic_share" width="48" height="48"/>
+        <image name="business" width="24" height="24"/>
+        <image name="default_image" width="48" height="48"/>
+        <image name="ic_account_box" width="24" height="24"/>
+        <image name="ic_border_all" width="24" height="24"/>
+        <image name="ic_cloud_upload" width="24" height="24"/>
+        <image name="ic_language" width="24" height="24"/>
+        <image name="ic_more_horiz" width="24" height="24"/>
+        <image name="ic_photo_camera" width="24" height="24"/>
+        <image name="ic_share" width="24" height="24"/>
+        <image name="icon_qr_code_mulit" width="33" height="33"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
-        <image name="ocr" width="36" height="36"/>
-        <image name="qrcode" width="36" height="36"/>
+        <image name="ocr" width="24" height="24"/>
+        <image name="qrcode" width="24" height="24"/>
         <image name="qrcode-scan" width="24" height="24"/>
-        <image name="qrcode-scan-multi" width="30" height="30"/>
-        <image name="redcycle" width="9.6000003814697266" height="9.6000003814697266"/>
+        <image name="qrcode-scan-multi" width="40" height="40"/>
+        <image name="redcycle" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lQL-al-B4s"/>
-        <segue reference="7Fn-HG-vAR"/>
+        <segue reference="i5L-r6-N6y"/>
         <segue reference="32D-md-z5T"/>
     </inferredMetricsTieBreakers>
 </document>

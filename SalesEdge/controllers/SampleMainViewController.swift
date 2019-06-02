@@ -33,7 +33,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         vcCustomer = storyboard.instantiateViewController(withIdentifier: "SampleCustomerViewController") as! SampleCustomerViewController
         vcCustomer?.sampleData = sampleData
         vcCustomer?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Customer", comment: "")))
-        vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Show Room", comment: "")))
+        vcMyList?.setInfo(itemInfo: IndicatorInfo(title: NSLocalizedString("Wish List", comment: "")))
         vcMyList?.sampleData = sampleData
         vcMyList?.loadJsonData()
         return [vcCustomer!,vcMyList!]
@@ -55,7 +55,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             var style = ToastStyle()
             style.messageColor = UIColor.green
             self.view.makeToast(message,style:style)
-            self.title = message
+            self.title = ""
         }
     }
     
@@ -92,9 +92,19 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             vc.message = "Pick Show Room by QRCode"
             vc.onCompleted = vcMyList?.addProduct
             self.moveToViewController(at: 1)
+        } else if segue.identifier == "pick_mulit_product" {
+            let vc = segue.destination as! QRCodeScannerViewController
+            vc.message = "Pick Show Room by QRCode"
+            vc.onCompleted = { [weak self](qrcode) in
+                self?.vcMyList?.addProduct(qrcode: qrcode)
+                self?.performSegue(withIdentifier: "pick_mulit_product", sender:sender)
+            }
+            self.moveToViewController(at: 1)
         }
     }
 
+
+    
     @IBAction func onSaveTouch(_ sender: Any) {
         if vcCustomer?.save() ?? false && vcMyList?.save() ?? false{
             var params = Helper.makeRequest()
