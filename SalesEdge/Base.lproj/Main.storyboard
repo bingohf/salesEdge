@@ -193,6 +193,7 @@
                         <outlet property="mFieldPANO" destination="bdv-iI-ctg" id="6cT-53-eLS"/>
                         <outlet property="mStateBarItem" destination="3ot-vf-P7b" id="3w7-BI-gUm"/>
                         <outlet property="mWebView" destination="Ncr-PL-WL2" id="87c-aL-Ee9"/>
+                        <outlet property="navItem" destination="say-W8-c62" id="Il1-yQ-uNz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

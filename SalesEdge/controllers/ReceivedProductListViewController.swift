@@ -77,7 +77,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         for product in item.products ?? []{
             if let imageUrl  = product.image_url{
                 cell.mImage.af_setImage(
-                    withURL: URL(string: "\(AppCons.BASE_URL)\(imageUrl)")!,
+                    withURL: URL(string: "\(AppCons.SE_Server)\(imageUrl)")!,
                     placeholderImage: #imageLiteral(resourceName: "default_image"),
                     imageTransition: .crossDissolve(0.2)
                 )
@@ -136,7 +136,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
             "device_id":deviceId
         ]
         self.mTableView.refreshControl?.beginRefreshing()
-        Alamofire.request(AppCons.BASE_URL + "spJson/SP_GET_RECEIVEDLIST2", method: .get, parameters: params,encoding: URLEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "spJson/SP_GET_RECEIVEDLIST2", method: .get, parameters: params,encoding: URLEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{

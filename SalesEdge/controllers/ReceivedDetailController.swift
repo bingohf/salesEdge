@@ -27,7 +27,7 @@ class ReceivedDetailController:UITableViewController{
                       "key2": sampleId!,
                       "type":"SAMPLE"]
         
-        Alamofire.request(AppCons.BASE_URL + "SpDataSet/SP_READ_MESSAGE", method: .post, parameters: params,encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "SpDataSet/SP_READ_MESSAGE", method: .post, parameters: params,encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -63,7 +63,7 @@ class ReceivedDetailController:UITableViewController{
             cell.mImage.image = #imageLiteral(resourceName: "default_image")
             if let image_url = item.image_url{
                 cell.mImage.af_setImage(
-                    withURL: URL(string: "\(AppCons.BASE_URL)\(image_url)")!,
+                    withURL: URL(string: "\(AppCons.SE_Server)\(image_url)")!,
                     placeholderImage: #imageLiteral(resourceName: "default_image"),
                     imageTransition: .crossDissolve(0.2)
                 )

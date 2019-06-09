@@ -183,7 +183,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowName2 where mytaxno ='\(mytaxno)'"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -239,7 +239,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)' order by prodno OFFSET \(offset)  ROWS FETCH NEXT \(size) ROWS ONLY"
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        Alamofire.request(AppCons.BASE_URL + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{

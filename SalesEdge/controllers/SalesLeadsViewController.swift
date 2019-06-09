@@ -32,9 +32,15 @@ class SalesLeadsViewController :ButtonBarPagerTabStripViewController{
         super.viewDidLoad()
         buttonBarView.selectedBar.backgroundColor = .orange
         buttonBarView.backgroundColor = UIColor(red: 7/255, green: 185/255, blue: 155/255, alpha: 1)
-        
-
    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let sm_server = UserDefaults.standard.string(forKey: "se_server"){
+            let t = [NSAttributedString.Key.foregroundColor:UIColor.blue]
+            self.navigationController?.navigationBar.titleTextAttributes = t
+            
+        }
     }
     
   

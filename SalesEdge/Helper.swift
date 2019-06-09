@@ -166,7 +166,7 @@ class Helper{
         ]) { (any1, any2) -> Any in
             any2
         }
-        Alamofire.request(AppCons.BASE_URL + "SpDataSet/SP_GET_MESSAGECOUNT", method: .post, parameters: params,encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "SpDataSet/SP_GET_MESSAGECOUNT", method: .post, parameters: params,encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{

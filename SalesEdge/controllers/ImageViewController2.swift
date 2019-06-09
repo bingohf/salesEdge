@@ -19,7 +19,7 @@ class ImageViewController2:UIViewController, UIScrollViewDelegate{
         mImageView.contentMode = .scaleToFill
         mImageView.contentMode = .scaleAspectFit
         mImageView.af_setImage(
-            withURL: URL(string: "\(AppCons.BASE_URL)\(imageUrl ?? "")")!,
+            withURL: URL(string: "\(AppCons.SE_Server)\(imageUrl ?? "")")!,
             placeholderImage: #imageLiteral(resourceName: "default_image"),
             imageTransition: .crossDissolve(0.2)
         )

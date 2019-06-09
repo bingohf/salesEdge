@@ -15,6 +15,8 @@ import Toast_Swift
 import RxSwift
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
+  
+    @IBOutlet weak var navItem: UINavigationItem!
     
     @IBOutlet weak var mStateBarItem: UIBarButtonItem!
     @IBOutlet weak var mImageView: UIImageView!
@@ -46,6 +48,15 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         mStateBarItem.title = ""
         showState()
         settingChange()
+        
+        if let sm_server = UserDefaults.standard.string(forKey: "sm_server"){
+          //  self.navigationController.navigationBar.barTintColor = .
+        //    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            let t = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+            self.navigationController?.navigationBar.titleTextAttributes = t
+            
+        }
+        
         //self.view.makeToastActivity(.center)
         
     }
@@ -53,7 +64,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
     
     func loadMenus() {
         let parameters = Helper.makeRequest()
-        Alamofire.request(AppCons.BASE_URL + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SM_Server + "Sp/Sp_GetScanMasterMenu", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
@@ -154,7 +165,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         let view = self.view
         view?.makeToastActivity(.center)
         let parameters: [String: Any] = Helper.makeRequest().merging(params) { (current, _) in current }
-        Alamofire.request(AppCons.BASE_URL + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SM_Server + apiPath, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .debugLog()
             .responseJSON{
                 response in
@@ -424,27 +435,50 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     func receiveGroup(group:String) {
         let parameters = [
-            "macNo" : UIDevice.current.identifierForVendor!.uuidString
+            "macNo" : UIDevice.current.identifierForVendor!.uuidString,
+            "series" :group
         ]
         
-        Alamofire.request(AppCons.BASE_URL + "group/\(group)", method: .put, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request(AppCons.SM_Server + "SpJson/sp_join_group", method: .get, parameters: parameters, encoding: URLEncoding.default)
             .debugLog()
+            .validate(statusCode: 200..<300)
             .responseJSON{
                 response in
-                if let result = response.result.value {
-                    let JSON = result as! NSDictionary
-                    if let array = JSON.value(forKey: "result") as! NSArray?{
-                        if let result = array.firstObject as! NSDictionary? {
-                            if let error = result["error"] as! String? {
-                                self.toast(message: error)
-                                return
-                            }
-                            if let line = result["line"] as! String?, let myTaxNo = result["myTaxNo"] as! String? {
-                                self.settingChange(line:line, myTaxNo: myTaxNo)
-                            }
+                if let error = response.result.error {
+                    if let data = response.data{
+                        if let message = String.init(data: data, encoding: String.Encoding.utf8) {
+                            self.toast(message : message)
+                            return
                         }
+                        
                     }
-                    
+                    self.toast(message: Helper.getErrorMessage(response.result))
+                    return
+                }
+                if let result = response.result.value {
+                    let array = result as! NSArray
+                    if let item = array.firstObject as? NSDictionary{
+                        if let line = item["line"] as! String?, let myTaxNo = item["myTaxNo"] as! String? {
+                            self.settingChange(line:line, myTaxNo: myTaxNo)
+                        }
+                        if let sm_server = item["sm_server"] as? String, let sm_port = item["sm_port"] as? Int{
+                            UserDefaults.standard.set(sm_server, forKey: "sm_server")
+                            UserDefaults.standard.set(sm_port, forKey: "sm_port")
+                            UserDefaults.standard.synchronize()
+                            AppCons.loadServer()
+                            let t = [NSAttributedString.Key.foregroundColor:UIColor.orange]
+                            self.navigationController?.navigationBar.titleTextAttributes = t
+                        }
+                        
+                        if let sm_server = item["se_server"] as? String, let sm_port = item["se_port"] as? Int{
+                            UserDefaults.standard.set(sm_server, forKey: "se_server")
+                            UserDefaults.standard.set(sm_port, forKey: "se_port")
+                            UserDefaults.standard.synchronize()
+                            AppCons.loadServer_Se()
+                        }
+                      
+                    }
+
                 }
                 
         }

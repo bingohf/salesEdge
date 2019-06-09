@@ -128,7 +128,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 }
             }
             let manager = SessionManager.default
-            var ob = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSample_v4Line", parameters: params, encoding: JSONEncoding.default)
+            var ob = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSample_v4Line", parameters: params, encoding: JSONEncoding.default)
                 .validate(statusCode: 200 ..< 300)
                 .validate({ (request, response, data) -> Request.ValidationResult in
                     if let str = String(data: data!, encoding: .utf8){
@@ -170,7 +170,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                     "pcsnum":1]) { (any1, any2) -> Any in
                                     any2
                                 }
-                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.BASE_URL + "Sp/sp_UpSampleDetailLine", parameters: params, encoding: JSONEncoding.default)
+                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSampleDetailLine", parameters: params, encoding: JSONEncoding.default)
                                     .validate(statusCode: 200 ..< 300)
                                     .validate({ (request, response, data) -> Request.ValidationResult in
                                         if let str = String(data: data!, encoding: .utf8){

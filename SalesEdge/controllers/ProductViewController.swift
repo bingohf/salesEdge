@@ -132,7 +132,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                 any2
             }
             self.view.makeToastActivity(.center)
-            Alamofire.request(AppCons.BASE_URL + "Sp/sp_UpProductLine", method: .post, parameters: params, encoding: JSONEncoding.default)
+            Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLine", method: .post, parameters: params, encoding: JSONEncoding.default)
                 .debugLog()
                 .validate(statusCode: 200..<300)
                 .responseJSON{
