@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041BF9922352EF4800D11079 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 041BF9912352EF4800D11079 /* Localizable.strings */; };
 		6A048BB220C38E3500D88164 /* MyShowRoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A048BB120C38E3500D88164 /* MyShowRoomListController.swift */; };
 		6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8920C2AB0C0083868C /* ImageViewController.swift */; };
 		6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */; };
@@ -47,7 +48,6 @@
 		6AA8862D20A80DEE00052232 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862C20A80DEE00052232 /* QRCodeScannerViewController.swift */; };
 		6AA8862F20A8192200052232 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8862E20A8192200052232 /* Extensions.swift */; };
 		6AA999A6217A9F3B0008E298 /* ProductListWithSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA999A5217A9F3B0008E298 /* ProductListWithSearchController.swift */; };
-		6AB1989321F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989221F2AD2500ED3E50 /* ReceivedSampleMO+CoreDataProperties.swift */; };
 		6AB1989621F2F26E00ED3E50 /* CoreStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989421F2F26D00ED3E50 /* CoreStore.xcdatamodeld */; };
 		6AB1989921F2F87300ED3E50 /* ReceivedSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989821F2F87300ED3E50 /* ReceivedSample.swift */; };
 		6AB1989B21F2F8E200ED3E50 /* ReceivedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1989A21F2F8E200ED3E50 /* ReceivedProduct.swift */; };
@@ -67,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041BF9912352EF4800D11079 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		04967B9F2352C22300B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04967BA02352C22300B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04967BA42352C31E00B3C8A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -242,6 +243,7 @@
 		6A92F71B201360CE00079C31 /* SalesEdge */ = {
 			isa = PBXGroup;
 			children = (
+				041BF9912352EF4800D11079 /* Localizable.strings */,
 				6AB1989721F2F85400ED3E50 /* coreStore */,
 				6AEF421F21D9AEB6000F531E /* view */,
 				6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */,
@@ -373,6 +375,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041BF9922352EF4800D11079 /* Localizable.strings in Resources */,
 				6A92F729201360CE00079C31 /* LaunchScreen.storyboard in Resources */,
 				6A0C3DCC20662E7F0050386D /* InfoPlist.strings in Resources */,
 				6A92F726201360CE00079C31 /* Assets.xcassets in Resources */,
