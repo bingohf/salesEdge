@@ -5,3 +5,28 @@
   Created by mac on 2019/10/13.
   Copyright © 2019 Bin Guo. All rights reserved.
 */
+/*
+  Localizable.strings
+  SalesEdge
+
+  Created by Bin Guo on 2018/3/24.
+  Copyright © 2018年 Bin Guo. All rights reserved.
+*/
+"Change Group" = "更換組別";
+"My List" = "我的清單";
+"Received" = "接收到的樣品";
+"Customer" = "客戶";
+"Wish List" = "願望清單";
+"My" = "我的";
+"MyID" = "我的ID";
+"Download sample group" = "下載集團產品";
+"Remove all" = "刪除全部";
+"Are you sure to remove all?" = "是否確定刪除全部？";
+"Cancel" = "取消";
+"Choose Option" = "選項";
+"Scan QRCode" = "掃描二維碼";
+"OK" = "確定";
+"Input" = "輸入";
+"Product No." = "產品編號";
+"Delete" = "刪除";
+"No image" = "沒有圖片";

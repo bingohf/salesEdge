@@ -1,12 +1,12 @@
 
 /* Class = "UIBarButtonItem"; title = "Status"; ObjectID = "3ot-vf-P7b"; */
-"3ot-vf-P7b.title" = "Status";
+"3ot-vf-P7b.title" = "狀態";
 
 /* Class = "UINavigationItem"; title = "My"; ObjectID = "42F-K6-9bT"; */
-"42F-K6-9bT.title" = "My";
+"42F-K6-9bT.title" = "我的";
 
 /* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "4EN-8d-jzv"; */
-"4EN-8d-jzv.title" = "Sales Edge";
+"4EN-8d-jzv.title" = "銷售優勢";
 
 /* Class = "UILabel"; text = "Label111"; ObjectID = "4Vz-XP-07T"; */
 "4Vz-XP-07T.text" = "Label111";
@@ -15,13 +15,13 @@
 "7zK-VT-OMY.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "QR"; ObjectID = "CZz-Sw-Fmc"; */
-"CZz-Sw-Fmc.normalTitle" = "QR";
+"CZz-Sw-Fmc.normalTitle" = "二維碼";
 
 /* Class = "UITabBarItem"; title = "My"; ObjectID = "CnK-Fs-iwG"; */
-"CnK-Fs-iwG.title" = "My";
+"CnK-Fs-iwG.title" = "我的";
 
 /* Class = "UITextView"; text = "The data entry here will be converted to QRCODE"; ObjectID = "DfU-ea-QaF"; */
-"DfU-ea-QaF.text" = "The data entry here will be converted to QRCODE";
+"DfU-ea-QaF.text" = "在此輸入的內容將會被轉成二維碼";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Dho-LC-KoT"; */
 "Dho-LC-KoT.normalTitle" = "Button";
@@ -30,10 +30,10 @@
 "FcJ-Ja-Iu2.title" = "Item";
 
 /* Class = "UINavigationItem"; title = "Take Photo"; ObjectID = "Ha3-vv-nIT"; */
-"Ha3-vv-nIT.title" = "Take Photo";
+"Ha3-vv-nIT.title" = "拍照";
 
 /* Class = "UITabBarItem"; title = "Sales Leads"; ObjectID = "Hwa-Mu-Rzs"; */
-"Hwa-Mu-Rzs.title" = "Sales Leads";
+"Hwa-Mu-Rzs.title" = "商機";
 
 /* Class = "UITableViewController"; title = "Product"; ObjectID = "I37-iq-pXz"; */
 "I37-iq-pXz.title" = "Product";
@@ -42,19 +42,19 @@
 "IWH-J0-Xau.normalTitle" = "Button";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "JCQ-iB-3qP"; */
-"JCQ-iB-3qP.normalTitle" = "Cancel";
+"JCQ-iB-3qP.normalTitle" = "取消";
 
 /* Class = "UIBarButtonItem"; title = "upload"; ObjectID = "Jps-Xs-KU2"; */
-"Jps-Xs-KU2.title" = "upload";
+"Jps-Xs-KU2.title" = "上傳";
 
 /* Class = "UISearchBar"; placeholder = "Product No."; ObjectID = "KFr-64-7In"; */
-"KFr-64-7In.placeholder" = "Product No.";
+"KFr-64-7In.placeholder" = "產品編號";
 
 /* Class = "UINavigationItem"; title = "Sales Leads"; ObjectID = "LuM-bH-ga6"; */
-"LuM-bH-ga6.title" = "Sales Leads";
+"LuM-bH-ga6.title" = "商機";
 
 /* Class = "UINavigationItem"; title = "Sample"; ObjectID = "N0O-pX-3X2"; */
-"N0O-pX-3X2.title" = "Sample";
+"N0O-pX-3X2.title" = "樣品";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Ols-1k-WVd"; */
 "Ols-1k-WVd.text" = "Label";
@@ -63,13 +63,13 @@
 "QXT-8x-s81.text" = "Label111";
 
 /* Class = "UIViewController"; title = "Picker"; ObjectID = "R3V-UH-qy2"; */
-"R3V-UH-qy2.title" = "Picker";
+"R3V-UH-qy2.title" = "挑選器";
 
 /* Class = "UILabel"; text = "Label111"; ObjectID = "U9a-cY-bJP"; */
 "U9a-cY-bJP.text" = "Label111";
 
 /* Class = "UINavigationItem"; title = "Show Room"; ObjectID = "UCe-Gf-K6y"; */
-"UCe-Gf-K6y.title" = "Show Room";
+"UCe-Gf-K6y.title" = "展示廳";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Ul4-Hz-mtE"; */
 "Ul4-Hz-mtE.text" = "Label";
@@ -81,7 +81,7 @@
 "Ux4-Fz-KXz.text" = "Label";
 
 /* Class = "UILabel"; text = "Product Description"; ObjectID = "V0v-Hq-w3E"; */
-"V0v-Hq-w3E.text" = "Product Description";
+"V0v-Hq-w3E.text" = "描述";
 
 /* Class = "UINavigationItem"; title = "PA"; ObjectID = "Wcv-nf-yGZ"; */
 "Wcv-nf-yGZ.title" = "PA";
@@ -108,7 +108,7 @@
 "cPa-gy-q4n.title" = "PA";
 
 /* Class = "UILabel"; text = "Samples will be sent to this phone by scanning QRCODE below."; ObjectID = "ceH-wJ-00J"; */
-"ceH-wJ-00J.text" = "Samples will be sent to this phone by scanning QRCODE below.";
+"ceH-wJ-00J.text" = "通過掃描二維碼，樣品會被發送到對方手機";
 
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "cgI-at-QiL"; */
 "cgI-at-QiL.title" = "Item";
@@ -129,10 +129,10 @@
 "hjF-gM-MWR.text" = "Label";
 
 /* Class = "UIBarButtonItem"; title = "More"; ObjectID = "j8D-k5-vXk"; */
-"j8D-k5-vXk.title" = "More";
+"j8D-k5-vXk.title" = "更多";
 
 /* Class = "UITabBarItem"; title = "Scan Master"; ObjectID = "kD2-2g-BF1"; */
-"kD2-2g-BF1.title" = "Scan Master";
+"kD2-2g-BF1.title" = "二維掃描";
 
 /* Class = "UILabel"; text = "Label111"; ObjectID = "kh3-BB-rxX"; */
 "kh3-BB-rxX.text" = "Label111";
@@ -159,10 +159,10 @@
 "nIU-57-Zqi.text" = "Label";
 
 /* Class = "UILabel"; text = "Install  app before sharing"; ObjectID = "rPA-Yh-qFk"; */
-"rPA-Yh-qFk.text" = "Install  app before sharing";
+"rPA-Yh-qFk.text" = "分享前先安裝App";
 
 /* Class = "UITabBarItem"; title = "Show Room"; ObjectID = "ri1-In-hnw"; */
-"ri1-In-hnw.title" = "Show Room";
+"ri1-In-hnw.title" = "展示廳";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "sCI-30-mKr"; */
 "sCI-30-mKr.text" = "Label";
@@ -171,31 +171,31 @@
 "sGN-87-vt0.title" = "Title";
 
 /* Class = "UINavigationItem"; title = "Show Room"; ObjectID = "sUh-Qu-1T7"; */
-"sUh-Qu-1T7.title" = "Show Room";
+"sUh-Qu-1T7.title" = "展示廳";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "sXX-Iz-3PJ"; */
 "sXX-Iz-3PJ.title" = "Title";
 
 /* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "say-W8-c62"; */
-"say-W8-c62.title" = "Sales Edge";
+"say-W8-c62.title" = "銷售優勢";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "teX-9b-XuL"; */
-"teX-9b-XuL.normalTitle" = "Done";
+"teX-9b-XuL.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "Touch to Image 1"; ObjectID = "tiA-Oo-B5r"; */
-"tiA-Oo-B5r.normalTitle" = "Touch to Image 1";
+"tiA-Oo-B5r.normalTitle" = "點擊圖片 1";
 
 /* Class = "UISearchBar"; placeholder = "Product No."; ObjectID = "udF-Oq-jK6"; */
-"udF-Oq-jK6.placeholder" = "Product No.";
+"udF-Oq-jK6.placeholder" = "產品編號";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "x0u-KJ-qS8"; */
 "x0u-KJ-qS8.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Touch to Image 2"; ObjectID = "xWf-vq-VR8"; */
-"xWf-vq-VR8.normalTitle" = "Touch to Image 2";
+"xWf-vq-VR8.normalTitle" = "點擊圖片 2";
 
 /* Class = "UILabel"; text = "Enter Subject Here"; ObjectID = "xvi-6C-Vld"; */
-"xvi-6C-Vld.text" = "Enter Subject Here";
+"xvi-6C-Vld.text" = "輸入標題";
 
 /* Class = "UILabel"; text = "Label111"; ObjectID = "yNb-dM-Yy7"; */
 "yNb-dM-Yy7.text" = "Label111";
