@@ -43,7 +43,7 @@ DEPENDENCIES:
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - ALCameraViewController
@@ -90,4 +90,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: d0b6926b773c1e8a902653200ec377e596d98e4a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.3

@@ -1,12 +1,12 @@
 
 /* Class = "UIBarButtonItem"; title = "Status"; ObjectID = "3ot-vf-P7b"; */
-"3ot-vf-P7b.title" = "状态";
+"3ot-vf-P7b.title" = "Status";
 
 /* Class = "UINavigationItem"; title = "My"; ObjectID = "42F-K6-9bT"; */
-"42F-K6-9bT.title" = "我的";
+"42F-K6-9bT.title" = "My";
 
 /* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "4EN-8d-jzv"; */
-"4EN-8d-jzv.title" = "销售优势";
+"4EN-8d-jzv.title" = "Sales Edge";
 
 /* Class = "UILabel"; text = "Label111"; ObjectID = "4Vz-XP-07T"; */
 "4Vz-XP-07T.text" = "Label111";
@@ -18,10 +18,10 @@
 "CZz-Sw-Fmc.normalTitle" = "QR";
 
 /* Class = "UITabBarItem"; title = "My"; ObjectID = "CnK-Fs-iwG"; */
-"CnK-Fs-iwG.title" = "我的";
+"CnK-Fs-iwG.title" = "My";
 
 /* Class = "UITextView"; text = "The data entry here will be converted to QRCODE"; ObjectID = "DfU-ea-QaF"; */
-"DfU-ea-QaF.text" = "在此输入的内容将会被转成二维码";
+"DfU-ea-QaF.text" = "The data entry here will be converted to QRCODE";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Dho-LC-KoT"; */
 "Dho-LC-KoT.normalTitle" = "Button";
@@ -30,10 +30,10 @@
 "FcJ-Ja-Iu2.title" = "Item";
 
 /* Class = "UINavigationItem"; title = "Take Photo"; ObjectID = "Ha3-vv-nIT"; */
-"Ha3-vv-nIT.title" = "拍照";
+"Ha3-vv-nIT.title" = "Take Photo";
 
 /* Class = "UITabBarItem"; title = "Sales Leads"; ObjectID = "Hwa-Mu-Rzs"; */
-"Hwa-Mu-Rzs.title" = "商机";
+"Hwa-Mu-Rzs.title" = "Sales Leads";
 
 /* Class = "UITableViewController"; title = "Product"; ObjectID = "I37-iq-pXz"; */
 "I37-iq-pXz.title" = "Product";
