@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041BF9922352EF4800D11079 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 041BF9912352EF4800D11079 /* Localizable.strings */; };
+		04FA885D2352F027004B1A70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04FA885F2352F027004B1A70 /* Localizable.strings */; };
 		6A048BB220C38E3500D88164 /* MyShowRoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A048BB120C38E3500D88164 /* MyShowRoomListController.swift */; };
 		6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8920C2AB0C0083868C /* ImageViewController.swift */; };
 		6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */; };
@@ -67,13 +67,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		041BF9912352EF4800D11079 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		04967B9F2352C22300B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04967BA02352C22300B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04967BA42352C31E00B3C8A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		04967BA52352C31E00B3C8A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04967BA62352C31E00B3C8A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		04967BA72352C34900B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		04FA885E2352F027004B1A70 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		04FA88612352F034004B1A70 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.debug.xcconfig"; sourceTree = "<group>"; };
 		3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesEdge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A048BB120C38E3500D88164 /* MyShowRoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShowRoomListController.swift; sourceTree = "<group>"; };
@@ -243,7 +244,7 @@
 		6A92F71B201360CE00079C31 /* SalesEdge */ = {
 			isa = PBXGroup;
 			children = (
-				041BF9912352EF4800D11079 /* Localizable.strings */,
+				04FA885F2352F027004B1A70 /* Localizable.strings */,
 				6AB1989721F2F85400ED3E50 /* coreStore */,
 				6AEF421F21D9AEB6000F531E /* view */,
 				6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */,
@@ -375,7 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041BF9922352EF4800D11079 /* Localizable.strings in Resources */,
+				04FA885D2352F027004B1A70 /* Localizable.strings in Resources */,
 				6A92F729201360CE00079C31 /* LaunchScreen.storyboard in Resources */,
 				6A0C3DCC20662E7F0050386D /* InfoPlist.strings in Resources */,
 				6A92F726201360CE00079C31 /* Assets.xcassets in Resources */,
@@ -516,6 +517,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		04FA885F2352F027004B1A70 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FA885E2352F027004B1A70 /* zh-Hant */,
+				04FA88612352F034004B1A70 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6A0C3DCE20662E7F0050386D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

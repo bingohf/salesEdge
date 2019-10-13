@@ -130,18 +130,18 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
     
     @IBAction func onMoreClick(_ sender: Any) {
         // 1
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option".localized(), preferredStyle: .actionSheet)
         
         // 2
-        let deleteAction = UIAlertAction(title: "Download sample group", style: .default, handler: {
+        let deleteAction = UIAlertAction(title: "Download sample group".localized(), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow(sender)
         })
-        let deleteAllAction = UIAlertAction(title: "Remove All", style: .default, handler: {
+        let deleteAllAction = UIAlertAction(title: "Remove All".localized(), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            let alert = UIAlertController(title: "Remove all", message: "Are you sure to remove all?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let alert = UIAlertController(title: "Remove all".localized(), message: "Are you sure to remove all?".localized().localized(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: { [weak alert] (_) in
                 do {
                     try self.productDAO.removeAll()
                     self.data.removeAll()
@@ -151,13 +151,13 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                 self.tableView.reloadData()
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { [weak alert] (_) in
             }))
             self.present(alert, animated: true, completion: nil)
             
         })
         //
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
@@ -351,15 +351,15 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
     
     @IBAction func onAddTouch(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Input", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Input".localized(), message: nil, preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
-            textField.placeholder = "Product No."
+            textField.placeholder = "Product No.".localized()
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             print("Text field: \(textField?.text)")
             if let prodno = textField?.text {
@@ -371,7 +371,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             
             
         }))
-        alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Scan QRCode".localized(), style: .default, handler: { (_) in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
             destinationVC.onCompleted = {[weak self](qrcode)in
@@ -382,7 +382,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { (_) in
             
         }))
         

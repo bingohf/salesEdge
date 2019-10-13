@@ -103,7 +103,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                 vc.imageUrl = filePath
                 show(vc, sender: nil)
             }else{
-                Helper.toast(message: "No Image", thisVC: self)
+                Helper.toast(message: "No Image".localized(), thisVC: self)
             }
             
         }catch{
@@ -116,7 +116,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+        let share = UITableViewRowAction(style: .normal, title: "Delete".localized()) { action, index in
             let rowData = self.data[index.row]
             do {
                 self.data.remove(at: index.row)

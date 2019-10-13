@@ -6,3 +6,20 @@
   Copyright © 2018年 Bin Guo. All rights reserved.
 */
 "Change Group" = "更换组别";
+"My List" = "我的清单";
+"Received" = "接收到的样品";
+"Customer" = "客户";
+"Wish List" = "愿望清单";
+"My" = "我的";
+"MyID" = "我的ID";
+"Download sample group" = "下载集团产品";
+"Remove all" = "删除全部";
+"Are you sure to remove all?" = "是否确定删除全部？";
+"Cancel" = "取消";
+"Choose Option" = "选项";
+"Scan QRCode" = "扫描二维码";
+"OK" = "确定";
+"Input" = "输入";
+"Product No." = "产品编号";
+"Delete" = "删除";
+"No image" = "没有图片";

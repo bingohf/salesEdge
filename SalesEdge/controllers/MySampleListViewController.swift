@@ -63,7 +63,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        let share = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+        let share = UITableViewRowAction(style: .normal, title: "Delete".localized()) { action, index in
             let rowData = self.data[index.row]
             do {
                 self.mySampleDAO.remove(data: rowData)

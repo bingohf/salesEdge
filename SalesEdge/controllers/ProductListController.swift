@@ -135,17 +135,17 @@ class ProductListController : UITableViewController, ProductDelegate{
     
     @IBAction func onMoreClick(_ sender: Any) {
         // 1
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option".localized(), preferredStyle: .actionSheet)
         
         // 2
-        let deleteAction = UIAlertAction(title: "Download sample group", style: .default, handler: {
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Download sample group".localized(), comment: "") , style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.downloadGroupShow(sender)
         })
-        let deleteAllAction = UIAlertAction(title: "Remove All", style: .default, handler: {
+        let deleteAllAction = UIAlertAction(title:NSLocalizedString( "Remove all".localized(), comment: ""), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            let alert = UIAlertController(title: "Remove all", message: "Are you sure to remove all?", preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("Remove all".localized(),comment: ""), message: NSLocalizedString("Are you sure to remove all?".localized(),comment: ""), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 do {
                     try self.productDAO.removeAll()
@@ -156,13 +156,13 @@ class ProductListController : UITableViewController, ProductDelegate{
                 self.tableView.reloadData()
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak alert] (_) in
+            alert.addAction(UIAlertAction(title:"Cancel".localized(), style: .cancel, handler: { [weak alert] (_) in
             }))
             self.present(alert, animated: true, completion: nil)
             
         })
         //
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel",comment: ""), style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Cancelled")
         })
@@ -325,7 +325,7 @@ class ProductListController : UITableViewController, ProductDelegate{
     
     @IBAction func onAddTouch(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Input", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Input".localized(), message: nil, preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
@@ -345,7 +345,7 @@ class ProductListController : UITableViewController, ProductDelegate{
             
             
         }))
-        alert.addAction(UIAlertAction(title: "Scan QRCode", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Scan QRCode".localized(), style: .default, handler: { (_) in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
             destinationVC.onCompleted = {[weak self](qrcode)in
@@ -356,7 +356,7 @@ class ProductListController : UITableViewController, ProductDelegate{
             
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { (_) in
             
         }))
         
