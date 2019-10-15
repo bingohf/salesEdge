@@ -1,0 +1,207 @@
+
+/* Class = "UIBarButtonItem"; title = "Status"; ObjectID = "3ot-vf-P7b"; */
+"3ot-vf-P7b.title" = "Status";
+
+/* Class = "UINavigationItem"; title = "My"; ObjectID = "42F-K6-9bT"; */
+"42F-K6-9bT.title" = "My";
+
+/* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "4EN-8d-jzv"; */
+"4EN-8d-jzv.title" = "Sales Edge";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "4Vz-XP-07T"; */
+"4Vz-XP-07T.text" = "Label111";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "7zK-VT-OMY"; */
+"7zK-VT-OMY.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "QR"; ObjectID = "CZz-Sw-Fmc"; */
+"CZz-Sw-Fmc.normalTitle" = "QR";
+
+/* Class = "UITabBarItem"; title = "My"; ObjectID = "CnK-Fs-iwG"; */
+"CnK-Fs-iwG.title" = "My";
+
+/* Class = "UITextView"; text = "The data entry here will be converted to QRCODE"; ObjectID = "DfU-ea-QaF"; */
+"DfU-ea-QaF.text" = "The data entry here will be converted to QRCODE";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Dho-LC-KoT"; */
+"Dho-LC-KoT.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "FcJ-Ja-Iu2"; */
+"FcJ-Ja-Iu2.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Take Photo"; ObjectID = "Ha3-vv-nIT"; */
+"Ha3-vv-nIT.title" = "Take Photo";
+
+/* Class = "UITabBarItem"; title = "Sales Leads"; ObjectID = "Hwa-Mu-Rzs"; */
+"Hwa-Mu-Rzs.title" = "Sales Leads";
+
+/* Class = "UITableViewController"; title = "Product"; ObjectID = "I37-iq-pXz"; */
+"I37-iq-pXz.title" = "Product";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IWH-J0-Xau"; */
+"IWH-J0-Xau.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "JCQ-iB-3qP"; */
+"JCQ-iB-3qP.normalTitle" = "Cancel";
+
+/* Class = "UIBarButtonItem"; title = "upload"; ObjectID = "Jps-Xs-KU2"; */
+"Jps-Xs-KU2.title" = "upload";
+
+/* Class = "UISearchBar"; placeholder = "Product No."; ObjectID = "KFr-64-7In"; */
+"KFr-64-7In.placeholder" = "Product No.";
+
+/* Class = "UINavigationItem"; title = "Sales Leads"; ObjectID = "LuM-bH-ga6"; */
+"LuM-bH-ga6.title" = "Sales Leads";
+
+/* Class = "UINavigationItem"; title = "Sample"; ObjectID = "N0O-pX-3X2"; */
+"N0O-pX-3X2.title" = "Sample";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ols-1k-WVd"; */
+"Ols-1k-WVd.text" = "Label";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "QXT-8x-s81"; */
+"QXT-8x-s81.text" = "Label111";
+
+/* Class = "UIViewController"; title = "Picker"; ObjectID = "R3V-UH-qy2"; */
+"R3V-UH-qy2.title" = "Picker";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "U9a-cY-bJP"; */
+"U9a-cY-bJP.text" = "Label111";
+
+/* Class = "UINavigationItem"; title = "Show Room"; ObjectID = "UCe-Gf-K6y"; */
+"UCe-Gf-K6y.title" = "Show Room";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ul4-Hz-mtE"; */
+"Ul4-Hz-mtE.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Upt-nP-7cl"; */
+"Upt-nP-7cl.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ux4-Fz-KXz"; */
+"Ux4-Fz-KXz.text" = "Label";
+
+/* Class = "UILabel"; text = "Product Description"; ObjectID = "V0v-Hq-w3E"; */
+"V0v-Hq-w3E.text" = "Product Description";
+
+/* Class = "UINavigationItem"; title = "PA"; ObjectID = "Wcv-nf-yGZ"; */
+"Wcv-nf-yGZ.title" = "PA";
+
+/* Class = "UIButton"; normalTitle = "OCR"; ObjectID = "YbP-zU-mCh"; */
+"YbP-zU-mCh.normalTitle" = "OCR";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "Ycf-mx-AD3"; */
+"Ycf-mx-AD3.title" = "Title";
+
+/* Class = "UITextField"; placeholder = "1. Bill No"; ObjectID = "Yot-00-lWu"; */
+"Yot-00-lWu.placeholder" = "1. Bill No";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ZYp-uF-XX6"; */
+"ZYp-uF-XX6.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "b5v-jA-hAA"; */
+"b5v-jA-hAA.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "2. PA or Item No"; ObjectID = "bdv-iI-ctg"; */
+"bdv-iI-ctg.placeholder" = "2. PA or Item No";
+
+/* Class = "UITabBarItem"; title = "PA"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "PA";
+
+/* Class = "UILabel"; text = "Samples will be sent to this phone by scanning QRCODE below."; ObjectID = "ceH-wJ-00J"; */
+"ceH-wJ-00J.text" = "Samples will be sent to this phone by scanning QRCODE below.";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "cgI-at-QiL"; */
+"cgI-at-QiL.title" = "Item";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f2v-EE-C1j"; */
+"f2v-EE-C1j.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fiA-kq-XTz"; */
+"fiA-kq-XTz.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "fxl-Iq-lZ9"; */
+"fxl-Iq-lZ9.title" = "Item";
+
+/* Class = "UIViewController"; title = "ProductVC"; ObjectID = "hN5-yd-lV3"; */
+"hN5-yd-lV3.title" = "ProductVC";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hjF-gM-MWR"; */
+"hjF-gM-MWR.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "More"; ObjectID = "j8D-k5-vXk"; */
+"j8D-k5-vXk.title" = "More";
+
+/* Class = "UITabBarItem"; title = "Scan Master"; ObjectID = "kD2-2g-BF1"; */
+"kD2-2g-BF1.title" = "Scan Master";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "kh3-BB-rxX"; */
+"kh3-BB-rxX.text" = "Label111";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "l5J-fB-EuO"; */
+"l5J-fB-EuO.title" = "Item";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "llB-aI-BhN"; */
+"llB-aI-BhN.text" = "Label111";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "lu3-eA-w30"; */
+"lu3-eA-w30.title" = "Item";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mm4-63-4lr"; */
+"mm4-63-4lr.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mns-42-JeD"; */
+"mns-42-JeD.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mwS-14-nJA"; */
+"mwS-14-nJA.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nIU-57-Zqi"; */
+"nIU-57-Zqi.text" = "Label";
+
+/* Class = "UILabel"; text = "Install  app before sharing"; ObjectID = "rPA-Yh-qFk"; */
+"rPA-Yh-qFk.text" = "Install  app before sharing";
+
+/* Class = "UITabBarItem"; title = "Show Room"; ObjectID = "ri1-In-hnw"; */
+"ri1-In-hnw.title" = "Show Room";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "sCI-30-mKr"; */
+"sCI-30-mKr.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "sGN-87-vt0"; */
+"sGN-87-vt0.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "Show Room"; ObjectID = "sUh-Qu-1T7"; */
+"sUh-Qu-1T7.title" = "Show Room";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "sXX-Iz-3PJ"; */
+"sXX-Iz-3PJ.title" = "Title";
+
+/* Class = "UINavigationItem"; title = "Sales Edge"; ObjectID = "say-W8-c62"; */
+"say-W8-c62.title" = "Sales Edge";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "teX-9b-XuL"; */
+"teX-9b-XuL.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "Touch to Image 1"; ObjectID = "tiA-Oo-B5r"; */
+"tiA-Oo-B5r.normalTitle" = "Touch to Image 1";
+
+/* Class = "UISearchBar"; placeholder = "Product No."; ObjectID = "udF-Oq-jK6"; */
+"udF-Oq-jK6.placeholder" = "Product No.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "x0u-KJ-qS8"; */
+"x0u-KJ-qS8.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Touch to Image 2"; ObjectID = "xWf-vq-VR8"; */
+"xWf-vq-VR8.normalTitle" = "Touch to Image 2";
+
+/* Class = "UILabel"; text = "Enter Subject Here"; ObjectID = "xvi-6C-Vld"; */
+"xvi-6C-Vld.text" = "Enter Subject Here";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "yNb-dM-Yy7"; */
+"yNb-dM-Yy7.text" = "Label111";
+
+/* Class = "UILabel"; text = "Label111"; ObjectID = "zWc-cG-mxE"; */
+"zWc-cG-mxE.text" = "Label111";
+
+/* Class = "UIBarButtonItem"; title = "MS"; ObjectID = "znL-es-UJ7"; */
+"znL-es-UJ7.title" = "MS";
