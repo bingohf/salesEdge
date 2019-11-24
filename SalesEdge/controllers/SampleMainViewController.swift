@@ -103,7 +103,30 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
         }
     }
 
-
+    func showLinkQrCode(callback:@escaping ()->Void) {
+        let showAlert = UIAlertController(title: "Please scan QRCODE below", message: nil, preferredStyle: .alert)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 50, width: 250, height: 250))
+        if let qrImage = Helper.generateQRCode(from: "http://ledwayvip.cloudapp.net/i/c.aspx?series=\(sampleData.sampleId!)") {
+           imageView.image = UIImage(ciImage:  qrImage)
+        }
+        
+        showAlert.view.addSubview(imageView)
+        let height = NSLayoutConstraint(item: showAlert.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 350)
+        let width = NSLayoutConstraint(item: showAlert.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+        showAlert.view.addConstraint(height)
+        showAlert.view.addConstraint(width)
+        showAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            callback()
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+    }
+    
+    @IBAction func onActionLink(_ sender:Any){
+        showLinkQrCode() {
+            
+        }
+    }
+    
     
     @IBAction func onSaveTouch(_ sender: Any) {
         if vcCustomer?.save() ?? false && vcMyList?.save() ?? false{
@@ -205,8 +228,11 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 }, onCompleted: {[weak self] in
                     self?.sampleData.upload_date = NSDate()
                     self?.mySampleDAO.create(data: (self?.sampleData)!)
-                    self?.dismiss(animated: true, completion: nil)
-                    self?.onCompleted?(self?.sampleData)
+                    self?.showLinkQrCode {
+                        self?.dismiss(animated: true, completion: nil)
+                        self?.onCompleted?(self?.sampleData)
+                    }
+                  
                 }, onDisposed: {
                     self.view.hideToastActivity()
                 })

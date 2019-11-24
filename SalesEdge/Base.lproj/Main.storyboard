@@ -1633,6 +1633,11 @@
                                     <segue destination="X1Y-H0-HV2" kind="presentation" identifier="share" id="7Fn-HG-vAR"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Link" image="icon_base_link" id="X5K-KO-n9B">
+                                <connections>
+                                    <action selector="onActionLink:" destination="emq-0B-plV" id="c1H-4v-zL9"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="ic_cloud_upload" id="Pcd-C7-ye9">
                                 <connections>
                                     <action selector="onSaveTouch:" destination="emq-0B-plV" id="kEd-c1-tVp"/>
@@ -1721,6 +1726,7 @@
         <image name="ic_more_horiz" width="24" height="24"/>
         <image name="ic_photo_camera" width="24" height="24"/>
         <image name="ic_share" width="24" height="24"/>
+        <image name="icon_base_link" width="24" height="24"/>
         <image name="icon_qr_code_mulit" width="33" height="33"/>
         <image name="icons8-qr-code-filled-40" width="40" height="40"/>
         <image name="icons8-相机-40" width="40" height="40"/>
