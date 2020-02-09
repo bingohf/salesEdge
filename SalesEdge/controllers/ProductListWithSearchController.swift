@@ -12,7 +12,7 @@ import RxSwift
 import SQLite
 import Alamofire
 import JGProgressHUD
-
+import SwiftEventBus
 
 class ProductListWithSearchController:UIViewController, UITableViewDelegate, UITableViewDataSource,ProductDelegate, UISearchBarDelegate{
     let DEFAULT_GROUP = Env.isProduction() ? "xxx" : "3036A"
@@ -30,6 +30,37 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                                            for: UIControl.Event.valueChanged)
         reloadData()
         
+
+        
+        
+        let preferences = UserDefaults.standard
+        if let setting = preferences.object(forKey: "product") as? String , setting == "Y"{
+             self.removeAll()
+            preferences.removeObject(forKey: "product")
+            preferences.synchronize()
+        }else{
+            SwiftEventBus.onMainThread(self, name: "GroupChange"){result in
+                self.removeAll()
+                preferences.removeObject(forKey: "product")
+                preferences.synchronize()
+                Helper.toast(message: "You has been resigned.", thisVC: self)
+            }
+        }
+        
+    }
+    
+    func removeAll() {
+        do {
+            try self.productDAO.removeAll()
+            self.data.removeAll()
+        }catch{
+            Helper.toast(message: error.localizedDescription, thisVC: self)
+        }
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SwiftEventBus.unregister(self)
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -142,13 +173,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             
             let alert = UIAlertController(title: "Remove all".localized(), message: "Are you sure to remove all?".localized().localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: { [weak alert] (_) in
-                do {
-                    try self.productDAO.removeAll()
-                    self.data.removeAll()
-                }catch{
-                    Helper.toast(message: error.localizedDescription, thisVC: self)
-                }
-                self.tableView.reloadData()
+                self.removeAll()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { [weak alert] (_) in
@@ -314,7 +339,6 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                     hud.textLabel.text = "Success"
                     hud.dismiss(afterDelay: 1)
                 }
-                
         }
     }
     

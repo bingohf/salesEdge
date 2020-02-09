@@ -13,6 +13,8 @@ import Alamofire
 import RxSwift
 import AlamofireImage
 import CoreStore
+import SwiftEventBus
+
 
 class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegate, UITableViewDataSource {
     let refreshControl = UIRefreshControl()
@@ -40,9 +42,24 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         loadFromCache()
         loadRemote()
 
+        let preferences = UserDefaults.standard
+        if let setting = preferences.object(forKey: "received") as? String , setting == "Y"{
+             self.loadRemote()
+            preferences.removeObject(forKey: "received")
+             preferences.synchronize()
+        }else{
+            SwiftEventBus.onMainThread(self, name: "GroupChange"){result in
+                self.loadRemote()
+                preferences.removeObject(forKey: "received")
+                preferences.synchronize()
+            }
+        }
     
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        SwiftEventBus.unregister(self)
+    }
     
     func loadFromCache(){
        let samples = CoreStore.fetchAll(From<ReceivedSample>().orderBy(.descending(\.date)))

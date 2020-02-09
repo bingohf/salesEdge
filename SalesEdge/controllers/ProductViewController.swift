@@ -142,13 +142,15 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
                         return
                     }
+                    print(response.data)
                     let value = response.result.value
+                    print(value)
                     let JSON = value as! NSDictionary
                     let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
                     let errCode = result.value(forKey: "errCode") as? Int
                     let errMessage = result.value(forKey: "errData") as? String
                     guard errCode == 1 else{
-                        Helper.toast(message: errMessage ?? "error", thisVC: self)
+                        Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
                         return
                     }
                     let productDAO = ProductDAO()

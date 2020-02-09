@@ -13,6 +13,7 @@ import AVFoundation
 import Alamofire
 import Toast_Swift
 import RxSwift
+import SwiftEventBus
 
 class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate ,UIWebViewDelegate{
   
@@ -37,9 +38,7 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         return QRCodeReaderViewController(builder: builder)
     }()
     
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //mWebView.loadHTMLString(pdaGuid(), baseURL: nil)
@@ -61,6 +60,15 @@ class SampleController: UIViewController,QRCodeReaderViewControllerDelegate,UITe
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        SwiftEventBus.onMainThread(self, name: "GroupChange"){ result in
+            self.settingChange()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SwiftEventBus.unregister(self)
+    }
     
     func loadMenus() {
         let parameters = Helper.makeRequest()
@@ -319,11 +327,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertController.Style.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:NSLocalizedString("Change Group", comment:""), style:.default){
             (action: UIAlertAction!) -> Void in
-            self.scanQRCode(){qrcodeResult in
-                if let qrcode = qrcodeResult?.value {
-                    self.receiveGroup(group: qrcode)
-                }
-            }
+             self.receiveGroup(group: "1234")
+            
+//            self.scanQRCode(){qrcodeResult in
+//                if let qrcode = qrcodeResult?.value {
+//                    self.receiveGroup(group: qrcode)
+//                }
+//            }
         }
         alertController.addAction(groupQRCodeAction)
         
@@ -419,15 +429,19 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     func settingChange() {
         let preferences = UserDefaults.standard
-        if let line = preferences.object(forKey: "line") as! String?, let myTaxNo = preferences.object(forKey: "myTaxNo") as! String? {
-            settingChange(line: line, myTaxNo: myTaxNo)
-        }
+        let line = preferences.object(forKey: "line") as? String ?? ""
+        let myTaxNo = preferences.object(forKey: "myTaxNo") as? String ?? ""
+        settingChange(line: line, myTaxNo: myTaxNo)
         
     }
     
     func settingChange(line:String?, myTaxNo:String?) {
         let preferences = UserDefaults.standard
-        self.title = "Scan Master (\(myTaxNo ?? ""))"
+        if let myTaxNo = myTaxNo, myTaxNo != "" {
+           self.title = "Scan Master (\(myTaxNo))"
+        }else{
+           self.title = "Scan Master"
+        }
         preferences.set(myTaxNo, forKey: "myTaxNo")
         preferences.set(line, forKey: "line")
         preferences.synchronize()
@@ -459,6 +473,9 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                     let array = result as! NSArray
                     if let item = array.firstObject as? NSDictionary{
                         if let line = item["line"] as! String?, let myTaxNo = item["myTaxNo"] as! String? {
+                            let preference = UserDefaults.standard
+                            preference.removeObject(forKey: "resigned")
+                            preference.synchronize()
                             self.settingChange(line:line, myTaxNo: myTaxNo)
                         }
                         if let sm_server = item["sm_server"] as? String, let sm_port = item["sm_port"] as? Int{
