@@ -29,14 +29,14 @@ class Helper{
     }()
     
     
-    open static func format(date: Date?) -> String{
+    public static func format(date: Date?) -> String{
         if date == nil {
             return ""
         }
         return formatter.string(from:date!)
     }
     
-    open static func date(from:String?) -> Date?{
+    public static func date(from:String?) -> Date?{
         if let str = from {
             return jsonFormatter.date(from: str)
         }
@@ -44,7 +44,7 @@ class Helper{
         
     }
     
-    open static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
+    public static func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
         let contextImage: UIImage = UIImage(cgImage: image.cgImage!)
         
         let contextSize: CGSize = contextImage.size
@@ -78,7 +78,7 @@ class Helper{
         return image
     }
     
-    open static func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+    public static func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
         
         let widthRatio  = targetSize.width  / size.width
@@ -105,17 +105,17 @@ class Helper{
     }
     
     
-    open static func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+    public static func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
-    open static func encodeBase64(image:UIImage) -> String{
+    public static func encodeBase64(image:UIImage) -> String{
         let imageData:NSData = image.pngData()! as NSData
         let strBase64:String = imageData.base64EncodedString(options: .lineLength64Characters)
         return strBase64
     }
     
-    open static func getErrorMessage<Value>(_ result: Result<Value>) -> String {
+    public static func getErrorMessage<Value>(_ result: Result<Value>) -> String {
         if case let .failure(error) = result {
             if let error = error as? AFError {
                 switch error {
@@ -155,12 +155,12 @@ class Helper{
         return ""
     }
     
-    open static func setBadge(count:Int){
+    public static func setBadge(count:Int){
         SwiftEventBus.post("BadgeValue", sender: count)
         UIApplication.shared.applicationIconBadgeNumber = count
     }
     
-    open static func loadUnReadCount(callback:@escaping ()->Void){
+    public static func loadUnReadCount(callback:@escaping ()->Void){
         var params = Helper.makeRequest()
         params.merge(["device_id": UIDevice.current.identifierForVendor!.uuidString
         ]) { (any1, any2) -> Any in
@@ -189,7 +189,7 @@ class Helper{
         }
     }
     
-    open static func generateQRCode(from string: String) -> CIImage? {
+    public static func generateQRCode(from string: String) -> CIImage? {
         let data = string.data(using: String.Encoding.utf8)
         
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
@@ -202,7 +202,7 @@ class Helper{
         return nil
     }
 
-    open static func getImagePath(folder:String) -> URL{
+    public static func getImagePath(folder:String) -> URL{
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let dataPath = documentsDirectory.appendingPathComponent(folder)
         
@@ -215,7 +215,7 @@ class Helper{
     }
     
     
-    open static func makeRequest() -> [String : Any] {
+    public static func makeRequest() -> [String : Any] {
         let line = UserDefaults.standard.object(forKey: "line") as! String?
         let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?
         return [
@@ -226,7 +226,7 @@ class Helper{
         ]
     }
     
-    open static func pdaGuid() -> String {
+    public static func pdaGuid() -> String {
         let deviceId = UIDevice.current.identifierForVendor!.uuidString;
         let deviceName = UIDevice.current.modelName
         let dformatter = DateFormatter()
@@ -252,7 +252,7 @@ class Helper{
     }
     
     
-    open static func toast(message:String, thisVC:UIViewController) {
+    public static func toast(message:String, thisVC:UIViewController) {
         var vc:UIViewController? = thisVC
         while ((vc?.parent) != nil)  {
             vc = vc?.parent
@@ -262,7 +262,7 @@ class Helper{
         }
     }
     
-    open static func convertToDictionary(text: String) -> Any? {
+    public static func convertToDictionary(text: String) -> Any? {
         if let data = text.data(using: .utf8) {
             do {
                 return try JSONSerialization.jsonObject(with: data, options: [])
@@ -273,7 +273,7 @@ class Helper{
         return nil
     }
     
-    open static func converToJson(obj:Any) -> String?{
+    public static func converToJson(obj:Any) -> String?{
         do{
             let data =  try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
             return String(data: data, encoding: .utf8)

@@ -1,46 +1,48 @@
 PODS:
-  - Alamofire (4.8.0)
-  - AlamofireImage (3.5.0):
-    - Alamofire (~> 4.8)
-  - ALCameraViewController (3.0.2)
+  - Alamofire (4.9.1)
+  - AlamofireImage (3.6.0):
+    - Alamofire (~> 4.9)
+  - ALCameraViewController (3.1)
   - CoreStore (5.3.1)
   - Disk (0.4.0)
-  - IQKeyboardManagerSwift (5.0.7)
-  - JGProgressHUD (2.0.3)
-  - QRCodeReader.swift (8.0.4)
-  - RxAlamofire (4.2.0):
-    - RxAlamofire/Core (= 4.2.0)
-  - RxAlamofire/Core (4.2.0):
-    - Alamofire (~> 4.5)
-    - RxSwift (~> 4)
-  - RxCocoa (4.1.1):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.1.1)
-  - SQLite.swift (0.11.4):
-    - SQLite.swift/standard (= 0.11.4)
-  - SQLite.swift/standard (0.11.4)
+  - IQKeyboardManagerSwift (6.3.0)
+  - JGProgressHUD (2.1)
+  - QRCodeReader.swift (10.1.0)
+  - RxAlamofire (5.1.0):
+    - RxAlamofire/Core (= 5.1.0)
+  - RxAlamofire/Core (5.1.0):
+    - Alamofire (~> 4.8)
+    - RxSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SQLite.swift (0.11.6):
+    - SQLite.swift/standard (= 0.11.6)
+  - SQLite.swift/standard (0.11.6)
   - SwiftEventBus (3.0.1)
-  - TDBadgedCell (5.5.1)
-  - Toast-Swift (3.0.1)
-  - XLPagerTabStrip (8.0.0)
+  - TDBadgedCell (5.6.0)
+  - Toast-Swift (5.0.1)
+  - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.8)
   - AlamofireImage (~> 3.5)
   - ALCameraViewController
   - CoreStore (~> 5.0)
   - Disk (~> 0.4.0)
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (= 6.3.0)
   - JGProgressHUD
-  - QRCodeReader.swift (~> 8.0.3)
-  - RxAlamofire (~> 4.2.0)
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
+  - QRCodeReader.swift (~> 10.1.0)
+  - RxAlamofire
+  - RxCocoa (~> 5.0)
+  - RxSwift (~> 5.0)
   - SQLite.swift (~> 0.11.4)
   - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag `3.0.1`)
   - TDBadgedCell (~> 5.5)
-  - Toast-Swift (~> 3.0.1)
-  - XLPagerTabStrip (~> 8.0)
+  - Toast-Swift (~> 5.0.1)
+  - XLPagerTabStrip (~> 9.0)
 
 SPEC REPOS:
   trunk:
@@ -54,6 +56,7 @@ SPEC REPOS:
     - QRCodeReader.swift
     - RxAlamofire
     - RxCocoa
+    - RxRelay
     - RxSwift
     - SQLite.swift
     - TDBadgedCell
@@ -71,23 +74,24 @@ CHECKOUT OPTIONS:
     :tag: 3.0.1
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
-  ALCameraViewController: 1edce3497633f0df138523645ed1228961ee2eab
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  ALCameraViewController: 144dea45fd749a623aafd8cb7b10cea88499fcc3
   CoreStore: 89d0c8e7a9d76d0c533018b4850245c973f4ecbd
   Disk: ef2956657d5bb56034b38b29b352170165226440
-  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
-  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
-  QRCodeReader.swift: 9730cfa7ed5f0dd839765df8cf18d41db20e4081
-  RxAlamofire: 87a9c588541210cc3e4a1f843ccc3ecf3eb98b31
-  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
-  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
-  SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
+  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
+  QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
+  RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SQLite.swift: 46d890be8601964454bd3392527f863d1b802d45
   SwiftEventBus: 87ccaeceff91b748775e37751ae3a81ec815b3d5
-  TDBadgedCell: 9c651089021510d197f4d2b4892e7ad1f84ff378
-  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
-  XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
+  TDBadgedCell: 50beb1c113bad0422b4d4ed27bb54e128936ec6d
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: d0b6926b773c1e8a902653200ec377e596d98e4a
+PODFILE CHECKSUM: a99c01c09768097c1a362a396b59dc2c040cc1c4
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

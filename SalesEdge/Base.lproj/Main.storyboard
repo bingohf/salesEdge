@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1715,6 +1715,11 @@
             <point key="canvasLocation" x="3346" y="525"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="lQL-al-B4s"/>
+        <segue reference="grb-dQ-jcv"/>
+        <segue reference="32D-md-z5T"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="app_share_qrcode" width="400" height="400"/>
         <image name="business" width="24" height="24"/>
@@ -1736,9 +1741,4 @@
         <image name="qrcode-scan-multi" width="40" height="40"/>
         <image name="redcycle" width="20" height="20"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="lQL-al-B4s"/>
-        <segue reference="i5L-r6-N6y"/>
-        <segue reference="32D-md-z5T"/>
-    </inferredMetricsTieBreakers>
 </document>
