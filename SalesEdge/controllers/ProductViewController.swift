@@ -9,21 +9,100 @@
 import Foundation
 import UIKit
 import Alamofire
+import ALCameraViewController
 
 protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, URLConvertible{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, URLConvertible, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+    
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
     var afterPickImage :(() -> Void)?
-    
+    let dataPath = Helper.getImagePath(folder: "Show")
+    let fileManager = FileManager.default
     @IBOutlet weak var mTxtDesc: UITextView!
-    @IBOutlet weak var mImage: UIImageView!
+
+    @IBOutlet weak var mCollectionView: UICollectionView!
     
     @IBOutlet weak var mLabelPlaceHold: UILabel!
     @IBOutlet weak var mBtnQRCode: UIButton!
+    
+    
+    let pictureTypes = ["Left" ,"Flat", "Down", "Front", "Bent", "Right"]
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pictureTypes.count
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell :ProductCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath) as! ProductCollectionViewCell
+        let index = indexPath.row
+        cell.image.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.06)
+        cell.label.text = pictureTypes[indexPath.row]
+        cell.label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
+        cell.btnChange.tag = indexPath.row
+        cell.btnChange.addTarget(self, action: #selector(onBtnChangeClick), for: UIControl.Event.touchUpInside)
+        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(pictureTypes[index])_1.png")
+        if fileManager.fileExists(atPath: filename.path){
+           cell.image.image = UIImage(contentsOfFile: filename.path)
+           cell.image.contentMode = .scaleToFill
+           cell.image.contentMode = .scaleAspectFit
+        }
+        
+        return cell
+        
+    }
+    
+    @objc func onBtnChangeClick(sender:UIButton){
+        print("onBtnChangeClick\(sender.tag)")
+        let index = sender.tag
+        takePhotoFor(index: index)
+    }
+    
+    
+    func takePhotoFor(index:Int) {
+        let croppingParmaters = CroppingParameters(isEnabled: true, allowResizing: true, allowMoving: true, minimumSize: CGSize(width:60,height:60))
+        let cameraViewController = CameraViewController(croppingParameters: croppingParmaters, allowsLibraryAccess: true, allowsSwapCameraOrientation: true, allowVolumeButtonCapture: true)
+        { [weak self] image, asset in
+            if let image = image {
+                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                if let data512 = image512.jpegData(compressionQuality: 1) {
+                    if let filename = self?.dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_\(self?.pictureTypes[index] ?? "")_1.png"){
+                       try? data512.write(to: filename)
+                        self?.mCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                    }
+                }
+            }
+            self?.dismiss(animated: true, completion: nil)
+        }
+        present(cameraViewController, animated: true, completion: nil)
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
+        let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
+        let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
+        return CGSize(width: size, height: size)
+    }
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("collectionView didSelectItemAt \(indexPath)")
+        let index = indexPath.row
+        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(pictureTypes[index])_1.png")
+        if fileManager.fileExists(atPath: filename.path){
+           let storyboard = UIStoryboard(name: "Main", bundle: nil)
+           let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
+           vc.imageUrl = filename
+           show(vc, sender: collectionView)
+        }else{
+            takePhotoFor(index: index)
+        }
+        
+    }
+    
+
     override public func viewDidLoad() {
         mBtnQRCode.contentMode = .center
         mBtnQRCode.imageView?.contentMode = .scaleAspectFit
@@ -33,11 +112,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         if let prodno = productData?.prodno{
             let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(prodno)_type1.png")
             do{
-                let fileManager = FileManager.default
+                
                 if fileManager.fileExists(atPath: filePath.path){
-                    mImage.image = UIImage(contentsOfFile: filePath.path)
-                    mImage.contentMode = .scaleToFill
-                    mImage.contentMode = .scaleAspectFit
+//                    mImage.image = UIImage(contentsOfFile: filePath.path)
+//                    mImage.contentMode = .scaleToFill
+//                    mImage.contentMode = .scaleAspectFit
                 }
                 
             }catch{
@@ -48,7 +127,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         
     }
     @IBAction func onTapGestureSelector(_ sender: Any) {
-        if let guesture = sender as? UITapGestureRecognizer {
+/*        if let guesture = sender as? UITapGestureRecognizer {
             if guesture.view === mImage {
                 let prodno = productData!.prodno
                 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -98,6 +177,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
             }
         }
+ */
     }
     
     
@@ -171,8 +251,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
         let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
         let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
-        mImage.image = image
-        mImage.contentMode = .scaleToFill
+       // mImage.image = image
+      //  mImage.contentMode = .scaleToFill
         let dataPath = Helper.getImagePath(folder: "Show")
         if let data512 = image512.jpegData(compressionQuality: 1) {
             let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
@@ -288,8 +368,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             if let image = image {
                 let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
                 let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
-                self?.mImage.image = image
-                self?.mImage.contentMode = .scaleToFill
+               // self?.mImage.image = image
+                //self?.mImage.contentMode = .scaleToFill
                 let dataPath = Helper.getImagePath(folder: "Show")
                 if let data512 = image512.pngData() {
                     let filename = dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_type1.png")
