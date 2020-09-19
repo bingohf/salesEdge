@@ -62,11 +62,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
     
     func takePhotoFor(index:Int) {
-        let croppingParmaters = CroppingParameters(isEnabled: true, allowResizing: true, allowMoving: true, minimumSize: CGSize(width:60,height:60))
+        let croppingParmaters = CroppingParameters(isEnabled: true, allowResizing: true, allowMoving: true, minimumSize: CGSize(width:120,height:120))
         let cameraViewController = CameraViewController(croppingParameters: croppingParmaters, allowsLibraryAccess: true, allowsSwapCameraOrientation: true, allowVolumeButtonCapture: true)
         { [weak self] image, asset in
             if let image = image {
-                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                let image512 = Helper.cropToBounds(image: image, width: 1024, height: 1024)
                 if let data512 = image512.jpegData(compressionQuality: 1) {
                     if let filename = self?.dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_\(self?.pictureTypes[index] ?? "")_1.png"){
                        try? data512.write(to: filename)
