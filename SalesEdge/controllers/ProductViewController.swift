@@ -30,20 +30,21 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     @IBOutlet weak var mBtnQRCode: UIButton!
     
     
-    let pictureTypes = ["Left" ,"Flat", "Down", "Front", "Bent", "Right"]
+    public static let pictureTypes = ["Left" ,"Flat", "Down", "Front", "Bent", "Right"]
+    let pictureTypes = ProductViewController.pictureTypes
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pictureTypes.count
+        return ProductViewController.pictureTypes.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell :ProductCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath) as! ProductCollectionViewCell
         let index = indexPath.row
         cell.image.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.06)
-        cell.label.text = pictureTypes[indexPath.row]
+        cell.label.text = ProductViewController.pictureTypes[indexPath.row]
         cell.label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
         cell.btnChange.tag = indexPath.row
         cell.btnChange.addTarget(self, action: #selector(onBtnChangeClick), for: UIControl.Event.touchUpInside)
-        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(pictureTypes[index])_1.png")
+        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index])_1.png")
         if fileManager.fileExists(atPath: filename.path){
            cell.image.image = UIImage(contentsOfFile: filename.path)
            cell.image.contentMode = .scaleToFill
@@ -68,7 +69,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             if let image = image {
                 let image512 = Helper.cropToBounds(image: image, width: 1024, height: 1024)
                 if let data512 = image512.jpegData(compressionQuality: 1) {
-                    if let filename = self?.dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_\(self?.pictureTypes[index] ?? "")_1.png"){
+                    if let filename = self?.dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index] )_1.png"){
                        try? data512.write(to: filename)
                         self?.mCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     }
@@ -90,7 +91,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("collectionView didSelectItemAt \(indexPath)")
         let index = indexPath.row
-        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(pictureTypes[index])_1.png")
+        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index])_1.png")
         if fileManager.fileExists(atPath: filename.path){
            let storyboard = UIStoryboard(name: "Main", bundle: nil)
            let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
@@ -181,44 +182,36 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     }
     
     
-    
-    @IBAction func onUploadTouch(_ sender: Any) {
-        mTxtDesc.endEditing(true)
-        let desc = mTxtDesc.text ?? ""
-        guard !desc.isEmpty else {
-            Helper.toast(message:"Please input Product description", thisVC:self)
+    func uploadImages(typeIndex:Int,   callback: @escaping ()->Void)   {
+        guard typeIndex < ProductViewController.pictureTypes.count else {
+            callback()
             return
         }
-        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
-        let image2Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
-        guard FileManager.default.fileExists(atPath: image1Path.path) else {
-            Helper.toast(message:"Please take a image for this product", thisVC:self)
-            return
+        let type = ProductViewController.pictureTypes[typeIndex]
+        let imagePath = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_\(type)_1.png")
+        if !FileManager.default.fileExists(atPath: imagePath.path) {
+            uploadImages(typeIndex: typeIndex + 1, callback: callback);
+            return;
         }
-        productData?.desc = desc
-        productData?.updatedate = Date()
-        
-        if let imageData1:NSData = NSData(contentsOf: image1Path),
-            let imageData2 = NSData(contentsOf: image2Path){
-            let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
-            let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
+       // Helper.toast(message: "Uploading \(type)", thisVC: self)
+        let fincallback = callback
+        if let imageData:NSData = NSData(contentsOf: imagePath){
+            let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
             var params = Helper.makeRequest()
-            params.merge(["prodno": productData?.prodno ?? "",
-                          "specdesc" : desc,
-                          "empno": UIDevice.current.identifierForVendor!.uuidString,
-                          "graphic" : strBase641,
-                          "graphic2" : strBase642
-            ]) { (any1, any2) -> Any in
-                any2
-            }
-            self.view.makeToastActivity(.center)
-            Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLine", method: .post, parameters: params, encoding: JSONEncoding.default)
+                       params.merge(["prodno": productData?.prodno ?? "",
+                                     "empno": UIDevice.current.identifierForVendor!.uuidString,
+                                     "graphic" : strBase64,
+                                     "type" : type
+                       ]) { (any1, any2) -> Any in
+                           any2
+                       }
+            Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLineImage", method: .post, parameters: params, encoding: JSONEncoding.default)
                 .debugLog()
                 .validate(statusCode: 200..<300)
                 .responseJSON{
                     response in
-                    self.view?.hideToastActivity()
                     if let error = response.result.error {
+                        self.view?.hideToastActivity()
                         Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
                         return
                     }
@@ -229,17 +222,73 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                     let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
                     let errCode = result.value(forKey: "errCode") as? Int
                     let errMessage = result.value(forKey: "errData") as? String
-                    guard errCode == 1 else{
+                    guard errCode == 1 else {
+                        self.view?.hideToastActivity()
                         Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
                         return
                     }
-                    let productDAO = ProductDAO()
-                    productDAO.create(data: self.productData!)
-                    self.delegate?.onDataChange(productData: self.productData!)
-                    self.navigationController?.popViewController(animated: true)
+                    //Helper.toast(message: "Uploaded \(type)", thisVC: self)
+                    self.uploadImages(typeIndex: typeIndex + 1, callback: fincallback);
+  
             }
         }
-        
+    }
+    
+    
+    @IBAction func onUploadTouch(_ sender: Any) {
+        mTxtDesc.endEditing(true)
+        let desc = mTxtDesc.text ?? ""
+        guard !desc.isEmpty else {
+            Helper.toast(message:"Please input Product description", thisVC:self)
+            return
+        }
+        var hasPicture = false
+        for type in pictureTypes{
+            let imagePath = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_\(type)_1.png")
+            if FileManager.default.fileExists(atPath: imagePath.path) {
+                hasPicture = true
+                break;
+            }
+        }
+        guard hasPicture else {
+            Helper.toast(message:"Please take a image for this product", thisVC:self)
+            return
+        }
+        var params = Helper.makeRequest()
+                   params.merge(["prodno": productData?.prodno ?? "",
+                                 "specdesc" : desc,
+                                 "empno": UIDevice.current.identifierForVendor!.uuidString,
+                   ]) { (any1, any2) -> Any in
+                       any2
+                   }
+                   self.view.makeToastActivity(.center)
+                   Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLineMaster", method: .post, parameters: params, encoding: JSONEncoding.default)
+                       .debugLog()
+                       .validate(statusCode: 200..<300)
+                       .responseJSON{
+                           response in
+                           if let error = response.result.error {
+                               Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
+                               return
+                           }
+                           print(response.data)
+                           let value = response.result.value
+                           print(value)
+                           let JSON = value as! NSDictionary
+                           let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
+                           let errCode = result.value(forKey: "errCode") as? Int
+                           let errMessage = result.value(forKey: "errData") as? String
+                           guard errCode == 1 else{
+                               Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
+                               return
+                           }
+                        self.uploadImages(typeIndex: 0){
+                            let productDAO = ProductDAO()
+                            productDAO.create(data: self.productData!)
+                            self.delegate?.onDataChange(productData: self.productData!)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                   }
         
     }
     
