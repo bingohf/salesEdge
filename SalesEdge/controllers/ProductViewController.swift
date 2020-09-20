@@ -74,6 +74,13 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         self?.mCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     }
                 }
+                let image256 = Helper.cropToBounds(image: image, width: 256, height: 256)
+                
+                if let data256 = image256.jpegData(compressionQuality: 1) {
+                    if let filename = self?.dataPath.appendingPathComponent("\(self?.productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index] )_2.png"){
+                       try? data256.write(to: filename)
+                    }
+                }
             }
             self?.dismiss(animated: true, completion: nil)
         }
@@ -193,14 +200,18 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             uploadImages(typeIndex: typeIndex + 1, callback: callback);
             return;
         }
+        let imagePath2 = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_\(type)_2.png")
        // Helper.toast(message: "Uploading \(type)", thisVC: self)
         let fincallback = callback
-        if let imageData:NSData = NSData(contentsOf: imagePath){
+        if let imageData:NSData = NSData(contentsOf: imagePath),
+           let imageData2:NSData = NSData(contentsOf: imagePath2){
             let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+            let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
             var params = Helper.makeRequest()
                        params.merge(["prodno": productData?.prodno ?? "",
                                      "empno": UIDevice.current.identifierForVendor!.uuidString,
                                      "graphic" : strBase64,
+                                     "graphic2" : strBase642,
                                      "type" : type
                        ]) { (any1, any2) -> Any in
                            any2
@@ -278,7 +289,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                            let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
                            let errCode = result.value(forKey: "errCode") as? Int
                            let errMessage = result.value(forKey: "errData") as? String
-                           guard errCode == 1 else{
+                           guard errCode != -1 else{
                                Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
                                return
                            }

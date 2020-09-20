@@ -148,12 +148,12 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
         if !Env.isProduction(){
             //deviceId = "42f7acf889d0db9"
         }
-
+        //deviceId = "C1482EE6-625E-4A15-8F78-6FDD1C7425AD"
         let params = [
             "device_id":deviceId
         ]
         self.mTableView.refreshControl?.beginRefreshing()
-        Alamofire.request(AppCons.SE_Server + "spJson/SP_GET_RECEIVEDLIST2", method: .get, parameters: params,encoding: URLEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "spJson/SP_GET_RECEIVEDLIST3", method: .get, parameters: params,encoding: URLEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
