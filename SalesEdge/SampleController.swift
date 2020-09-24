@@ -327,13 +327,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let alertController = UIAlertController(title:nil, message:nil,preferredStyle:UIAlertController.Style.actionSheet)
         let groupQRCodeAction = UIAlertAction(title:NSLocalizedString("Change Group", comment:""), style:.default){
             (action: UIAlertAction!) -> Void in
-             self.receiveGroup(group: "1234")
+             //self.receiveGroup(group: "1234")
             
-//            self.scanQRCode(){qrcodeResult in
-//                if let qrcode = qrcodeResult?.value {
-//                    self.receiveGroup(group: qrcode)
-//                }
-//            }
+            self.scanQRCode(){qrcodeResult in
+                if let qrcode = qrcodeResult?.value {
+                    self.receiveGroup(group: qrcode)
+                }
+            }
         }
         alertController.addAction(groupQRCodeAction)
         
