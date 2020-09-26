@@ -214,6 +214,14 @@ class Helper{
         return dataPath
     }
     
+    public static func getImagePath(folder:String, prodno:String, type:String) ->URL{
+        let dataPath = getImagePath(folder: folder)
+        if type == "Main"{
+            return dataPath.appendingPathComponent("\(prodno)_type1.png")
+        }
+        return dataPath.appendingPathComponent("\(prodno)_\(type)_1.png")
+    }
+    
     
     public static func makeRequest() -> [String : Any] {
         let line = UserDefaults.standard.object(forKey: "line") as! String?

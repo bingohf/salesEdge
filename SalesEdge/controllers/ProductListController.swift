@@ -48,15 +48,12 @@ class ProductListController : UITableViewController, ProductDelegate{
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = default_Image
         
-        for type in ProductViewController.pictureTypes{
-            let imagePath = Helper.getImagePath(folder: "Show").appendingPathComponent("\(item.prodno ?? "")_\(type)_1.png")
-            if FileManager.default.fileExists(atPath: imagePath.path) {
-                cell.mImage.image = UIImage(contentsOfFile: imagePath.path)
-                break;
-            }
+        let imagePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
+        if FileManager.default.fileExists(atPath: imagePath.path) {
+            cell.mImage.image = UIImage(contentsOfFile: imagePath.path)
         }
-        
         return cell
+
         
     }
     

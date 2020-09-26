@@ -30,7 +30,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     @IBOutlet weak var mBtnQRCode: UIButton!
     
     
-    public static let pictureTypes = ["Left" ,"Flat", "Down", "Front", "Bent", "Right"]
+    public static let pictureTypes = ["Main" , "Left" ,"Flat", "Down", "Front", "Bent", "Right"]
     let pictureTypes = ProductViewController.pictureTypes
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ProductViewController.pictureTypes.count
@@ -44,7 +44,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         cell.label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
         cell.btnChange.tag = indexPath.row
         cell.btnChange.addTarget(self, action: #selector(onBtnChangeClick), for: UIControl.Event.touchUpInside)
-        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index])_1.png")
+        let filename = Helper.getImagePath(folder: "Show", prodno: productData?.prodno ?? "", type: pictureTypes[indexPath.row])
         if fileManager.fileExists(atPath: filename.path){
            cell.image.image = UIImage(contentsOfFile: filename.path)
            cell.image.contentMode = .scaleToFill
@@ -63,6 +63,11 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
     
     func takePhotoFor(index:Int) {
+        if index == 0{
+            onActionPhotoTouch(mCollectionView)
+            return
+        }
+        
         let croppingParmaters = CroppingParameters(isEnabled: true, allowResizing: true, allowMoving: true, minimumSize: CGSize(width:120,height:120))
         let cameraViewController = CameraViewController(croppingParameters: croppingParmaters, allowsLibraryAccess: true, allowsSwapCameraOrientation: true, allowVolumeButtonCapture: true)
         { [weak self] image, asset in
@@ -90,7 +95,12 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
         let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
-        let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
+        let size:CGFloat;
+        if pictureTypes[indexPath.row] == "Main"{
+            size = (collectionView.frame.size.width - space)
+        }else{
+            size = (collectionView.frame.size.width - space) / 2.0
+        }
         return CGSize(width: size, height: size)
     }
     
@@ -98,7 +108,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("collectionView didSelectItemAt \(indexPath)")
         let index = indexPath.row
-        let filename = dataPath.appendingPathComponent("\(productData?.prodno ?? "")_\(ProductViewController.pictureTypes[index])_1.png")
+        let filename = Helper.getImagePath(folder: "Show", prodno: productData?.prodno ?? "", type: pictureTypes[indexPath.row])
         if fileManager.fileExists(atPath: filename.path){
            let storyboard = UIStoryboard(name: "Main", bundle: nil)
            let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
@@ -426,7 +436,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         let vc = storyboard.instantiateViewController(withIdentifier: "CombinImagePickerViewController") as! CombinImagePickerViewController
         vc.onCompleted = {[weak self] image in
             if let image = image {
-                let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
+                let image512 = Helper.cropToBounds(image: image, width: 1024, height: 1024)
                 let image110 = Helper.cropToBounds(image: image512, width: 110, height: 110)
                // self?.mImage.image = image
                 //self?.mImage.contentMode = .scaleToFill
@@ -441,6 +451,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 }
                 self?.afterPickImage?()
                 self?.afterPickImage = nil
+                
+                self?.mCollectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
             }
             
             
