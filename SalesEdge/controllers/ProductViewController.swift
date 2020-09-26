@@ -263,55 +263,61 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             Helper.toast(message:"Please input Product description", thisVC:self)
             return
         }
-        var hasPicture = false
-        for type in pictureTypes{
-            let imagePath = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_\(type)_1.png")
-            if FileManager.default.fileExists(atPath: imagePath.path) {
-                hasPicture = true
-                break;
-            }
-        }
-        guard hasPicture else {
+        let image1Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type1.png")
+        let image2Path = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_type2.png")
+        guard FileManager.default.fileExists(atPath: image1Path.path) else {
             Helper.toast(message:"Please take a image for this product", thisVC:self)
             return
         }
-        var params = Helper.makeRequest()
-                   params.merge(["prodno": productData?.prodno ?? "",
-                                 "specdesc" : desc,
-                                 "empno": UIDevice.current.identifierForVendor!.uuidString,
-                   ]) { (any1, any2) -> Any in
-                       any2
-                   }
-                   self.view.makeToastActivity(.center)
-                   Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLineMaster", method: .post, parameters: params, encoding: JSONEncoding.default)
-                       .debugLog()
-                       .validate(statusCode: 200..<300)
-                       .responseJSON{
-                           response in
-                           if let error = response.result.error {
-                               Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
-                               return
-                           }
-                           print(response.data)
-                           let value = response.result.value
-                           print(value)
-                           let JSON = value as! NSDictionary
-                           let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
-                           let errCode = result.value(forKey: "errCode") as? Int
-                           let errMessage = result.value(forKey: "errData") as? String
-                           guard errCode != -1 else{
-                               Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
-                               return
-                           }
-                        self.uploadImages(typeIndex: 0){
-                            let productDAO = ProductDAO()
-                            productDAO.create(data: self.productData!)
-                            self.delegate?.onDataChange(productData: self.productData!)
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                   }
+        productData?.desc = desc
+        productData?.updatedate = Date()
         
-    }
+        if let imageData1:NSData = NSData(contentsOf: image1Path),
+                    let imageData2 = NSData(contentsOf: image2Path){
+                    let strBase641 = imageData1.base64EncodedString(options: .lineLength64Characters)
+                    let strBase642 = imageData2.base64EncodedString(options: .lineLength64Characters)
+                    var params = Helper.makeRequest()
+                    params.merge(["prodno": productData?.prodno ?? "",
+                                  "specdesc" : desc,
+                                  "empno": UIDevice.current.identifierForVendor!.uuidString,
+                                  "graphic" : strBase641,
+                                  "graphic2" : strBase642
+                    ]) { (any1, any2) -> Any in
+                        any2
+                    }
+                    self.view.makeToastActivity(.center)
+                    Alamofire.request(AppCons.SE_Server + "Sp/sp_UpProductLineV2", method: .post, parameters: params, encoding: JSONEncoding.default)
+                        .debugLog()
+                        .validate(statusCode: 200..<300)
+                        .responseJSON{
+                            response in
+                            self.view?.hideToastActivity()
+                            if let error = response.result.error {
+                                Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
+                                return
+                            }
+                            print(response.data)
+                            let value = response.result.value
+                            print(value)
+                            let JSON = value as! NSDictionary
+                            let result = (JSON.value(forKey: "result") as! NSArray).firstObject as! NSDictionary
+                            let errCode = result.value(forKey: "errCode") as? Int
+                            let errMessage = result.value(forKey: "errData") as? String
+                            guard errCode == 1 else{
+                                Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
+                                return
+                            }
+                            
+                            self.uploadImages(typeIndex: 1){
+                                let productDAO = ProductDAO()
+                                productDAO.create(data: self.productData!)
+                                self.delegate?.onDataChange(productData: self.productData!)
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                    }
+                }
+        }
+    
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 // Local variable inserted by Swift 4.2 migrator.
