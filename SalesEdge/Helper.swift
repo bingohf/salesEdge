@@ -223,6 +223,24 @@ class Helper{
     }
     
     
+    public static func setUploaded(file:URL) {
+        let fileManager = FileManager.default
+        let fileattr = try? fileManager.attributesOfItem(atPath: file.path)
+        if let modifiedDate = fileattr?[FileAttributeKey.modificationDate] as? NSDate {
+            try? "\(modifiedDate)".write(to: URL.init(fileURLWithPath: file.path + "_\(modifiedDate.timeIntervalSince1970)"), atomically: true, encoding: String.Encoding.utf8)
+        }
+    }
+    
+    public static func isUploaded(file:URL) -> Bool{
+        let fileManager = FileManager.default
+        let fileattr = try? fileManager.attributesOfItem(atPath: file.path)
+        if let modifiedDate = fileattr?[FileAttributeKey.modificationDate] as? NSDate {
+            return fileManager.fileExists(atPath: file.path + "_\(modifiedDate.timeIntervalSince1970)");
+        }
+        return false;
+    }
+    
+    
     public static func makeRequest() -> [String : Any] {
         let line = UserDefaults.standard.object(forKey: "line") as! String?
         let myTaxNo = UserDefaults.standard.object(forKey: "myTaxNo") as! String?

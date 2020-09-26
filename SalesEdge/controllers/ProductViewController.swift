@@ -204,9 +204,10 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
             callback()
             return
         }
+     
         let type = ProductViewController.pictureTypes[typeIndex]
         let imagePath = Helper.getImagePath(folder: "Show").appendingPathComponent("\(productData?.prodno ?? "")_\(type)_1.png")
-        if !FileManager.default.fileExists(atPath: imagePath.path) {
+        if !FileManager.default.fileExists(atPath: imagePath.path) ||  Helper.isUploaded(file: imagePath) {
             uploadImages(typeIndex: typeIndex + 1, callback: callback);
             return;
         }
@@ -248,6 +249,7 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         Helper.toast(message: "error: \( errMessage ?? "error")", thisVC: self)
                         return
                     }
+                    Helper.setUploaded(file: imagePath)
                     //Helper.toast(message: "Uploaded \(type)", thisVC: self)
                     self.uploadImages(typeIndex: typeIndex + 1, callback: fincallback);
   
@@ -291,7 +293,6 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
                         .validate(statusCode: 200..<300)
                         .responseJSON{
                             response in
-                            self.view?.hideToastActivity()
                             if let error = response.result.error {
                                 Helper.toast(message: Helper.getErrorMessage(response.result), thisVC: self)
                                 return
