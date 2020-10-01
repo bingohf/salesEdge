@@ -52,7 +52,10 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         cell.label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
         cell.btnChange.tag = indexPath.row
         cell.btnChange.addTarget(self, action: #selector(onBtnChangeClick), for: UIControl.Event.touchUpInside)
+        cell.image.contentMode = .scaleToFill
+        cell.image.image = nil
         let filename = Helper.getImagePath(folder: "Show", prodno: productData?.prodno ?? "", type: pictureTypes[indexPath.row])
+        print(filename.path)
         if fileManager.fileExists(atPath: filename.path){
            cell.image.image = UIImage(contentsOfFile: filename.path)
            cell.image.contentMode = .scaleToFill
