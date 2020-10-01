@@ -10,6 +10,7 @@ import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
+//    @IBOutlet weak var mIndicator: UIActivityIndicatorView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var image: UIImageView!
     

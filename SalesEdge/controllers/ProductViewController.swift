@@ -15,7 +15,7 @@ protocol ProductDelegate {
     func onDataChange(productData: ProductData)
 }
 
-public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, URLConvertible, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+public class ProductViewController:UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate, UITextViewDelegate, URLConvertible, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, URLSessionDownloadDelegate{
     
     var productData:ProductData? = nil
     var delegate:ProductDelegate? = nil
@@ -28,7 +28,15 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
     
     @IBOutlet weak var mLabelPlaceHold: UILabel!
     @IBOutlet weak var mBtnQRCode: UIButton!
-    
+    var index:Int?
+    var file:URL?
+    var callback:(()->Void)?
+    private lazy var urlSession: URLSession = {
+        let config = URLSessionConfiguration.background(withIdentifier: "MySession")
+        config.isDiscretionary = true
+        config.sessionSendsLaunchEvents = true
+        return URLSession.init(configuration: config, delegate: self, delegateQueue: nil)
+    }()
     
     public static let pictureTypes = ["Main" , "Left" ,"Flat", "Down", "Front", "Bent", "Right"]
     let pictureTypes = ProductViewController.pictureTypes
@@ -128,22 +136,73 @@ public class ProductViewController:UIViewController,UIImagePickerControllerDeleg
         mLabelPlaceHold.isHidden = !mTxtDesc.text.isEmpty
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         if let prodno = productData?.prodno{
-            let filePath = documentsDirectory.appendingPathComponent("Show").appendingPathComponent("\(prodno)_type1.png")
-            do{
-                
-                if fileManager.fileExists(atPath: filePath.path){
-//                    mImage.image = UIImage(contentsOfFile: filePath.path)
-//                    mImage.contentMode = .scaleToFill
-//                    mImage.contentMode = .scaleAspectFit
-                }
-                
-            }catch{
-                print(error)
+            self.view.makeToastActivity(.center)
+            loadImage(index: 1){
+                self.view.hideToastActivity()
+                self.mCollectionView.reloadData()
             }
         }
-        
+    }
+    
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        try? FileManager.default.moveItem(at: location, to: self.file!)
+        Helper.setUploaded(file: file!)
+        DispatchQueue.main.async {
+            self.loadImage(index: self.index! + 1, callback: self.callback!)
+        }
+    }
+
+    
+    func loadImage(index:Int,callback:@escaping ()->Void)  {
+        guard index < pictureTypes.count else {
+            
+            DispatchQueue.main.async {
+                callback()
+            }
+            return
+        }
+        let prodno = productData?.prodno ?? ""
+        let type = pictureTypes[index]
+        let file = Helper.getImagePath(folder: "Show", prodno: prodno, type: type)
+        guard !FileManager.default.fileExists(atPath: file.path) else {
+            loadImage(index: index + 1, callback: callback)
+            return
+        }
+        self.index = index
+        self.callback = callback
+        self.file = file
+        let mytaxno = Helper.getMyTaxNO()
+        if let url = URL.init(string: AppCons.SE_Server + "spStream/SP_GET_PRODUCTImageV1?out_field=prodimage&PRODNO=\(prodno)&mytaxno=\(mytaxno)&type=\(type)&v1=\(Date().timeIntervalSince1970)"){
+            let sessionConfig = URLSessionConfiguration.default
+            let session = URLSession.init(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+            let reqeust = try! URLRequest.init(url: url, method: HTTPMethod.get)
+            let task = session.dataTask(with: reqeust) { (d, r, e) in
+                if let error = e {
+                    self.loadImage(index: index + 1, callback: self.callback!)
+                    return
+                }
+                guard let httpResponse = r as? HTTPURLResponse,
+                    (200...299).contains(httpResponse.statusCode) else {
+                    self.loadImage(index: index + 1, callback: self.callback!)
+                    return
+                }
+                if let data = d {
+                    if data.count > 0 {
+                        try? data.write(to: file)
+                        Helper.setUploaded(file: file)
+                    }
+                }
+                self.loadImage(index: index + 1, callback: self.callback!)
+            }
+//            let task = session.dataTask(with: request) { (data, response, error) in
+//                print(data)
+//            }
+
+            task.resume()
+        }
         
     }
+    
     @IBAction func onTapGestureSelector(_ sender: Any) {
 /*        if let guesture = sender as? UITapGestureRecognizer {
             if guesture.view === mImage {
@@ -476,4 +535,19 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
+}
+
+
+class Downloader {
+    class func load(URL: URL) {
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let request = NSMutableURLRequest(url: URL)
+        request.httpMethod = "GET"
+        let task = session.downloadTask(with: request as URLRequest) { (url, response, error) in
+            print(url)
+            
+        }
+        task.resume()
+    }
 }

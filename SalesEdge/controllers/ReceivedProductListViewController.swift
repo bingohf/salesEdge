@@ -153,7 +153,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
             "device_id":deviceId
         ]
         self.mTableView.refreshControl?.beginRefreshing()
-        Alamofire.request(AppCons.SE_Server + "spJson/SP_GET_RECEIVEDLIST3", method: .get, parameters: params,encoding: URLEncoding.default)
+        Alamofire.request(AppCons.SE_Server + "spJson/SP_GET_RECEIVEDLIST2", method: .get, parameters: params,encoding: URLEncoding.default)
             .debugLog()
             .validate(statusCode: 200..<300)
             .responseJSON{
