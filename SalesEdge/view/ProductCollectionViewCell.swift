@@ -18,3 +18,15 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     
 }
+
+
+class ProductCollectionViewCell2: UICollectionViewCell {
+    
+//    @IBOutlet weak var mIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    
+    @IBOutlet weak var labelBackgound: UIView!
+    
+    
+}

@@ -74,13 +74,19 @@ class ReceivedDetailController:UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let url = self.products?[indexPath.row].image_url{
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController2") as! ImageViewController2
+//            vc.imageUrl = url
+//            vc.title = self.products?[indexPath.row].prod_no ?? ""
+//            show(vc, sender: nil)
+//        }
         if let url = self.products?[indexPath.row].image_url{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ImageViewController2") as! ImageViewController2
-            vc.imageUrl = url
-            vc.title = self.products?[indexPath.row].prod_no ?? ""
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProductPictureController") as! ProductPictureController
+            vc.prodno = self.products?[indexPath.row].prod_no ?? ""
+            vc.mainUrl = url
             show(vc, sender: nil)
         }
-        
     }
 }
