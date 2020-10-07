@@ -58,7 +58,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="xiz-ce-JMr"/>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="RQU-Fw-Mwn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KNx-TL-iOi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,17 +99,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" systemColor="labelColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="SLl-qv-pZy"/>
                                 </connections>
@@ -133,17 +122,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" systemColor="labelColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="U6P-FF-NHo"/>
                                 </connections>
@@ -161,6 +139,7 @@
                                     <constraint firstAttribute="width" constant="40" id="BVy-zi-AAq"/>
                                     <constraint firstAttribute="height" constant="40" id="zCt-O1-pCr"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button" image="icons8-相机-40"/>
                                 <connections>
                                     <action selector="onBtnTakePhotoClick:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Hmr-at-soD"/>
@@ -172,6 +151,7 @@
                                     <constraint firstAttribute="width" constant="40" id="M5e-tX-ewp"/>
                                     <constraint firstAttribute="height" constant="40" id="qvB-V3-pti"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button" image="qrcode-scan-multi"/>
                                 <connections>
                                     <action selector="onMulitScanTouch:" destination="9pv-A4-QxB" eventType="touchUpInside" id="rdn-NN-F6y"/>
@@ -179,6 +159,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="Ncr-PL-WL2" secondAttribute="trailing" id="11Y-1f-vAC"/>
                             <constraint firstItem="Ncr-PL-WL2" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="1DO-Gm-U1X"/>
@@ -220,7 +201,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1280.8" y="420.53973013493254"/>
+            <point key="canvasLocation" x="1334" y="478"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7Rm-Op-H8y">
+            <objects>
+                <viewController id="Suf-w9-Uck" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L3q-wl-hhr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="UX9-9Q-Cd4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5ye-Mj-jTe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvJ-G3-TXA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1997.5999999999999" y="567.16641679160421"/>
         </scene>
         <!--PA-->
         <scene sceneID="wg7-f3-ORb">
@@ -368,11 +365,11 @@
             <objects>
                 <viewController storyboardIdentifier="ProductDetail" title="ProductVC" id="hN5-yd-lV3" customClass="ProductViewController" customModule="SalesEdge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TMw-7K-1mr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-Sw-Fmc">
-                                <rect key="frame" x="317" y="60" width="50" height="40"/>
+                                <rect key="frame" x="317" y="16" width="50" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aaQ-0W-z2B"/>
                                     <constraint firstAttribute="width" constant="50" id="abC-zY-Bpr"/>
@@ -384,7 +381,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbP-zU-mCh">
-                                <rect key="frame" x="317" y="103" width="50" height="40"/>
+                                <rect key="frame" x="317" y="59" width="50" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="1Qv-EM-iIR"/>
                                     <constraint firstAttribute="height" constant="40" id="Y2E-Wf-79I"/>
@@ -396,7 +393,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="SXv-sA-g9V">
-                                <rect key="frame" x="16" y="60" width="293" height="83"/>
+                                <rect key="frame" x="16" y="16" width="293" height="83"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
@@ -425,13 +422,13 @@
                                 </connections>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0v-Hq-w3E">
-                                <rect key="frame" x="21" y="65" width="293" height="16"/>
+                                <rect key="frame" x="21" y="21" width="293" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Okx-Ze-TVN">
-                                <rect key="frame" x="0.0" y="151" width="375" height="467"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="540"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jle-hB-VwD">
                                     <size key="itemSize" width="151" height="145"/>
@@ -1849,7 +1846,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Lod-K2-e7i"/>
         <segue reference="grb-dQ-jcv"/>
-        <segue reference="32D-md-z5T"/>
+        <segue reference="rFz-a6-WWr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="app_share_qrcode" width="400" height="400"/>
