@@ -79,7 +79,7 @@ class ReceivedProductViewController:XLPagerItemViewController,UITableViewDelegat
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let item = data[indexPath.row]
         cell.mTxtLabel.text = item.from
-        cell.mTxtTimestamp.text = Helper.format(date: item.date)
+        cell.mTxtTimestamp?.text = Helper.format(date: item.date)
         cell.mImage.image = #imageLiteral(resourceName: "default_image")
         cell.mTxtSubTitle.text = ""
         cell.mRedFlag.isHidden = true

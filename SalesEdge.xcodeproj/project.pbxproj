@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04FA885D2352F027004B1A70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04FA885F2352F027004B1A70 /* Localizable.strings */; };
+		4775D98B46FC37B1509F41E1 /* Pods_SalesEdge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CA55FF4107204728DAD484 /* Pods_SalesEdge.framework */; };
 		6A048BB220C38E3500D88164 /* MyShowRoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A048BB120C38E3500D88164 /* MyShowRoomListController.swift */; };
 		6A064B8A20C2AB0C0083868C /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8920C2AB0C0083868C /* ImageViewController.swift */; };
 		6A064B8C20C2D2930083868C /* ReceivedDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */; };
@@ -65,7 +66,6 @@
 		6AEF422121D9AED0000F531E /* UIBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEF422021D9AED0000F531E /* UIBadgeView.swift */; };
 		D7C40AD8250CB1460000342B /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C40AD7250CB1460000342B /* ProductCollectionViewCell.swift */; };
 		D7F2CA072526AF03006677DF /* ProductPictureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F2CA062526AF03006677DF /* ProductPictureController.swift */; };
-		DF44E99DFD68EDD8EC3810C2 /* Pods_SalesEdge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,8 +77,7 @@
 		04967BA72352C34900B3C8A4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		04FA885E2352F027004B1A70 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		04FA88612352F034004B1A70 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.debug.xcconfig"; sourceTree = "<group>"; };
-		3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesEdge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D6CC9832A74CC3E49888C97 /* Pods-SalesEdge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.debug.xcconfig"; path = "Target Support Files/Pods-SalesEdge/Pods-SalesEdge.debug.xcconfig"; sourceTree = "<group>"; };
 		6A048BB120C38E3500D88164 /* MyShowRoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShowRoomListController.swift; sourceTree = "<group>"; };
 		6A064B8920C2AB0C0083868C /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		6A064B8B20C2D2930083868C /* ReceivedDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedDetailController.swift; sourceTree = "<group>"; };
@@ -138,10 +137,11 @@
 		6AE90FF920CBB0A9006F35C7 /* SampleMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleMainViewController.swift; sourceTree = "<group>"; };
 		6AEB513621C62B1B001EFA63 /* SalesEdge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesEdge.entitlements; sourceTree = "<group>"; };
 		6AEF422021D9AED0000F531E /* UIBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBadgeView.swift; sourceTree = "<group>"; };
-		91BC84EBD2A22330F4A87F3C /* Pods-SalesEdge.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.adhoc.xcconfig"; sourceTree = "<group>"; };
+		9F329874C8CFDAAC5247DBB6 /* Pods-SalesEdge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.release.xcconfig"; path = "Target Support Files/Pods-SalesEdge/Pods-SalesEdge.release.xcconfig"; sourceTree = "<group>"; };
+		B3FA945776A7C2E446C51596 /* Pods-SalesEdge.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.adhoc.xcconfig"; path = "Target Support Files/Pods-SalesEdge/Pods-SalesEdge.adhoc.xcconfig"; sourceTree = "<group>"; };
+		B6CA55FF4107204728DAD484 /* Pods_SalesEdge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesEdge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C40AD7250CB1460000342B /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7F2CA062526AF03006677DF /* ProductPictureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPictureController.swift; sourceTree = "<group>"; };
-		D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEdge.release.xcconfig"; path = "Pods/Target Support Files/Pods-SalesEdge/Pods-SalesEdge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,21 +149,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF44E99DFD68EDD8EC3810C2 /* Pods_SalesEdge.framework in Frameworks */,
+				4775D98B46FC37B1509F41E1 /* Pods_SalesEdge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49BAFCDEF984E6B08C362F06 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3B5F6695D7ACCC579C57564F /* Pods_SalesEdge.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		6A085308209EA7340094C5B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,8 +225,8 @@
 			children = (
 				6A92F71B201360CE00079C31 /* SalesEdge */,
 				6A92F71A201360CE00079C31 /* Products */,
-				F53941D8C1DDEC21C39405CD /* Pods */,
-				49BAFCDEF984E6B08C362F06 /* Frameworks */,
+				CD8C676CA688E1F30E08B137 /* Pods */,
+				FF813407A0B85E3F77952E3A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,14 +289,22 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		F53941D8C1DDEC21C39405CD /* Pods */ = {
+		CD8C676CA688E1F30E08B137 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */,
-				D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */,
-				91BC84EBD2A22330F4A87F3C /* Pods-SalesEdge.adhoc.xcconfig */,
+				2D6CC9832A74CC3E49888C97 /* Pods-SalesEdge.debug.xcconfig */,
+				9F329874C8CFDAAC5247DBB6 /* Pods-SalesEdge.release.xcconfig */,
+				B3FA945776A7C2E446C51596 /* Pods-SalesEdge.adhoc.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FF813407A0B85E3F77952E3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6CA55FF4107204728DAD484 /* Pods_SalesEdge.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,11 +314,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A92F72D201360CE00079C31 /* Build configuration list for PBXNativeTarget "SalesEdge" */;
 			buildPhases = (
-				43A6E0830F18AF84203C2A17 /* [CP] Check Pods Manifest.lock */,
+				BBBFCF24A395FF8E1E27CC6E /* [CP] Check Pods Manifest.lock */,
 				6A92F715201360CE00079C31 /* Sources */,
 				6A92F716201360CE00079C31 /* Frameworks */,
 				6A92F717201360CE00079C31 /* Resources */,
-				1FD7AA1EBB775FC9AD0458F1 /* [CP] Embed Pods Frameworks */,
+				B0DB9E6E2D2B6F2FA5B7B0B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,7 +393,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FD7AA1EBB775FC9AD0458F1 /* [CP] Embed Pods Frameworks */ = {
+		B0DB9E6E2D2B6F2FA5B7B0B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -443,16 +443,20 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SalesEdge/Pods-SalesEdge-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		43A6E0830F18AF84203C2A17 /* [CP] Check Pods Manifest.lock */ = {
+		BBBFCF24A395FF8E1E27CC6E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-SalesEdge-checkManifestLockResult.txt",
 			);
@@ -624,7 +628,7 @@
 		};
 		6A5F6B4E20AFCB95006F1F35 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91BC84EBD2A22330F4A87F3C /* Pods-SalesEdge.adhoc.xcconfig */;
+			baseConfigurationReference = B3FA945776A7C2E446C51596 /* Pods-SalesEdge.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
@@ -636,7 +640,7 @@
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.2;
+				MARKETING_VERSION = 4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -761,7 +765,7 @@
 		};
 		6A92F72E201360CE00079C31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3136EF02809C01C2DF7F2E41 /* Pods-SalesEdge.debug.xcconfig */;
+			baseConfigurationReference = 2D6CC9832A74CC3E49888C97 /* Pods-SalesEdge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
@@ -773,7 +777,7 @@
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.2;
+				MARKETING_VERSION = 4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0cb1628f-0c64-4e8d-903d-313ef34d64f6";
@@ -785,7 +789,7 @@
 		};
 		6A92F72F201360CE00079C31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9316253B3969E843D914890 /* Pods-SalesEdge.release.xcconfig */;
+			baseConfigurationReference = 9F329874C8CFDAAC5247DBB6 /* Pods-SalesEdge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SalesEdge/SalesEdge.entitlements;
@@ -797,7 +801,7 @@
 				INFOPLIST_FILE = SalesEdge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.2;
+				MARKETING_VERSION = 4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ledway.se;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

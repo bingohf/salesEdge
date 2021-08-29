@@ -25,7 +25,7 @@ class MySampleListViewController:XLPagerItemViewController,UITableViewDelegate, 
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = Helper.format(date: item.created as Date?)
+        cell.mTxtTimestamp?.text = Helper.format(date: item.created as Date?)
         cell.mTxtLabel.text = item.customer
         if (cell.mTxtLabel.text ?? "") .isEmpty{
             cell.mTxtLabel.text = "NA"

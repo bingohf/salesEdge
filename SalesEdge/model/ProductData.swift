@@ -12,4 +12,6 @@ struct ProductData {
     var prodno:String
     var desc:String?
     var updatedate:Date?
+    var pcsnum: Int = 1
+    var memo :String?
 }

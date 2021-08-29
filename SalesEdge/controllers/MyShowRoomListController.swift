@@ -17,9 +17,54 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     let defaultImage = #imageLiteral(resourceName: "default_image")
      private let productDAO = ProductDAO()
     @IBOutlet weak var mTableView: UITableView?
+    var onPcsNumChange:((_ value:Int, _ cell: CustomTableCellView) -> Void)? = nil
+    var onMemoBtnTouch:((_ index:Int) -> Void)? = nil
     override func viewDidLoad() {
         loadJsonData()
-
+        onPcsNumChange = {[weak self](value, cell) in
+            self?.data[cell.index].pcsnum = value
+            self?.sampleData?.isDirty = true
+       }
+        onMemoBtnTouch = {[weak self](index) in
+            let alert = UIAlertController(title: "Memo".localized(), message: nil, preferredStyle: .alert)
+            
+            //2. Add the text field. You can configure it however you need.
+            alert.addTextField { (textField) in
+                textField.placeholder = "Memo".localized()
+            }
+            alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: { [weak alert] (_) in
+                let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+                print("Text field: \(textField?.text)")
+                if let prodno = textField?.text {
+                    if !prodno.isEmpty {
+                        self?.sampleData?.isDirty = true
+                        self?.data[index].memo = textField?.text
+                        self?.mTableView?.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+                    }
+                    
+                }
+                
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Scan QRCode".localized(), style: .default, handler: { (_) in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let destinationVC = storyboard.instantiateViewController(withIdentifier: "QRCodeScannerViewController") as! QRCodeScannerViewController
+                destinationVC.onCompleted = {[weak self](qrcode)in
+                    self?.data[index].memo = qrcode
+                    self?.mTableView?.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+                    
+                }
+                self?.present(destinationVC, animated: true, completion: nil)
+                
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: { (_) in
+                
+            }))
+            
+            // 4. Present the alert.
+            self?.present(alert, animated: true, completion: nil)
+       }
     }
     
     open func loadJsonData()   {
@@ -33,7 +78,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                             updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
                         }
                         if let prodno = item["prod_id"]{
-                            let temp = ProductData(prodno: prodno as! String, desc: item["spec_desc"] as? String, updatedate: updatedate)
+                            let temp = ProductData(prodno: prodno as! String, desc: item["spec_desc"] as? String, updatedate: updatedate, pcsnum: (item["pcsnum"] as? Int) ?? 1, memo: item["memo"] as? String)
                             data.append(temp)
                         }
                     }
@@ -48,13 +93,21 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         let cell =
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
+        cell.index = indexPath.row
+        cell.onPcsChange = onPcsNumChange
+        cell.onMemoBtnCallback = onMemoBtnTouch
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
+        cell.mTxtTimestamp?.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = defaultImage
+        cell.pcsnum = item.pcsnum ?? 0
+        cell.mTxtMemo.text = item.memo
+        if (item.memo ?? "").isEmpty{
+            cell.mTxtMemo.text = "Click to set memo"
+        }
+        cell.mTxtPcsNum.text = "\(item.pcsnum ?? 0)"
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
-        print(filePath)
         do{
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath.path){
@@ -73,6 +126,16 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     
     func callback(selected: [ProductData]) {
         data = selected
+        sampleData?.productJson = dataToJson()
+        sampleData?.isDirty = true
+        mTableView?.reloadData()
+    }
+    func getSelected() -> [ProductData] {
+        loadJsonData()
+        return data
+    }
+    
+    func dataToJson() -> String? {
         let temp =  data.map({ (product) -> NSDictionary in
             var jsonDate :Int64? = nil
             if let date = product.updatedate{
@@ -80,16 +143,12 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             }
             return ["prod_id": product.prodno,
                     "spec_desc": product.desc,
-                "create_date":jsonDate
+                "create_date":jsonDate,
+                "pcsnum":product.pcsnum,
+                "memo":product.memo
             ]
         })
-        sampleData?.productJson = Helper.converToJson(obj:temp)
-        sampleData?.isDirty = true
-        mTableView?.reloadData()
-    }
-    func getSelected() -> [ProductData] {
-        loadJsonData()
-        return data
+        return Helper.converToJson(obj:temp)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -120,6 +179,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             let rowData = self.data[index.row]
             do {
                 self.data.remove(at: index.row)
+                self.sampleData?.productJson = self.dataToJson()
                 tableView.deleteRows(at: [index], with: UITableView.RowAnimation.fade)
             } catch {
                 print("delete failed: \(error)")
@@ -140,7 +200,9 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
             }
             return ["prod_id": product.prodno,
                     "spec_desc": product.desc ?? nil,
-                    "create_date" : jsonDate ?? nil
+                    "create_date" : jsonDate ?? nil,
+                    "pcsnum": product.pcsnum,
+                    "memo": product.memo
             ]
         })
         sampleData?.productJson = Helper.converToJson(obj:temp)
@@ -168,4 +230,6 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         sampleData?.isDirty = true
     
     }
+    
+
 }

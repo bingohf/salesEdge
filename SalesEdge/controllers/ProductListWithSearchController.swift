@@ -78,7 +78,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
+        cell.mTxtTimestamp?.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = default_Image
@@ -224,6 +224,8 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
                                 hud.progress = 0.025
                                 hud.textLabel.text = "Loading"
                                 hud.show(in: self.view)
+                                let preferences = UserDefaults.standard
+                                preferences.setValue(name, forKey: "show_name")
                                 self.download(showName:name as! String,hud:hud, total:ttl, offset:0, size:1)
                             })
                             optionMenu.addAction(action)
@@ -254,6 +256,7 @@ class ProductListWithSearchController:UIViewController, UITableViewDelegate, UIT
         let preferences = UserDefaults.standard
         let mytaxno = preferences.object(forKey: "myTaxNo") ?? DEFAULT_GROUP
         let sql = "select * from view_GroupShowList where showname ='\(showName)' and mytaxno ='\(mytaxno)' order by prodno OFFSET \(offset)  ROWS FETCH NEXT \(size) ROWS ONLY"
+        print(sql)
         let escapeSql = sql.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         Alamofire.request(AppCons.SE_Server + "sql/\(escapeSql)", method: .get, parameters: nil, encoding: JSONEncoding.default)
             .debugLog()

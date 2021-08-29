@@ -43,7 +43,7 @@ class ProductListController : UITableViewController, ProductDelegate{
             tableView.dequeueReusableCell(
                 withIdentifier: "Cell", for: indexPath) as! CustomTableCellView
         let  item = data[indexPath.row]
-        cell.mTxtTimestamp.text = Helper.format(date: item.updatedate)
+        cell.mTxtTimestamp?.text = Helper.format(date: item.updatedate)
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = default_Image

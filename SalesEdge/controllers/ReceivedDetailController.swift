@@ -59,7 +59,7 @@ class ReceivedDetailController:UITableViewController{
         if let item = self.products?[indexPath.row]{
             cell.mTxtLabel.text = item.prod_no
             cell.mTxtSubTitle.text = item.spec
-            cell.mTxtTimestamp.text = Helper.format(date: item.date)
+            cell.mTxtTimestamp?.text = Helper.format(date: item.date)
             cell.mImage.image = #imageLiteral(resourceName: "default_image")
             if let image_url = item.image_url{
                 cell.mImage.af_setImage(

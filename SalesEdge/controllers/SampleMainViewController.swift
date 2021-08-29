@@ -97,7 +97,10 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             vc.message = "Pick Show Room by QRCode"
             vc.onCompleted = { [weak self](qrcode) in
                 self?.vcMyList?.addProduct(qrcode: qrcode)
-                self?.performSegue(withIdentifier: "pick_mulit_product", sender:sender)
+            
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self?.performSegue(withIdentifier: "pick_mulit_product", sender:sender)
+                }
             }
             self.moveToViewController(at: 1)
         }
@@ -130,13 +133,16 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
     
     @IBAction func onSaveTouch(_ sender: Any) {
         if vcCustomer?.save() ?? false && vcMyList?.save() ?? false{
+            
+            let show_name = UserDefaults.standard.value(forKey: "show_name") as? String
             var params = Helper.makeRequest()
             params.merge(["series": sampleData.sampleId ?? "",
                           "custMemo" : sampleData.customer ?? "",
                           "dataFrom": sampleData.dataFrom ?? "",
                           "shareToDeviceId": sampleData.shareToDeviceID ?? "",
                           "empno": UIDevice.current.identifierForVendor!.uuidString,
-                          "json" : toJson(sampleData: sampleData)
+                          "json" : toJson(sampleData: sampleData),
+                          "show_name" : show_name
             ]) { (any1, any2) -> Any in
                 any2
             }
@@ -190,10 +196,11 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                     "series":sampleData.sampleId,
                                     "prodno": prodno,
                                     "itemExt": "\(index)",
-                                    "pcsnum":1]) { (any1, any2) -> Any in
+                                    "pcsnum": item["pcsnum"],
+                                                "memo": item["memo"]]) { (any1, any2) -> Any in
                                     any2
                                 }
-                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSampleDetailLine", parameters: params, encoding: JSONEncoding.default)
+                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSampleDetailLineV5", parameters: params, encoding: JSONEncoding.default)
                                     .validate(statusCode: 200 ..< 300)
                                     .validate({ (request, response, data) -> Request.ValidationResult in
                                         if let str = String(data: data!, encoding: .utf8){
