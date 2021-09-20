@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MySample" representedClassName="MySample" syncable="YES">
+        <attribute name="auto_send_on" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="customer" optional="YES" attributeType="String"/>
+        <attribute name="dataFrom" optional="YES" attributeType="String"/>
+        <attribute name="email_list" optional="YES" attributeType="String"/>
+        <attribute name="line" optional="YES" attributeType="String"/>
+        <attribute name="mac_address" optional="YES" attributeType="String"/>
+        <attribute name="productJson" optional="YES" attributeType="String"/>
+        <attribute name="reader" optional="YES" attributeType="String"/>
+        <attribute name="sampleId" attributeType="String"/>
+        <attribute name="shareToDeviceID" optional="YES" attributeType="String"/>
+        <attribute name="upload_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="sampleId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Product" representedClassName="ProductManagedObject" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="prodno" optional="YES" attributeType="String"/>
+        <attribute name="updatedate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="prodno"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="ReceivedSample" representedClassName="ReceivedSampleMO" syncable="YES">
+        <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="graphicUrl" optional="YES" attributeType="String"/>
+        <attribute name="products" optional="YES" attributeType="String"/>
+        <attribute name="sampleId" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="MySample" positionX="-693" positionY="-0" width="128" height="209"/>
+        <element name="Product" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="ReceivedSample" positionX="-308.062255859375" positionY="-5.99658203125" width="128" height="120"/>
+    </elements>
+</model>

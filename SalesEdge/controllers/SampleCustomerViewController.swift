@@ -20,10 +20,14 @@ class SampleCustomerViewController:XLPagerItemViewController,UIImagePickerContro
     @IBOutlet weak var mCustomerHint: UILabel!
     @IBOutlet weak var mImage: UIImageView!
     
+    @IBOutlet weak var mEmail_send_to: UIDatePicker!
+    @IBOutlet weak var mEmailList: UITextField!
     @IBOutlet weak var mTxtCustomer: UITextView!
     let emptyImage = #imageLiteral(resourceName: "ic_photo_camera")
     override func viewDidLoad() {
         mTxtCustomer.text = sampleData?.customer
+        mEmail_send_to.date = sampleData?.auto_send_on ?? Date()
+        mEmailList.text = sampleData?.email_list
         mCustomerHint.isHidden = !mTxtCustomer.text.isEmpty
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsDirectory.appendingPathComponent("Sample").appendingPathComponent("\(sampleData?.sampleId ?? "")_type1.png")
@@ -108,7 +112,17 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             Helper.toast(message: "Please input Customer Description", thisVC: self)
             return false
         }
+        guard mEmailList.text != "" else {
+            Helper.toast(message: "Please input email list", thisVC: self)
+            return false
+        }
+        guard validateEmail(candidate: mEmailList.text ?? "") == true else {
+            Helper.toast(message: "email address is invalid", thisVC: self)
+            return false
+        }
         sampleData?.customer = mTxtCustomer.text
+        sampleData?.auto_send_on = mEmail_send_to.date
+        sampleData?.email_list = mEmailList.text
         if  mImage.contentMode != .center {
             if let image = mImage.image{
                 let image512 = Helper.cropToBounds(image: image, width: 512, height: 512)
@@ -190,6 +204,11 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             print(error)
         }
  
+    }
+    
+    func validateEmail(candidate: String) -> Bool {
+     let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}(,[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64})*$"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
 }
 

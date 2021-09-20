@@ -64,7 +64,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
             sampleData.isDirty = false
             self.vcCustomer?.save()
             self.vcMyList?.save()
-            self.sampleData.created = NSDate()
+            self.sampleData.created = Date()
             self.mySampleDAO.create(data: self.sampleData)
             onCompleted?(sampleData)
         }
@@ -142,6 +142,8 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                           "shareToDeviceId": sampleData.shareToDeviceID ?? "",
                           "empno": UIDevice.current.identifierForVendor!.uuidString,
                           "json" : toJson(sampleData: sampleData),
+                          "email_list": sampleData.email_list,
+                          "email_send_date" : Helper.format(date: sampleData.auto_send_on),
                           "show_name" : show_name
             ]) { (any1, any2) -> Any in
                 any2
@@ -157,7 +159,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 }
             }
             let manager = SessionManager.default
-            var ob = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSample_v4Line", parameters: params, encoding: JSONEncoding.default)
+            var ob = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSample_v5Line", parameters: params, encoding: JSONEncoding.default)
                 .validate(statusCode: 200 ..< 300)
                 .validate({ (request, response, data) -> Request.ValidationResult in
                     if let str = String(data: data!, encoding: .utf8){
@@ -197,10 +199,12 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                                     "prodno": prodno,
                                     "itemExt": "\(index)",
                                     "pcsnum": item["pcsnum"],
+                                                "state_type":item["state_type"],
+                                                "unit":item["unit"],
                                                 "memo": item["memo"]]) { (any1, any2) -> Any in
                                     any2
                                 }
-                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSampleDetailLineV5", parameters: params, encoding: JSONEncoding.default)
+                                let obItem = manager.rx.request(HTTPMethod.post, AppCons.SE_Server + "Sp/sp_UpSampleDetailLineV6", parameters: params, encoding: JSONEncoding.default)
                                     .validate(statusCode: 200 ..< 300)
                                     .validate({ (request, response, data) -> Request.ValidationResult in
                                         if let str = String(data: data!, encoding: .utf8){
@@ -233,7 +237,7 @@ class SampleMainViewController :ButtonBarPagerTabStripViewController{
                 .subscribe(onError: {[weak self] (err) in
                     Helper.toast(message: "\(err.localizedDescription)", thisVC: self!)
                 }, onCompleted: {[weak self] in
-                    self?.sampleData.upload_date = NSDate()
+                    self?.sampleData.upload_date = Date()
                     self?.mySampleDAO.create(data: (self?.sampleData)!)
                     self?.showLinkQrCode {
                         self?.dismiss(animated: true, completion: nil)

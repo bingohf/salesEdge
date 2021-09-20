@@ -24,7 +24,8 @@ class MySampleDAO:CoreDataDAO{
         if listData.count > 0{
             for item in listData{
                 let mo = item 
-                resListData.append(MySampleData(sampleId: mo.sampleId, customer: mo.customer, created: mo.created, productJson: mo.productJson, line:mo.line, reader:mo.reader, mac_address:mo.mac_address, shareToDeviceID:mo.shareToDeviceID, update_date:mo.upload_date))
+                resListData.append(MySampleData(sampleId: mo.sampleId, customer: mo.customer, created: mo.created, productJson: mo.productJson, line:mo.line, reader:mo.reader, mac_address:mo.mac_address, shareToDeviceID:mo.shareToDeviceID, update_date:mo.upload_date,
+                                                email_list: mo.email_list ?? "", auto_send_on: mo.auto_send_on))
             }
         }
         return resListData
@@ -43,6 +44,8 @@ class MySampleDAO:CoreDataDAO{
         mySample.reader = data.reader
         mySample.line = data.line
         mySample.upload_date = data.upload_date
+        mySample.auto_send_on = data.auto_send_on
+        mySample.email_list = data .email_list
         self.saveContext()
     }
     

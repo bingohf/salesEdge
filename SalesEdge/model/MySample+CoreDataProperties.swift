@@ -1,9 +1,8 @@
 //
 //  MySample+CoreDataProperties.swift
-//  SalesEdge
+//  
 //
-//  Created by Bin Guo on 2018/7/24.
-//  Copyright © 2018年 Bin Guo. All rights reserved.
+//  Created by bingo on 2021/9/20.
 //
 //
 
@@ -17,7 +16,7 @@ extension MySample {
         return NSFetchRequest<MySample>(entityName: "MySample")
     }
 
-    @NSManaged public var created: NSDate?
+    @NSManaged public var created: Date?
     @NSManaged public var customer: String?
     @NSManaged public var dataFrom: String?
     @NSManaged public var line: String?
@@ -26,6 +25,8 @@ extension MySample {
     @NSManaged public var reader: String?
     @NSManaged public var sampleId: String?
     @NSManaged public var shareToDeviceID: String?
-    @NSManaged public var upload_date: NSDate?
+    @NSManaged public var upload_date: Date?
+    @NSManaged public var email_list: String?
+    @NSManaged public var auto_send_on: Date?
 
 }

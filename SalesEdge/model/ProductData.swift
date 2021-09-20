@@ -13,5 +13,7 @@ struct ProductData {
     var desc:String?
     var updatedate:Date?
     var pcsnum: Int = 1
+    var stateType:String = "Hanger"
+    var unit:String = "PCS"
     var memo :String?
 }

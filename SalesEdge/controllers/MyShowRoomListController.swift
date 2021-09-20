@@ -22,8 +22,37 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
     override func viewDidLoad() {
         loadJsonData()
         onPcsNumChange = {[weak self](value, cell) in
-            self?.data[cell.index].pcsnum = value
-            self?.sampleData?.isDirty = true
+            var prodInfo = self?.data[cell.index]
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "num_unit_picker_controller") as! NumUnitPickerController
+            
+            let alert = UIAlertController(style: .alert, title: "Selections")
+            alert.set(vc: vc, height: 300)
+            //alert.show()
+            let okAction = UIAlertAction(title: NSLocalizedString("OK",comment: ""), style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                print("OK")
+                //self?.data[cell.index].pcsnum = value
+                let (state_type, pcsnum, unit) = vc.getValues()
+                self?.data[cell.index].stateType = state_type
+                self?.data[cell.index].pcsnum = Int(pcsnum)!
+                self?.data[cell.index].unit = unit
+                cell.mTxtPcsNum.text = "\(state_type) \(pcsnum) \(unit)"
+                self?.sampleData?.isDirty = true
+            })
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel",comment: ""), style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                print("Cancelled")
+            })
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self?.present(alert, animated: false, completion: {
+                
+            })
+            
+            vc.setValues(stateType: prodInfo!.stateType, pcsnum: prodInfo!.pcsnum, unit: prodInfo!.unit)
+            
        }
         onMemoBtnTouch = {[weak self](index) in
             let alert = UIAlertController(title: "Memo".localized(), message: nil, preferredStyle: .alert)
@@ -78,7 +107,7 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                             updatedate = Date(timeIntervalSince1970: TimeInterval(intDate / 1000))
                         }
                         if let prodno = item["prod_id"]{
-                            let temp = ProductData(prodno: prodno as! String, desc: item["spec_desc"] as? String, updatedate: updatedate, pcsnum: (item["pcsnum"] as? Int) ?? 1, memo: item["memo"] as? String)
+                            let temp = ProductData(prodno: prodno as! String, desc: item["spec_desc"] as? String, updatedate: updatedate, pcsnum: (item["pcsnum"] as? Int) ?? 1, stateType: item["state_type"] as? String ?? "Hanger", unit:item["unit"] as? String ?? "PCS", memo: item["memo"] as? String)
                             data.append(temp)
                         }
                     }
@@ -101,12 +130,11 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
         cell.mTxtLabel.text = item.prodno
         cell.mTxtSubTitle.text = item.desc
         cell.mImage.image = defaultImage
-        cell.pcsnum = item.pcsnum ?? 0
         cell.mTxtMemo.text = item.memo
         if (item.memo ?? "").isEmpty{
             cell.mTxtMemo.text = "Click to set memo"
         }
-        cell.mTxtPcsNum.text = "\(item.pcsnum ?? 0)"
+        cell.mTxtPcsNum.text = "\(item.stateType) \(item.pcsnum ?? 0) \(item.unit)"
         let filePath = Helper.getImagePath(folder:"Show").appendingPathComponent("\(item.prodno)_type1.png")
         do{
             let fileManager = FileManager.default
@@ -145,6 +173,8 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                     "spec_desc": product.desc,
                 "create_date":jsonDate,
                 "pcsnum":product.pcsnum,
+                "state_type":product.stateType,
+                "unit": product.unit,
                 "memo":product.memo
             ]
         })
@@ -202,6 +232,8 @@ class MyShowRoomListController:XLPagerItemViewController,UITableViewDelegate, UI
                     "spec_desc": product.desc ?? nil,
                     "create_date" : jsonDate ?? nil,
                     "pcsnum": product.pcsnum,
+                    "state_type": product.stateType,
+                    "unit" :product.unit,
                     "memo": product.memo
             ]
         })
